@@ -1,0 +1,98 @@
+/* -----------AdminDashboard------------------------------ */
+.AdminDashboard{
+    display: flex;
+    justify-content: row;
+    /* border: solid 2px black; */
+    background-color: #fffdf6;
+    min-width: 1024px;
+}
+
+.DashBoardMain{
+    /* border: solid 2px orange; */
+    width: 90%;
+    
+}
+/* -----------메인TOP------------------------------ */
+.mainTop{
+    /* border: solid 2px green; */
+    display: flex;
+    justify-content: space-around;
+    padding: 0.5rem 0 1.5rem 0;
+}
+.mainTop_item{
+    border: solid 2px #fce699;
+    border-radius: 10px;
+    background-color: white;
+    padding: 0.8rem 1.5rem 0.8rem 1.5rem;
+    width: 300px;
+    min-width: 300px;
+    
+}
+.itemTitile{
+    text-align: center;
+    font-size: 1.2rem;
+    font-weight: 600;
+    padding-bottom: 10px;
+}
+.Summary_item{
+    display: flex;
+    justify-content: space-between;
+    border-bottom: solid 1px #ccc;
+    margin-bottom: 5px;
+}
+
+/* -----------메인 Ranking------------------------------ */
+.mainRanking{
+    display: flex;
+    justify-content: space-around;
+    /* border: solid 2px skyblue; */
+    padding-bottom: 1.5rem;
+}
+.Ranking_item{
+    border: solid 2px #fce699;
+    border-radius: 10px;
+    background-color: white;
+    padding: 1rem 1.5rem 1rem 1.5rem;
+    width: 480px;
+    min-width: 480px;
+}
+.rankingTitle{
+    font-weight: bold;
+    padding-bottom: 10px;
+    font-size: 1.2rem;
+}
+.fa-ranking-star{
+    color: rgb(255, 217, 0);
+}
+.Ranking_item>ul>li>span{
+    font-weight: bold;
+    padding-right: 14px;
+}
+.Ranking_item>ul>li{
+    padding-top: 5px;
+}
+/* -----------메인 Graph------------------------------ */
+.mainGraph{
+    display: flex;
+    justify-content: center;
+    padding-bottom: 1.5rem;
+}
+.mainGraph_item{
+    border: solid 2px #fce699;
+    border-radius: 10px;
+    background-color: white;
+
+}
+.mainGraph .bar{
+    /* 이슈 : 화면 가로폭 줄이면 네비바로 튀어나옴 */
+    width: 1000px;
+    min-width: 1000px;
+    height: 350px;
+}
+.mainGraph .Circular{
+    margin-left: 4rem;
+    width: 350px;
+    min-width: 350px;
+    height: 350px;
+
+}

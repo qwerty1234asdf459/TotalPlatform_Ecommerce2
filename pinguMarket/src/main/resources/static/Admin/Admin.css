@@ -1,0 +1,56 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    list-style: none;
+    text-decoration: none;
+    font-family: "Nunito Sans", sans-serif; 
+}
+/* -----------상단 타이틀 AdminDashboardHeader----------- */
+.AdminDashboardHeader{
+    background-color: #fffdf6;
+}
+.headerLogo {
+	width: 30%;
+	display: flex;
+	justify-content: start;
+	align-items: center;
+}
+
+.headerLogo>p {
+	font-size: 40px;
+	font-weight: bold;
+	transition: .2s;
+    padding-left: 15px;
+}
+
+.headerLogo .B {
+	color: #f7418f;
+}
+/*  -----------메뉴바 스타일----------------------------- */
+.MSmenu{
+    /* border: solid 2px tomato; */
+    border-radius: 20px;
+    width: 10%;
+    min-width: 165px;
+    background-color: #fff3c7;
+    padding-bottom: 1.5rem;
+}
+li, a{
+    list-style: none;
+    text-decoration: none;
+    color: inherit;
+}
+
+.MSmenu li a{
+    display: block;
+    width: 100%;
+    height: 100%;
+    /* border: 1px solid blue; */
+    padding: 1.5rem 0.5rem 0 1rem;
+}
+
+.MSmenu li:hover{ /*메뉴 호버 효과*/
+    font-size: 1.1rem;
+    font-weight: 1000;
+}

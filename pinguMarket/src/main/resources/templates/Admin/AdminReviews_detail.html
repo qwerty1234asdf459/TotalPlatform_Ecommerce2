@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" th:href="@{/Admin/Admin.css}">
+    <link rel="stylesheet" th:href="@{/Admin/AdminReviews_detail.css}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"/> 
+</head>
+<!-- 리뷰 관리 상세페이지 -->
+<body>
+    <div th:replace="~{/Admin/AdminHeader :: AdminHeaderFragment}"></div><!--헤더 --> 
+    
+    <div class="AdminReviews_detail">
+        <nav th:replace="~{/Admin/Adminnavbar :: AdminnavbarFragment}"></nav><!--네비바 -->     
+        
+        
+        <div class="AdminReviews_detailMain"><!--메인****************************************************************-->
+            <!-- 리뷰 내용을 보여줌 : 삭제기능 -->
+            <h2>리뷰 관리 > 상세페이지</h2>
+            <div id="content-box">
+                <div class="content_border">
+                    <table>
+                        <tr class="writing-title">
+                            <td th:text="${scQuestion.title}" colspan="4">TITILE</td>
+                        </tr>
+                        <tr class="writing-id-date">
+                            <td class="writing-td-title">작성자</td>
+                            <td th:text="${scQuestion.buyuser.id}" class="writing-td-content">user_id</td>
+                            <td class="writing-td-title">작성일</td>
+                            <td th:text="${#temporals.format(scQuestion.questionDate, 'yyyy-MM-dd HH:mm:ss')}" class="writing-td-content">update_date</td>
+                        </tr>
+                        <tr class="product">
+                            <td class="writing-td-title">상품명</td>
+                            <td th:text="${}" class="writing-td-content">product_id</td>
+                            <td class="writing-td-title">별점</td>
+                            <td th:text="${}" class="writing-td-content">scope</td>
+                        </tr>
+                        <tr class="writing-content">
+                            <td class="writing-td-title">내용</td>
+                            <td class="writing-td-content" colspan="3">
+                                <pre th:text="${scQuestion.contents}" class="writing-td-content-pre">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quas ipsam tempora provident, neque ea quaerat ducimus! Dolor ratione, sapiente dolorem delectus natus assumenda itaque animi eum in. Aliquam, excepturi sint!</pre>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div>
+                    <button id="delete-btn" class="btn-style">리뷰 삭제</button>
+                    <!-- 삭제하시겠습니까? 팝업띄우기 -->
+                </div>
+            
+        </div><!--메인 끝-->
+    </div>
+    
+</body>
+</html>

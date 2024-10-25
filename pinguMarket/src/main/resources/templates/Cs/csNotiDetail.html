@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>공지사항</title>
+    <link rel="stylesheet" th:href="@{/layout/reset.css}">
+    <link rel="stylesheet" th:href="@{/layout/headerStyle.css}">
+    <link rel="stylesheet" th:href="@{/layout/footerStyle.css}">
+    <link rel="stylesheet" th:href="@{/csc/csNotiDetailStyle.css}">
+    <script src="https://kit.fontawesome.com/86c06c2025.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <!-- *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*--*-*-*-*-*-*-*-*-*-* HEADER *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*--*-*-*-*-*-*-*-*-*-* -->
+
+    <header>
+        <div class="headerBanner">
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur sunt libero odit pariatur tempore
+                facilis magni quia veritatis</p>
+            <div class="closeBtn"><i class="fa-solid fa-x"></i></div>
+        </div>
+
+        <div class="headerUp_Container">
+            <div class="headerLogo">
+                <a href="mainPage.html">
+                    <p><span>B</span>-Team</p>
+                </a>
+            </div>
+
+            <div class="searchContainer">
+                <form action="post">
+                    <input type="text" class="searchBar" placeholder="SEARCH">
+                    <div class="searchBtn btn"><i class="fa-solid fa-magnifying-glass"></i></div>
+                </form>
+            </div>
+            <ul class="contentNav">
+                <li class="wishList">
+                    <a href="#">
+                        <p>
+                            <i class="fa-regular fa-heart"></i>
+                        </p>
+                    </a>
+                </li>
+                <li class="cart">
+                    <a href="#">
+                        <p>
+                            <i class="fa-solid fa-cart-shopping"></i>
+                        </p>
+                    </a>
+                </li>
+                <li class="login">
+                    <a href="loginPage.html">
+                        <p>
+                            <i class="fa-regular fa-user"></i>
+                        </p>
+                    </a>
+                </li>
+                <li class="customerService">
+                    <a href="csPage.html">
+                        <p>
+                            <i class="fa-solid fa-headset"></i>
+                        </p>
+                    </a>
+                    <ul>
+                        <li><a href="csPage.html">공지사항</a></li>
+                        <li><a href="csPage.html">1:1 문의</a></li>
+                    </ul>   
+                </li>
+            </ul>
+        </div>
+        <div class="headerDown_Container">
+            <div class="categoryContainer">
+                <p><span><i class="fa-solid fa-bars"></i></span>Category</p>
+                <ul class="category">
+                    <li><a href="#">lorem</a></li>
+                    <li><a href="#">lorem</a></li>
+                    <li><a href="#">loremlorem</a></li>
+                    <li><a href="#">lorem</a></li>
+                    <li><a href="#">loremlorem</a></li>
+                    <li><a href="#">lorem</a></li>
+                    <li><a href="#">lorem</a></li>
+                    <li><a href="#">loremlorem</a></li>
+                    <li><a href="#">lorem</a></li>
+                    <li><a href="#">loremlorem</a></li>
+                    <li><a href="#">lorem</a></li>
+                    <li><a href="#">lorem</a></li>
+                    <li><a href="#">loremlorem</a></li>
+                    <li><a href="#">lorem</a></li>
+                    <li><a href="#">loremlorem</a></li>
+                    <li><a href="#">lorem</a></li>
+                    <li><a href="#">lorem</a></li>
+                    <li><a href="#">loremlorem</a></li>
+                    <li><a href="#">lorem</a></li>
+                    <li><a href="#">loremlorem</a></li>
+                    <li><a href="#">lorem</a></li>
+                    <li><a href="#">lorem</a></li>
+                    <li><a href="#">loremlorem</a></li>
+                    <li><a href="#">lorem</a></li>
+                    <li><a href="#">loremlorem</a></li>
+                    <li><a href="#">lorem</a></li>
+                    <li><a href="#">lorem</a></li>
+                    <li><a href="#">loremlorem</a></li>
+                    <li><a href="#">lorem</a></li>
+                    <li><a href="#">loremlorem</a></li>
+                    <li><a href="#">lorem</a></li>
+                    <li><a href="#">lorem</a></li>
+                    <li><a href="#">loremlorem</a></li>
+                    <li><a href="#">lorem</a></li>
+                    <li><a href="#">loremlorem</a></li>
+                </ul>
+            </div>
+            <ul class="event">
+                <li><a href="#">BEST</a></li>
+                <li><a href="#">NEW</a></li>
+                <li><a href="#">Seler</a></li>
+            </ul>
+            <div class="languageContainer">
+                <div class="language">
+                    <p>KR</p>
+                    <p>EN</p>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*--*-*-*-*-*-*-*-*-*-* MAIN *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*--*-*-*-*-*-*-*-*-*-* -->
+    <main>
+        <div class="mainWhole">
+            <div class="NoticeHeader">
+                <div class="NoticeTitle">공지사항</div>
+                <div class="NoticeTitle2">새로운 소식들과 유용한 정보들을 한곳에서 확인하세요.</div>
+            </div>
+
+            <div class="mainContainer">
+                <div class="contentCon">
+                    <div class="mainTitle">제목</div>
+                    <div class="mainSub">[안내] 소비자 분쟁해결 기준 안내</div>
+                </div>
+                <div class="contentCon">
+                    <div class="mainTitle">작성자</div>
+                    <div class="mainSub">글쓴이</div>
+                </div>
+                <div class="contentCon">
+                    <div class="mainTitle">작성일</div>
+                    <div class="mainSub">2024.10.17</div>
+                </div>
+
+
+                <div class="contentContainer">
+                    <div>
+                        <p>
+                            <img src="../static/img/공지사항 이미지 예시.jpg">
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis deserunt nam unde iste repellendus ullam dignissimos molestias.</p>
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis deserunt nam unde iste repellendus ullam dignissimos molestias.</p>
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis deserunt nam unde iste repellendus ullam dignissimos molestias.</p>
+                        </p>
+                    </div>
+                </div>
+
+                <div class="invenContainer">
+                    <a href="csPage.html">
+                        <button class="invenBtn" type="button" >
+                            <span class="invenText">목록</span>
+                        </button>
+                    </a>
+                </div>
+               
+
+            </div>
+
+
+
+
+
+
+
+
+
+        </div>
+
+
+
+
+    </main>
+
+    <!-- *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*--*-*-*-*-*-*-*-*-*-* FOOTER *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*--*-*-*-*-*-*-*-*-*-* -->
+
+    <footer>
+        <div class="footerCon footerCon01">
+            <div class="csContainer">
+                <div class="csText">
+                    <p>고객행복센터</p>
+
+                    <div class="companyNum">
+                        <p>1644-1107</p>
+                        <p><span>월~토요일 오전 7시 - 오후6시</span></p>
+                    </div>
+                </div>
+                <div class="askCon">
+                    <div class="askBtn">
+                        <a href="#">카카오톡문의</a>
+                    </div>
+                    <p>월~토요일 : 오전 7시 - 오후 6시 <br>
+                        일/공휴일 : 오전 7시 - 오후 1시</p>
+                </div>
+                <div class="askCon">
+                    <div class="askBtn">
+                        <a href="#">카카오톡문의</a>
+                    </div>
+                    <p>월~토요일 : 오전 7시 - 오후 6시 <br>
+                        일/공휴일 : 오전 7시 - 오후 1시</p>
+                </div>
+                <div class="askCon">
+                    <div class="askBtn">
+                        <a href="#">카카오톡문의</a>
+                    </div>
+                    <p>월~토요일 : 오전 7시 - 오후 6시 <br>
+                        일/공휴일 : 오전 7시 - 오후 1시</p>
+                </div>
+                <p>비회원문의 : help@naver.com</p>
+            </div>
+
+            <div class="introduceContainer">
+                <ul class="companyNav">
+                    <li><a href="#">회사소개</a></li>
+                    <li><a href="#">회사소개영상</a></li>
+                    <li><a href="#">투자정보</a></li>
+                    <li><a href="#">인재채용</a></li>
+                    <li><a href="#">이용약관</a></li>
+                    <li><a href="#">개인정보처리방침</a></li>
+                    <li><a href="#">이용안내</a></li>
+                </ul>
+                <div class="introduceText">
+                    <p>법인명 : lorem | 사업자등록번호 : 000-00-00000 &emsp;<a href="#">사업자정보 확인</a></p>
+                    <p>통신판매업 : 제 2024-경기안산-1515호</p>
+                    <p>주소 : 경기도 안산시 상록구 이동 000호 5층 | 대표이사 : 백경빈</p>
+                    <p>채용문의 : <a href="#">abcd@naver.com</a></p>
+                    <p>팩스 : 000 - 0000 - 0000</p>
+                </div>
+                <ul class="snsContainer">
+                    <!-- <a target="_blank" href="https://icons8.com/icon/ww630cOi80NH/target-logo">표적</a> 작가: <a target="_blank" href="https://icons8.com">Icons8</a> -->
+                    <li><a href="#"><img src="../static/img/facebook.png" alt=""></a></li>
+                    <li><a href="#"><img src="../static/img/youtube.png" alt=""></a></li>
+                    <li><a href="#"><img src="../static/img/instagrem.png" alt=""></a></li>
+                    <li><a href="#"><img src="../static/img/target.png" alt=""></a></li>
+                    <li><a href="#"><img src="../static/img/blog.png" alt=""></a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footerCon footerNotice">
+            <p>&copy; by BeakGyeoungBin ALL RIGHT</p>
+        </div>
+    </footer>
+
+
+
+
+   <script th:src="@{/layout/headerModul.js}"></script> 
+
+</body>
+</html>

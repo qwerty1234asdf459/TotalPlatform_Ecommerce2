@@ -1,0 +1,203 @@
+/* -----------AdminReviews------------------------------ */
+.AdminOrderManagement{
+    display: flex;
+    justify-content: row;
+    /* border: solid 2px black; */
+    background-color: #fffdf6;
+    min-width: 1024px;
+}
+
+/* -----------메인---------------------------------------------- */
+.OrderManagementMain{
+    /* border: solid 2px orange; */
+    width: 90%;
+    padding: 16px;
+}
+
+/* 상태별 집계 state-box */
+.state-box{
+    display: flex;
+}
+.OrderManagementMain>p{
+    padding: 0.8rem 0;
+}
+.state-box .box{
+    border-radius: 5px;
+    background-color: white;
+    border: solid 2px #fce699;
+    text-align: center;
+    width: 180px;
+    padding: 16px;
+    margin: 0 8px;
+}
+
+/* 필터 filter */
+.filter-box{
+    /* border-top: solid 2px #fce699; */
+    border-bottom: solid 2px #fce699;
+    padding: 16px;
+    margin-top: 8px;
+}
+.checkbox-group{
+    padding-top: 10px;
+}
+
+/* 텍스트검색******************************** */
+.searchLine{
+    /* border: solid 1px black; */
+    padding-top: 10px;
+}
+.searchLine select{
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    width: 100px;
+    height: 30px;
+    font-size: 14px;
+}
+.searchtext{
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    width: 500px;
+    height: 30px;
+
+}
+
+/* 기간검색*********************************** */
+
+/* 체크박스 스타일 */
+.option-item input[type="checkbox"] {
+    margin-right: 5px; /* 체크박스와 텍스트 간의 간격 */
+}
+
+/* 주문일자 필터 컨테이너 스타일 */
+.date-filter {
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px; /* 요소 사이의 간격 */
+}
+
+/* 주문일자 제목 스타일 */
+.date-title {
+    font-size: 16px;
+    font-weight: bold; /* 굵게 처리 */
+}
+
+/* 필터 컨트롤 스타일 */
+.filter-controls {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap; /* 버튼이 여러 줄로 나누어질 수 있도록 */
+    gap: 10px; /* 요소 사이의 간격 */
+    flex: 1;
+}
+
+/* 날짜 범위 입력 필드 스타일 */
+.date-range {
+    display: flex;
+    align-items: center;
+    gap: 5px; /* 입력 필드 사이의 간격 */
+}
+
+.date-range input[type="date"] {
+    padding: 5px;
+    font-size: 14px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+/* 날짜 범위 구분자 스타일 */
+.date-range span {
+    font-size: 15px;
+}
+
+/* 빠른 선택 버튼 스타일 */
+.quick-select {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px; /* 버튼 사이의 간격 */
+}
+
+.quick-select-button {
+    padding: 5px 10px;
+    margin: 0 4px;
+    font-size: 14px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background-color: #f2f2f2;
+    color: #333;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.quick-select-button:hover {
+    background-color: #fce699; /* 버튼 호버 시 배경색 */
+    color: black; /* 버튼 호버 시 텍스트 색상 */
+    border: 1px solid #fce699;
+}
+
+.btn-style{ /*버튼스타일*/
+    margin-top: 15px;
+    margin-right: 10px;
+    border-radius: 5px;
+    border: 0px;
+    width: 70px;
+    height: 30px;
+    color: black;
+    background-color: #fce699;
+    font-weight: bold;
+}
+button:hover{
+    cursor: pointer;
+}
+/* list-box ***************************** */
+.list-box{
+    padding: 16px 0 16px 10px;
+}
+.list-box>.title{
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+/* table-container */
+.table-container{
+    margin-top: 10px;
+    border: solid 1.5px #c2c2c2;
+    background-color: white;
+}
+.table-scrollable{
+    overflow-y: auto;
+    height: 800px;
+}
+table{
+    border: solid 1.5px #c2c2c2;
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: auto; /* 열 너비 자동 조정 */
+}
+tr,td{
+    border: solid 1.5px #c2c2c2;
+    padding: 8px;
+    font-size: 14px;
+    text-align: left;
+    vertical-align: middle; /* 셀 내용 수직 정렬 */
+    white-space: nowrap; /* 셀 내용 줄 바꿈 방지 */
+    overflow: hidden; /* 내용 넘칠 경우 숨김 */
+    text-overflow: ellipsis; /* 넘치는 내용에 '...' 추가 */
+}
+th {
+    font-weight: bold;
+    padding: 3px;
+    min-width: 20px; /* 최소 너비 설정 */
+    text-align: center;
+    background-color: #fffdfd;
+}
+td {
+    min-width: 20px; /* 최소 너비 설정 */
+}
+input[type="checkbox"] {
+    zoom: 1.5;
+}
+.check-item{ /*체크박스 가운데 정렬*/
+    display: flex;
+    justify-content: center;
+}

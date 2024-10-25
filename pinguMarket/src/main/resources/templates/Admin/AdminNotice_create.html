@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" th:href="@{/Admin/Admin.css}">
+    <link rel="stylesheet" th:href="@{/Admin/AdminNotice_create.css}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"/> 
+</head>
+<!--  -->
+<body>
+    <div th:replace="~{/Admin/AdminHeader :: AdminHeaderFragment}"></div><!--헤더 -->
+    
+    <div class="AdminNotice_create">
+        <nav th:replace="~{/Admin/Adminnavbar :: AdminnavbarFragment}"></nav><!--네비바 -->       
+        
+        
+        <div class="AdminNotice_createMain"><!--메인****************************************************************-->
+            <!-- (공지사항)게시글 등록 기능 -->
+            <h2>공지사항 > 신규등록</h2>
+            <form th:action="@{/createnotice}" th:object = "${AdminNoticeForm}" method="post">
+                <div class="content_border">
+                    <table id="create-table">
+                        <tr class="writing-id-date">
+                            <td class="writing-td-title">제목</td>
+                            <td class="writing-td-content">
+                                <input type="text" name="title" id="writing-td-text" spellcheck="false">
+                            </td>
+                        </tr>
+                        <tr class="writing-content">
+                            <td class="writing-td-title">내용</td>
+                            <td class="writing-td-content">
+                                <textarea name="contents" id="writing-td-textarea" spellcheck="false"></textarea>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                    <div id="btn-box">
+                        <button type="button" id="btn-clear" class="btn-style">초기화</button>
+                        <button type="submit" id="save-btn" class="btn-style">게시글 저장</button>
+                    </div>
+            </form>
+            
+        </div><!--메인 끝-->
+    </div>
+    <script th:src="@{/Admin/AdminNotice_create.js}"></script>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" th:href="@{/Admin/Admin.css}">
+    <link rel="stylesheet" th:href="@{/Admin/AdminRegistration.css}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"/> 
+</head>
+<!-- 상품관리 >  신규등록 -->
+<body>
+    <div th:replace="~{/Admin/AdminHeader :: AdminHeaderFragment}"></div><!--헤더 -->
+    
+    <div class="AdminRegistration">
+        <nav th:replace="~{/Admin/Adminnavbar :: AdminnavbarFragment}"></nav><!--네비바 -->      
+        
+        <!--메인****************************************************************-->
+        <form th:action="@{/registration}" th:object = "${AdminProductForm}" method="post" enctype="multipart/form-data" class="RegistrationMain">
+            <h2>상품관리 > 신규등록</h2>
+            <section>
+                <span>노출 상품명 : </span>
+                <input class="searchtext" name="name" type="text" placeholder="상품명을 입력해주세요.">
+            </section>
+            <section>
+                <span>카테고리 선택 : </span>
+                <select name="category" id="">
+                    <option value="1">전체</option>
+                    <option value="2">카테고리1</option>
+                    <option value="3">카테고리2</option>
+                    <option value="4">카테고리3</option>
+                </select>
+            </section>
+            <section>
+                <span>노출 가격      : </span>
+                <input class="searchtext" name="price" type="text" placeholder="가격을 입력해주세요.">
+            </section>
+            <section>
+                <span>수량(판매개수) : </span>
+                <input class="searchtext" name="amount" type="text" placeholder="수량을 입력해주세요.">
+            </section>
+
+            <!-- <div class="Img_container">
+                <pre style="font-weight: bold;">  상품이미지</pre>
+                <div class="Imgbox">
+                    <div class="Representative_img">대표이미지</div>
+                    <div class="Detailed_img">상세페이지 이미지</div>
+                </div>
+            </div> -->
+            <button type="submit" class="btn-style">등록 완료</button>
+            
+            
+        </form><!--메인 끝-->
+    </div>
+    
+</body>
+</html>

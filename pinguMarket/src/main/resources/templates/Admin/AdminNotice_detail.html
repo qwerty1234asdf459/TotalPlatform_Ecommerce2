@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" th:href="@{/Admin/Admin.css}">
+    <link rel="stylesheet" th:href="@{/Admin/AdminNotice_detail.css}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"/> 
+</head>
+<!-- (공지사항)게시글 상세 페이지 -->
+<body>
+    <div th:replace="~{/Admin/AdminHeader :: AdminHeaderFragment}"></div><!--헤더 --> 
+    
+    <div class="AdminNotice_detail">
+        <nav th:replace="~{/Admin/Adminnavbar :: AdminnavbarFragment}"></nav><!--네비바 -->       
+        
+        
+        <div class="Notice_detailMain"><!--메인****************************************************************-->
+            <!-- (공지사항)게시글 수정 및 삭제 기능 -->
+            <h2>공지사항 > 상세페이지</h2>
+            <div id="content-box">
+                <div class="content_border">
+                    <table>
+                        <tr class="writing-title">
+                            <td th:text="${n.title}" colspan="4"></td>
+                        </tr>
+                        <tr class="writing-id-date">
+                            <td class="writing-td-title">작성자</td>
+                            <td th:text="${n.adminId}" class="writing-td-content"></td>
+                            <td class="writing-td-title">등록날짜</td>
+                            <td th:text="${#temporals.format(n.update_date 'yyyy-MM-dd HH:mm:ss')}" class="writing-td-content"></td>
+                        </tr>
+                        <tr class="writing-content">
+                            <td class="writing-td-title">내용</td>
+                            <td class="writing-td-content" colspan="3">
+                                <pre th:text="${n.contents}" class="writing-td-content-pre"></pre>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div>
+                    <button id="modify-btn" class="btn-style">게시글 수정</button>
+                    <button id="delete-btn" class="btn-style">게시글 삭제</button>
+                    <!-- 삭제하시겠습니까? 팝업띄우기 -->
+                    <button id="save-btn" class="btn-style">게시글 저장</button>
+                    <!-- 수정버튼 누르면 저장버튼 나타나게 -->
+                </div>
+
+            
+        </div><!--메인 끝-->
+    </div>
+    <script th:src="@{/Admin/AdminNotice_detail.js}"></script>
+    
+</body>
+</html>

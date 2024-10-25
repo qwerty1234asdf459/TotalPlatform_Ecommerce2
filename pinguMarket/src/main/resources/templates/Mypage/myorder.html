@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>내 주문내역</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            list-style: none;
+            text-decoration: none;
+        }
+        a {
+	        text-decoration: none; color: black;
+	    }
+        a:visited, a:hover, a:active {
+            text-decoration: none;
+        }
+        /* 나중에 삭제할 헤더 자리먹기용 */
+        header{
+            height: 50px;
+        }
+        /* 헤더 끝 */
+        /* 메인 시작 */
+        .myContainer{
+            display: flex;
+        }
+        /* 사이드바 나중에 분리 */
+        .sideBar{
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            border: 1.5px solid black;
+            border-radius: 10px;
+            margin: 1.5vw;
+            padding: 1vw;
+            width: 15vw;
+        }
+        .sideBar > *{
+            margin-bottom: 0.5vw;
+        }
+        /* 사이드바 끝 */
+        /* 메인 컨텐츠가 들어갈 메인 컨테이너 */
+        .mainContainer{
+            margin: 1.5vw;
+            width: 70vw;
+            border: 2px solid black;
+            border-radius: 10px;
+        }
+        .paymentListImage{
+            width: 75px;
+            height: 75px;
+            overflow: hidden;
+        }
+        .paymentListContainer{
+            display: flex;
+            margin: 0.5vw;
+            border: 1.5px solid black;
+            border-radius: 10px;
+        }
+        .paymentListInfo{
+            width: 65rem;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .paymentListInfo > div {
+            text-align: center;
+        }
+        .paymentListContainer > div{
+            padding: 0.5vw;
+        }
+
+        @media (max-width: 768px) {
+    .myContainer {
+        flex-direction: column; /* 작은 화면에서는 세로 배치 */
+    }
+    .sideBar {
+        width: 40vw;
+        margin: 0s;
+    }
+    .mainContainer {
+        width: 95vw;
+    }
+}
+    </style>
+</head>
+<body>
+    <header>
+        <!-- 프래그먼트 생기기 전 땜빵 자리먹기용 -->
+         헤 더
+    </header>
+    
+    <!-- 메인 시작 -->
+    <section>
+        <div class="myContainer">
+            <!-- 사이드바 시작 -->
+            <aside>
+                <div class="sideBar">
+
+                <h1>메뉴</h1>
+                <br>
+                <h3>내 쇼핑</h3>
+                <ul>
+                    <li><a href="#">주문 내역</a></li>
+                    <li><a href="#">내 리뷰</a></li>
+                </ul>
+                <hr>
+                <h3>내 정보</h3>
+                <ul>
+                    <li><a href="#">개인정보 수정</a></li>
+                    <li><a href="#">회원 탈퇴</a></li>
+                </ul>
+                <hr>
+                <h3>쿠폰</h3>
+                <ul>
+                    <li><a href="#">내 쿠폰</a></li>
+                    <li><a href="#">쿠폰 등록</a></li>
+                </ul>
+            </div>
+                            <!-- 프래그먼트로 분리할 것 -->
+            </aside>
+            <!-- 사이드바 끝 -->
+             <!-- 사이드바에서 고른 거 나오는 곳 -->
+            <main>
+                <div class="mainContainer">
+                    <div class="orderSearchContainer">
+                        <form th:action="@{/mypage/myorder}" method="get" class="headerSearchBar">
+                            <input name="keyword" type="text" class="search" placeholder="찾는 상품을 검색하세요">
+                            <div class="searchBtn">
+                                <button type="submit">
+                                    검색
+                                </button>
+                            </div>
+                        </form>
+
+                    </div>
+                    <!-- <div th:if="${리스트.isEmpty()}">
+                        구매내역이 없습니다.
+                    </div> -->
+                    <div class="paymentListContainer"> <!-- 반복 용도의 div이라서 나중에 th:each="" th:if="${!리스트.isEmpty()}" 붙이기 -->
+                        <div class="paymentListImage">
+                            <img src="b9343d314206275c1b6d0d0c4fcc2ce71.jpg" alt="">
+                        </div>
+                        <div class="paymentListInfo">
+                            <!--  상품명, 구매일자, 주문번호, 총 가격 등의 정보 작성용 -->
+                             <div class="paymentProductName">상품 <h4>유혜광 돈까스</h4></div>              <!-- th:text="${상품이름}" -->
+                             <div class="paymentPrice">가격 <h4>7300000원</div> <!-- th:text="${payment.가격}" -->
+                             <div class="paymentDate">결제일자 <h4></h4></div> <!-- th:text="${payment.createDate}" -->
+                             <div class="paymentDeliveryno" >주문 번호 <h4></h4></div> <!-- th:text="${payment.deliveryno}" -->
+                             <div class="paymentContent">배송 상태<h4></h4></div>              <!-- th:text="${payment.deliveryState}" -->
+                        </div> 
+                    </div> <!-- paymentListContainer 끝 -->
+                    
+
+                    
+                </div>
+            </main>
+            <!-- 메인 끝 -->
+
+        </div>
+    </section>
+</body>
+</html>
