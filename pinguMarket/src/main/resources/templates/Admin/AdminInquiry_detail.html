@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" th:href="@{/Admin/Admin.css}">
+    <link rel="stylesheet" th:href="@{/Admin/AdminInquiry_detail.css}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"/> 
+</head>
+<!-- 문의 관리 -->
+<body>
+    <div th:replace="~{/Admin/AdminHeader :: AdminHeaderFragment}"></div><!--헤더 -->
+    
+    <div class="AdminInquiry_dtailMain">
+        <nav th:replace="~{/Admin/Adminnavbar :: AdminnavbarFragment}"></nav><!--네비바 -->     
+        
+        <section class="Inquiry_dtailMain"><!--메인****************************************************************-->
+            <!-- 삭제, 답변 가능 : 스프링연결코드 수정필요-->
+            <h1>문의 관리 > 상세페이지</h1>
+            <div id="content-box">
+                <div class="content_border">
+                    <table>
+                        <tr class="writing-title">
+                            <td th:text="${scQuestion.title}" colspan="4">TITILE</td>
+                        </tr>
+                        <tr class="writing-id-date">
+                            <td class="writing-td-title">ID</td>
+                            <td th:text="${scQuestion.buyuser.id}" class="writing-td-content">작성자 ID</td>
+                            <td class="writing-td-title">등록날짜</td>
+                            <td th:text="${#temporals.format(scQuestion.questionDate, 'yyyy-MM-dd HH:mm:ss')}" class="writing-td-content">yyyy-MM-dd HH:mm:ss</td>
+                        </tr>
+                        <tr class="writing-content">
+                            <td class="writing-td-title">내용</td>
+                            <td class="writing-td-content" colspan="3">
+                                <pre th:text="${scQuestion.contents}" class="writing-td-content-pre">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quas ipsam tempora provident, neque ea quaerat ducimus! Dolor ratione, sapiente dolorem delectus natus assumenda itaque animi eum in. Aliquam, excepturi sint!</pre>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <button id="answer-btn" class="btn-style">답변 등록</button>
+
+                <!-- 답변 등록 버튼 클릭 시 나타남 -->
+                <form th:action="@{/admin/sub_center_answer}" method="post">
+                    <div class="content_border">
+                        <table id="answer-table">
+                            <tr class="writing-id-date">
+                                <td class="writing-td-title">제목</td>
+                                <td class="writing-td-content">
+                                    <input type="text" name="title" id="writing-td-text" spellcheck="false">
+                                </td>
+                            </tr>
+                            <tr class="writing-content">
+                                <td class="writing-td-title">내용</td>
+                                <td class="writing-td-content">
+                                    <textarea name="content" id="writing-td-textarea" spellcheck="false"></textarea>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                        <div id="btn-box">
+                            <button type="submit" class="btn-style">저장</button>
+                            <button type="button" id="btn-clear" class="btn-style">초기화</button>
+                        </div>
+                        <input type="hidden" name="questionId" th:value="${scQuestion.cquestionId}">
+                </form>
+            </div>
+        </section>
+
+
+
+    </div>
+    <script th:src="@{/Admin/AdminInquiry_detail.js}"></script>
+</body>
+</html>

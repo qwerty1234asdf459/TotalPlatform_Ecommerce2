@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" th:href="@{/Admin/Admin.css}">
+    <link rel="stylesheet" th:href="@{/Admin/AdminProduct.css}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"/> 
+</head>
+<!-- 상품관리 -->
+<body>
+    <div th:replace="~{/Admin/AdminHeader :: AdminHeaderFragment}"></div><!--헤더 -->  
+    
+    <div class="AdminMerchandise">
+        <nav th:replace="~{/Admin/Adminnavbar :: AdminnavbarFragment}"></nav><!--네비바 -->       
+        
+        
+        <div class="MerchandiseMain"><!--메인****************************************************************-->
+            <h2>상품관리</h2>
+            <section class="searchLine">
+                <span>텍스트 검색 : </span>
+                <select name="" id="">
+                    <option value="">상품명</option>
+                    <option value="">상품 ID</option>
+                </select>
+                <input class="searchtext" type="text" placeholder="상품명 또는 상품ID를 입력해주세요.">
+                <button type="button" class="fa-solid fa-magnifying-glass btn-style"> 검색</button>
+            </section>
+            
+            <section class="filterLine">
+                <select name="" id="">
+                    <option value="">전체</option>
+                    <option value="">카테고리1</option>
+                    <option value="">카테고리2</option>
+                    <option value="">카테고리3</option>
+                </select>
+                <button class="btn-style quick-select-button">재고 적은 순</button>
+                <button class="btn-style quick-select-button">판매량 높은 순</button>
+                <button class="btn-style quick-select-button">최근 등록일 순</button>
+            </section>
+
+            <section class="BtnLine">
+                <button class="btn-style salesVolume" th:onclick="|location.href='@{/registration}'|">신규 등록</button>
+                <button class="btn-style new">선택상품 일괄 삭제</button>
+            </section>
+
+            <section class="list-box">
+                <div class="title">총 <span>--</span><span>개의 상품 | </span><span>--</span>개 선택됨</div>
+                <div class="table-container">
+                    <div class="table-scrollable">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th><input type="checkbox" id="select-all"></th>
+                                    <th>상품코드</th>
+                                    <th>상품명</th>
+                                    <th>카테고리</th>
+                                    <th>노출상태</th>
+                                    <th>판매가</th>
+                                    <th>재고수량</th>
+                                    <th>등록일</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><span class="check-item"><input type="checkbox" name="select-item"></span></td>
+                                    <td>product_id</td>
+                                    <td>product_name</td>
+                                    <td>category</td>
+                                    <td>cancel_yn</td>
+                                    <td>price</td>
+                                    <td>amount</td>
+                                    <td>update_date</td>
+                                </tr>
+                                <!-- 추가 데이터 행을 여기에 추가 -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+        </div><!--메인 끝-->
+    </div>
+    
+</body>
+</html>

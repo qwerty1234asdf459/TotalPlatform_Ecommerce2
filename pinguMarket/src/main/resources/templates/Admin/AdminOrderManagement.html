@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" th:href="@{/Admin/Admin.css}">
+    <link rel="stylesheet" th:href="@{/Admin/AdminOrderManagement.css}">
+</head>
+<!-- 주문/배송관리 -->
+<body>
+    <div th:replace="~{/Admin/AdminHeader :: AdminHeaderFragment}"></div><!--헤더 --> 
+    
+    <div class="AdminOrderManagement">
+        <nav th:replace="~{/Admin/Adminnavbar :: AdminnavbarFragment}"></nav><!--네비바 -->       
+        
+        <div class="OrderManagementMain"><!--메인****************************************************************-->
+            <h2>주문/배송관리</h2>
+            <p>상태별집계</p>
+            <section class="state-box">
+                <div class="box">처리중인 주문 <div> N건</div></div>
+                <div class="box">배송준비중 <div> N건</div></div>
+                <div class="box">배송중 <div> N건</div></div>
+                <div class="box">반품요청 <div> N건</div></div>
+                <div class="box">주문오류/처리불가 <div> N건</div></div>
+                <div class="box">재고부족 <div> N건</div></div>
+            </section>
+            <section class="filter-box">
+                <p class="fa-solid fa-filter" style="font-weight: bold;"> 필터</p>
+                <div class="checkbox-container">
+                    <div class="checkbox-group">
+                        <span>결제유형 : </span>
+                        <label><input type="checkbox" name="" value="전체"> 전체</label>
+                        <label><input type="checkbox" name="" value="카드결제"> 카드결제</label>
+                        <label><input type="checkbox" name="" value="계좌이체"> 계좌이체</label>
+                        <label><input type="checkbox" name="" value="카카오페이"> 카카오페이</label>
+                    </div>
+                    <div class="checkbox-group">
+                        <span>주문처리상태 : </span>
+                        <label><input type="checkbox" name="" value="전체"> 전체</label>
+                        <label><input type="checkbox" name="" value="결재완료"> 결제완료</label>
+                        <label><input type="checkbox" name="" value="배송준비중"> 배송준비중</label>
+                        <label><input type="checkbox" name="" value="배송중"> 배송중</label>
+                        <label><input type="checkbox" name="" value="배송완료"> 배송완료</label>
+                        <label><input type="checkbox" name="" value="취소"> 취소</label>
+                    </div>
+                    <div class="checkbox-group">
+                        <span>반품처리상태 : </span>
+                        <label><input type="checkbox" name="" value="반품요청"> 반품요청</label>
+                        <label><input type="checkbox" name="" value="반품거부"> 반품거부</label>
+                        <label><input type="checkbox" name="" value="반품승인"> 반품승인</label>
+                        <label><input type="checkbox" name="" value="반품완료"> 반품완료</label>
+                    </div>
+
+                    <div class="searchLine"> <!-- 텍스트 검색 -->
+                        <span>텍스트 검색 : </span>
+                        <select name="" id="">
+                            <option value="">주문번호</option>
+                            <option value="">주문자 ID</option>
+                            <option value="">수취인</option>
+                        </select>
+                        <input class="searchtext" type="text" placeholder="주문번호, 주문자ID 또는 수취인을 입력해주세요.">
+                    </div>
+                    <div class="searchLine"> <!-- 기간 검색 -->
+                        <div class="filter-controls">
+                            <span>주문일자 : </span>
+                            <div class="date-range">
+                                <input type="date" id="start-date" placeholder="시작일">
+                                <span>~</span>
+                                <input type="date" id="end-date" placeholder="종료일">
+                            </div>
+                            <div class="quick-select">
+                                <button type="button" class="quick-select-button">오늘</button>
+                                <button type="button" class="quick-select-button">어제</button>
+                                <button type="button" class="quick-select-button">이번주</button>
+                                <button type="button" class="quick-select-button">이번달</button>
+                                <button type="button" class="quick-select-button">지난주</button>
+                                <button type="button" class="quick-select-button">지난달</button>
+                                <button type="button" class="quick-select-button">전체</button>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="button" class="fa-solid fa-magnifying-glass btn-style"> 검색</button>
+                    <button type="button" id="btn-clear" class="btn-style">초기화</button>
+                </div>
+            </section>
+            <section class="list-box">
+                <div class="title">총 <span>--</span>개의 주문 목록</div>
+                <div>
+                    <span>주문 상태 변경 버튼 :</span>
+                    <button type="button" class="quick-select-button">배송중</button>
+                    <button type="button" class="quick-select-button">배송완료</button>
+                    <button type="button" class="quick-select-button">반품거부</button>
+                    <button type="button" class="quick-select-button">반품승인</button>
+                    <button type="button" class="quick-select-button">주문취소</button>
+                </div>
+
+                <div class="table-container">
+                    <div class="table-scrollable">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th><input type="checkbox" id="select-all"></th>
+                                    <th>주문번호</th>
+                                    <th>주문상태</th>
+                                    <th>주문상품번호</th>
+                                    <th>상품명</th>
+                                    <th>주문자</th>
+                                    <th>주문자연락처</th>
+                                    <th>주문자주소</th>
+                                    <th>수취인</th>
+                                    <th>수취인연락처</th>
+                                    <th>수취인주소</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><span class="check-item"><input type="checkbox" name="select-item"></span></td>
+                                    <td>payment_id</td>
+                                    <td>delivery_state</td>
+                                    <td>product_id</td>
+                                    <td>product_name</td>
+                                    <td>user_id</td>
+                                    <td>user_tell</td>
+                                    <td>address, address_detail</td>
+                                    <td>delivery_name</td>
+                                    <td>delivery_tell</td>
+                                    <td>delivery_address</td>
+                                    
+                                </tr>
+                                <!-- 추가 데이터 행을 여기에 추가 -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </section>
+
+            
+        </div><!--메인 끝-->
+    </div>
+    
+</body>
+</html>

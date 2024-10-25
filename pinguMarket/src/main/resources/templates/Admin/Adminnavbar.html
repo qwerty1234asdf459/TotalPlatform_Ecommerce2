@@ -1,0 +1,60 @@
+<nav th:fragment="AdminnavbarFragment">
+    <div class="MSmenu"> 
+        <ul class="manu_list">
+            <li class="DashBoard_item">
+                <div class="DashBoard">
+                    <a th:href="@{/admin/main}"><span class="fa-solid fa-square-poll-horizontal"></span> DashBoard</a>
+                </div>
+            </li>
+            <pre><br> ----</pre>
+            <li class="UserManagement_item">
+                <div class="UserManagement">                       
+                    <a th:href="@{/admin/UserManagement}"><span class="fa-solid fa-address-card"></span> 회원 관리</a>
+                </div>
+            </li>
+            <li class="OrderManagement_item">
+                <div class="OrderManagement">
+                    <a th:href="@{/admin/OrderManagement}"><span class="fa-solid fa-boxes-stacked"></span> 주문/배송관리</a>
+                </div>
+            </li>
+            <pre><br> ----</pre>
+            <li class="Merchandise_item">
+                <div class="Merchandise">
+                    <a th:href="@{/admin/Product}"><span class="fa-solid fa-seedling"></span> 상품 관리</a>
+                </div>
+            </li>
+            <li class="Inquiry_item">
+                <div class="Inquiry">
+                    <a th:href="@{/admin/Inquiry}"><span class="fa-solid fa-question"></span> 문의 관리</a>
+                </div>
+            </li>
+            <li class="Reviews_item">
+                <div class="Reviews">
+                    <a th:href="@{/admin/Reviews}"><span class="fa-solid fa-pen-to-square"></span> 리뷰 관리</a>
+                </div>
+            </li>
+            <li class="Category_item">
+                <div class="Category">
+                    <a href=""><span class="fa-solid fa-table-list"></span> 카테고리 관리</a>
+                </div>
+            </li>
+            <li class="ShippingCost_item">
+                <div class="ShippingCost">
+                    <a href=""><span class="fa-solid fa-truck"></span> 배송비 관리</a>
+                </div>
+            </li>
+            <pre><br> ----</pre>
+            <li class="Notice_item">
+                <div class="Notice">
+                    <a th:href="@{/admin/Notice}"><span class="fa-solid fa-clipboard"></span> 공지사항 관리</a>                       
+                </div>
+            </li>
+            <li class="Settlement_item">
+                <div class="Settlement">
+                    <a href=""><span class="fa-solid fa-calculator"></span> 정산 관리</a>                       
+                </div>
+            </li>
+        </ul>
+    </div>
+
+</nav>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" th:href="@{/Admin/Admin.css}">
+    <link rel="stylesheet" th:href="@{/Admin/AdminInquiry.css}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"/> 
+</head>
+<!-- 문의 관리 -->
+<body>
+    <div th:replace="~{/Admin/AdminHeader :: AdminHeaderFragment}"></div><!--헤더 --> 
+    
+    <div class="AdminInquiryMain">
+        <nav th:replace="~{/Admin/Adminnavbar :: AdminnavbarFragment}"></nav><!--네비바 -->        
+        
+        
+        <div class="InquiryMain"><!--메인****************************************************************-->
+            <!-- 삭제, 답변 가능 -->
+            <h1>문의 관리</h1>
+            <div id="searchBox"> <!-- 검색창 -->
+                <select name="" id="">
+                    <option>전체</option>
+                    <option value="">작성자 ID</option>
+                    <option value="">상품명</option>
+                    <option value="">제목</option>
+                </select>
+                <input type="text" placeholder="작성자 ID, 상품명 또는 제목을 입력해주세요.">
+                <button class="fa-solid fa-magnifying-glass searchbtn"></button>
+
+                <button class="userDelete" type="">문의글 삭제</button>
+                <!-- 다중선택 삭제 기능, 삭제 전 확인 문구 띄우기 -->
+            </div>
+
+            <div id="columnBox"> <!-- 테이블 컬럼 -->
+                <span>선택</span>
+                <span>등록날짜</span>
+                <span>ID</span>
+                <span>제목</span>
+                <span>답변여부</span> 
+            </div>
+            <div class="Rows"> <!--th:each="buyuser:${paging}" 페이징 처리 필요-->
+                <span><input type="checkbox"></span>
+                <span>XXXX-XX-XX</span>
+                <span>IDxxxxxxx</span>
+                <span>제목</span>
+                <span>N</span>
+            </div>
+            
+            <div id="pageBtn"> <!--
+                <ul>
+                    <li th:classappend="${!paging.hasPrevious} ? 'disabled'">
+		        		 <a th:href="@{|?page=${paging.number-1}|}">
+		        		        <span>이전</span>
+		        		 </a>
+                    </li>
+                    <li th:each="page : ${#numbers.sequence(0, paging.totalPages-1)}"
+                        th:if="${page >= paging.number-2 and page <= paging.number+2}"
+                        th:classappend="${page == paging.number} ? 'active'">
+                        <a th:text="${page}" th:href="@{|?page=${page}|}"></a>
+                    </li>
+                    <li th:classappend="${!paging.hasNext} ? 'disabled'">
+		              <a th:href="@{|?page=${paging.number+1}|}">
+		                <span>다음</span>
+		              </a>
+                    </li>-->
+                </ul>
+            </div>
+
+
+            
+        </div><!--메인 끝-->
+    </div>
+    
+</body>
+</html>

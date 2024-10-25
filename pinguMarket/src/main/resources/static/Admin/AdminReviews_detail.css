@@ -1,0 +1,88 @@
+/* -----------AdminReviews_dtail------------------------------ */
+.AdminReviews_detail{
+    display: flex;
+    justify-content: row;
+    /* border: solid 2px black; */
+    background-color: #fffdf6;
+    min-width: 1024px;
+}
+
+/* -----------메인---------------------------------------------- */
+.AdminReviews_detailMain{
+    /* border: solid 2px orange; */
+    width: 90%;
+    padding: 1rem 0 2rem 2.5rem;
+}
+
+/* 테이블 디자인 */
+#content-box{
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+}
+.content_border {
+    border-radius: 10px;
+    display: inline-block; /* 내부 테이블 크기에 맞춤 */
+    border: 2px solid #fce699; 
+    overflow: hidden; /* 넘치는 건 감춤 */
+    margin-top: 15px;
+}
+td {
+    border: 2px solid #fce699;
+}
+tr {
+    background-color: white;
+}
+table {
+    border-collapse: collapse;
+    width: 800px;
+    max-width: 1000px;
+    height: 600px;
+    border-style: hidden; /* 두께 맞추기 위해 border-style 숨김 */
+}
+/* 테이블 컬럼 칸 */
+table .writing-title { /* 리뷰 제목 <tr> */
+    height: 70px;
+    font-size: 20px;
+    font-weight: bold;
+}
+table .writing-title > td {
+    padding-left: 20px;
+}
+table .writing-td-title{ /* ID, 등록날짜, 내용 컬럼 */
+    height: 50px;
+    width: 80px;
+    text-align: center;
+    font-size: 17px;
+    font-weight: bold;
+}
+/* 회원 리뷰 내용 칸 */
+table .writing-id-date > .writing-td-content{ /* ID, 등록날짜 값 */
+    width: 240px;
+}
+table .writing-td-content{ /* ID, 등록날짜, 내용 값 */
+    padding-left: 15px;
+    font-size: 16px;
+}
+table .writing-td-content-pre{ /* 내용 값 */
+    height: 530px;
+    width: 640px;
+    font-size: 16px;
+    white-space: pre-wrap; /* 줄바꿈 설정 */
+    line-height: 22px;
+    padding: 1rem;
+    overflow: scroll; /*넘치면 스크롤*/
+}
+
+/* 버튼 스타일 */
+.btn-style {
+    margin-top: 20px;
+    margin-left: 20px;
+    background-color: #fce699;
+    width: 90px;
+    height: 40px;
+    border: 0px;
+    border-radius: 10px;
+    color: black;
+    cursor: pointer;
+}

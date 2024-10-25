@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" th:href="@{/Admin/Admin.css}">
+    <link rel="stylesheet" th:href="@{/Admin/AdminUserManagement.css}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"/> 
+</head>
+<!-- 회원관리 -->
+<body>
+    <div th:replace="~{/Admin/AdminHeader :: AdminHeaderFragment}"></div><!--헤더 -->
+    
+    <div class="AdminUserManagement">
+        <nav th:replace="~{/Admin/Adminnavbar :: AdminnavbarFragment}"></nav><!--네비바 -->   
+                
+        <div class="UserManagementMain"><!--메인****************************************************************-->
+            <!-- 삭제 기능, 회원정보와 주문건수, 반품건수, 등록일을 보여줌 -->
+            <h1>회원 관리</h1>
+            <div id="searchBox"> <!-- 검색창 -->
+                <select name="" id="">
+                    <option>전체</option>
+                    <option value="">ID</option>
+                    <option value="">이름</option>
+                </select>
+                <input type="text" placeholder="ID명 또는 이름을 입력해주세요.">
+                <button class="fa-solid fa-magnifying-glass searchbtn"></button>
+
+                <button class="userDelete" type="">회원 삭제</button>
+                <!-- 다중선택 삭제 기능, 삭제 전 확인 문구 띄우기 -->
+            </div>
+
+            <div id="columnBox"> <!-- 테이블 컬럼 -->
+                <span>선택</span>
+                <span>ID</span>
+                <span>이름</span>
+                <span>전화번호</span>
+                <span>주소</span> 
+                <span>주문건수</span>
+                <span>반품건수</span>
+                <span>등록일</span>
+            </div>
+            <div class="Rows"> <!--th:each="buyuser:${paging}"-->
+                <span><input type="checkbox"></span>
+                <span>IDxxxxxxx</span>
+                <span>김이름</span>
+                <span>010-0000-0000</span>
+                <span>주소 ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ</span> 
+                <span>--건</span>
+                <span>--건</span>
+                <span>XXXX-XX-XX</span>
+            </div>
+            <div id="pageBtn"> <!--
+                    <li th:classappend="${!paging.hasPrevious} ? 'disabled'">
+		        		 <a th:href="@{|?page=${paging.number-1}|}">
+		        		        <span>이전</span>
+		        		 </a>
+                    </li>
+                    <li th:each="page : ${#numbers.sequence(0, paging.totalPages-1)}"
+                        th:if="${page >= paging.number-2 and page <= paging.number+2}"
+                        th:classappend="${page == paging.number} ? 'active'">
+                        <a th:text="${page}" th:href="@{|?page=${page}|}"></a>
+                    </li>
+                    <li th:classappend="${!paging.hasNext} ? 'disabled'">
+		              <a th:href="@{|?page=${paging.number+1}|}">
+		                <span>다음</span>
+		              </a>
+                    </li>-->
+                </ul>
+            </div>
+
+
+
+        </div><!--메인 끝-->
+    </div>
+<!--  
+    <script> //수정필요
+        // 변수 정의 및 초기화
+         const searchBtn = document.getElementById('searchBtn');
+         const searchKw = document.getElementById('search_kw');
+         const searchForm = document.getElementById('searchForm');
+         const kwInput = document.getElementById('kw');
+ 
+         //검색 버튼 클릭시
+         searchBtn.addEventListener('click', function() {
+             document.getElementById('kw').value = document.getElementById('search_kw').value;
+             document.getElementById('searchForm').submit();
+         });
+     
+             
+        // 검색창에서 Enter 키를 누르고 있을때 발생함 =  keydown 
+         searchKw.addEventListener('keydown', function(event) {
+             if (event.key === 'Enter') {    // Enter 키 임을 확인함 . 
+                 event.preventDefault();   // Enter 키 기본 동작(줄 바꿈) 방지해줌  
+                 kwInput.value = searchKw.value;
+                 searchForm.submit();
+             }
+         });     
+     </script>
+--> 
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" th:href="@{/Admin/Admin.css}">
+    <link rel="stylesheet" th:href="@{/Admin/AdminLogin.css}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"/> 
+</head>
+<!-- 관리자 페이지 로그인 -->
+<body>
+    <div th:replace="~{/Admin/AdminHeader :: AdminHeaderFragment}"></div><!--헤더 --> 
+    
+    <div class="AdminLogin">
+        <div class="loginContainer">
+            <h1>로그인</h1>
+            <form action="">
+                <input type="text" placeholder="관리자 코드를 입력해주세요">
+                <button class="Btn login">로그인</button>
+                <button class="Btn signIn">관리자 코드생성</button>
+            </form>
+        </div>
+    </div>
+    
+</body>
+</html>
