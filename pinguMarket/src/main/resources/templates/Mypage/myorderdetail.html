@@ -14,16 +14,7 @@
     
 
 
-.myReviewContainer{
-    background-color: white;
-    border-radius: 0.5rem;
-    padding: 1rem 2rem 1rem 2rem;
-}
-.myReviewContainer>p{
-    padding-bottom: 1rem ;
-    font-size: var(--titleFont);
-    border-bottom: 2px solid;
-}
+
 
         .reviewListContainer{
             margin: 0.5vw;
@@ -35,6 +26,35 @@
         }
         .reviewListTop{
             display: flex;
+        }
+        
+        .paymentListImage{
+            width: 75px;
+            height: 75px;
+            overflow: hidden;
+        }
+        .paymentListContainer{
+            display: flex;
+            margin: 0.5vw;
+            border: 1.5px solid black;
+            border-radius: 10px;
+        }
+        .paymentListInfo{
+            width: 65rem;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .paymentListInfo > div {
+            text-align: center;
+        }
+        .paymentListContainer > div{
+            padding: 0.5vw;
+        }
+        .createReviewLink{
+	      display: flex;
+          justify-content: center;
+          align-items: center;
         }
     </style>
 </head>
@@ -211,35 +231,24 @@
 
 
             <div class="myPageRight">
-                <div class="myReviewContainer">
-                    <p>내 리뷰</p>
+                <div class="orderHistory">
+                    <p>주문내역</p>
                     
-                     <div class="mainContainer">
-                    <div th:if="${user.reviewList.isEmpty()}">
-                        작성한 리뷰가 없습니다.
-                    </div>
-                    <div class="reviewListContainer" th:each="review : ${user.reviewList}" th:if="${!user.reviewList.isEmpty()}"> <!-- 반복 용도의 div이라서 나중에 th:each="review : ${user.reviewList}" th:if="${!user.reviewList.isEmpty() 붙이기 -->
-                        <div class="reviewListTop">
-                            <div class="reviewListInfo">
-                                <!-- 유저 이름, 작성일, 평점, 상품명 등의 정보 작성용 -->
-                                <div class="reviewUserName"><h3 th:text="${review.user.name}"></h3></div>
-                                <div class="reviewProductName"><h3 th:text="${review.product.name}"><a href="#"></a></h3></div> <!-- 리뷰에서 제품명 누르면 링크타지게도 해보기-->
-                                <div class="reviewScope" th:text="${review.scope} + 점"></div>
-                                <div class="reviewDate" th:text="${review.updateDate}"></div>
-                            </div>
-                            <div class="reviewModifyDelete">
-                                <a th:text="수정" th:href="@{|reviewmodify/${review.reviewId}|}"></a>
-                                <a href="javascript:void(0);" th:data-uri="@{|/reviewdelete/${review.reviewId}|}"th:text="삭제" class="delete"></a>
-                            </div>
-                             
-                        </div>  <!-- reviewListInfo 끝 -->
-                        <div class="reviewListContent">
-                            <!-- <div class="reviewImage"></div>  이미지 생기면 이거 쓰기-->
-                            <div class="reviewTitle" ><h1 th:text="${review.title}"></h1></div>
-                            <div class="reviewContent" ><span th:text="${review.contents}"></span></div>
+                    <!-- <div th:if="${리스트.isEmpty()}">
+                        구매내역이 없습니다.
+                    </div> -->
+                    <div class="paymentListContainer" th:each="paymentdetail : ${payment.paymentDetailList}"> <!-- 반복 용도의 div이라서 나중에 th:each="" th:if="${!리스트.isEmpty()}" 붙이기 -->
+                        <div class="paymentListImage">
+                            <img src="b9343d314206275c1b6d0d0c4fcc2ce71.jpg" alt="">
                         </div>
-                    </div>
-                </div>
+                        <div class="paymentListInfo">
+                            <!--  상품명, 구매일자, 주문번호, 총 가격 등의 정보 작성용 -->
+                             <div class="ProductName">상품명 <h4 th:text="${paymentdetail.product.name}"></h4 ></div>
+                             <div class="paymentDetailPrice">가격 <h4 th:text="${paymentdetail.price}"> </h4 ></div> <!-- th:text="${payment.가격}" -->
+                             <div class="paymentDetailCount" >수량 <h4 th:text="${paymentdetail.count}"></h4></div>
+                             <div class="createReviewLink"> <a th:href="@{/reviewcreate/{productId}(productId = ${paymentdetail.product.productId})}">리뷰 작성</a></div>
+                        </div> 
+                    </div> <!-- paymentListContainer 끝 -->
                 
             
             </div>
@@ -313,20 +322,7 @@
             <p>&copy; by BeakGyeoungBin ALL RIGHT</p>
         </div>
     </footer>
-    <script src="/MyPage/headerModul.js">
-
-</script>
-<script>
-let del = document.querySelectorAll(".delete");
-        for(let el of del){
-	el.addEventListener('click', function(){
-		if(confirm("정말로 삭제?")){
-			location.href = this.dataset.uri;
-//                         삭제의 data.uri가 dataset-uri에 저장하는 것이기 때문에 누른 버튼의 uri를 가져옴
-		}
-	});
-};
-</script>
+    <script src="/MyPage/headerModul.js"></script>
 </body>
 
 </html>

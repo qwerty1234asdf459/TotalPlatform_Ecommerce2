@@ -14,16 +14,7 @@
     
 
 
-.myReviewContainer{
-    background-color: white;
-    border-radius: 0.5rem;
-    padding: 1rem 2rem 1rem 2rem;
-}
-.myReviewContainer>p{
-    padding-bottom: 1rem ;
-    font-size: var(--titleFont);
-    border-bottom: 2px solid;
-}
+
 
         .reviewListContainer{
             margin: 0.5vw;
@@ -35,6 +26,35 @@
         }
         .reviewListTop{
             display: flex;
+        }
+        
+        .paymentListImage{
+            width: 75px;
+            height: 75px;
+            overflow: hidden;
+        }
+        .paymentListContainer{
+            display: flex;
+            margin: 0.5vw;
+            border: 1.5px solid black;
+            border-radius: 10px;
+        }
+        .paymentListInfo{
+            width: 65rem;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .paymentListInfo > div {
+            text-align: center;
+        }
+        .paymentListContainer > div{
+            padding: 0.5vw;
+        }
+        .createReviewLink{
+	      display: flex;
+          justify-content: center;
+          align-items: center;
         }
     </style>
 </head>
@@ -211,38 +231,84 @@
 
 
             <div class="myPageRight">
-                <div class="myReviewContainer">
-                    <p>내 리뷰</p>
-                    
-                     <div class="mainContainer">
-                    <div th:if="${user.reviewList.isEmpty()}">
-                        작성한 리뷰가 없습니다.
-                    </div>
-                    <div class="reviewListContainer" th:each="review : ${user.reviewList}" th:if="${!user.reviewList.isEmpty()}"> <!-- 반복 용도의 div이라서 나중에 th:each="review : ${user.reviewList}" th:if="${!user.reviewList.isEmpty() 붙이기 -->
-                        <div class="reviewListTop">
-                            <div class="reviewListInfo">
-                                <!-- 유저 이름, 작성일, 평점, 상품명 등의 정보 작성용 -->
-                                <div class="reviewUserName"><h3 th:text="${review.user.name}"></h3></div>
-                                <div class="reviewProductName"><h3 th:text="${review.product.name}"><a href="#"></a></h3></div> <!-- 리뷰에서 제품명 누르면 링크타지게도 해보기-->
-                                <div class="reviewScope" th:text="${review.scope} + 점"></div>
-                                <div class="reviewDate" th:text="${review.updateDate}"></div>
-                            </div>
-                            <div class="reviewModifyDelete">
-                                <a th:text="수정" th:href="@{|reviewmodify/${review.reviewId}|}"></a>
-                                <a href="javascript:void(0);" th:data-uri="@{|/reviewdelete/${review.reviewId}|}"th:text="삭제" class="delete"></a>
-                            </div>
-                             
-                        </div>  <!-- reviewListInfo 끝 -->
-                        <div class="reviewListContent">
-                            <!-- <div class="reviewImage"></div>  이미지 생기면 이거 쓰기-->
-                            <div class="reviewTitle" ><h1 th:text="${review.title}"></h1></div>
-                            <div class="reviewContent" ><span th:text="${review.contents}"></span></div>
-                        </div>
-                    </div>
+                <div class="orderHistory">
+                    <p>주문내역</p>
+
+                  <div class="userModifyContainer">
+                  <form th:action="@{/usermodify}" th:object="${userModifyForm}"  method="post">
+                 <!--  <div id="erorrs" th:replace="~{login/form_errors :: formErrorsFragment}"></div>
+                  -->
+                  <div class="userInfoEmail">
+                  <div>이메일</div>
+                  <h4 th:text="${user.email}"}></h4>
+                  
+                  <div class="warp-input">
+                  <input type="text" th:field="*{email1}"/>
+                  <span>@</span>
+                    <input class="box" type="text" th:field="*{email2}">
+                    <select name="box" id="domain-list" type="text" class="box">
+                      <option value="type">직접입력</option>
+                      <option value="naver.com">naver.com</option>
+                      <option value="google.com">google.com</option>
+                      <option value="hanmail.net">hanmail.net</option>
+                      <option value="nate.com">nate.com</option>
+                      <option value="kakao.com">kakao.com</option>
+                    </select>
                 </div>
-                
-            
-            </div>
+                <br>
+                  
+                  
+                     <div class="userInfoName">
+                     <div>이름</div>
+                     <h4 th:text="${user.name}">아</h4>
+                     <input type="text" th:field="*{name}">
+                     </div>
+                     <br>
+                     
+                     
+                    <div class="userInfoAdress">
+                    <div>주소</div>
+                     <h4 th:text="${user.address}"></h4>
+                     
+                     <input type="text" th:field="*{address1}" placeholder="우편번호" readonly>
+                     <input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
+                     <input type="text" th:field="*{address2}" placeholder="주소" readonly><br>
+                     <input type="text" th:field="*{addressDetail}" placeholder="상세주소">
+                     </div>
+                     <br>
+                     
+                     <div class="userInfoGender">
+                     <div> 성별</div>
+                     <h4 th:text="${user.gender}"></h4>
+                     
+                     <label for="male">남성</label>
+                     <input type="radio" th:field="*{gender}" value="male">
+                     <label for="female">여성</label>
+                     <input type="radio" th:field="*{gender}" value="female">
+                     </div>
+                     <br>
+                     
+                     <br>
+                     
+                  <div class="userInfoTel">
+                  <div>전화번호</div>
+                     <h4 th:text="${user.tell}"></h4>
+                     
+
+                  <input type="tel" th:field="*{tell}" onfocus="this.placeholder=''" maxlength="13" oninput="autoHyphen(this)" pattern="010-[0-9]{3,4}-[0-9]{4}" placeholder="- 없이 숫자만 입력하세요" 
+                  id="tel" autocomplete="off" name="users_phone"  onblur="this.placeholder = '- 없이 숫자만 입력하세요'"/>
+                </div>
+                <br>
+                     
+                     
+                     
+
+                     <input type="submit" value="수정하기">
+                  </form>
+                  
+                  </div>
+                  
+                  </div>
         </div>
     </main>
     <!-- *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*--*-*-*-*-*-*-*-*-*-* FOOTER *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*--*-*-*-*-*-*-*-*-*-* -->
@@ -313,20 +379,74 @@
             <p>&copy; by BeakGyeoungBin ALL RIGHT</p>
         </div>
     </footer>
-    <script src="/MyPage/headerModul.js">
-
-</script>
+                  
+                  <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+                  <script src="/MyPage/headerModul.js"></script>
 <script>
-let del = document.querySelectorAll(".delete");
-        for(let el of del){
-	el.addEventListener('click', function(){
-		if(confirm("정말로 삭제?")){
-			location.href = this.dataset.uri;
-//                         삭제의 data.uri가 dataset-uri에 저장하는 것이기 때문에 누른 버튼의 uri를 가져옴
-		}
-	});
-};
-</script>
-</body>
 
-</html>
+ 
+    function sample6_execDaumPostcode() {
+        new daum.Postcode({
+            oncomplete: function(data) {
+                // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+
+                // 각 주소의 노출 규칙에 따라 주소를 조합한다.
+                // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+                var addr = ''; // 주소 변수
+                var extraAddr = ''; // 참고항목 변수
+
+                //사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
+                if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+                    addr = data.roadAddress;
+                } else { // 사용자가 지번 주소를 선택했을 경우(J)
+                    addr = data.jibunAddress;
+                }
+
+                // 사용자가 선택한 주소가 도로명 타입일때 참고항목을 조합한다.
+                if(data.userSelectedType === 'R'){
+                    // 법정동명이 있을 경우 추가한다. (법정리는 제외)
+                    // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+                    if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
+                        extraAddr += data.bname;
+                    }
+                    // 건물명이 있고, 공동주택일 경우 추가한다.
+                    if(data.buildingName !== '' && data.apartment === 'Y'){
+                        extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+                    }
+                    // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+                    
+                }
+
+                // 우편번호와 주소 정보를 해당 필드에 넣는다.
+                document.getElementById('address1').value = data.zonecode;
+                document.getElementById("address2").value = addr;
+                // 커서를 상세주소 필드로 이동한다.
+                document.getElementById("addressDetail").focus();
+            }
+        }).open();
+    }
+    
+    // 도메인 직접 입력 or domain option 선택
+const domainListEl = document.querySelector('#domain-list')
+const domainInputEl = document.querySelector('#email2')
+// select 옵션 변경 시
+domainListEl.addEventListener('change', (event) => {
+  // option에 있는 도메인 선택 시
+  if(event.target.value !== "type") {
+    // 선택한 도메인을 input에 입력하고 disabled
+    domainInputEl.value = event.target.value
+    domainInputEl.readOnly = true
+  } else { // 직접 입력 시
+    // input 내용 초기화 & 입력 가능하도록 변경
+    domainInputEl.value = ""
+    domainInputEl.readOnly = false
+  }
+})
+
+const autoHyphen = (target) => {
+  target.value = target.value
+   .replace(/[^0-9]/g, '')
+   .replace(/^(\d{0,3})(\d{0,4})(\d{0,4})$/g, "$1-$2-$3").replace(/(\-{1,2})$/g, "");
+}
+</script>
+	</html>
