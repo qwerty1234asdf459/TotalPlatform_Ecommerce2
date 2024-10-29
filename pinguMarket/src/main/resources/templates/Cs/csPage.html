@@ -8,7 +8,7 @@
     <link rel="stylesheet" th:href="@{/layout/reset.css}">
     <link rel="stylesheet" th:href="@{/layout/headerStyle.css}">
     <link rel="stylesheet" th:href="@{/layout/footerStyle.css}">
-    <link rel="stylesheet" th:href="@{/csc/csPageStyle.css}">
+    <link rel="stylesheet" th:href="@{/Cs/csPageStyle.css}">
     <script src="https://kit.fontawesome.com/86c06c2025.js" crossorigin="anonymous"></script>
 </head>
 
@@ -136,13 +136,13 @@
                 <ul>
                     <li class="on">
                         <a href="#">
-                            <p>공지사항</p>
+                        	<p th:href="@{/csc}">1:1 문의</p>
                             <i class="fa-solid fa-angle-right"></i>
                         </a>
                     </li>
                     <li>
                         <a>
-                            <p th:href="@{/csc}">1:1 문의</p>
+                            <p>공지사항</p>
                             <i class="fa-solid fa-angle-right"></i>
                         </a>
                     </li>
@@ -150,7 +150,28 @@
             </div>
 
             <ul>
-                <li class="csContent on">
+            	<li class="csContent on">
+                    <div class="csTitle">1:1문의</div>
+                    <table class="csInfo">
+                        <tr>
+                            <th>번호</th>
+                            <th>제목</th>
+                            <th>작성일</th>
+                            <th>답변상태</th>
+                        </tr>
+                        <tr th:each="CsQuestion, loop : ${paging}">
+                        	<td th:text="${paging.totalElements - (paging.number * paging.size) - loop.index}"></td>
+                            <td><a  th:href="@{|/csc/detail/${CsQuestion.CsQuestionId}|}" th:text="${CsQuestion.title}"></a></td>
+                            <td th:text="${#temporals.format(CsQuestion.updateDate, 'yyyy-MM-dd HH:mm:ss')}"></td>
+                            <td th:text="${CsQuestion.CsAnswer==null} ? 'N' : 'Y'"></td>
+                        </tr>
+                    </table> 
+                    <div class="askBtn">
+                        <a th:href="@{csc/form}">문의하기</a>
+                    </div>                                   
+                </li>
+                
+                <li class="csContent">
                     <div class="csTitle">공지사항<span>회사의 새로운 소식들과 유용한 정보들을 한곳에서 확인하세요.</span></div>
                     <table class="csInfo">
                         <tr>
@@ -239,26 +260,7 @@
                     </table>
                 </li>
 
-                <li class="csContent">
-                    <div class="csTitle">1:1문의</div>
-                    <table class="csInfo">
-                        <tr>
-                            <th>번호</th>
-                            <th>제목</th>
-                            <th>작성일</th>
-                            <th>답변상태</th>
-                        </tr>
-                        <tr th:each="CsQuestion, loop : ${paging}">
-                        	<td th:text="${paging.totalElements - (paging.number * paging.size) - loop.index}"></td>
-                            <td><a  th:href="@{|/csc/detail/${CsQuestion.csQuestionId}|}" th:text="${CsQuestion.title}"></a></td>
-                            <td th:text="${#temporals.format(CsQuestion.updateDate, 'yyyy-MM-dd HH:mm:ss')}"></td>
-                            <td th:text="${CsQuestion.CsAnswer==null} ? 'N' : 'Y'"></td>
-                        </tr>
-                    </table> 
-                    <div class="askBtn">
-                        <a th:href="@{csc/form}">문의하기</a>
-                    </div>                                   
-                </li>      
+                      
                 
                <!-- <div class="paginBtn">pagingBtn</div>-->
                 <!-- 페이징 버튼 -->
@@ -392,7 +394,7 @@
 
 
 
-    <script th:src="@{/csc/csPageModul.js}"></script>
+    <script th:src="@{/Cs/csPageModul.js}"></script>
     <script th:src="@{/layout/headerModul.js}"></script>
 </body>
 
