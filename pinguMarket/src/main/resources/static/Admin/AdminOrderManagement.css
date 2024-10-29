@@ -194,10 +194,66 @@ th {
 td {
     min-width: 20px; /* 최소 너비 설정 */
 }
-input[type="checkbox"] {
-    zoom: 1.5;
+input[type="checkbox"] {/*체크박스 크기 조정*/
+    width: 20px;
+    height: 20px;
 }
 .check-item{ /*체크박스 가운데 정렬*/
     display: flex;
     justify-content: center;
+}
+.drop{ /*펼치기 아이콘*/
+    text-align: center;
+    cursor: pointer;
+}
+.fa-chevron-down{
+    font-size: 16px;
+}
+
+/* 드롭다운 - 상세정보 */
+.drop>.sub{
+    display:none;
+    height:120px;
+    list-style:none;
+    overflow:hidden;
+}
+
+.drop>.sub li{
+  background-color:orange;
+  border-top:1px white solid;
+}
+
+.drop>.sub li>a{
+  text-decoration:none;
+  color:black;
+}
+
+.drop>.sub.up{
+  height:0px;
+  animation-name:slide_up;
+  animation-duration:1s;  
+}
+
+.drop>.sub.down{
+  height:120px;
+  animation-name:slide_down;
+  animation-duration:1s;
+}
+
+@keyframes slide_up{
+  0%{
+    height:120px;
+  }
+  100%{
+    height:0px;
+  }
+}
+
+@keyframes slide_down{
+  0%{
+    height:0px;
+  }
+  100%{
+    height:120px;
+  }
 }

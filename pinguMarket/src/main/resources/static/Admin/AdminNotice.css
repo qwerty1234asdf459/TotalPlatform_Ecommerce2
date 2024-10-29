@@ -90,10 +90,10 @@ button:hover{
 .Rows > span:nth-child(3) { width: 200px; }
 .Rows > span:nth-child(4) { width: 200px; }
 
-.Rows input{
-    zoom: 1.3;
+[type="checkbox"]{
+    width: 20px;
+    height: 20px;
 }
-
 .Rows:hover{
     border: solid 2px black;
     cursor: pointer;

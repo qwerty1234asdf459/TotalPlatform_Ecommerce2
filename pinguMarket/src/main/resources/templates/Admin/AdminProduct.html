@@ -63,15 +63,15 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
+                                <tr th:each="PList : ${PList}">
                                     <td><span class="check-item"><input type="checkbox" name="select-item"></span></td>
-                                    <td>product_id</td>
-                                    <td>product_name</td>
-                                    <td>category</td>
-                                    <td>cancel_yn</td>
-                                    <td>price</td>
-                                    <td>amount</td>
-                                    <td>update_date</td>
+                                    <td th:text="${PList.productId}"></td>
+                                    <td th:text="${PList.name}"></td>
+                                    <td th:text="${PList.category}"></td>
+                                    <td th:text="${PList.cancelYn}"></td>
+                                    <td th:text="${PList.price}"></td>
+                                    <td th:text="${PList.amount}"></td>
+                                    <td th:text="${PList.updateDate}"></td>
                                 </tr>
                                 <!-- 추가 데이터 행을 여기에 추가 -->
                             </tbody>

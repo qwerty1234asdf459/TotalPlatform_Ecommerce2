@@ -27,9 +27,10 @@
                         </tr>
                         <tr class="writing-id-date">
                             <td class="writing-td-title">작성자</td>
-                            <td th:text="${n.adminId}" class="writing-td-content"></td>
+                            <td th:text="${n.admin}" class="writing-td-content"></td>
                             <td class="writing-td-title">등록날짜</td>
-                            <td th:text="${#temporals.format(n.update_date 'yyyy-MM-dd HH:mm:ss')}" class="writing-td-content"></td>
+                            <td th:text="${n.updateDate}" class="writing-td-content"></td>
+                        <!-- ${#temporals.format(n.updateDate 'yyyy-MM-dd HH:mm:ss')}" -->
                         </tr>
                         <tr class="writing-content">
                             <td class="writing-td-title">내용</td>

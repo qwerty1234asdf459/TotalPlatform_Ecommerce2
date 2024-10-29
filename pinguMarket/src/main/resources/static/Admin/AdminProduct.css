@@ -128,7 +128,8 @@ td {
     min-width: 20px; /* 최소 너비 설정 */
 }
 input[type="checkbox"] {
-    zoom: 1.5;
+    width: 20px;
+    height: 20px;
 }
 .check-item{ /*체크박스 가운데 정렬*/
     display: flex;

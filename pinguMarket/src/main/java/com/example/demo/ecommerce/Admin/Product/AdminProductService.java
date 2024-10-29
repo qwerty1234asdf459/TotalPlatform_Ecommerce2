@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 
 import org.springframework.stereotype.Service;
 
+import com.example.demo.ecommerce.Entity.AdminProduct;
 import com.example.demo.ecommerce.Entity.Product;
 
 import lombok.RequiredArgsConstructor;

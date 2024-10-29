@@ -37,4 +37,6 @@ public class UserService {
 	}
 //	로그인 기능이 없어서 String이 아니라 Integer를 사용하여 땜빵용
 	
+	
+	
 }
