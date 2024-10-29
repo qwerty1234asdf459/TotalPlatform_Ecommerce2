@@ -9,6 +9,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import com.example.demo.ecommerce.Entity.Notice;
+import com.example.demo.ecommerce.Entity.Product;
+import com.example.demo.ecommerce.Review.CanNotFoundException;
+
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 
@@ -25,6 +29,7 @@ public class AdminNoticeController {
 		public String createNotice() {
 			return "/Admin/AdminNotice_create";
 		}
+		
 		
 		//@PreAuthorize(value = "isAuthenticated()")  //로그인 한 경우에만 요청 처리
 		@PostMapping("/createnotice")
@@ -44,21 +49,21 @@ public class AdminNoticeController {
 		
 		//---------------관리자페이지 > 공지사항 > 상세 페이지-----------------------------
 //		@PreAuthorize("isAuthenticated()") // 로그인 한 경우에만 요청 처리
-//		@GetMapping("/admin/Notice/{noticeId}") 
-//	    public String AdminNotice(Model model, @PathVariable("productId") Integer noticeId) {
-//			//noticeId로 조회해서 가져오기
-//			Notice n = this.ans.getNotice(noticeId);
-//	        model.addAttribute("n", n);
-//	        return "/Admin/AdminNotice_detail";
-//	    }
+		@GetMapping("/admin/Notice/{noticeId}") 
+	    public String AdminNotice(Model model, @PathVariable("noticeId") Integer noticeId) {
+			//noticeId로 조회해서 가져오기
+			Notice n = this.ans.getNotice(noticeId);
+	        model.addAttribute("n", n);
+	        return "/Admin/AdminNotice_detail";
+	    }
 		
 		//---------------관리자페이지 > 공지사항 페이지(리스트)-----------------------------
 //		@PreAuthorize("isAuthenticated()") // 로그인 한 경우에만 요청 처리
-//		@GetMapping("/admin/Notice") 
-//		public String notice(Model model) {
-//	        List<Notice> NList = this.anr.findAll();
-//	        model.addAttribute("NList", NList);
-//	                          //" "안에 있는 값이 html에서 인식할 텍스트
-//	        return "/Admin/AdminNotice";  
-//		}
+		@GetMapping("/admin/Notice") 
+		public String notice(Model model) {
+	        List<Notice> NList = this.anr.findAll();
+	        model.addAttribute("NList", NList);
+	                          //" "안에 있는 값이 html에서 인식할 텍스트
+	        return "/Admin/AdminNotice";  
+		}
 }

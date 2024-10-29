@@ -23,24 +23,24 @@
                 <div class="content_border">
                     <table>
                         <tr class="writing-title">
-                            <td th:text="${scQuestion.title}" colspan="4">TITILE</td>
+                            <td th:text="${r.title}" colspan="4"></td>
                         </tr>
                         <tr class="writing-id-date">
                             <td class="writing-td-title">작성자</td>
-                            <td th:text="${scQuestion.buyuser.id}" class="writing-td-content">user_id</td>
+                            <td th:text="${r.user}" class="writing-td-content"></td>
                             <td class="writing-td-title">작성일</td>
-                            <td th:text="${#temporals.format(scQuestion.questionDate, 'yyyy-MM-dd HH:mm:ss')}" class="writing-td-content">update_date</td>
+                            <td th:text="${r.updateDate}"  class="writing-td-content">update_date</td>
                         </tr>
                         <tr class="product">
                             <td class="writing-td-title">상품명</td>
-                            <td th:text="${}" class="writing-td-content">product_id</td>
+                            <td th:text="${r.product}" class="writing-td-content"></td>
                             <td class="writing-td-title">별점</td>
-                            <td th:text="${}" class="writing-td-content">scope</td>
+                            <td th:text="${r.scope}" class="writing-td-content"></td>
                         </tr>
                         <tr class="writing-content">
                             <td class="writing-td-title">내용</td>
                             <td class="writing-td-content" colspan="3">
-                                <pre th:text="${scQuestion.contents}" class="writing-td-content-pre">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quas ipsam tempora provident, neque ea quaerat ducimus! Dolor ratione, sapiente dolorem delectus natus assumenda itaque animi eum in. Aliquam, excepturi sint!</pre>
+                                <pre th:text="${r.contents}" class="writing-td-content-pre">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quas ipsam tempora provident, neque ea quaerat ducimus! Dolor ratione, sapiente dolorem delectus natus assumenda itaque animi eum in. Aliquam, excepturi sint!</pre>
                             </td>
                         </tr>
                     </table>

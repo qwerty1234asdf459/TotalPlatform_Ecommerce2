@@ -1,16 +1,21 @@
 package com.example.demo.ecommerce.Admin.Product;
 
 import java.security.Principal;
+import java.util.List;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.example.demo.ecommerce.Admin.Product.AdminProductForm;
+import com.example.demo.ecommerce.Admin.AdminService;
+import com.example.demo.ecommerce.Entity.AdminProduct;
 import com.example.demo.ecommerce.Entity.Product;
+import com.example.demo.ecommerce.Entity.User;
+import com.example.demo.ecommerce.Product.ProductRepository;
 
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
@@ -20,10 +25,23 @@ import lombok.RequiredArgsConstructor;
 @Controller
 public class AdminProductController {
 	private final AdminProductService aps;
+	private final ProductRepository pr;
 	//private final AdminService as;
 	//private final ImageController ic;
 	
-	//------------------상품등록 페이지-----------------------------
+	//------------------관리자페이지 > 상품관리(리스트)-----------------------------
+	//@PreAuthorize("isAuthenticated()") // 로그인 한 경우에만 요청 처리
+	@GetMapping("/admin/Product") 
+	public String AdminProduct(Model model) {
+        List<Product> PList = this.pr.findAll();
+        model.addAttribute("PList", PList);
+                          //" "안에 있는 값이 html에서 인식할 텍스트
+        return "/Admin/AdminProduct";  
+	}
+	
+	
+	
+	//---------------관리자페이지 > 상품관리 > 신규 등록 페이지-----------------
 	//@PreAuthorize("isAuthenticated()") // 로그인 한 경우에만 요청 처리
 	@GetMapping("/registration")
 	public String createProduct() {

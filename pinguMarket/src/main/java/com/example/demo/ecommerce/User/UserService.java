@@ -37,11 +37,11 @@ public class UserService {
 	}
 //	로그인 기능이 없어서 String이 아니라 Integer를 사용하여 땜빵용
 	
+
 	public void usermodify(User user,
 			String email1, String email2, String name,
 			String address1,String address2,String addressDetail,
 			String gender, String tell) {
-//		    bu.setPw(passwordEncoder.encode(pw));
 			user.setEmail(email1+"@"+email2);
 			user.setName(name);
 //			bu.setRegisterDate(LocalDateTime.now());

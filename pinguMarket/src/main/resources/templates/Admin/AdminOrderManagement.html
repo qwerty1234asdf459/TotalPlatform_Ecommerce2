@@ -6,6 +6,7 @@
     <title>Document</title>
     <link rel="stylesheet" th:href="@{/Admin/Admin.css}">
     <link rel="stylesheet" th:href="@{/Admin/AdminOrderManagement.css}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"/> 
 </head>
 <!-- 주문/배송관리 -->
 <body>
@@ -102,31 +103,27 @@
                                 <tr>
                                     <th><input type="checkbox" id="select-all"></th>
                                     <th>주문번호</th>
-                                    <th>주문상태</th>
-                                    <th>주문상품번호</th>
-                                    <th>상품명</th>
-                                    <th>주문자</th>
-                                    <th>주문자연락처</th>
-                                    <th>주문자주소</th>
-                                    <th>수취인</th>
-                                    <th>수취인연락처</th>
-                                    <th>수취인주소</th>
+                                    <th>결제일</th>
+                                    <th>처리 상태</th>
+                                    <th>회원번호</th>
+                                    <th>배송번호</th>
+                                    <th><i class="fa-solid fa-chevron-down"></i></th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                <tr>
+                            <tbody><!--ueer, product, payment테이블 에서 정보 끌어오기-->
+                                <tr th:each="PayList : ${PayList}">
                                     <td><span class="check-item"><input type="checkbox" name="select-item"></span></td>
-                                    <td>payment_id</td>
-                                    <td>delivery_state</td>
-                                    <td>product_id</td>
-                                    <td>product_name</td>
-                                    <td>user_id</td>
-                                    <td>user_tell</td>
-                                    <td>address, address_detail</td>
-                                    <td>delivery_name</td>
-                                    <td>delivery_tell</td>
-                                    <td>delivery_address</td>
-                                    
+                                    <td th:text="${PayList.paymentId}"></td>
+                                    <td th:text="${PayList.createDate}"></td>
+                                    <td th:text="|${PayList.paymentState} ${PayList.deliveryState}|"></td>
+                                    <td th:text="${PayList.user}"></td>
+                                    <td th:text="${PayList.deliveryno}"></td>
+                                    <td class="drop"><i class="fa-solid fa-chevron-down"></i></td>
+                                    <ul class="sub"> <!--드롭다운 : 상세정보-->
+                                        <li>
+                                            상세내용
+                                        </li>
+                                    <!-- <td th:text="|${PayList.user.address} ${PayList.user.address_detail}|"></td> -->
                                 </tr>
                                 <!-- 추가 데이터 행을 여기에 추가 -->
                             </tbody>
@@ -139,6 +136,6 @@
             
         </div><!--메인 끝-->
     </div>
-    
+    <script th:src="@{/Admin/AdminOrderManagement.js}"></script>
 </body>
 </html>
