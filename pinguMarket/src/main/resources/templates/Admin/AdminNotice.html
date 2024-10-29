@@ -37,11 +37,11 @@
                 <span>작성자</span>
                 <span>작성일</span>
             </div>
-            <div class="Rows"> <!--th:each="buyuser:${paging}" 페이징 처리 필요-->
+            <div class="Rows" th:each="NList : ${NList}"> <!--페이징 처리 필요-->
                 <span><input type="checkbox"></span>
-                <a th:href="@{|/admin/Notice/${NList.noticeId}|}" th:text="${NList.title}"></a>
-                <span>Admin</span>
-                <span>XXXX-XX-XX</span>
+                <a class="list_title" th:href="@{|/admin/Notice/${NList.noticeId}|}" th:text="${NList.title}"></a>
+                <a class="list_admin" th:href="@{|/admin/Notice/${NList.noticeId}|}" th:text="${NList.admin}"></a>
+                <a class="list_updateDate" th:href="@{|/admin/Notice/${NList.noticeId}|}" th:text="${NList.updateDate}"></a>
             </div>
             
             <div id="pageBtn"> <!--

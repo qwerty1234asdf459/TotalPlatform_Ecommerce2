@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+    	<button onclick="window.open('http://localhost:8080/coupon','_blank','width=700, height=600, top=50, left=50, scrollbars=yes')">쿠폰입력</button>
+    	<span th:text="${coupon.code}"></span>
+    	<span th:text="${coupon.discount}"></span>
+    	<span th:text="${coupon.createDate}"></span>
+    </div>
+   
+</body>
+</html>

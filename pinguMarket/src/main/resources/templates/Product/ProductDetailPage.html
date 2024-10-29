@@ -212,17 +212,75 @@
                 <li><a href="#">상품설명</a></li>
                 <li><a href="#">상세정보</a></li>
                 <li><a href="#">후기<span>(61)</span></a></li>
-                <li><a th:onclick="|location.href='@{/csc}'|">문의</a></li>
+                <li><a th:onclick="|location.href='@{/csc}'|">문의</a></li><!--클릭 시 csc페이지로 연결-->
             </ul>
             <ul class="productExplainContainer">
-                <li class="productExplain on">
+                <li class="productExplain on"> <!--상품설명-->
                 상품설명 이미지 추후 추가
                 </li>
-                <li class="productExplain">
+                <li class="productExplain"> <!--상세정보-->
                     상세정보 이미지 추후 추가
                 </li>
-                <li class="productExplain">
-                    UI추가
+                <li class="productExplain"> <!--리뷰-->
+                    <h3>상품 후기</h3>
+                    <div class="imgList">
+                        <div class="imgbox"></div>
+                        <div class="imgbox"></div>
+                        <div class="imgbox"></div>
+                        <div class="imgbox"></div>
+                        <div class="imgbox"></div>
+                        <div class="imgbox"></div>
+                        <div class="imgbox"></div>
+                        <div class="imgbox plus">+ 더보기</div>
+                    </div>
+                    <div class="rv_filter">
+                        <div>총  <span>--</span>개</div>
+                        <div style="white-space: pre;"><button class="ReviewBtn best">추천순</button>  |  <button class="ReviewBtn day">최근등록순</button></div>
+                    </div>
+                    <div class="rv_container">
+                        <div class="rvLeft">
+                            <div class="rv_Id">userId</div>
+                            <div class="rv_scope">scope</div>
+                            <div class="rv_day">updateDate</div>
+                        </div>
+                        <div class="rvRight">
+                            <div class="rv_text">리뷰 내용... Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab id, eius quod explicabo doloribus maxime repellat! Totam aspernatur repellendus sint facilis exercitationem, illum ipsam sapiente voluptate corporis obcaecati sunt explicabo?</div>
+                            <div class="rv_img">첨부 사진...</div>
+                        </div>
+                    </div>
+                    <div class="rv_container"><!--반복,, 백단연결 후 삭제-->
+                        <div class="rvLeft">
+                            <div class="rv_Id">userId</div>
+                            <div class="rv_scope">scope</div>
+                            <div class="rv_day">updateDate</div>
+                        </div>
+                        <div class="rvRight">
+                            <div class="rv_text">리뷰 내용... Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab id, eius quod explicabo doloribus maxime repellat! Totam aspernatur repellendus sint facilis exercitationem, illum ipsam sapiente voluptate corporis obcaecati sunt explicabo?</div>
+                            <div class="rv_img">첨부 사진...</div>
+                        </div>
+                    </div>
+                    <div class="rv_container">
+                        <div class="rvLeft">
+                            <div class="rv_Id">userId</div>
+                            <div class="rv_scope">scope</div>
+                            <div class="rv_day">updateDate</div>
+                        </div>
+                        <div class="rvRight">
+                            <div class="rv_text">리뷰 내용... Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab id, eius quod explicabo doloribus maxime repellat! Totam aspernatur repellendus sint facilis exercitationem, illum ipsam sapiente voluptate corporis obcaecati sunt explicabo?</div>
+                            <div class="rv_img">첨부 사진...</div>
+                        </div>
+                    </div>
+                    <div class="rv_container"> <!--페이징처리 필요-->
+                        <div class="rvLeft">
+                            <div class="rv_Id">userId</div>
+                            <div class="rv_scope">scope</div>
+                            <div class="rv_day">updateDate</div>
+                        </div>
+                        <div class="rvRight">
+                            <div class="rv_text">리뷰 내용... Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab id, eius quod explicabo doloribus maxime repellat! Totam aspernatur repellendus sint facilis exercitationem, illum ipsam sapiente voluptate corporis obcaecati sunt explicabo?</div>
+                            <div class="rv_img">첨부 사진...</div>
+                        </div>
+                    </div>
                 </li>
                 <li class="productExplain">
                 </li>

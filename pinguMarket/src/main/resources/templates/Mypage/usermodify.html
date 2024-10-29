@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>myPage</title>
+    <link rel="stylesheet" href="/MyPage/reset.css">
+    <link rel="stylesheet" href="/MyPage/headerStyle.css">
+    <link rel="stylesheet" href="/MyPage/myPageStyle.css">
+    <link rel="stylesheet" href="/MyPage/footerStyle.css">
+    <script src="https://kit.fontawesome.com/86c06c2025.js" crossorigin="anonymous"></script>
+    <style>
+    
+
+
+
+
+        .reviewListContainer{
+            margin: 0.5vw;
+            border: 1.5px solid black;
+            border-radius: 10px;
+        }
+        .reviewListContainer > div{
+            padding: 0.5vw;
+        }
+        .reviewListTop{
+            display: flex;
+        }
+        
+        .paymentListImage{
+            width: 75px;
+            height: 75px;
+            overflow: hidden;
+        }
+        .paymentListContainer{
+            display: flex;
+            margin: 0.5vw;
+            border: 1.5px solid black;
+            border-radius: 10px;
+        }
+        .paymentListInfo{
+            width: 65rem;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .paymentListInfo > div {
+            text-align: center;
+        }
+        .paymentListContainer > div{
+            padding: 0.5vw;
+        }
+        .createReviewLink{
+	      display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*--*-*-*-*-*-*-*-*-*-* HEADER *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*--*-*-*-*-*-*-*-*-*-* -->
+
+    <header>
+        <div class="headerBanner">
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur sunt libero odit pariatur tempore
+                facilis magni quia veritatis</p>
+            <div class="closeBtn"><i class="fa-solid fa-x"></i></div>
+        </div>
+
+        <div class="headerUp_Container">
+            <div class="headerLogo">
+                <a href="mainPage.html">
+                    <p><span>B</span>-Team</p>
+                </a>
+            </div>
+
+            <div class="searchContainer">
+                <form action="post">
+                    <input type="text" class="searchBar" placeholder="SEARCH">
+                    <div class="searchBtn btn"><i class="fa-solid fa-magnifying-glass"></i></div>
+                </form>
+            </div>
+            <ul class="contentNav">
+                <li class="wishList">
+                    <a href="#">
+                        <p>
+                            <i class="fa-regular fa-heart"></i>
+                        </p>
+                    </a>
+                </li>
+                <li class="cart">
+                    <a href="#">
+                        <p>
+                            <i class="fa-solid fa-cart-shopping"></i>
+                        </p>
+                    </a>
+                </li>
+                <li class="login">
+                    <a href="loginPage.html">
+                        <p>
+                            <i class="fa-regular fa-user"></i>
+                        </p>
+                    </a>
+                </li>
+                <li class="customerService">
+                    <a href="csPage.html">
+                        <p>
+                            <i class="fa-solid fa-headset"></i>
+                        </p>
+                    </a>
+                    <ul>
+                        <li><a href="csPage.html">공지사항</a></li>
+                        <li><a href="csPage.html">자주하는 질문</a></li>
+                        <li><a href="csPage.html">1:1 문의</a></li>
+                        <li><a href="csPage.html">대량주문 문의</a></li>
+                    </ul>   
+                </li>
+            </ul>
+        </div>
+        <div class="headerDown_Container">
+            <div class="categoryContainer">
+                <p><span><i class="fa-solid fa-bars"></i></span>Category</p>
+                <ul class="category">
+                    <li><a href="#">lorem</a></li>
+                    <li><a href="#">lorem</a></li>
+                    <li><a href="#">loremlorem</a></li>
+                    <li><a href="#">lorem</a></li>
+                    <li><a href="#">loremlorem</a></li>
+                    <li><a href="#">lorem</a></li>
+                    <li><a href="#">lorem</a></li>
+                    <li><a href="#">loremlorem</a></li>
+                    <li><a href="#">lorem</a></li>
+                    <li><a href="#">loremlorem</a></li>
+                    <li><a href="#">lorem</a></li>
+                    <li><a href="#">lorem</a></li>
+                    <li><a href="#">loremlorem</a></li>
+                    <li><a href="#">lorem</a></li>
+                    <li><a href="#">loremlorem</a></li>
+                    <li><a href="#">lorem</a></li>
+                    <li><a href="#">lorem</a></li>
+                    <li><a href="#">loremlorem</a></li>
+                    <li><a href="#">lorem</a></li>
+                    <li><a href="#">loremlorem</a></li>
+                    <li><a href="#">lorem</a></li>
+                    <li><a href="#">lorem</a></li>
+                    <li><a href="#">loremlorem</a></li>
+                    <li><a href="#">lorem</a></li>
+                    <li><a href="#">loremlorem</a></li>
+                    <li><a href="#">lorem</a></li>
+                    <li><a href="#">lorem</a></li>
+                    <li><a href="#">loremlorem</a></li>
+                    <li><a href="#">lorem</a></li>
+                    <li><a href="#">loremlorem</a></li>
+                    <li><a href="#">lorem</a></li>
+                    <li><a href="#">lorem</a></li>
+                    <li><a href="#">loremlorem</a></li>
+                    <li><a href="#">lorem</a></li>
+                    <li><a href="#">loremlorem</a></li>
+                </ul>
+            </div>
+            <ul class="event">
+                <li><a href="#">BEST</a></li>
+                <li><a href="#">NEW</a></li>
+                <li><a href="#">Seler</a></li>
+            </ul>
+            <div class="languageContainer">
+                <div class="language">
+                    <p>KR</p>
+                    <p>EN</p>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*--*-*-*-*-*-*-*-*-*-* MAIN *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*--*-*-*-*-*-*-*-*-*-* -->
+    <main>
+        <div class="myPageContainer">
+
+            <div class="myPageLeft">
+                <div class="myInfo">
+                    <p class="myName"><span th:text="${user.name}"></span>님</p>
+                    <div class="myCard">
+                        <div class="cardSaving">
+                            <p>적립금</p>
+                            <p><span class="cardMoney">0</span>원</p>
+                        </div>
+                        <div class="cardCash">
+                            <p>캐쉬</p>
+                            <p><span class="cardMoney">0</span>원</p>
+                        </div>
+                        <div class="cardMemberShip">
+                            <p>멤버스 무료체험</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="navContainer">
+                    <ul>
+                        <p>자주찾는 메뉴</p>
+                        <li><a th:href="@{/myorder}">주문내역</a></li>
+                        <li><a th:href="@{/mycoupon}">쿠폰</a></li>
+                        <li><a href="#">찜한상품</a></li>
+                        <li><a href="#">자주구매</a></li>
+                    </ul>
+                    <ul>
+                        <p>쇼핑</p>
+                        <li><a href="#">결제수단 or 00페이</a></li>
+                        <li><a th:href="@{/myreview}">상품후기</a></li>
+                        <li><a href="#">선물 내역</a></li>
+                        <li><a href="#">상품 문의</a></li>
+                    </ul>
+                    <ul>
+                        <p>혜택</p>
+                        <li><a href="#">회사멤버스</a></li>
+                    </ul>
+                    <ul>
+                        <p>내정보관리</p>
+                        <li><a href="#">배송지관리</a></li>
+                        <li><a href="#">나의 스타일</a></li>
+                        <li><a th:href="@{/usermodify}">개인정보수정</a></li>
+                    </ul>
+                    <ul>
+                        <p>서비스안내</p>
+                        <li><a href="#">퍼플박스</a></li>
+                        <li><a href="#">VIP제도 안내</a></li>
+                    </ul>
+                </div>
+            </div>
+
+
+            <div class="myPageRight">
+                <div class="orderHistory">
+                    <p>주문내역</p>
+
+                  <div class="userModifyContainer">
+                  <form th:action="@{/usermodify}" th:object="${userModifyForm}"  method="post">
+                 <!--  <div id="erorrs" th:replace="~{login/form_errors :: formErrorsFragment}"></div>
+                  -->
+                  <div class="userInfoEmail">
+                  <div>이메일</div>
+                  <h4 th:text="${user.email}"}></h4>
+                  
+                  <div class="warp-input">
+                  <input type="text" th:field="*{email1}"/>
+                  <span>@</span>
+                    <input class="box" type="text" th:field="*{email2}">
+                    <select name="box" id="domain-list" type="text" class="box">
+                      <option value="type">직접입력</option>
+                      <option value="naver.com">naver.com</option>
+                      <option value="google.com">google.com</option>
+                      <option value="hanmail.net">hanmail.net</option>
+                      <option value="nate.com">nate.com</option>
+                      <option value="kakao.com">kakao.com</option>
+                    </select>
+                </div>
+                <br>
+                  
+                  
+                     <div class="userInfoName">
+                     <div>이름</div>
+                     <h4 th:text="${user.name}">아</h4>
+                     <input type="text" th:field="*{name}">
+                     </div>
+                     <br>
+                     
+                     
+                    <div class="userInfoAdress">
+                    <div>주소</div>
+                     <h4 th:text="${user.address}"></h4>
+                     
+                     <input type="text" th:field="*{address1}" placeholder="우편번호" readonly>
+                     <input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
+                     <input type="text" th:field="*{address2}" placeholder="주소" readonly><br>
+                     <input type="text" th:field="*{addressDetail}" placeholder="상세주소">
+                     </div>
+                     <br>
+                     
+                     <div class="userInfoGender">
+                     <div> 성별</div>
+                     <h4 th:text="${user.gender}"></h4>
+                     
+                     <label for="male">남성</label>
+                     <input type="radio" th:field="*{gender}" value="male">
+                     <label for="female">여성</label>
+                     <input type="radio" th:field="*{gender}" value="female">
+                     </div>
+                     <br>
+                     
+                     <br>
+                     
+                  <div class="userInfoTel">
+                  <div>전화번호</div>
+                     <h4 th:text="${user.tell}"></h4>
+                     
+
+                  <input type="tel" th:field="*{tell}" onfocus="this.placeholder=''" maxlength="13" oninput="autoHyphen(this)" pattern="010-[0-9]{3,4}-[0-9]{4}" placeholder="- 없이 숫자만 입력하세요" 
+                  id="tel" autocomplete="off" name="users_phone"  onblur="this.placeholder = '- 없이 숫자만 입력하세요'"/>
+                </div>
+                <br>
+                     
+                     
+                     
+
+                     <input type="submit" value="수정하기">
+                  </form>
+                  
+                  </div>
+                  
+                  </div>
+        </div>
+    </main>
+    <!-- *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*--*-*-*-*-*-*-*-*-*-* FOOTER *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*--*-*-*-*-*-*-*-*-*-* -->
+    <footer>
+        <div class="footerCon footerCon01">
+            <div class="csContainer">
+                <div class="csText">
+                    <p>고객행복센터</p>
+
+                    <div class="companyNum">
+                        <p>1644-1107</p>
+                        <p><span>월~토요일 오전 7시 - 오후6시</span></p>
+                    </div>
+                </div>
+                <div class="askCon">
+                    <div class="askBtn">
+                        <a href="#">카카오톡문의</a>
+                    </div>
+                    <p>월~토요일 : 오전 7시 - 오후 6시 <br>
+                        일/공휴일 : 오전 7시 - 오후 1시</p>
+                </div>
+                <div class="askCon">
+                    <div class="askBtn">
+                        <a href="#">카카오톡문의</a>
+                    </div>
+                    <p>월~토요일 : 오전 7시 - 오후 6시 <br>
+                        일/공휴일 : 오전 7시 - 오후 1시</p>
+                </div>
+                <div class="askCon">
+                    <div class="askBtn">
+                        <a href="#">카카오톡문의</a>
+                    </div>
+                    <p>월~토요일 : 오전 7시 - 오후 6시 <br>
+                        일/공휴일 : 오전 7시 - 오후 1시</p>
+                </div>
+                <p>비회원문의 : help@naver.com</p>
+            </div>
+
+            <div class="introduceContainer">
+                <ul class="companyNav">
+                    <li><a href="#">회사소개</a></li>
+                    <li><a href="#">회사소개영상</a></li>
+                    <li><a href="#">투자정보</a></li>
+                    <li><a href="#">인재채용</a></li>
+                    <li><a href="#">이용약관</a></li>
+                    <li><a href="#">개인정보처리방침</a></li>
+                    <li><a href="#">이용안내</a></li>
+                </ul>
+                <div class="introduceText">
+                    <p>법인명 : lorem | 사업자등록번호 : 000-00-00000 &emsp;<a href="#">사업자정보 확인</a></p>
+                    <p>통신판매업 : 제 2024-경기안산-1515호</p>
+                    <p>주소 : 경기도 안산시 상록구 이동 000호 5층 | 대표이사 : 백경빈</p>
+                    <p>채용문의 : <a href="#">abcd@naver.com</a></p>
+                    <p>팩스 : 000 - 0000 - 0000</p>
+                </div>
+                <ul class="snsContainer">
+                    <!-- <a target="_blank" href="https://icons8.com/icon/ww630cOi80NH/target-logo">표적</a> 작가: <a target="_blank" href="https://icons8.com">Icons8</a> -->
+                    <li><a href="#"><img src="../img/facebook.png" alt=""></a></li>
+                    <li><a href="#"><img src="../img/youtube.png" alt=""></a></li>
+                    <li><a href="#"><img src="../img/instagrem.png" alt=""></a></li>
+                    <li><a href="#"><img src="../img/target.png" alt=""></a></li>
+                    <li><a href="#"><img src="../img/blog.png" alt=""></a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footerCon footerNotice">
+            <p>&copy; by BeakGyeoungBin ALL RIGHT</p>
+        </div>
+    </footer>
+                  
+                  <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+                  <script src="/MyPage/headerModul.js"></script>
+<script>
+
+ 
+    function sample6_execDaumPostcode() {
+        new daum.Postcode({
+            oncomplete: function(data) {
+                // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+
+                // 각 주소의 노출 규칙에 따라 주소를 조합한다.
+                // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+                var addr = ''; // 주소 변수
+                var extraAddr = ''; // 참고항목 변수
+
+                //사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
+                if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+                    addr = data.roadAddress;
+                } else { // 사용자가 지번 주소를 선택했을 경우(J)
+                    addr = data.jibunAddress;
+                }
+
+                // 사용자가 선택한 주소가 도로명 타입일때 참고항목을 조합한다.
+                if(data.userSelectedType === 'R'){
+                    // 법정동명이 있을 경우 추가한다. (법정리는 제외)
+                    // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+                    if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
+                        extraAddr += data.bname;
+                    }
+                    // 건물명이 있고, 공동주택일 경우 추가한다.
+                    if(data.buildingName !== '' && data.apartment === 'Y'){
+                        extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+                    }
+                    // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+                    
+                }
+
+                // 우편번호와 주소 정보를 해당 필드에 넣는다.
+                document.getElementById('address1').value = data.zonecode;
+                document.getElementById("address2").value = addr;
+                // 커서를 상세주소 필드로 이동한다.
+                document.getElementById("addressDetail").focus();
+            }
+        }).open();
+    }
+    
+    // 도메인 직접 입력 or domain option 선택
+const domainListEl = document.querySelector('#domain-list')
+const domainInputEl = document.querySelector('#email2')
+// select 옵션 변경 시
+domainListEl.addEventListener('change', (event) => {
+  // option에 있는 도메인 선택 시
+  if(event.target.value !== "type") {
+    // 선택한 도메인을 input에 입력하고 disabled
+    domainInputEl.value = event.target.value
+    domainInputEl.readOnly = true
+  } else { // 직접 입력 시
+    // input 내용 초기화 & 입력 가능하도록 변경
+    domainInputEl.value = ""
+    domainInputEl.readOnly = false
+  }
+})
+
+const autoHyphen = (target) => {
+  target.value = target.value
+   .replace(/[^0-9]/g, '')
+   .replace(/^(\d{0,3})(\d{0,4})(\d{0,4})$/g, "$1-$2-$3").replace(/(\-{1,2})$/g, "");
+}
+</script>
+	</html>

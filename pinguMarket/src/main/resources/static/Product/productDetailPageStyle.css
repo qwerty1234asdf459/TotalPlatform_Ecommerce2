@@ -209,3 +209,66 @@ padding-bottom: 1rem;
     z-index: 2;
     opacity: 1;
 }
+
+/* *******************리뷰 *****************************/
+.productExplain{
+    /* border: 1px solid blueviolet; */
+    margin-bottom: 16px;
+}
+.imgList{
+    display: flex;
+}
+.imgbox{
+    border: 1px solid white;
+    margin: 16px 0;
+    height: 150px;
+    width: 150px;
+    background-color: brown;
+}
+.plus{
+    color: white;
+    font-weight: bold;
+    line-height: 150px; /*수직정렬*/
+    text-align: center; /*수평정렬*/
+}
+.rv_filter{
+    padding-bottom: 16px;
+    border-bottom: 2px solid black;
+    display: flex;
+    justify-content: space-between;
+}
+.ReviewBtn{
+    text-transform: none;
+    cursor: pointer;
+    border: none;
+    background-color: transparent;
+}
+.rv_container{
+    display: flex;
+}
+.rvLeft{
+    border: 1px solid rgb(220, 220, 220);
+    display: flex;
+    flex-direction: column;
+    margin: 10px 5px;
+    padding: 10px;
+    width: 300px;
+    font-weight: bold;
+    font-size: 18px;
+}
+.rvRight{
+    border: 1px solid rgb(220, 220, 220);
+    margin: 10px 5px;
+}
+.rv_text{
+    margin: 10px;
+}
+.rv_img{
+    margin : 10px;
+    height: 100px;
+    width: 100px;
+    border: 1.5px solid white;
+    background-color: brown; /*백단 연결 후 삭제*/
+    color: white; /*백단 연결 후 삭제*/
+    font-weight: bold; /*백단 연결 후 삭제*/
+}
