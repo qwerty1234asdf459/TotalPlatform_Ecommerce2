@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form id="couponUseForm">
+    	<input id="code" type="text" required>
+    	<button type="submit">쿠폰사용</button>
+    </form>
+    
+   	<script>
+		const cuf = document.getElementById("couponUseForm");
+		cuf.addEventListener('submit',function(e){
+			e.preventDefault();
+			
+			const code = document.getElementById('code').value;
+			
+			fetch("http://localhost:8080/coupon",{
+				method: 'POST',
+				headers: {
+    				"Content-Type": "application/json",
+    				},
+				body : new URLSearchParams({code:code})
+			})
+			.then(response => {
+				if(response.ok){
+					alert("쿠폰이 입력되었습니다.");
+					window.closed;
+				}else{
+					alert("유효하지 않은 쿠폰코드 입니다.");
+					console.error(response);
+				}
+			})
+			.catch(error =>{
+				alert("연결에 실패하였습니다");
+				console.error('Error: ',error);
+			})
+		})
+	</script>
+</body>
+</html>
