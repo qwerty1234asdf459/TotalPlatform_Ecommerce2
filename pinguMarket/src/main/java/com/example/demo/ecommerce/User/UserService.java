@@ -37,6 +37,21 @@ public class UserService {
 	}
 //	로그인 기능이 없어서 String이 아니라 Integer를 사용하여 땜빵용
 	
-	
+
+	public void usermodify(User user,
+			String email1, String email2, String name,
+			String address1,String address2,String addressDetail,
+			String gender, String tell) {
+			user.setEmail(email1+"@"+email2);
+			user.setName(name);
+//			bu.setRegisterDate(LocalDateTime.now());
+//			이 RegisterDate는 가입일이라서 수정일 변수가 필요
+		    user.setAddress(address1+" "+address2);
+		    user.setAddressDetail(addressDetail);
+			user.setGender(gender);
+			user.setTell(tell);
+			this.ur.save(user);
+		}
+//	     회원정보 바꾸는 메서드
 	
 }

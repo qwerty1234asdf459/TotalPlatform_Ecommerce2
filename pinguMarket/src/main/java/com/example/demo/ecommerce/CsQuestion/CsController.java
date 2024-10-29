@@ -34,7 +34,7 @@ private final AdminService ar;
 		Page<CsQuestion> paging = this.qr.getList(page, principal.getName());
 		model.addAttribute("paging", paging);
 		
-		return "csc/csPage";
+		return "Cs/csPage";
 	}
 	
 //  1:1 문의에서 질문 클릭 시 해당 내용 보여주는 상세페이지 연결
@@ -44,7 +44,7 @@ private final AdminService ar;
 		CsQuestion q = this.qr.getQuestion(id);
 		model.addAttribute("question",  q);
 		
-		return "csc/cscDetail";
+		return "Cs/cscDetail";
 	}
 	
 //  1:1 문의 작성 폼 페이지 연결
@@ -52,7 +52,7 @@ private final AdminService ar;
 	@GetMapping("/csc/form")
 	public String csquestionForm(CsQuestionForm csquestionForm) {
 
-		return "csc/cscForm";
+		return "Cs/cscForm";
 	}
 	
 	// 서비스센터 문의한 내용을 받아와 처리하는 곳
@@ -62,7 +62,7 @@ private final AdminService ar;
 					BindingResult bindingResult, Principal principal) throws UserException {
 			
 			if(bindingResult.hasErrors()) {
-				return "csc/cscForm";// cscDetail?
+				return "Cs/cscForm";// cscDetail?
 			}
 			
 			this.qr.create(csquestionForm.getTitle(), csquestionForm.getContents(), principal.getName());
@@ -79,7 +79,7 @@ private final AdminService ar;
 			csquestionForm.setTitle(q.getTitle());
 			csquestionForm.setContents(q.getContents());
 			
-			return "csc/cscRetouchForm"; 
+			return "Cs/cscRetouchForm"; 
 			
 		}
 	
@@ -90,7 +90,7 @@ private final AdminService ar;
 				@PathVariable("id") Integer id, BindingResult bindingResult) throws UserException {
 			
 			if(bindingResult.hasErrors()) {
-				return "csc/cscForm";
+				return "Cs/cscForm";
 			}
 			
 			CsQuestion q = this.qr.getQuestion(id);
@@ -112,14 +112,14 @@ private final AdminService ar;
 		
 
 		// 서비스센터 문의 답변페이지 연결
-//		@PreAuthorize("isAuthenticated()")
-//		@GetMapping("/csc/answer/{id}")
-//		public String answerDetail(Model model, @PathVariable("id") Integer id) {
-//			
-//			model.addAttribute("answer", this.ar.getAnswer(id));
-//			
-//			return "";
-//		}
+		@PreAuthorize("isAuthenticated()")
+		@GetMapping("/csc/answer/{id}")
+		public String answerDetail(Model model, @PathVariable("id") Integer id) {
+			
+			model.addAttribute("answer", this.ar.getAnswer(id));
+			
+			return "";
+		}
 	
 	
 	

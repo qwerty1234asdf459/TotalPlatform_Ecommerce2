@@ -1,166 +1,365 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>내 주문내역</title>
+    <title>myPage</title>
+    <link rel="stylesheet" href="/MyPage/reset.css">
+    <link rel="stylesheet" href="/MyPage/headerStyle.css">
+    <link rel="stylesheet" href="/MyPage/myPageStyle.css">
+    <link rel="stylesheet" href="/MyPage/footerStyle.css">
+    <script src="https://kit.fontawesome.com/86c06c2025.js" crossorigin="anonymous"></script>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            list-style: none;
-            text-decoration: none;
-        }
-        a {
-	        text-decoration: none; color: black;
-	    }
-        a:visited, a:hover, a:active {
-            text-decoration: none;
-        }
-        /* 나중에 삭제할 헤더 자리먹기용 */
-        header{
-            height: 50px;
-        }
-        /* 헤더 끝 */
-        /* 메인 시작 */
-        .myContainer{
-            display: flex;
-        }
-        /* 사이드바 나중에 분리 */
-        .sideBar{
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            border: 1.5px solid black;
-            border-radius: 10px;
-            margin: 1.5vw;
-            padding: 1vw;
-            width: 15vw;
-        }
-        .sideBar > *{
-            margin-bottom: 0.5vw;
-        }
-        /* 사이드바 끝 */
-        /* 메인 컨텐츠가 들어갈 메인 컨테이너 */
-        .mainContainer{
-            margin: 1.5vw;
-            width: 70vw;
-            border: 2px solid black;
-            border-radius: 10px;
-        }
-        .paymentListImage{
-            width: 75px;
-            height: 75px;
-            overflow: hidden;
-        }
-        .paymentListContainer{
-            display: flex;
-            margin: 0.5vw;
-            border: 1.5px solid black;
-            border-radius: 10px;
-        }
-        .paymentListInfo{
-            width: 65rem;
-            display: flex;
-            justify-content: space-between;
-        }
+    
 
-        .paymentListInfo > div {
-            text-align: center;
-        }
-        .paymentListContainer > div{
-            padding: 0.5vw;
-        }
 
-        @media (max-width: 768px) {
-    .myContainer {
-        flex-direction: column; /* 작은 화면에서는 세로 배치 */
-    }
-    .sideBar {
-        width: 40vw;
-        margin: 0s;
-    }
-    .mainContainer {
-        width: 95vw;
-    }
+.paymentListContainer {
+    display: flex;
+    align-items: center;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    margin: 0.5rem 0;
+    overflow: hidden;
+    cursor: pointer;
+}
+.paymentHeader {
+    display: grid;
+    padding-left:10px;
+    grid-template-columns: 0.3fr 1.2fr 1.2fr 1fr 1fr 1fr;
+    font-weight: bold;
+    padding: 0.5rem;
+    border-bottom: 2px solid;
+    text-align: center;
+    background-color: rgb(238, 238, 238);
+}
+.paymentHeader span {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.paymentListImage {
+    width: 75px;
+    height: 75px;
+    flex-shrink: 0;
+}
+
+.paymentListImage img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.paymentListInfo {
+    display: grid;
+    grid-template-columns: 1fr 1.3fr 1fr 1fr 1fr;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+    padding: 0.5rem;
+    gap: 0.5rem;
+}
+
+.paymentListInfo span {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
     </style>
 </head>
-<body>
-    <header>
-        <!-- 프래그먼트 생기기 전 땜빵 자리먹기용 -->
-         헤 더
-    </header>
-    
-    <!-- 메인 시작 -->
-    <section>
-        <div class="myContainer">
-            <!-- 사이드바 시작 -->
-            <aside>
-                <div class="sideBar">
 
-                <h1>메뉴</h1>
-                <br>
-                <h3>내 쇼핑</h3>
-                <ul>
-                    <li><a href="#">주문 내역</a></li>
-                    <li><a href="#">내 리뷰</a></li>
-                </ul>
-                <hr>
-                <h3>내 정보</h3>
-                <ul>
-                    <li><a href="#">개인정보 수정</a></li>
-                    <li><a href="#">회원 탈퇴</a></li>
-                </ul>
-                <hr>
-                <h3>쿠폰</h3>
-                <ul>
-                    <li><a href="#">내 쿠폰</a></li>
-                    <li><a href="#">쿠폰 등록</a></li>
+<body>
+    <!-- *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*--*-*-*-*-*-*-*-*-*-* HEADER *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*--*-*-*-*-*-*-*-*-*-* -->
+
+    <header>
+        <div class="headerBanner">
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur sunt libero odit pariatur tempore
+                facilis magni quia veritatis</p>
+            <div class="closeBtn"><i class="fa-solid fa-x"></i></div>
+        </div>
+
+        <div class="headerUp_Container">
+            <div class="headerLogo">
+                <a href="mainPage.html">
+                    <p><span>B</span>-Team</p>
+                </a>
+            </div>
+
+            <div class="searchContainer">
+                <form action="post">
+                    <input type="text" class="searchBar" placeholder="SEARCH">
+                    <div class="searchBtn btn"><i class="fa-solid fa-magnifying-glass"></i></div>
+                </form>
+            </div>
+            <ul class="contentNav">
+                <li class="wishList">
+                    <a href="#">
+                        <p>
+                            <i class="fa-regular fa-heart"></i>
+                        </p>
+                    </a>
+                </li>
+                <li class="cart">
+                    <a href="#">
+                        <p>
+                            <i class="fa-solid fa-cart-shopping"></i>
+                        </p>
+                    </a>
+                </li>
+                <li class="login">
+                    <a href="loginPage.html">
+                        <p>
+                            <i class="fa-regular fa-user"></i>
+                        </p>
+                    </a>
+                </li>
+                <li class="customerService">
+                    <a href="csPage.html">
+                        <p>
+                            <i class="fa-solid fa-headset"></i>
+                        </p>
+                    </a>
+                    <ul>
+                        <li><a href="csPage.html">공지사항</a></li>
+                        <li><a href="csPage.html">자주하는 질문</a></li>
+                        <li><a href="csPage.html">1:1 문의</a></li>
+                        <li><a href="csPage.html">대량주문 문의</a></li>
+                    </ul>   
+                </li>
+            </ul>
+        </div>
+        <div class="headerDown_Container">
+            <div class="categoryContainer">
+                <p><span><i class="fa-solid fa-bars"></i></span>Category</p>
+                <ul class="category">
+                    <li><a href="#">lorem</a></li>
+                    <li><a href="#">lorem</a></li>
+                    <li><a href="#">loremlorem</a></li>
+                    <li><a href="#">lorem</a></li>
+                    <li><a href="#">loremlorem</a></li>
+                    <li><a href="#">lorem</a></li>
+                    <li><a href="#">lorem</a></li>
+                    <li><a href="#">loremlorem</a></li>
+                    <li><a href="#">lorem</a></li>
+                    <li><a href="#">loremlorem</a></li>
+                    <li><a href="#">lorem</a></li>
+                    <li><a href="#">lorem</a></li>
+                    <li><a href="#">loremlorem</a></li>
+                    <li><a href="#">lorem</a></li>
+                    <li><a href="#">loremlorem</a></li>
+                    <li><a href="#">lorem</a></li>
+                    <li><a href="#">lorem</a></li>
+                    <li><a href="#">loremlorem</a></li>
+                    <li><a href="#">lorem</a></li>
+                    <li><a href="#">loremlorem</a></li>
+                    <li><a href="#">lorem</a></li>
+                    <li><a href="#">lorem</a></li>
+                    <li><a href="#">loremlorem</a></li>
+                    <li><a href="#">lorem</a></li>
+                    <li><a href="#">loremlorem</a></li>
+                    <li><a href="#">lorem</a></li>
+                    <li><a href="#">lorem</a></li>
+                    <li><a href="#">loremlorem</a></li>
+                    <li><a href="#">lorem</a></li>
+                    <li><a href="#">loremlorem</a></li>
+                    <li><a href="#">lorem</a></li>
+                    <li><a href="#">lorem</a></li>
+                    <li><a href="#">loremlorem</a></li>
+                    <li><a href="#">lorem</a></li>
+                    <li><a href="#">loremlorem</a></li>
                 </ul>
             </div>
-                            <!-- 프래그먼트로 분리할 것 -->
-            </aside>
-            <!-- 사이드바 끝 -->
-             <!-- 사이드바에서 고른 거 나오는 곳 -->
-            <main>
-                <div class="mainContainer">
-                    <div class="orderSearchContainer">
-                        <form th:action="@{/mypage/myorder}" method="get" class="headerSearchBar">
-                            <input name="keyword" type="text" class="search" placeholder="찾는 상품을 검색하세요">
-                            <div class="searchBtn">
-                                <button type="submit">
-                                    검색
-                                </button>
-                            </div>
-                        </form>
-
-                    </div>
-                    <!-- <div th:if="${리스트.isEmpty()}">
-                        구매내역이 없습니다.
-                    </div> -->
-                    <div class="paymentListContainer"> <!-- 반복 용도의 div이라서 나중에 th:each="" th:if="${!리스트.isEmpty()}" 붙이기 -->
-                        <div class="paymentListImage">
-                            <img src="b9343d314206275c1b6d0d0c4fcc2ce71.jpg" alt="">
-                        </div>
-                        <div class="paymentListInfo">
-                            <!--  상품명, 구매일자, 주문번호, 총 가격 등의 정보 작성용 -->
-                             <div class="paymentProductName">상품 <h4>유혜광 돈까스</h4></div>              <!-- th:text="${상품이름}" -->
-                             <div class="paymentPrice">가격 <h4>7300000원</div> <!-- th:text="${payment.가격}" -->
-                             <div class="paymentDate">결제일자 <h4></h4></div> <!-- th:text="${payment.createDate}" -->
-                             <div class="paymentDeliveryno" >주문 번호 <h4></h4></div> <!-- th:text="${payment.deliveryno}" -->
-                             <div class="paymentContent">배송 상태<h4></h4></div>              <!-- th:text="${payment.deliveryState}" -->
-                        </div> 
-                    </div> <!-- paymentListContainer 끝 -->
-                    
-
-                    
+            <ul class="event">
+                <li><a href="#">BEST</a></li>
+                <li><a href="#">NEW</a></li>
+                <li><a href="#">Seler</a></li>
+            </ul>
+            <div class="languageContainer">
+                <div class="language">
+                    <p>KR</p>
+                    <p>EN</p>
                 </div>
-            </main>
-            <!-- 메인 끝 -->
-
+            </div>
         </div>
-    </section>
+    </header>
+
+    <!-- *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*--*-*-*-*-*-*-*-*-*-* MAIN *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*--*-*-*-*-*-*-*-*-*-* -->
+    <main>
+        <div class="myPageContainer">
+
+            <div class="myPageLeft">
+                <div class="myInfo">
+                    <p class="myName"><span th:text="${user.name}"></span>님</p>
+                    <div class="myCard">
+                        <div class="cardSaving">
+                            <p>적립금</p>
+                            <p><span class="cardMoney">0</span>원</p>
+                        </div>
+                        <div class="cardCash">
+                            <p>캐쉬</p>
+                            <p><span class="cardMoney">0</span>원</p>
+                        </div>
+                        <div class="cardMemberShip">
+                            <p>멤버스 무료체험</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="navContainer">
+                    <ul>
+                        <p>자주찾는 메뉴</p>
+                        <li><a th:href="@{/myorder}">주문내역</a></li>
+                        <li><a th:href="@{/mycoupon}">쿠폰</a></li>
+                        <li><a href="#">찜한상품</a></li>
+                        <li><a href="#">자주구매</a></li>
+                    </ul>
+                    <ul>
+                        <p>쇼핑</p>
+                        <li><a href="#">결제수단 or 00페이</a></li>
+                        <li><a th:href="@{/myreview}">상품후기</a></li>
+                        <li><a href="#">선물 내역</a></li>
+                        <li><a href="#">상품 문의</a></li>
+                    </ul>
+                    <ul>
+                        <p>혜택</p>
+                        <li><a href="#">회사멤버스</a></li>
+                    </ul>
+                    <ul>
+                        <p>내정보관리</p>
+                        <li><a href="#">배송지관리</a></li>
+                        <li><a href="#">나의 스타일</a></li>
+                        <li><a th:href="@{/usermodify}">개인정보수정</a></li>
+                    </ul>
+                    <ul>
+                        <p>서비스안내</p>
+                        <li><a href="#">퍼플박스</a></li>
+                        <li><a href="#">VIP제도 안내</a></li>
+                    </ul>
+                </div>
+            </div>
+
+
+            <div class="myPageRight">
+                <div class="orderHistory">
+                    <p>주문내역</p>
+                    <ul>
+                        <li class="on"><a href="#">3개월</a></li>
+                        <li><a href="#">6개월</a></li>
+                        <li><a href="#">1년</a></li>
+                        <li><a href="#">3년</a></li>
+                    </ul>
+                    
+                     <div class="paymentHeader">
+                             <div class="paymentHeaderImage">
+                                  <span>이미지</span>
+                             </div>
+                        <span>결제일</span>
+                        <span>결제액</span>
+                        <span>대표 상품명</span>
+                        <span>주문 번호</span>
+                        <span>배송 상태</span>
+                     </div>
+
+    <!-- 결제 내역이 없을 때 표시 -->
+    <div th:if="${paymentList.isEmpty()}">
+        구매내역이 없습니다.
+    </div>
+
+    <!-- 각 결제 내역 반복 -->
+    <div class="paymentListContainer" 
+         th:each="payment, iterStat : ${paymentList}"
+         th:onclick="|location.href='@{/myorder/detail/{paymentId}(paymentId=${payment.paymentId})}'|">
+         
+        <!-- 상품 이미지 -->
+        <div class="paymentListImage">
+            <img src="/img/ordertest.jpg" alt="상품 이미지">
+        </div>
+
+        <!-- 결제 정보 -->
+        <div class="paymentListInfo">
+            <span th:text="${#temporals.format(payment.createDate, 'yyyy-MM-dd')}"></span>
+            <span th:text="${totalprice[iterStat.index] + '원'}"></span>
+            <span th:text="${productNames[iterStat.index]}"></span>
+            <span th:text="${payment.deliveryno}"></span>
+            <span th:text="${payment.deliveryState}"></span>
+        </div>
+                   </div> <!-- paymentListContainer 끝 -->
+                </div>
+                
+            
+            </div>
+        </div>
+    </main>
+    <!-- *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*--*-*-*-*-*-*-*-*-*-* FOOTER *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*--*-*-*-*-*-*-*-*-*-* -->
+    <footer>
+        <div class="footerCon footerCon01">
+            <div class="csContainer">
+                <div class="csText">
+                    <p>고객행복센터</p>
+
+                    <div class="companyNum">
+                        <p>1644-1107</p>
+                        <p><span>월~토요일 오전 7시 - 오후6시</span></p>
+                    </div>
+                </div>
+                <div class="askCon">
+                    <div class="askBtn">
+                        <a href="#">카카오톡문의</a>
+                    </div>
+                    <p>월~토요일 : 오전 7시 - 오후 6시 <br>
+                        일/공휴일 : 오전 7시 - 오후 1시</p>
+                </div>
+                <div class="askCon">
+                    <div class="askBtn">
+                        <a href="#">카카오톡문의</a>
+                    </div>
+                    <p>월~토요일 : 오전 7시 - 오후 6시 <br>
+                        일/공휴일 : 오전 7시 - 오후 1시</p>
+                </div>
+                <div class="askCon">
+                    <div class="askBtn">
+                        <a href="#">카카오톡문의</a>
+                    </div>
+                    <p>월~토요일 : 오전 7시 - 오후 6시 <br>
+                        일/공휴일 : 오전 7시 - 오후 1시</p>
+                </div>
+                <p>비회원문의 : help@naver.com</p>
+            </div>
+
+            <div class="introduceContainer">
+                <ul class="companyNav">
+                    <li><a href="#">회사소개</a></li>
+                    <li><a href="#">회사소개영상</a></li>
+                    <li><a href="#">투자정보</a></li>
+                    <li><a href="#">인재채용</a></li>
+                    <li><a href="#">이용약관</a></li>
+                    <li><a href="#">개인정보처리방침</a></li>
+                    <li><a href="#">이용안내</a></li>
+                </ul>
+                <div class="introduceText">
+                    <p>법인명 : lorem | 사업자등록번호 : 000-00-00000 &emsp;<a href="#">사업자정보 확인</a></p>
+                    <p>통신판매업 : 제 2024-경기안산-1515호</p>
+                    <p>주소 : 경기도 안산시 상록구 이동 000호 5층 | 대표이사 : 백경빈</p>
+                    <p>채용문의 : <a href="#">abcd@naver.com</a></p>
+                    <p>팩스 : 000 - 0000 - 0000</p>
+                </div>
+                <ul class="snsContainer">
+                    <!-- <a target="_blank" href="https://icons8.com/icon/ww630cOi80NH/target-logo">표적</a> 작가: <a target="_blank" href="https://icons8.com">Icons8</a> -->
+                    <li><a href="#"><img src="../img/facebook.png" alt=""></a></li>
+                    <li><a href="#"><img src="../img/youtube.png" alt=""></a></li>
+                    <li><a href="#"><img src="../img/instagrem.png" alt=""></a></li>
+                    <li><a href="#"><img src="../img/target.png" alt=""></a></li>
+                    <li><a href="#"><img src="../img/blog.png" alt=""></a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footerCon footerNotice">
+            <p>&copy; by BeakGyeoungBin ALL RIGHT</p>
+        </div>
+    </footer>
+    <script src="/MyPage/headerModul.js"></script>
 </body>
+
 </html>

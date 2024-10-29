@@ -1,0 +1,117 @@
+.myPageContainer{
+    padding: 3rem var(--layoutpadding) 5rem var(--layoutpadding);
+    min-width: var(--pageMinWidth);
+    display: flex;
+    gap: 2rem;
+    align-items: start;
+    background-color: #f7419010;
+}
+
+/*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-* MYPAGE LEFT  *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
+.myPageLeft{
+    width: 25%;
+}
+.myInfo{
+    margin-bottom: 0.5rem;
+    padding: 1.5rem;
+    border-top-left-radius: 0.5rem;
+    border-top-right-radius: 0.5rem;
+    background-color: white;
+}
+.myInfo>p{
+    font-size: var(--titleFont);
+    padding-bottom:1rem ;
+}
+.myCard{
+    border: 1px solid rgb(231, 231, 231);
+    border-radius: 0.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    overflow: hidden;
+    font-size: 14px;
+}
+.cardSaving{
+    width: 50%;
+    padding: 1rem 0.5rem 0.5rem 1rem;
+}
+.cardCash{
+    width: 50%;
+    padding: 1rem 0.5rem 0.5rem 1rem;
+}
+.cardMoney{
+    font-size: var(--titleFont);
+    font-weight: 900;
+}
+.cardMemberShip{
+    width: 100%;
+    padding: 1rem;
+    background-color: #fff3c7;;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+
+.navContainer{
+    background-color: white;
+    padding: 1rem 1.5rem 2rem 1.5rem;
+    border-bottom-left-radius: 0.5rem;
+    border-bottom-right-radius: 0.5rem;
+}
+.navContainer>ul{
+    padding: 1rem 0 1rem 0;
+    border-bottom: 1px solid rgb(230, 230, 230);
+}
+.navContainer>ul>p{
+    font-size: var(--contentFont);
+    font-weight: 600;
+    padding-bottom: 1.5rem;
+    color: rgb(197, 197, 197);
+}
+.navContainer>ul>li{
+    font-size: var(--contentFont);
+    font-weight: 600;
+    padding-bottom: 1.5rem;
+    color: rgb(197, 197, 197);
+}
+
+/*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-* MYPAGE RIGHT  *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
+.myPageRight{
+    width: 75%;
+}
+
+.orderHistory{
+    background-color: white;
+    border-radius: 0.5rem;
+    padding: 1rem 2rem 1rem 2rem;
+}
+.orderHistory>p{
+    padding-bottom: 1rem ;
+    font-size: var(--titleFont);
+    border-bottom: 2px solid;
+}
+
+.orderHistory>ul{
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem 0 1rem 0;
+    gap: 1rem;
+}
+.orderHistory>ul>li{
+    flex: 1;
+}
+
+.orderHistory>ul>li>a{
+    display: block;
+    padding: 0.5rem 0 0.5rem 0;
+    border-radius: 0.5rem;
+    text-align: center;
+    background-color: rgb(238, 238, 238);
+    font-weight: 600;
+    color: rgb(197, 197, 197);
+    transition: .3s;
+}
+
+.orderHistory>ul>li.on>a{
+    background-color: rgb(58, 58, 58);
+    color: white;
+}

@@ -9,6 +9,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.demo.ecommerce.Entity.Product;
 import com.example.demo.ecommerce.Entity.Review;
@@ -30,10 +31,10 @@ public class ReviewController {
 	
 	
 //	@PreAuthorize("isAuthenticated()")
-//	@GetMapping("/product/{id}/createreview") 상품 기능이 생기면 수정
-	@GetMapping("/reviewcreate")
+//	@GetMapping("/product/{productId}/createreview")
+	@GetMapping("/reviewcreate/{productId}")
 	public String reviewCreate(Model model,
-//			@PathVariable ("id") Integer productId,
+			@PathVariable ("productId") Integer productId,
 			Principal principal) throws CanNotFoundException {
 		
 		ReviewCreateForm reviewform = new ReviewCreateForm();
@@ -45,14 +46,15 @@ public class ReviewController {
 	}
 	
 //	@PreAuthorize("isAuthenticated()")
-	@PostMapping("/reviewcreate")
+	@PostMapping("/reviewcreate/{productId}")
 	public String reviewCreate(Model model,
+			@PathVariable ("productId") Integer productId,
 			@Valid ReviewCreateForm reviewCreateForm, BindingResult bindingResult,
 			Principal principal) throws CanNotFoundException {
 //		Product p = this.ps.getProduct(productId);
 //		User u = this.us.getUser(principal.getName());
 		
-		Product p = this.ps.getProduct(1);
+		Product p = this.ps.getProduct(productId);
 		User u = this.us.getUser(2);
 		
 		if(bindingResult.hasErrors()) {
