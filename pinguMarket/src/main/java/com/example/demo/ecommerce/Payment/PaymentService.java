@@ -21,7 +21,8 @@ public class PaymentService {
 		List<Payment> p = this.pr.findByUserId(id);
 		if(!p.isEmpty()) {
 			return p;
-		}else {
+		}
+		else {
 			throw new CanNotFoundException("데이터를 찾을 수 없습니다.");
 		}
 	}

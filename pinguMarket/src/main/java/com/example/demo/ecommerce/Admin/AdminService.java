@@ -16,8 +16,7 @@ import com.example.demo.ecommerce.CsAnswer.CsAnswerRepository;
 import com.example.demo.ecommerce.CsQuestion.CsQuestionRepository;
 import com.example.demo.ecommerce.Entity.CsAnswer;
 import com.example.demo.ecommerce.Entity.CsQuestion;
-import com.example.demo.lms.LmsAdminUserRepository;
-import com.example.demo.lms.LmsUser;
+
 
 import lombok.RequiredArgsConstructor;
 

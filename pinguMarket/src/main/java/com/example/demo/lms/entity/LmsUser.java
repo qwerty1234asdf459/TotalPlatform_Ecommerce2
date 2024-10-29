@@ -1,7 +1,8 @@
-package com.example.demo.lms;
+package com.example.demo.lms.entity;
 
 import java.time.LocalDateTime;
 import java.util.List;
+
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -9,7 +10,6 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
@@ -32,7 +32,6 @@ public class LmsUser {
 	private String tel;
 	private String birth;
 	private String gender;
-	
 	@Column(name = "create_date")
 	private LocalDateTime createDate; //회원가입일
 	
@@ -42,10 +41,6 @@ public class LmsUser {
 	@Column(name = "signout_yn")
 	private String signoutYn; //회원탈퇴여부
 	
+	@OneToMany(mappedBy = "user")
+	private List<LmsCoupon> coupons; //쿠폰 코드 리스트
 }
-
-
-
-
-
-
