@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <script src="//code.jquery.com/jquery-latest.min.js"></script> <!--제이쿼리-->
     <link rel="stylesheet" th:href="@{/Admin/Admin.css}">
     <link rel="stylesheet" th:href="@{/Admin/AdminOrderManagement.css}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"/> 
@@ -110,8 +111,8 @@
                                     <th><i class="fa-solid fa-chevron-down"></i></th>
                                 </tr>
                             </thead>
-                            <tbody><!--ueer, product, payment테이블 에서 정보 끌어오기-->
-                                <tr th:each="PayList : ${PayList}">
+                            <tbody>
+                                <tr class="Rows" th:each="PayList : ${PayList}">
                                     <td><span class="check-item"><input type="checkbox" name="select-item"></span></td>
                                     <td th:text="${PayList.paymentId}"></td>
                                     <td th:text="${PayList.createDate}"></td>
@@ -119,15 +120,58 @@
                                     <td th:text="${PayList.user}"></td>
                                     <td th:text="${PayList.deliveryno}"></td>
                                     <td class="drop"><i class="fa-solid fa-chevron-down"></i></td>
-                                    <ul class="sub"> <!--드롭다운 : 상세정보-->
-                                        <li>
-                                            상세내용
-                                        </li>
-                                    <!-- <td th:text="|${PayList.user.address} ${PayList.user.address_detail}|"></td> -->
                                 </tr>
-                                <!-- 추가 데이터 행을 여기에 추가 -->
                             </tbody>
                         </table>
+                        <!--모달로-->
+                        <ul id="modal" class="modalBox" th:each="PayList : ${PayList}"> 
+                            <p>상세정보</p>
+                            <li class="subbox">
+                                <div class="subL">
+                                    <p>주 문 번 호 : </p>
+                                    <pre>결   제   일 : </pre>
+                                    <p>처 리 상 태 : </p>
+                                    <p>회 원 번 호 : </p>
+                                    <p>배 송 번 호 : </p>
+                                </div>
+                                <div class="subR">
+                                    <P th:text="${PayList.paymentId}"></P>
+                                    <P th:text="${PayList.createDate}"></P>
+                                    <P th:text="|${PayList.paymentState} ${PayList.deliveryState}|"></P>
+                                    <P th:text="${PayList.user}"></P>
+                                    <P th:text="${PayList.deliveryno}"></P>
+                                </div>
+                            </li>
+                            <li class="subbox">
+                                <div class="subL"><pre>주   문   자 : </pre></div>
+                                <div class="subR">
+                                    <p th:text="${PayList.user.name}">주문자명 user.name</p>
+                                    <p th:text="${PayList.user.tell}">주문자 전화번호 user.tell</p>
+                                    <p th:text="|${PayList.user.address} ${PayList.user.addressDetail}|">주문자 주소</p>
+                                </div>
+                            </li>
+                            <li class="subbox">
+                                <div class="subL"><pre>수   취   인 : </pre></div>
+                                <div class="subR">
+                                    <p th:text="${PayList.name}">수취인명 payment.name</p>
+                                    <p th:text="${PayList.address}">수취인 주소 payment.address</p>
+                                    <p th:text="${PayList.tell}">수취인 번호 payment.tell</p>
+                                </div>
+                            </li>
+                            <li class="subbox" th:each="payment : ${PayList.paymentDetailList}">
+                                <div class="subL"><p>주 문 내 역 : </p></div>
+                                <div class="subR">
+                                    <pre><span>상품명 > </span><span th:text="${payment.price}">상품가격</span>원 > <span th:text="${payment.count}">구매수량</span>개 > total : <span th:text="${payment.price * payment.count}">상품가격*구매수량</span>원</pre>
+                                </div>
+                            </li>
+                            <li class="subbox">
+                                <div class="subL"><p>총 결제 금액 : </p></div>
+                                <div class="subR">
+                                    <p><span>----</span>원</p>
+                                    <!-- 계산어떻게? -->
+                                </div>
+                            </li>
+                        </ul> 
                     </div>
                 </div>
 
@@ -136,6 +180,7 @@
             
         </div><!--메인 끝-->
     </div>
+    
     <script th:src="@{/Admin/AdminOrderManagement.js}"></script>
 </body>
 </html>

@@ -22,18 +22,18 @@
                 <div class="content_border">
                     <table>
                         <tr class="writing-title">
-                            <td th:text="${scQuestion.title}" colspan="4">TITILE</td>
+                            <td th:text="${Q.title}" colspan="4">TITILE</td>
                         </tr>
                         <tr class="writing-id-date">
                             <td class="writing-td-title">ID</td>
-                            <td th:text="${scQuestion.buyuser.id}" class="writing-td-content">작성자 ID</td>
+                            <td th:text="${Q.user.id}" class="writing-td-content">작성자 ID</td>
                             <td class="writing-td-title">등록날짜</td>
-                            <td th:text="${#temporals.format(scQuestion.questionDate, 'yyyy-MM-dd HH:mm:ss')}" class="writing-td-content">yyyy-MM-dd HH:mm:ss</td>
+                            <td th:text="${Q.updateDate}" class="writing-td-content">yyyy-MM-dd HH:mm:ss</td>
                         </tr>
                         <tr class="writing-content">
                             <td class="writing-td-title">내용</td>
                             <td class="writing-td-content" colspan="3">
-                                <pre th:text="${scQuestion.contents}" class="writing-td-content-pre">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quas ipsam tempora provident, neque ea quaerat ducimus! Dolor ratione, sapiente dolorem delectus natus assumenda itaque animi eum in. Aliquam, excepturi sint!</pre>
+                                <pre th:text="${Q.contents}" class="writing-td-content-pre">내용연결</pre>
                             </td>
                         </tr>
                     </table>
@@ -41,7 +41,7 @@
                 <button id="answer-btn" class="btn-style">답변 등록</button>
 
                 <!-- 답변 등록 버튼 클릭 시 나타남 -->
-                <form th:action="@{/admin/sub_center_answer}" method="post">
+                <form th:action="@{/admin/cs/{csQuestionId}}" th:object = "${CsAnswerForm}" method="post">
                     <div class="content_border">
                         <table id="answer-table">
                             <tr class="writing-id-date">
@@ -53,7 +53,7 @@
                             <tr class="writing-content">
                                 <td class="writing-td-title">내용</td>
                                 <td class="writing-td-content">
-                                    <textarea name="content" id="writing-td-textarea" spellcheck="false"></textarea>
+                                    <textarea name="contents" id="writing-td-textarea" spellcheck="false"></textarea>
                                 </td>
                             </tr>
                         </table>
@@ -62,7 +62,7 @@
                             <button type="submit" class="btn-style">저장</button>
                             <button type="button" id="btn-clear" class="btn-style">초기화</button>
                         </div>
-                        <input type="hidden" name="questionId" th:value="${scQuestion.cquestionId}">
+                        <input type="hidden" name="csQuestionId" th:value="${Q.csQuestionId}">
                 </form>
             </div>
         </section>
