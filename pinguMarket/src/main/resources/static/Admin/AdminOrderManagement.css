@@ -212,7 +212,7 @@ input[type="checkbox"] {/*체크박스 크기 조정*/
 
 /* 모달 - 상세정보 **********************/
 .modalBox{
-    /* display:none; */
+    display : none;
     list-style : none;
     background-color: #fffdfd;
     border: solid 2px #fce699;
@@ -224,12 +224,17 @@ input[type="checkbox"] {/*체크박스 크기 조정*/
     left: 50vh;
     
 }
-#modal>p{
+
+.boxtitle{
+    padding-top: 14px;
     text-align: center;
     font-size: 1.4rem;
     font-weight: bold;
-    padding: 15px;
 
+}
+.boxbtn{
+    display: flex;
+    justify-content: center;
 }
 .modalBox > li{
     border-bottom: solid 2px #fce699;
@@ -243,34 +248,4 @@ input[type="checkbox"] {/*체크박스 크기 조정*/
 .subL{
     margin-right: 10px;
     width: 130px;
-}
-
-.modalBox.up{
-  height:0px;
-  animation-name:slide_up;
-  animation-duration:0.5s;  
-}
-
-.modalBox.down{
-  height:120px;
-  animation-name:slide_down;
-  animation-duration:0.5s;
-}
-
-@keyframes slide_up{
-  0%{
-    height:120px;
-  }
-  100%{
-    height:0px;
-  }
-}
-
-@keyframes slide_down{
-  0%{
-    height:0px;
-  }
-  100%{
-    height:120px;
-  }
 }

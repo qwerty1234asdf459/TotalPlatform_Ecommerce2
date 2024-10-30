@@ -1,5 +1,6 @@
 package com.example.demo.ecommerce.Review;
 
+import java.lang.ProcessBuilder.Redirect;
 import java.security.Principal;
 import java.util.Optional;
 
@@ -36,14 +37,25 @@ public class ReviewController {
 	public String reviewCreate(Model model,
 			@PathVariable ("productId") Integer productId,
 			Principal principal) throws CanNotFoundException {
+		User u = this.us.getUser(1);
+		Product p = this.ps.getProduct(productId);
 		
 		ReviewCreateForm reviewform = new ReviewCreateForm();
-		
 		model.addAttribute("reviewCreateForm", reviewform);
 		
-		return "/Mypage/reviewform";
+
+		try {
+	        // 리뷰 존재 여부 확인 (리뷰가 이미 있을 경우 예외 발생)
+	        this.rs.getReview(u.getUserId(), productId);
+	        // 리뷰가 없으므로 폼 페이지로 이동
+	        return "/Mypage/reviewform";
+	    } catch (CanNotFoundException e) {
+	        // 이미 리뷰가 있는 경우 리뷰 목록 페이지로 리디렉션
+	        return "redirect:/myreview";
+	    }
+		} 
 		
-	}
+
 	
 //	@PreAuthorize("isAuthenticated()")
 	@PostMapping("/reviewcreate/{productId}")
@@ -55,7 +67,7 @@ public class ReviewController {
 //		User u = this.us.getUser(principal.getName());
 		
 		Product p = this.ps.getProduct(productId);
-		User u = this.us.getUser(2);
+		User u = this.us.getUser(1);
 		
 		if(bindingResult.hasErrors()) {
 			return "/Mypage/reviewform";

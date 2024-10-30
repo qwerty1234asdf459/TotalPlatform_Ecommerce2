@@ -1,10 +1,12 @@
 <!DOCTYPE html>
-    <main>
+<div layout:decorate="~{Layout/layout}">
+    <!-- *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-* MAIN *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*--*-*-*-*-*-*-*-*-*-* -->
+    <main layout:fragment="content">
+	<link rel="stylesheet" th:href="@{/Payment/paymentPageStyle.css}">
         <div class="payContainer">
             <div class="payTitle">
                 <p>주문서</p>
             </div>
-            
             <div class="payContent">
                 <div class="order-product">
                     <p>주문 상품</p>
@@ -185,3 +187,4 @@
             </div>
         </div>
     </main>
+</div>

@@ -38,4 +38,9 @@ public class PaymentController {
 		model.addAttribute("coupon", c);
 		return "Payment/CouponInfoTest";
 	}
+	
+	@GetMapping("/paymentView")
+	public String payment() {
+		return "Payment/paymentPage";
+	}
 }

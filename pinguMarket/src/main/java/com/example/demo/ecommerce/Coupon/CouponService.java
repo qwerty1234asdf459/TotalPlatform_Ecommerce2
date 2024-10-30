@@ -1,5 +1,6 @@
 package com.example.demo.ecommerce.Coupon;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.stereotype.Service;
@@ -14,18 +15,18 @@ import lombok.RequiredArgsConstructor;
 @Service
 public class CouponService {
 
-	private CouponRepository cr;
+	private final CouponRepository cr;
 	
-//	public Coupon getCoupon(Integer userId, String useYn) {
-//
-//		Optional<Coupon> coupon = this.cr.findByUserUseYn(userId, useYn);
-//		if(coupon.isPresent()) {
-//			return coupon.get();
-//		}
-//		else {
-//			throw new CanNotFoundException("존재하지 않는 유저입니다");
-//		}
-//	}
+	public List<Coupon> getCoupon(Integer userId) throws CanNotFoundException {
+
+		List<Coupon> coupon = this.cr.findByUserUseYn(userId);
+		if(!coupon.isEmpty()) {
+			return coupon;
+		}
+		else {
+			throw new CanNotFoundException("존재하지 않는 유저입니다");
+		}
+	}
 	
 	
 	

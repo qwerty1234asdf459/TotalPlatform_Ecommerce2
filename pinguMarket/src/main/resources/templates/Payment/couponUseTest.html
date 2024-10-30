@@ -1,16 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
+<div layout:decorate="~{Layout/layout}">
+    <!-- *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-* MAIN *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*--*-*-*-*-*-*-*-*-*-* -->
+    <main layout:fragment="content">
     <form id="couponUseForm">
     	<input id="code" type="text" required>
     	<button type="submit">쿠폰사용</button>
     </form>
-    
+    </main>
+</div>
    	<script>
 		const cuf = document.getElementById("couponUseForm");
 		cuf.addEventListener('submit',function(e){
@@ -40,5 +37,3 @@
 			})
 		})
 	</script>
-</body>
-</html>
