@@ -23,6 +23,15 @@ public class ReviewService {
 	                   .orElseThrow(() -> new CanNotFoundException("리뷰를 찾을 수 없습니다."));
 	}
 	
+	public Review getReview(Integer userId, Integer productId) throws CanNotFoundException {
+		Optional<Review> review = this.rer.findByUserProduct(userId, productId);
+		if(!review.isPresent()) {
+			return null;
+		}else {
+			throw new CanNotFoundException("이미 리뷰가 있습니다.");
+		}
+	}
+	
 	public void reviewCreate(Product p, User u,  String scope, String title, String contents) {
 		Review r = new Review();
 		r.setProduct(p);

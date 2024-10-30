@@ -238,13 +238,13 @@
                      </div>
 
     <!-- 쿠폰이 없을 때 표시 -->
-    <div th:if="${user.couponList == null || user.couponList.isEmpty()}">
+    <div th:if="${couponList == null || couponList.isEmpty()}">
         쿠폰이 없습니다.
     </div>
 
     <!-- 쿠폰 반복 -->
     <div class="contentListContainer" 
-         th:each="coupon : ${user.couponList}" th:if="${user.couponList != null && !user.couponList.isEmpty()}">
+         th:each="coupon : ${couponList}" th:if="${couponList != null && !couponList.isEmpty()}">
 
         <!-- 쿠폰 정보 -->
         <div class="contentListInfo">

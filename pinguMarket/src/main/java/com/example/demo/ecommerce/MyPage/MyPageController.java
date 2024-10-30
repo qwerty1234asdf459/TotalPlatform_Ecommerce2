@@ -11,6 +11,9 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+
+import com.example.demo.ecommerce.Coupon.CouponService;
+import com.example.demo.ecommerce.Entity.Coupon;
 import com.example.demo.ecommerce.Entity.Payment;
 import com.example.demo.ecommerce.Entity.User;
 import com.example.demo.ecommerce.Payment.PaymentService;
@@ -30,7 +33,7 @@ public class MyPageController {
 	private final ReviewService rs;
 	private final UserService us;
 	private final PaymentService ps;
-//	private final CouponService cs;
+	private final CouponService cs;
 	
 	@GetMapping("/myorder")
 	public String myOrderPage(Model model, Principal principal) throws CanNotFoundException {
@@ -72,7 +75,7 @@ public class MyPageController {
 	public String myReviewPage(Model model,
 			Principal principal) throws CanNotFoundException {
 //		User u = this.us.getUser(principal.getName());
-		User u = this.us.getUser(2);
+		User u = this.us.getUser(1);
 	
 		model.addAttribute("user", u);		
 		return "Mypage/myreview";
@@ -148,11 +151,10 @@ public class MyPageController {
 	public String myCouponPage(Model model, Principal principal) throws CanNotFoundException {
 		
 		User user = this.us.getUser(2);
-//		Optional<Coupon> coupon = this.cs.
+		List<Coupon> coupon = this.cs.getCoupon(user.getUserId());
 		
 		model.addAttribute("user", user);
-		
-		
+		model.addAttribute("couponList", coupon);
 		return "Mypage/mycoupon";
 	}
 	
