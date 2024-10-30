@@ -24,10 +24,5 @@ public class AdminLoginController {
         return "/Admin/AdminDashboard";
     }
 	
-	@GetMapping("/Inquiry") //문의 관리
-    public String AdminInquiry() {
-        return "/Admin/AdminInquiry";
-    }
-	
 	
 }

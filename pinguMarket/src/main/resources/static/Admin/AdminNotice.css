@@ -71,8 +71,8 @@ button:hover{
                     padding-right: 10px;}
 #columnBox > span:nth-child(1) { width: 100px; } /*선택*/
 #columnBox > span:nth-child(2) { width: 700px; } /*제목*/
-#columnBox > span:nth-child(3) { width: 200px; } /*작성자*/
-#columnBox > span:nth-child(4) { width: 200px; } /*작성일*/
+#columnBox > span:nth-child(3) { width: 400px; } /*작성자*/
+#columnBox > span:nth-child(4) { width: 400px; } /*작성일*/
 
 .Rows {
     padding: 14px;
@@ -85,10 +85,10 @@ button:hover{
     display: inline-block; 
     padding-right: 10px;
 }
-.Rows > span:nth-child(1) { width: 100px; }
-.Rows > span:nth-child(2) { width: 700px; }
-.Rows > span:nth-child(3) { width: 200px; }
-.Rows > span:nth-child(4) { width: 200px; }
+.Rows > span { width: 100px; }/*선택*/
+.list_title { width: 700px; }/*제목*/
+.list_admin { width: 400px; }/*작성자*/
+.list_updateDate { width: 400px; }/*작성일*/
 
 [type="checkbox"]{
     width: 20px;

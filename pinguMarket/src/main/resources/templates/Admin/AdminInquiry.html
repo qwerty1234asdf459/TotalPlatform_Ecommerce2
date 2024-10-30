@@ -34,18 +34,18 @@
             </div>
 
             <div id="columnBox"> <!-- 테이블 컬럼 -->
-                <span>선택</span>
-                <span>등록날짜</span>
+                <span><input type="checkbox"></span>
+                <span>작성일자</span>
                 <span>ID</span>
                 <span>제목</span>
                 <span>답변여부</span> 
             </div>
-            <div class="Rows"> <!--th:each="buyuser:${paging}" 페이징 처리 필요-->
+            <div class="Rows"th:each="Q : ${Q}"> <!--페이징 처리 필요-->
                 <span><input type="checkbox"></span>
-                <span>XXXX-XX-XX</span>
-                <span>IDxxxxxxx</span>
-                <span>제목</span>
-                <span>N</span>
+                <a class="list_updateDate" th:href="@{|/admin/cs/${Q.csQuestionId}|}" th:text="${Q.updateDate}">작성일</a>
+                <a class="list_userId" th:href="@{|/admin/cs/${Q.csQuestionId}|}" th:text="${Q.user.id}">글쓴이</a>
+                <a class="list_title" th:href="@{|/admin/cs/${Q.csQuestionId}|}" th:text="${Q.title}">제목</a>
+                <a class="list_anwerYN" href="#">N</a>
             </div>
             
             <div id="pageBtn"> <!--
