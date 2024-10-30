@@ -79,28 +79,28 @@
     width: 75%;
 }
 
-.orderHistory{
+.myPageTitle{
     background-color: white;
     border-radius: 0.5rem;
     padding: 1rem 2rem 1rem 2rem;
 }
-.orderHistory>p{
+.myPageTitle>p{
     padding-bottom: 1rem ;
     font-size: var(--titleFont);
     border-bottom: 2px solid;
 }
 
-.orderHistory>ul{
+.myPageTitle>ul{
     display: flex;
     justify-content: space-between;
     padding: 1rem 0 1rem 0;
     gap: 1rem;
 }
-.orderHistory>ul>li{
+.myPageTitle>ul>li{
     flex: 1;
 }
 
-.orderHistory>ul>li>a{
+.myPageTitle>ul>li>a{
     display: block;
     padding: 0.5rem 0 0.5rem 0;
     border-radius: 0.5rem;
@@ -111,7 +111,7 @@
     transition: .3s;
 }
 
-.orderHistory>ul>li.on>a{
+.myPageTitle>ul>li.on>a{
     background-color: rgb(58, 58, 58);
     color: white;
 }

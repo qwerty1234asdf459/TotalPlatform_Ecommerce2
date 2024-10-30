@@ -86,11 +86,11 @@ button:hover{
     display: inline-block; 
     padding-right: 10px;
 }
-.Rows > span:nth-child(1) { width: 100px; }
-.Rows > span:nth-child(2) { width: 200px; }
-.Rows > span:nth-child(3) { width: 600px; }
-.Rows > span:nth-child(4) { width: 200px; }
-.Rows > span:nth-child(5) { width: 200px; }
+.Rows > span { width: 100px; }/*선택*/
+.list_user { width: 200px; }/*ID*/
+.list_product { width: 600px; }/*상품명*/
+.list_scope { width: 200px; }/*별점*/
+.list_updateDate { width: 200px; }/*등록일*/
 
 input[type="checkbox"]{
     width: 20px;
