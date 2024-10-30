@@ -119,13 +119,14 @@
                                     <td th:text="|${PayList.paymentState} ${PayList.deliveryState}|"></td>
                                     <td th:text="${PayList.user}"></td>
                                     <td th:text="${PayList.deliveryno}"></td>
-                                    <td class="drop"><i class="fa-solid fa-chevron-down"></i></td>
+                                    <td id="openModal" class="drop"><i class="fa-solid fa-chevron-down"></i></td>
                                 </tr>
                             </tbody>
                         </table>
                         <!--모달로-->
                         <ul id="modal" class="modalBox" th:each="PayList : ${PayList}"> 
-                            <p>상세정보</p>
+                            <p><div class="boxtitle">상세정보</div></p>
+                            <div class="boxbtn"><button id="closeModal" class="btn-style closeM">닫기</button></div>
                             <li class="subbox">
                                 <div class="subL">
                                     <p>주 문 번 호 : </p>
