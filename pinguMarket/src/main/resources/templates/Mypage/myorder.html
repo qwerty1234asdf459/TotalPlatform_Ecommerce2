@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>myPage</title>
+    <title>내 결제내역</title>
     <link rel="stylesheet" href="/MyPage/reset.css">
     <link rel="stylesheet" href="/MyPage/headerStyle.css">
     <link rel="stylesheet" href="/MyPage/myPageStyle.css">
@@ -14,7 +14,7 @@
     
 
 
-.paymentListContainer {
+.contentListContainer {
     display: flex;
     align-items: center;
     border: 1px solid #ccc;
@@ -23,10 +23,10 @@
     overflow: hidden;
     cursor: pointer;
 }
-.paymentHeader {
+.contentHeader {
     display: grid;
     padding-left:10px;
-    grid-template-columns: 0.3fr 1.2fr 1.2fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1.2fr 1.7fr 1fr 1fr 1fr;
     font-weight: bold;
     padding: 0.5rem;
     border-bottom: 2px solid;
@@ -51,9 +51,9 @@
     object-fit: cover;
 }
 
-.paymentListInfo {
+.contentListInfo {
     display: grid;
-    grid-template-columns: 1fr 1.3fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1.2fr 1.7fr 1fr 1fr 1fr;
     align-items: center;
     text-align: center;
     width: 100%;
@@ -61,7 +61,7 @@
     gap: 0.5rem;
 }
 
-.paymentListInfo span {
+.contentListInfo span {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -241,7 +241,7 @@
 
 
             <div class="myPageRight">
-                <div class="orderHistory">
+                <div class="myPageTitle">
                     <p>주문내역</p>
                     <ul>
                         <li class="on"><a href="#">3개월</a></li>
@@ -250,10 +250,8 @@
                         <li><a href="#">3년</a></li>
                     </ul>
                     
-                     <div class="paymentHeader">
-                             <div class="paymentHeaderImage">
-                                  <span>이미지</span>
-                             </div>
+                     <div class="contentHeader">
+                        <span></span>
                         <span>결제일</span>
                         <span>결제액</span>
                         <span>대표 상품명</span>
@@ -267,22 +265,19 @@
     </div>
 
     <!-- 각 결제 내역 반복 -->
-    <div class="paymentListContainer" 
+    <div class="contentListContainer" 
          th:each="payment, iterStat : ${paymentList}"
          th:onclick="|location.href='@{/myorder/detail/{paymentId}(paymentId=${payment.paymentId})}'|">
          
-        <!-- 상품 이미지 -->
-        <div class="paymentListImage">
-            <img src="/img/ordertest.jpg" alt="상품 이미지">
-        </div>
 
         <!-- 결제 정보 -->
-        <div class="paymentListInfo">
-            <span th:text="${#temporals.format(payment.createDate, 'yyyy-MM-dd')}"></span>
-            <span th:text="${totalprice[iterStat.index] + '원'}"></span>
-            <span th:text="${productNames[iterStat.index]}"></span>
-            <span th:text="${payment.deliveryno}"></span>
-            <span th:text="${payment.deliveryState}"></span>
+        <div class="contentListInfo">
+            <div class="paymentListImage"><img src="/img/ordertest.jpg" alt="상품 이미지"></div>
+            <div class="paymentDate"><span th:text="${#temporals.format(payment.createDate, 'yyyy-MM-dd')}"></span></div>
+            <div class="paymentPrice"><span th:text="${totalprice[iterStat.index] + '원'}"></span></div>
+            <div class="paymentProductName"><span th:text="${productNames[iterStat.index]}"></span></div>
+            <div class="paymentDeliveryno"><span th:text="${payment.deliveryno}"></span></div>
+            <div class="paymentDeliveryState"><span th:text="${payment.deliveryState}"></span></div>
         </div>
                    </div> <!-- paymentListContainer 끝 -->
                 </div>

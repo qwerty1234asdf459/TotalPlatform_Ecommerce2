@@ -30,6 +30,7 @@ public class MyPageController {
 	private final ReviewService rs;
 	private final UserService us;
 	private final PaymentService ps;
+//	private final CouponService cs;
 	
 	@GetMapping("/myorder")
 	public String myOrderPage(Model model, Principal principal) throws CanNotFoundException {
@@ -88,19 +89,20 @@ public class MyPageController {
 	
 //	@PreAuthorize("isAuthenticated()")
 	@GetMapping("/usermodify") 
-	public String mypageModify(Model model, Principal principal) throws CanNotFoundException  {
+	public String myInfoModifyPage(Model model, Principal principal) throws CanNotFoundException  {
 		
 //		User user = this.us.getUser(principal.getName());
 //		로그인 생기면 위에걸로 수정
-		User user = this.us.getUser(2);
+		User user = this.us.getUser(1);
 		
 		UserModifyForm form = new UserModifyForm();
 	    form.setName(user.getName());
 	    form.setEmail1(user.getEmail().split("@")[0]);
 	    form.setEmail2(user.getEmail().split("@")[1]);
 	    form.setAddress1(user.getAddress().split(" ")[0]);
-	    form.setAddress2(user.getAddress().split(" ")[0]);
-//	    form.setAddress2(user.getAddress().split(" ", 2)[1]);
+	    form.setAddress2(user.getAddress().split(" ", 2)[1]);
+//	    form.setAddress2(user.getAddress().split(" ")[0]);
+	    
 	    form.setAddressDetail(user.getAddressDetail());
 	    form.setGender(user.getGender());
 	    form.setTell(user.getTell());
@@ -113,13 +115,13 @@ public class MyPageController {
 
 //	@PreAuthorize("isAuthenticated()")
 	@PostMapping("/usermodify") 
-	public String mypageModify(
+	public String myInfoModifyPage(
 			@Valid UserModifyForm userModifyForm, BindingResult bindingResult,
 			Model model, Principal principal) throws CanNotFoundException  {
 		
 //		User user = this.us.getUser(principal.getName());
 //		로그인 생기면 위에걸로 수정
-		User user = this.us.getUser(2);
+		User user = this.us.getUser(1);
 		
 	    model.addAttribute("user", user);
 	    
@@ -138,8 +140,20 @@ public class MyPageController {
 				userModifyForm.getGender(),
 				userModifyForm.getTell());
 		
-		return "redirect: Mypage/usermodify";
+		return "redirect:usermodify";
 		
+	}
+	
+	@GetMapping("/mycoupon")
+	public String myCouponPage(Model model, Principal principal) throws CanNotFoundException {
+		
+		User user = this.us.getUser(2);
+//		Optional<Coupon> coupon = this.cs.
+		
+		model.addAttribute("user", user);
+		
+		
+		return "Mypage/mycoupon";
 	}
 	
 }

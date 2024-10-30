@@ -231,8 +231,8 @@
 
 
             <div class="myPageRight">
-                <div class="orderHistory">
-                    <p>주문내역</p>
+                <div class="myPageTitle">
+                    <p>개인정보 수정</p>
 
                   <div class="userModifyContainer">
                   <form th:action="@{/usermodify}" th:object="${userModifyForm}"  method="post">
@@ -240,7 +240,7 @@
                   -->
                   <div class="userInfoEmail">
                   <div>이메일</div>
-                  <h4 th:text="${user.email}"}></h4>
+                  <h4 th:text="${user.email}"></h4>
                   
                   <div class="warp-input">
                   <input type="text" th:field="*{email1}"/>
@@ -282,9 +282,9 @@
                      <h4 th:text="${user.gender}"></h4>
                      
                      <label for="male">남성</label>
-                     <input type="radio" th:field="*{gender}" value="male">
+                     <input type="radio" th:field="*{gender}" value="남성">
                      <label for="female">여성</label>
-                     <input type="radio" th:field="*{gender}" value="female">
+                     <input type="radio" th:field="*{gender}" value="여성">
                      </div>
                      <br>
                      
