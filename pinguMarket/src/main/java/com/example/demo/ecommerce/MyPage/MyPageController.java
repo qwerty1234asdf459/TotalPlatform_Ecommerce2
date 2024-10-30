@@ -85,7 +85,6 @@ public class MyPageController {
 	public String myPage(Model model) throws CanNotFoundException {
 		
 		User u = this.us.getUser(2);
-		
 		model.addAttribute("user", u);
 		return "Mypage/myPage";
 	}
