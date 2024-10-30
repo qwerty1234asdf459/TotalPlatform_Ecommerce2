@@ -189,7 +189,7 @@ th {
     padding: 3px;
     min-width: 20px; /* 최소 너비 설정 */
     text-align: center;
-    background-color: #fffdfd;
+    background-color: #fffafa;
 }
 td {
     min-width: 20px; /* 최소 너비 설정 */
@@ -210,34 +210,51 @@ input[type="checkbox"] {/*체크박스 크기 조정*/
     font-size: 16px;
 }
 
-/* 드롭다운 - 상세정보 */
-.drop>.sub{
-    display:none;
-    height:120px;
-    list-style:none;
-    overflow:hidden;
+/* 모달 - 상세정보 **********************/
+.modalBox{
+    /* display:none; */
+    list-style : none;
+    background-color: #fffdfd;
+    border: solid 2px #fce699;
+    border-radius: 10px;
+    position: fixed;
+    width: 800PX;
+    z-index: 1;
+    top: 20vh;
+    left: 50vh;
+    
+}
+#modal>p{
+    text-align: center;
+    font-size: 1.4rem;
+    font-weight: bold;
+    padding: 15px;
+
+}
+.modalBox > li{
+    border-bottom: solid 2px #fce699;
+    
 }
 
-.drop>.sub li{
-  background-color:orange;
-  border-top:1px white solid;
+.subbox{
+    display: flex;
+    padding: 15px;
+}
+.subL{
+    margin-right: 10px;
+    width: 130px;
 }
 
-.drop>.sub li>a{
-  text-decoration:none;
-  color:black;
-}
-
-.drop>.sub.up{
+.modalBox.up{
   height:0px;
   animation-name:slide_up;
-  animation-duration:1s;  
+  animation-duration:0.5s;  
 }
 
-.drop>.sub.down{
+.modalBox.down{
   height:120px;
   animation-name:slide_down;
-  animation-duration:1s;
+  animation-duration:0.5s;
 }
 
 @keyframes slide_up{
