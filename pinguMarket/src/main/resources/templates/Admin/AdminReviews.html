@@ -41,8 +41,8 @@
             </div>
             <div class="Rows" th:each="RList : ${RList}"> <!--페이징 처리 필요-->
                 <span><input type="checkbox"></span>
-                <a class="list_user" th:href="@{|/admin/Reviews/${RList.reviewId}|}" th:text="${RList.user}"></a>
-                <a class="list_product" th:href="@{|/admin/Reviews/${RList.reviewId}|}" th:text="${RList.product}"></a>
+                <a class="list_user" th:href="@{|/admin/Reviews/${RList.reviewId}|}" th:text="${RList.user.name}"></a>
+                <a class="list_product" th:href="@{|/admin/Reviews/${RList.reviewId}|}" th:text="${RList.product.name}"></a>
                 <a class="list_scope" th:href="@{|/admin/Reviews/${RList.reviewId}|}" th:text="${RList.scope}"></a>
                 <a class="list_updateDate" th:href="@{|/admin/Reviews/${RList.reviewId}|}" th:text="${RList.updateDate}"></a>
             </div>

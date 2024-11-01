@@ -4,16 +4,19 @@ package com.example.demo.ecommerce.Admin;
 import java.time.LocalDateTime;
 
 import java.util.List;
+import java.util.Optional;
 
 
 import org.springframework.stereotype.Service;
 
 import com.example.demo.ecommerce.CsAnswer.CsAnswerRepository;
 import com.example.demo.ecommerce.CsQuestion.CsQuestionRepository;
+import com.example.demo.ecommerce.Entity.Admin;
 import com.example.demo.ecommerce.Entity.CsAnswer;
 import com.example.demo.ecommerce.Entity.CsQuestion;
 import com.example.demo.ecommerce.Entity.User;
 import com.example.demo.ecommerce.User.UserRepository;
+import com.example.demo.ecommerce.Review.CanNotFoundException;
 
 import lombok.RequiredArgsConstructor;
 
@@ -24,6 +27,7 @@ public class AdminService {
 	private final CsQuestionRepository cqr;
 	private final CsAnswerRepository car;
 	private final UserRepository ur;
+	private final AdminRepository ar;
 	
 	
 	public CsQuestion getQuestion(Integer id) {
@@ -60,6 +64,7 @@ public void answerUpdate(String title, String contents, Integer id) {
 	}
 
 
+
 //**************************1:1 문의글 count 조회***************************************************
 
 public int getQuestionCountByAll(Integer userId) {
@@ -73,6 +78,30 @@ public List<CsQuestion> getUserByKeyword(Integer userId, int startNo, int pageSi
 	User user = this.ur.searchUser(userId);
 	return this.cqr.findQestionByUserId(1, startNo, pageSize); // 유저정보 강제 입력함. 추후 1 대신 user.getUserId()로 변경 필요
 }
+
+
+///////////////////////////////////////////////////////////////////
+	public Admin getAdmin(Integer adminId) throws CanNotFoundException {
+		
+		Optional<Admin> admin = this.ar.findByAdminId(adminId);
+		if(admin.isPresent()) {
+			return admin.get();
+		}
+		else {
+			throw new CanNotFoundException("존재하지 않는 관리자입니다");
+		}
+	}
+
+	//	관리자 로그인 기능이 없어서 String이 아니라 Integer를 사용하여 땜빵용
+	public Admin getAdmin(String adCode) throws CanNotFoundException {
+		Optional<Admin> admin = this.ar.findByAdCode(adCode);
+		if(admin.isPresent()) {
+			return admin.get();
+		}
+		else {
+			throw new CanNotFoundException("존재하지 않는 유저입니다");
+		}
+	}
 
 	
 	

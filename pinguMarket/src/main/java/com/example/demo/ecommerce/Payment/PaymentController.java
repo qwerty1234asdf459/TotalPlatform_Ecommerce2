@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.example.demo.ecommerce.Product.ProductService;
+import com.example.demo.ecommerce.User.UserService;
 import com.example.demo.lms.entity.LmsCoupon;
 import com.example.demo.lms.service.LmsCouponService;
 
@@ -19,6 +21,8 @@ import lombok.RequiredArgsConstructor;
 public class PaymentController {
 	
 	private final LmsCouponService couponService;
+	private final UserService userService;
+	private final ProductService productService;
 	
 	@GetMapping("/coupon")
 	public String useCoupon() {
@@ -33,14 +37,16 @@ public class PaymentController {
 	}
 	
 	@GetMapping("/payment")
-	public String paymentTest(@RequestParam(value = "code",defaultValue = "") String code, Model model) {
-		LmsCoupon c = couponService.findByCode(code);
-		model.addAttribute("coupon", c);
-		return "Payment/CouponInfoTest";
+	public String paymentTest(Model model) {
+		
+		
+		return "Payment/paymentPage";
 	}
 	
 	@GetMapping("/paymentView")
 	public String payment() {
 		return "Payment/paymentPage";
 	}
+	
+	
 }

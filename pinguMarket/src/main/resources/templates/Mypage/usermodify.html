@@ -4,46 +4,36 @@
     <main layout:fragment="content">
     <link rel="stylesheet" href="/MyPage/myPageStyle.css">
     <style>
-        .reviewListContainer{
-            margin: 0.5vw;
-            border: 1.5px solid black;
-            border-radius: 10px;
-        }
-        .reviewListContainer > div{
-            padding: 0.5vw;
-        }
-        .reviewListTop{
-            display: flex;
+    .userModify > div{
+        padding: 1rem;
+
+}
+
+    .pwModal{
+            position:absolute;
+            display:flex;
+            justify-content: center;
+            top:0;
+            left:0;
+            width:100%;
+            height:100%;
+            background-color: rgba(0,0,0,0.4);
         }
         
-        .paymentListImage{
-            width: 75px;
-            height: 75px;
-            overflow: hidden;
-        }
-        .paymentListContainer{
-            display: flex;
-            margin: 0.5vw;
-            border: 1.5px solid black;
-            border-radius: 10px;
-        }
-        .paymentListInfo{
-            width: 65rem;
-            display: flex;
-            justify-content: space-between;
-        }
-
-        .paymentListInfo > div {
+        .pwModalBody{
+            position:absolute;
+            top:50%;
+            width:35%;
+            height:20%;
+            padding:1.5rem;  
             text-align: center;
+            background-color: white;
+            border-radius:10px;
         }
-        .paymentListContainer > div{
-            padding: 0.5vw;
-        }
-        .createReviewLink{
-	      display: flex;
-          justify-content: center;
-          align-items: center;
-        }
+        #pwError{
+	display:none;
+}
+    
     </style>
         <div class="myPageContainer">
 
@@ -88,7 +78,7 @@
                         <p>내정보관리</p>
                         <li><a href="#">배송지관리</a></li>
                         <li><a href="#">나의 스타일</a></li>
-                        <li><a th:href="@{/usermodify}">개인정보수정</a></li>
+                        <li><a th:href="@{/pwcheck}">개인정보수정</a></li>
                     </ul>
                     <ul>
                         <p>서비스안내</p>
@@ -102,16 +92,29 @@
             <div class="myPageRight">
                 <div class="myPageTitle">
                     <p>개인정보 수정</p>
+                    
+                    <div class="pwModal" id="pwModal">
+            <div class="pwModalBody">
+                <h2>패스워드를 입력해주세요</h2>
+                <form id="pwCheckForm">
+                <input type="hidden" id="_csrf" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+                    <input type="password" id="password" name="password" required>
+                    <button type="submit" id="pwCheckBtn">확인</button>
+                </form>
+                <p id="pwError">비밀번호가 일치하지 않습니다.</p>
+            </div>
+        </div>
+                    
+                    
 
-                  <div class="userModifyContainer">
-                  <form th:object="${userModifyForm}"  method="post">
+        <div id="userModifyContainer">
+            <form th:action="@{/usermodify}" th:object="${userModifyForm}" method="post">
                  <!--  <div id="erorrs" th:replace="~{login/form_errors :: formErrorsFragment}"></div>
                   -->
+                  
+                  
                   <div class="userInfoEmail">
                   <div>이메일</div>
-                  <h4 th:text="${user.email}"></h4>
-                  
-                  <div class="warp-input">
                   <input type="text" th:field="*{email1}"/>
                   <span>@</span>
                     <input class="box" type="text" th:field="*{email2}">
@@ -124,66 +127,78 @@
                       <option value="kakao.com">kakao.com</option>
                     </select>
                 </div>
-                <br>
                   
                   
                      <div class="userInfoName">
                      <div>이름</div>
-                     <h4 th:text="${user.name}">아</h4>
                      <input type="text" th:field="*{name}">
                      </div>
-                     <br>
                      
                      
                     <div class="userInfoAdress">
                     <div>주소</div>
-                     <h4 th:text="${user.address}"></h4>
                      
                      <input type="text" th:field="*{address1}" placeholder="우편번호" readonly>
                      <input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
                      <input type="text" th:field="*{address2}" placeholder="주소" readonly><br>
                      <input type="text" th:field="*{addressDetail}" placeholder="상세주소">
                      </div>
-                     <br>
                      
                      <div class="userInfoGender">
                      <div> 성별</div>
-                     <h4 th:text="${user.gender}"></h4>
                      
                      <label for="male">남성</label>
                      <input type="radio" th:field="*{gender}" value="남성">
                      <label for="female">여성</label>
                      <input type="radio" th:field="*{gender}" value="여성">
                      </div>
-                     <br>
-                     
-                     <br>
                      
                   <div class="userInfoTel">
                   <div>전화번호</div>
-                     <h4 th:text="${user.tell}"></h4>
-                     
-
                   <input type="tel" th:field="*{tell}" onfocus="this.placeholder=''" maxlength="13" oninput="autoHyphen(this)" pattern="010-[0-9]{3,4}-[0-9]{4}" placeholder="- 없이 숫자만 입력하세요" 
                   id="tel" autocomplete="off" name="users_phone"  onblur="this.placeholder = '- 없이 숫자만 입력하세요'"/>
                 </div>
-                <br>
-                     
-                     
-                     
 
                      <input type="submit" value="수정하기">
                   </form>
                   
-                  </div>
-                  
+        </div> <!-- userModifyContainer 끝 -->
                   </div>
         </div>
     </main>
 </div>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 	<script>
-
+	
+	let pwBtn = document.querySelector('#pwCheckBtn');
+        pwBtn.addEventListener('click', function(e) {
+    e.preventDefault();
+    
+    const password = document.getElementById('password').value; // 입력한 값을 password로 저장
+    const csrfToken = document.getElementById('_csrf').value;
+    
+    fetch('http://localhost:8080/pwcheck', { // http://localhost:8080/pwcheck에 요청을 보냄
+        method: 'POST', // post 형식
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded', // 컨텐츠 타입 정해주기 솔직히 이거 뭔지 잘 모르겠는데 예제에 있던거 그냥 넣음
+            'X-CSRF-TOKEN': csrfToken // 서프토큰도 같이
+        },
+        body: new URLSearchParams({password: password}) // 현 페이지에서 입력한 password값을 password로 전송?
+    })
+    .then(response => response.json())  // 응답을 JSON 객체로 변환하여 받아오기
+    .then(data => {
+	// 받아온 json 데이터가 담긴 data
+        if(data.pwChecked) {  // data에 있는 pwChecked값 체크
+            document.getElementById('pwModal').style.display = 'none'; // 모달창 none
+        } else {
+            document.getElementById('pwError').style.display = 'block'; // 에러메세지 켜기
+        }
+    })
+    .catch(error => {
+        alert("연결에 실패하였습니다.");
+        console.error('Error:', error);
+    });
+});
  
     function sample6_execDaumPostcode() {
         new daum.Postcode({
@@ -248,5 +263,7 @@
 	   .replace(/[^0-9]/g, '')
 	   .replace(/^(\d{0,3})(\d{0,4})(\d{0,4})$/g, "$1-$2-$3").replace(/(\-{1,2})$/g, "");
 	}
+
+
 	</script>
  
