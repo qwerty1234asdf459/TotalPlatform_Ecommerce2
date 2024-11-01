@@ -12,52 +12,35 @@
             <div class="mainContainer">
                 <div class="contentCon">
                     <div class="mainTitle">제목</div>
-                    <div class="mainSub">[안내] 소비자 분쟁해결 기준 안내</div>
+                    <div class="mainSub"  th:text="${notice.title}"></div>
                 </div>
                 <div class="contentCon">
                     <div class="mainTitle">작성자</div>
-                    <div class="mainSub">글쓴이</div>
+                    <div class="mainSub" th:text="${notice.admin.adminId}"></div>
                 </div>
                 <div class="contentCon">
                     <div class="mainTitle">작성일</div>
-                    <div class="mainSub">2024.10.17</div>
+                    <div class="mainSub" th:text="${#temporals.format(notice.updateDate, 'yyyy-MM-dd HH:mm:ss')}"></div>
                 </div>
 
 
                 <div class="contentContainer">
                     <div>
                         <p>
-                            <img src="../static/img/공지사항 이미지 예시.jpg">
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis deserunt nam unde iste repellendus ullam dignissimos molestias.</p>
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis deserunt nam unde iste repellendus ullam dignissimos molestias.</p>
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis deserunt nam unde iste repellendus ullam dignissimos molestias.</p>
+                            <img src="">
+                            <p th:text="${notice.contents}"></p>
                         </p>
                     </div>
                 </div>
 
                 <div class="invenContainer">
-                    <a href="csPage.html">
+                    <a th:href="@{/csc}">
                         <button class="invenBtn" type="button" >
                             <span class="invenText">목록</span>
                         </button>
                     </a>
-                </div>
-               
-
+                </div> 
             </div>
-
-
-
-
-
-
-
-
-
         </div>
-
-
-
-
     </main>
 </div>

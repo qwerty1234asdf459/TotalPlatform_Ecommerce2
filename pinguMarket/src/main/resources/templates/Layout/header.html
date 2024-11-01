@@ -26,7 +26,7 @@
                     </a>
                 </li>
                 <li class="cart">
-                    <a href="#">
+                    <a th:href="@{/cart}">
                         <p>
                             <i class="fa-solid fa-cart-shopping"></i>
                         </p>
@@ -40,16 +40,14 @@
                     </a>
                 </li>
                 <li class="customerService">
-                    <a href="#">
+                    <a th:href="@{/csc}">
                         <p>
                             <i class="fa-solid fa-headset"></i>
                         </p>
                     </a>
                     <ul>
-                        <li><a href="#">공지사항</a></li>
-                        <li><a href="#">자주하는 질문</a></li>
-                        <li><a href="#">1:1 문의</a></li>
-                        <li><a href="#">대량주문 문의</a></li>
+                     <!--   <li><a th:href="@{/csc}">1:1 문의</a></li>
+                        <li><a th:href="@{/csc}">공지사항</a></li>-->
                     </ul>
                 </li>
             </ul>

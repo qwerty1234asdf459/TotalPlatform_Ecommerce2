@@ -71,11 +71,8 @@
                         </li>
                     </ul>
                 </div>
-                <!-- 페이징 버튼 end -->   
-                    
-
+                <!-- 페이징 버튼 end -->                       
                 </li>
-
                 
 
                 <li class="csContent">
@@ -87,17 +84,18 @@
                             <th>작성자</th>
                             <th>작성일</th>
                         </tr>
-                        <tr>
-                            <!--<td>1</td>
-                            <td th:text="${Notice.title}"></td>
-                            <td>company</td>
-                            <td th:text="${#temporals.format(Notice.updateDate, 'yyyy-MM-dd HH:mm:ss')}"></td>-->
+                        <tr th:each="Notice, loop : ${noticeList}">
+                            <td>1</td>
+                            <td><a th:href="@{|/csc/notice/${Notice.NoticeId}|}"
+                            	   th:text="${Notice.title}"></a></td>
+                            <td th:text="${Notice.admin.adminId}"></td>
+                            <td th:text="${#temporals.format(Notice.updateDate, 'yyyy-MM-dd HH:mm:ss')}"></td>
                         </tr>
                     </table>
-                    
                 </li>
             </ul>
         </div>
+
 
 
 

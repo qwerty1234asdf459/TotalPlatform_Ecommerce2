@@ -33,8 +33,9 @@ public class CsQuestionService {
 			}
 		}
 
-		public void create(String title, String contents, Integer id) throws UserException {
+		public void create(String orderNo, String title, String contents, Integer id) throws UserException {
 			CsQuestion q = new CsQuestion();
+			q.setOrderNo(orderNo);
 			q.setTitle(title);
 			q.setContents(contents);
 			q.setUpdateDate(LocalDateTime.now());
@@ -42,8 +43,9 @@ public class CsQuestionService {
 			this.qr.save(q);
 		}
 
-		public void modify(CsQuestion q, String title, String contents) {
+		public void modify(CsQuestion q, String orderNo, String title, String contents) {
 			q.setTitle(title);
+			q.setOrderNo(orderNo);
 			q.setContents(contents);
 			this.qr.save(q);
 		}
