@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<div> layout:decorate="~{Layout/layout}">
+<div layout:decorate="~{Layout/layout}">
     <!-- *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-* MAIN *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*--*-*-*-*-*-*-*-*-*-* -->
     <main layout:fragment="content">
-    <link rel="stylesheet" th:href="@{/Cs/cscFormStyle.css}">
+    	<link rel="stylesheet" th:href="@{/Cs/cscFormStyle.css}">
         <div class="csContainer">
             <div class="csSideNav">
                 <div class="csSideNavTitle">
@@ -35,7 +35,7 @@
 
 
                 <div class="askconContainer">
-                    <form th:object="${csquestionForm}"  method="post">
+                    <form th:object="${csQuestionForm}"  method="post">
                     	<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
                     	
                     	
@@ -45,7 +45,7 @@
                             </div>
                             <div class="typeSelect">
                                 <div class="SelectAll">
-                                    <select name="SelectType">
+                                    <select name="SelectType"><!--th:field="*{paymentId}"-->
                                         <option value="SelectType1">주문번호를 선택해주세요.</option>
                                         <option value="SelectType2">20241016-001</option>
                                         <option value="SelectType3">20241016-002</option>

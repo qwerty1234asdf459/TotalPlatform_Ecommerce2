@@ -23,15 +23,6 @@ public class CsQuestionService {
 	private final CsQuestionRepository qr;
 	private final CsQuestionUserRepository userRepository;
 	
-	//로그인한 유저의 모든 고객센터 문의글을 조회하는 메소드
-		public Page<CsQuestion> getList(int page, String id)  throws UserException {
-			List<Sort.Order> sorts = new ArrayList<>();
-			sorts.add(Sort.Order.desc("updateDate"));
-
-			Pageable pageable = PageRequest.of(page, 10, Sort.by(sorts));
-			
-			return this.qr.findByUser(getUser(id), pageable);
-		}
 		
 		public CsQuestion getQuestion(Integer id) throws UserException {
 			Optional<CsQuestion> q1 = this.qr.findById(id);
@@ -42,7 +33,7 @@ public class CsQuestionService {
 			}
 		}
 
-		public void create(String title, String contents, String id) throws UserException {
+		public void create(String title, String contents, Integer id) throws UserException {
 			CsQuestion q = new CsQuestion();
 			q.setTitle(title);
 			q.setContents(contents);
@@ -62,7 +53,7 @@ public class CsQuestionService {
 		}
 		
 		//유저 정보 가져오기
-		public User getUser(String id) throws UserException {
+		public User getUser(Integer id) throws UserException {
 			Optional<User> user = this.userRepository.findById(id);
 			
 			if(user.isPresent()) { 

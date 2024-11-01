@@ -2,15 +2,11 @@ package com.example.demo.ecommerce.Admin;
 
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
+
 import java.util.List;
 import java.util.Optional;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
+
 import org.springframework.stereotype.Service;
 
 import com.example.demo.ecommerce.CsAnswer.CsAnswerRepository;
@@ -19,6 +15,7 @@ import com.example.demo.ecommerce.Entity.Admin;
 import com.example.demo.ecommerce.Entity.CsAnswer;
 import com.example.demo.ecommerce.Entity.CsQuestion;
 import com.example.demo.ecommerce.Entity.User;
+import com.example.demo.ecommerce.User.UserRepository;
 import com.example.demo.ecommerce.Review.CanNotFoundException;
 
 import lombok.RequiredArgsConstructor;
@@ -29,6 +26,7 @@ public class AdminService {
 
 	private final CsQuestionRepository cqr;
 	private final CsAnswerRepository car;
+	private final UserRepository ur;
 	private final AdminRepository ar;
 	
 	
@@ -66,6 +64,22 @@ public void answerUpdate(String title, String contents, Integer id) {
 	}
 
 
+
+//**************************1:1 문의글 count 조회***************************************************
+
+public int getQuestionCountByAll(Integer userId) {
+	User user = this.ur.searchUser(userId);
+	return this.cqr.countQuestionByAll(1); //유저정보 강제 입력함. 추후 1 대신 user.getUserId()로 변경 필요
+}
+
+
+// ******************1:1문의하기 페이징 처리******************************************************
+public List<CsQuestion> getUserByKeyword(Integer userId, int startNo, int pageSize) {
+	User user = this.ur.searchUser(userId);
+	return this.cqr.findQestionByUserId(1, startNo, pageSize); // 유저정보 강제 입력함. 추후 1 대신 user.getUserId()로 변경 필요
+}
+
+
 ///////////////////////////////////////////////////////////////////
 	public Admin getAdmin(Integer adminId) throws CanNotFoundException {
 		
@@ -88,7 +102,7 @@ public void answerUpdate(String title, String contents, Integer id) {
 			throw new CanNotFoundException("존재하지 않는 유저입니다");
 		}
 	}
-	
+
 	
 	
 
