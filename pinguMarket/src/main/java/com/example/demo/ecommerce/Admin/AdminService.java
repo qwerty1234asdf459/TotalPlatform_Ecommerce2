@@ -4,6 +4,7 @@ package com.example.demo.ecommerce.Admin;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -14,9 +15,11 @@ import org.springframework.stereotype.Service;
 
 import com.example.demo.ecommerce.CsAnswer.CsAnswerRepository;
 import com.example.demo.ecommerce.CsQuestion.CsQuestionRepository;
+import com.example.demo.ecommerce.Entity.Admin;
 import com.example.demo.ecommerce.Entity.CsAnswer;
 import com.example.demo.ecommerce.Entity.CsQuestion;
-
+import com.example.demo.ecommerce.Entity.User;
+import com.example.demo.ecommerce.Review.CanNotFoundException;
 
 import lombok.RequiredArgsConstructor;
 
@@ -26,23 +29,8 @@ public class AdminService {
 
 	private final CsQuestionRepository cqr;
 	private final CsAnswerRepository car;
+	private final AdminRepository ar;
 	
-	public Page<CsQuestion> getQuestionList(int page, String kw, String kwType){
-		List<Sort.Order> sorts = new ArrayList<>();
-		sorts.add(Sort.Order.desc("updateDate"));
-		
-		Pageable pageable = PageRequest.of(page, 10, Sort.by(sorts));
-		
-		switch(kwType) {
-			case "total": return this.cqr.findAllByTitleOrId(kw, pageable);
-			case "id" : return this.cqr.findAllById(kw, pageable);
-			case "title" : return this.cqr.findAllByTitle(kw, pageable);
-		
-		}
-		
-		return this.cqr.findAllByTitleOrId(kw, pageable);
-		
-	}
 	
 	public CsQuestion getQuestion(Integer id) {
 		return this.cqr.findById(id).get();
@@ -76,6 +64,31 @@ public void answerUpdate(String title, String contents, Integer id) {
 		
 		this.car.save(ca);
 	}
+
+
+///////////////////////////////////////////////////////////////////
+	public Admin getAdmin(Integer adminId) throws CanNotFoundException {
+		
+		Optional<Admin> admin = this.ar.findByAdminId(adminId);
+		if(admin.isPresent()) {
+			return admin.get();
+		}
+		else {
+			throw new CanNotFoundException("존재하지 않는 관리자입니다");
+		}
+	}
+
+	//	관리자 로그인 기능이 없어서 String이 아니라 Integer를 사용하여 땜빵용
+	public Admin getAdmin(String adCode) throws CanNotFoundException {
+		Optional<Admin> admin = this.ar.findByAdCode(adCode);
+		if(admin.isPresent()) {
+			return admin.get();
+		}
+		else {
+			throw new CanNotFoundException("존재하지 않는 유저입니다");
+		}
+	}
+	
 	
 	
 
