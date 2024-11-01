@@ -53,6 +53,7 @@ public class Payment {
 	@Column(name = "delivery_state")	
 	private String deliveryState;
 	
+	@Column(name= "order_no")
 	private String orderNo;
 	
 	@OneToMany(mappedBy = "payment", cascade = CascadeType.PERSIST)

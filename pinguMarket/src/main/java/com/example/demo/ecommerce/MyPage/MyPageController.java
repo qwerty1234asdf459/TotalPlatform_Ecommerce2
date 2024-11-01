@@ -27,6 +27,7 @@ import com.example.demo.ecommerce.Entity.Payment;
 import com.example.demo.ecommerce.Entity.User;
 import com.example.demo.ecommerce.Payment.PaymentService;
 import com.example.demo.ecommerce.Review.CanNotFoundException;
+import com.example.demo.ecommerce.User.EditPwForm;
 import com.example.demo.ecommerce.User.UserModifyForm;
 import com.example.demo.ecommerce.User.UserService;
 import com.example.demo.lms.service.LmsCouponService;
@@ -45,7 +46,8 @@ public class MyPageController {
 	private final PaymentService ps;
 	private final CouponService cs;
 	private final LmsCouponService lcs;
-	
+
+//	@PreAuthorize("isAuthenticated()")
 	@GetMapping("/myorder")
 	public String myOrderPage(Model model, Principal principal) throws CanNotFoundException {
 //		User u = this.us.getUser(principal.getName());
@@ -68,6 +70,7 @@ public class MyPageController {
 		
 	}
 	
+//	@PreAuthorize("isAuthenticated()")	
 	@GetMapping("/myorder/detail/{paymentId}")
 	public String myOrderDetailPage(Model model,
 			@PathVariable ("paymentId") Integer id, Principal principal) throws CanNotFoundException {
@@ -91,7 +94,8 @@ public class MyPageController {
 		model.addAttribute("user", u);		
 		return "Mypage/myreview";
 	}
-	
+
+//	@PreAuthorize("isAuthenticated()")
 	@GetMapping("myPage")
 	public String myPage(Model model) throws CanNotFoundException {
 		
@@ -123,7 +127,7 @@ public class MyPageController {
 	
 //	@PreAuthorize("isAuthenticated()")
 	@GetMapping("/usermodify") 
-	public String myInfoModifyPage(HttpSession session,
+	public String myInfoModifyPage(
 			Model model, Principal principal) throws CanNotFoundException  {
 //		User user = this.us.getUser(principal.getName());
 //		로그인 생기면 위에걸로 수정
@@ -131,7 +135,6 @@ public class MyPageController {
 		User user = this.us.getUser(1);
 		
 		UserModifyForm form = new UserModifyForm();
-	    form.setName(user.getName());
 	    form.setEmail1(user.getEmail().split("@")[0]);
 	    form.setEmail2(user.getEmail().split("@")[1]);
 	    form.setAddress1(user.getAddress().split(" ")[0]);
@@ -153,6 +156,7 @@ public class MyPageController {
 			@Valid UserModifyForm userModifyForm, BindingResult bindingResult,
 			Model model, Principal principal) throws CanNotFoundException  {
 		
+		
 //		User user = this.us.getUser(principal.getName());
 //		로그인 생기면 위에걸로 수정
 		User user = this.us.getUser(1);
@@ -167,17 +171,42 @@ public class MyPageController {
 		this.us.userModify(user,
 				userModifyForm.getEmail1(),
 				userModifyForm.getEmail2(),
-				userModifyForm.getName(),
 				userModifyForm.getAddress1(),
 				userModifyForm.getAddress2(),
 				userModifyForm.getAddressDetail(),
 				userModifyForm.getGender(),
 				userModifyForm.getTell());
 		
-		return "redirect:usermodify";
+		return "Mypage/usermodify";
 		
 	}
 	
+//	@PreAuthorize("isAuthenticated()")	
+	@GetMapping("usermodify/pw")
+	public String myPwModifyPage(EditPwForm editPwForm,
+			Model model, Principal principal) throws CanNotFoundException {
+			
+		User user = this.us.getUser(1);
+		
+		model.addAttribute("editPwForm", editPwForm);
+		model.addAttribute("user", user);
+		
+			return "Mypage/pwmodify";
+		}
+	
+//	@PreAuthorize("isAuthenticated()")	
+	@PostMapping("usermodify/pw")
+	public String myPwModifyPage(Model model, Principal principal,
+			@Valid EditPwForm passwordModifyForm, BindingResult bindingResult) throws CanNotFoundException {
+		User user = this.us.getUser(1);
+		
+//		추후 승래님이 만드신 기능 집어넣기
+
+		return "Mypage/pwmodify";
+	}
+	
+	
+//	@PreAuthorize("isAuthenticated()")	
 	@GetMapping("/mycoupon")
 	public String myCouponPage(Model model, Principal principal) throws CanNotFoundException {
 		
@@ -190,7 +219,7 @@ public class MyPageController {
 		return "Mypage/mycoupon";
 	}
 	
-
+//	@PreAuthorize("isAuthenticated()")
 	@PostMapping("/mycoupon/inputcoupon")
 	public ResponseEntity<String> useCoupon(@RequestParam("code")String code)
 			throws CanNotFoundException,CouponOverlappingException {
@@ -205,7 +234,8 @@ public class MyPageController {
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("쿠폰에러");
 		}
 	}
-
+	
+//	@PreAuthorize("isAuthenticated()")
 	@GetMapping("/signout")
 	public String singoutPage(Model model, Principal principal) throws CanNotFoundException {
 		User user = this.us.getUser(1);
@@ -213,6 +243,18 @@ public class MyPageController {
 		model.addAttribute("user", user);
 		
 		return "Mypage/signout";
+	}
+	
+//	@PreAuthorize("isAuthenticated()")
+	@PostMapping("/signout") 
+	public String singoutPage(Principal principal) throws CanNotFoundException {
+		
+		User user = this.us.getUser(1);
+		
+		us.userSignout(user, "n");
+		
+//		return "redirect:/user/logout";
+		return "redirect:/myorder";
 	}
 
 }
