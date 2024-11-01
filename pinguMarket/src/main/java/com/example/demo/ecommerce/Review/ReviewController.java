@@ -12,9 +12,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.example.demo.ecommerce.Entity.PaymentDetail;
 import com.example.demo.ecommerce.Entity.Product;
 import com.example.demo.ecommerce.Entity.Review;
 import com.example.demo.ecommerce.Entity.User;
+import com.example.demo.ecommerce.PaymentDetail.PaymentDetailService;
 import com.example.demo.ecommerce.Product.ProductService;
 import com.example.demo.ecommerce.User.UserService;
 
@@ -29,6 +31,7 @@ public class ReviewController {
 	private final ProductService ps;
 	private final UserService us;
 	private final ReviewService rs;
+	private final PaymentDetailService pds;
 	
 	
 //	@PreAuthorize("isAuthenticated()")
@@ -43,18 +46,24 @@ public class ReviewController {
 		ReviewCreateForm reviewform = new ReviewCreateForm();
 		model.addAttribute("reviewCreateForm", reviewform);
 		
-
+		
 		try {
-	        // 리뷰 존재 여부 확인 (리뷰가 이미 있을 경우 예외 발생)
-	        this.rs.getReview(u.getUserId(), productId);
-	        // 리뷰가 없으므로 폼 페이지로 이동
-	        return "/Mypage/reviewform";
+			Review review = this.rs.getReview(u.getUserId(), productId);
+			PaymentDetail paymentDetail = this.pds.getPaymentDetail(u.getUserId(), productId);
+			if(review != null) {
+				return "redirect:/myreview";
+			}else if(paymentDetail == null) {
+				return "redirect:/myreview";
+			}else {
+				return "/Mypage/reviewform";
+			}
+	       
 	    } catch (CanNotFoundException e) {
-	        // 이미 리뷰가 있는 경우 리뷰 목록 페이지로 리디렉션
+	        // 리뷰가 있으면 예외가 발생해서 myreview로 보냄
 	        return "redirect:/myreview";
 	    }
 		} 
-		
+			
 
 	
 //	@PreAuthorize("isAuthenticated()")

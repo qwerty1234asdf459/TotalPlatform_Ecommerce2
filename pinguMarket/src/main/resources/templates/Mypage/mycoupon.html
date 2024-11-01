@@ -4,6 +4,29 @@
     <main layout:fragment="content">
     <link rel="stylesheet" href="/MyPage/myPageStyle.css">
     <style>
+    .couponModal{
+            position:absolute;
+            display:none;
+            justify-content: center;
+            top:0;
+            left:0;
+            width:100%;
+            height:100%;
+            background-color: rgba(0,0,0,0.4);
+        }
+        
+        .couponModalBody{
+            position:absolute;
+            top:50%;
+            width:35%;
+            height:20%;
+            padding:1.5rem;  
+            text-align: center;
+            background-color: white;
+            border-radius:10px;
+        }
+
+
 .contentListContainer {
     display: flex;
     align-items: center;
@@ -87,7 +110,7 @@
                         <p>내정보관리</p>
                         <li><a href="#">배송지관리</a></li>
                         <li><a href="#">나의 스타일</a></li>
-                        <li><a th:href="@{/usermodify}">개인정보수정</a></li>
+                        <li><a th:href="@{/pwcheck}">개인정보수정</a></li>
                     </ul>
                     <ul>
                         <p>서비스안내</p>
@@ -100,7 +123,21 @@
 
             <div class="myPageRight">
                 <div class="myPageTitle">
+                    
                     <p>내 쿠폰</p>
+                    
+                    <div class="couponModal">
+        <div class="couponModalBody">
+            <h2>쿠폰 코드를 입력해주세요</h2>
+            <form method="post">
+            <textarea id="code"  placeholder="쿠폰 코드를 입력해주세요" maxlength="16" required></textarea>
+            <input type="submit" name="codeBtn" id="codeBtn" value="등록">
+            </form>
+    <button class="modalCloseBtn">닫기</button>
+        </div>
+    </div>
+    <button class="modalOpenBtn">쿠폰 등록</button>
+                    
                     
                      <div class="contentHeader">
                         <span>쿠폰 일자</span>
@@ -109,13 +146,12 @@
                      </div>
 
     <!-- 쿠폰이 없을 때 표시 -->
-    <div th:if="${couponList == null || couponList.isEmpty()}">
+    <div th:if="${couponList.isEmpty()}">
         쿠폰이 없습니다.
     </div>
 
     <!-- 쿠폰 반복 -->
-    <div class="contentListContainer" 
-         th:each="coupon : ${couponList}" th:if="${couponList != null && !couponList.isEmpty()}">
+<div class="contentListContainer" th:each="coupon : ${couponList}">
 
         <!-- 쿠폰 정보 -->
         <div class="contentListInfo">
@@ -130,4 +166,19 @@
             </div>
         </div>
     </main>
+    
 </div>
+
+    <script>
+        const couponModal = document.querySelector('.couponModal');
+        const modalOpenBtn = document.querySelector('.modalOpenBtn');
+        const modalCloseBtn = document.querySelector('.modalCloseBtn');
+
+        modalOpenBtn.addEventListener("click", ()=>{
+            couponModal.style.display="flex";
+        });
+        
+        modalCloseBtn.addEventListener("click", ()=>{
+             couponModal.style.display = "none"
+        });
+    </script>

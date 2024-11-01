@@ -4,65 +4,7 @@
     <main layout:fragment="content">
     <link rel="stylesheet" href="/MyPage/myPageStyle.css">
     <style>
-		* {
-		    box-sizing: border-box;
-		}
-		.contentListContainer {
-		    display: flex;
-		    align-items: center;
-		    border: 1px solid #ccc;
-		    border-radius: 10px;
-		    margin: 0.5rem 0;
-		    overflow: hidden;
-		}
-		.contentHeader {
-		    display: grid;
-		    padding-left:10px;
-		    grid-template-columns: 1fr 1.7fr 1fr 1fr 1fr;
-		    font-weight: bold;
-		    padding: 0.5rem;
-		    border-bottom: 2px solid;
-		    text-align: center;
-		    background-color: rgb(238, 238, 238);
-		}
-		.contentHeader span {
-		    white-space: nowrap;
-		    overflow: hidden;
-		    text-overflow: ellipsis;
-		}
-		
-		.productImage {
-		    width: 75px;
-		    height: 75px;
-		    flex-shrink: 0;
-		}
-		
-		.productImage img {
-		    width: 100%;
-		    height: 100%;
-		    object-fit: cover;
-		}
-		
-		.contentListInfo {
-		    display: grid;
-		    grid-template-columns: 1fr 1.7fr 1fr 1fr 1fr;
-		    align-items: center;
-		    text-align: center;
-		    width: 100%;
-		    padding: 0.5rem;
-		    gap: 0.5rem;
-		}
-		
-		.contentListInfo span {
-		    white-space: nowrap;
-		    overflow: hidden;
-		    text-overflow: ellipsis;
-		}
-		.createReviewLink{
-			display: flex;
-		    justify-content: center;
-		    align-items: center;
-		}
+
     </style>
         <div class="myPageContainer">
 
@@ -120,33 +62,23 @@
 
             <div class="myPageRight">
                 <div class="myPageTitle">
-                    <p>주문내역</p>
                     
-                    <div class="contentHeader">
-                        <span></span>
-                        <span>상품명</span>
-                        <span>가격</span>
-                        <span>수량</span>
-                        <span>리뷰</span>
-                     </div>
+                    <p>회원탈퇴</p>
                     
-                    <!-- <div th:if="${리스트.isEmpty()}">
-                        구매내역이 없습니다.
-                    </div> -->
-                    <div class="contentListContainer" th:each="paymentdetail : ${payment.paymentDetailList}"> <!-- 반복 용도의 div이라서 나중에 th:each="" th:if="${!리스트.isEmpty()}" 붙이기 -->
 
-                        <div class="contentListInfo">
-                            <!--  상품명, 구매일자, 주문번호, 총 가격 등의 정보 작성용 -->
-                             <div class="productImage"><img src="/img/ordertest.jpg" alt=""></div>
-                             <div class="productName"><h4 th:text="${paymentdetail.product.name}"></h4></div>
-                             <div class="paymentDetailPrice"><h4 th:text="${paymentdetail.price}"> </h4 ></div> <!-- th:text="${payment.가격}" -->
-                             <div class="paymentDetailCount"><h4 th:text="${paymentdetail.count}"></h4></div>
-                             <div class="createReviewLink"> <a th:href="@{/reviewcreate/{productId}(productId = ${paymentdetail.product.productId})}">리뷰 작성</a></div>
-                        </div> 
-                    </div> <!-- paymentListContainer 끝 -->
+
+
+
+
+                </div>
                 
             
             </div>
         </div>
     </main>
+    
 </div>
+
+    <script>
+
+    </script>

@@ -40,6 +40,8 @@ public class CsQuestion {
 	@Column(nullable = false)
 	private String contents;
 	
+	private String orderNo;
+	
 	@Column(name ="update_date",nullable = false)
 	private LocalDateTime updateDate;
 	
