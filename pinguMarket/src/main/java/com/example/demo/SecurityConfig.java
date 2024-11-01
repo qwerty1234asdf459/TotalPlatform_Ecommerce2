@@ -41,6 +41,7 @@ public class SecurityConfig {
 	              .logoutRequestMatcher(new AntPathRequestMatcher("/user/logout"))
 	              .logoutSuccessUrl("/main")
 	              .invalidateHttpSession(true)) //로그아웃 시 생성된 사용자 세션도 삭제
+	        .csrf((auth) -> auth.disable());
 	      ;
 	      return http.build();
 	   }

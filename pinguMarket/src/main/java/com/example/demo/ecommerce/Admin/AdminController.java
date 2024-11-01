@@ -1,8 +1,5 @@
 package com.example.demo.ecommerce.Admin;
 
-import java.util.List;
-
-
 import org.springframework.stereotype.Controller;
 
 
@@ -12,7 +9,7 @@ import lombok.RequiredArgsConstructor;
 @Controller
 public class AdminController{
 
-	private final AdminService adService;
+	//private final AdminService as;
 	
 
 	

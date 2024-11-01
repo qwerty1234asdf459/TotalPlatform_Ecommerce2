@@ -34,4 +34,15 @@ csSideNav.forEach(item =>{
 });
 
 
+// ---------------------페이징 처리-------------------------------------------------
+const page_elements = document.getElementsByClassName("page-link"); //페이징 버튼 배열
+
+//페이징 버튼 클릭시
+Array.from(page_elements).forEach(function(element) {
+	element.addEventListener('click', function() {
+		document.getElementById('page').value = this.dataset.page;
+	    document.getElementById('searchForm').submit();
+	});
+});
+
 

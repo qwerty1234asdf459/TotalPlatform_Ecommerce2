@@ -48,7 +48,7 @@ public class LmsCouponService {
 	public boolean useCheck(String code) {
 		LmsCoupon c = couponRepository.findByCode(code);
 		
-		if(c.getUseYn()=="y") {
+		if(c.getUseYn().equals("y")) {
 			return true;
 		}else {
 			return false;

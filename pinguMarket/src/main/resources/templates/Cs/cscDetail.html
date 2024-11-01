@@ -16,7 +16,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="csPage.html">
+                        <a>
                             <p>공지사항</p>
                             <i class="fa-solid fa-angle-right"></i>
                         </a>
@@ -95,7 +95,7 @@
 	                        <div class="adminReply">
 	                            <div class="type">
 	                                <div class="reply">
-	                                    <label for="label-text">관리자 답변</label>
+	                                    <label for="label-text">관리자 답변 제목</label>
 	                                </div>
 	                                <div class="inputReply">
 	                                    <div class="detailReply">
@@ -103,7 +103,26 @@
 	                                            <textarea inputmode="text" class="inquiry-reply"></textarea>
 	                                            <div class="conPlaceholder">
 	                                                <div class="replyCon">
-	                                                    <p th:href="@{|/csc/answer/${question.CsAnswer.csAnswerId}|}"></p>
+	                                                    <!-- <p th:href="@{|/csc/answer/${question.CsAnswer.csAnswerId}|}"></p> -->
+                                                        <p></p>
+	                                                </div>
+	                                            </div>
+	                                        </div>
+	                                    </div>
+	                                </div>
+	                            </div>
+                                <div class="type">
+	                                <div class="reply">
+	                                    <label for="label-text">관리자 답변 내용</label>
+	                                </div>
+	                                <div class="inputReply">
+	                                    <div class="detailReply">
+	                                        <div class="replyContainer">
+	                                            <textarea inputmode="text" class="inquiry-reply"></textarea>
+	                                            <div class="conPlaceholder">
+	                                                <div class="replyCon">
+	                                                    <!-- <p th:href="@{|/csc/answer/${question.CsAnswer.csAnswerId}|}"></p> -->
+                                                        <p></p>
 	                                                </div>
 	                                            </div>
 	                                        </div>
