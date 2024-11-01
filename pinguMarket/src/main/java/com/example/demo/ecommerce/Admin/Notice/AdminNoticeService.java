@@ -26,9 +26,26 @@ public class AdminNoticeService {
 		return n;
 	}
 	
+	
+	
 	//---------------	noticeId값으로 공지사항 데이터 조회---------------------
 	public Notice getNotice(Integer noticeId) { 
         Optional<Notice> n = this.anr.findById(noticeId);
         return n.get();
 	}
+
+	public void updateNotice(Notice notice) {
+		anr.save(notice);
+		
+	}
+
+
+	//공지사항 수정 데이터 저장
+	public void update(Notice n, String title, String contents) {
+		n.setTitle(title);
+		n.setContents(contents);
+		n.setUpdateDate(LocalDateTime.now());
+		this.anr.save(n);
+	}
+
 }

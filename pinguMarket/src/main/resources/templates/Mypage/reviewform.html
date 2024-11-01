@@ -50,9 +50,8 @@
 <body>
     <section>
         <div class="createReviewContainer">
-            <form  th:object="${reviewCreateForm}" method="post">
-            <input type="hidden"
-          th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+            <form th:object="${reviewCreateForm}" method="post">
+            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
                 <h1>리뷰 작성</h1>
                 <div class="createReviewScope">
                     <label for="one">1</label>

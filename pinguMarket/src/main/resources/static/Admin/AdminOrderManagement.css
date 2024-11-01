@@ -211,17 +211,25 @@ input[type="checkbox"] {/*체크박스 크기 조정*/
 }
 
 /* 모달 - 상세정보 **********************/
-.modalBox{
+.modalContainer{
+    position: fixed;
+    width : 100vw; height : 100vh;
+    z-index: 100; top: 0; left: 0;
+    background-color: rgba(0,0,0,0.2);
     display : none;
+    
+}
+
+.modalBox{
     list-style : none;
     background-color: #fffdfd;
     border: solid 2px #fce699;
     border-radius: 10px;
-    position: fixed;
     width: 800PX;
-    z-index: 1;
-    top: 20vh;
-    left: 50vh;
+    max-height: 600;
+    position: relative;
+    top: 200px; left: 550px;
+    overflow-y: auto; /*넘칠때만 스크롤*/
     
 }
 
