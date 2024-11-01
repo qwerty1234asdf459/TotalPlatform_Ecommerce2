@@ -47,3 +47,14 @@ if (askContainer.querySelector(".adminReply")) {
 } else {
     retouchBtn.style.display = "block";
 }
+
+
+
+// 수정버튼 클릭 시 URL 이동
+function questionModify(questionId){
+	location.href = '/csc/modify/' + questionId;
+}
+
+
+
+

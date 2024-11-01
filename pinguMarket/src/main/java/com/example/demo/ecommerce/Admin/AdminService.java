@@ -14,7 +14,9 @@ import com.example.demo.ecommerce.CsQuestion.CsQuestionRepository;
 import com.example.demo.ecommerce.Entity.Admin;
 import com.example.demo.ecommerce.Entity.CsAnswer;
 import com.example.demo.ecommerce.Entity.CsQuestion;
+import com.example.demo.ecommerce.Entity.Payment;
 import com.example.demo.ecommerce.Entity.User;
+import com.example.demo.ecommerce.Payment.PaymentRepository;
 import com.example.demo.ecommerce.User.UserRepository;
 import com.example.demo.ecommerce.Review.CanNotFoundException;
 
@@ -28,6 +30,7 @@ public class AdminService {
 	private final CsAnswerRepository car;
 	private final UserRepository ur;
 	private final AdminRepository ar;
+	private final PaymentRepository pr;
 	
 	
 	public CsQuestion getQuestion(Integer id) {
@@ -101,6 +104,13 @@ public List<CsQuestion> getUserByKeyword(Integer userId, int startNo, int pageSi
 		else {
 			throw new CanNotFoundException("존재하지 않는 유저입니다");
 		}
+	}
+
+	//**************************유저가 로그인한 아이디로 Payment 리스트를 조회**************************
+	public List<Payment> getPaymentList(String userId) {
+		
+		User user = this.ur.findById(userId).get();	
+		return this.pr.findByUserId(user.getUserId());
 	}
 
 	

@@ -24,17 +24,6 @@ public class PaymentController {
 	private final UserService userService;
 	private final ProductService productService;
 	
-	@GetMapping("/coupon")
-	public String useCoupon() {
-		return "Payment/couponUseTest";
-	}
-	
-	@PostMapping("/coupon")
-	@CrossOrigin(origins = "http://localhost:8080/coupon/input")
-	public ResponseEntity<String> useCoupon(@RequestBody LmsCoupon coupon) {
-		System.out.println(coupon.getCode());
-		return ResponseEntity.ok(null);
-	}
 	
 	@GetMapping("/payment")
 	public String paymentTest(Model model) {

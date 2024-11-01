@@ -1,6 +1,7 @@
 package com.example.demo.ecommerce.Admin.Notice;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.stereotype.Service;
@@ -46,6 +47,12 @@ public class AdminNoticeService {
 		n.setContents(contents);
 		n.setUpdateDate(LocalDateTime.now());
 		this.anr.save(n);
+	}
+
+
+// **************************고객센터 > 공지사항 list 불러오기 **************************
+	public List<Notice> findAll() {	
+		return this.anr.findAll();
 	}
 
 }
