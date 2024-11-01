@@ -16,6 +16,9 @@
 }
 
 /* 글 내용 구역 */
+#noticebox{
+    display: block;
+}
 #content-box{
     display: flex;
     flex-direction: column;
@@ -36,9 +39,9 @@ tr {
 }
 table {
     border-collapse: collapse;
-    width: 800px;
+    width: 950px;
     max-width: 1000px;
-    height: 600px;
+    height: 650px;
     border-style: hidden; /* 두께 맞추기 위해 border-style 숨김 */
 }
 
@@ -47,7 +50,7 @@ table .writing-title { /* 글 제목 <tr> */
     font-size: 20px;
     font-weight: bold;
 }
-table .writing-title > td {
+table .top > td{
     padding-left: 20px;
 }
 table .writing-id-date {
@@ -67,14 +70,36 @@ table .writing-td-content{ /* ID, 등록날짜, 내용 값 */
     font-size: 16px;
 }
 table .writing-td-content-pre{ /* 내용 값 */
-    height: 440px;
-    width: 640px;
+    padding-top: 20px;
+    height: 550px;
+    width: 800px;
     font-size: 16px;
     white-space: pre-wrap; /* 줄바꿈 설정 */
     line-height: 22px;
+    overflow-y: auto;
 }
 
-/* 버튼 스타일 */
+
+/* --수정하기 구역------------------------------------------ */
+form{
+    display: none;
+}
+form input[type="text"] {
+    border-width: 0px;
+    width: 100%;
+    outline: none; /* 포커스 상태일때 두께 생기는거 없애기 */
+    font-size: 17px;
+}
+textarea {
+    border-width: 0px;
+    height: 550px;
+    width: 800px;
+    outline: none; /* 포커스 상태일때 두께 생기는거 없애기 */
+    resize: none;
+    overflow-y: auto;
+}
+
+/* --버튼 스타일 -------------------------------------*/
 .btn-style {
     margin-top: 20px;
     margin-left: 20px;

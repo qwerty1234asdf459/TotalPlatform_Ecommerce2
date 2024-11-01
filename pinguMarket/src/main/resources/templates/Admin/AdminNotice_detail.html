@@ -19,18 +19,17 @@
         <div class="Notice_detailMain"><!--메인****************************************************************-->
             <!-- (공지사항)게시글 수정 및 삭제 기능 -->
             <h2>공지사항 > 상세페이지</h2>
-            <div id="content-box">
+            <div id="noticebox"> <!--조회기능(수정버튼 누르기 전)-->
                 <div class="content_border">
                     <table>
-                        <tr class="writing-title">
+                        <tr class="writing-title top">
                             <td th:text="${n.title}" colspan="4"></td>
                         </tr>
                         <tr class="writing-id-date">
                             <td class="writing-td-title">작성자</td>
-                            <td th:text="${n.admin}" class="writing-td-content"></td>
+                            <td th:text="${n.admin.adminId}" class="writing-td-content"></td>
                             <td class="writing-td-title">등록날짜</td>
                             <td th:text="${n.updateDate}" class="writing-td-content"></td>
-                        <!-- ${#temporals.format(n.updateDate 'yyyy-MM-dd HH:mm:ss')}" -->
                         </tr>
                         <tr class="writing-content">
                             <td class="writing-td-title">내용</td>
@@ -41,17 +40,35 @@
                     </table>
                 </div>
 
-                <div>
-                    <button id="modify-btn" class="btn-style">게시글 수정</button>
-                    <button id="delete-btn" class="btn-style">게시글 삭제</button>
-                    <!-- 삭제하시겠습니까? 팝업띄우기 -->
-                    <button id="save-btn" class="btn-style">게시글 저장</button>
-                    <!-- 수정버튼 누르면 저장버튼 나타나게 -->
+            </div>
+            <form th:action="@{|/admin/Notice/detail|}" method="post" id="NoticeForm"> <!--수정하기(수정버튼 눌렀을때 보여줌)-->
+                <input type="hidden" name="noticeId" id="noticeId" th:value="${n.noticeId}">
+                <!-- 타입 넘버로 바꿔도 안됨,,,텍스트도 안됨 ㅡㅡ -->
+                <div class="content_border">
+                    <table>
+                        <tr class="writing-title">
+                            <td class="writing-td-title">제목</td>
+                            <td class="writing-td-content" colspan="3">
+                                <input class="writing-td-content" type="text" id="writing-td-text" name="title" th:value="${n.title}" required>
+                            </td>
+                        </tr>
+                        <tr class="writing-content">
+                            <td class="writing-td-title">내용</td>
+                            <td class="writing-td-content" colspan="3">
+                                <textarea class="writing-td-content-pre" id="writing-td-textarea" name="contents" th:text="${n.contents}" required></textarea>
+                            </td>
+                        </tr>
+                    </table>
                 </div>
-
-            
+            </form>
+            <div>
+                <button id="updateBtn" class="btn-style">게시글 수정</button>
+                <!-- <button id="updateReBtn" class="btn-style" type="submit">게시글 저장</button> -->
+                <button id="updateReBtn" class="btn-style" th:attr="data-id=${n.noticeId}" type="submit">게시글 저장</button>
+                <button id="deleteBtn" class="btn-style" th:attr="data-id=${n.noticeId}">게시글 삭제</button>
+            </div>
         </div><!--메인 끝-->
-    </div>
+    </div>    
     <script th:src="@{/Admin/AdminNotice_detail.js}"></script>
     
 </body>

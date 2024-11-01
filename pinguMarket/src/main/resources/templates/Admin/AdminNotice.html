@@ -39,9 +39,9 @@
             </div>
             <div class="Rows" th:each="NList : ${NList}"> <!--페이징 처리 필요-->
                 <span><input type="checkbox"></span>
-                <a class="list_title" th:href="@{|/admin/Notice/${NList.noticeId}|}" th:text="${NList.title}"></a>
-                <a class="list_admin" th:href="@{|/admin/Notice/${NList.noticeId}|}" th:text="${NList.admin}"></a>
-                <a class="list_updateDate" th:href="@{|/admin/Notice/${NList.noticeId}|}" th:text="${NList.updateDate}"></a>
+                <a class="list_title" th:href="@{|/admin/Notice/detail/${NList.noticeId}|}" th:text="${NList.title}"></a>
+                <a class="list_admin" th:href="@{|/admin/Notice/detail/${NList.noticeId}|}" th:text="${NList.admin.adminId}"></a>
+                <a class="list_updateDate" th:href="@{|/admin/Notice/detail/${NList.noticeId}|}" th:text="${NList.updateDate}"></a>
             </div>
             
             <div id="pageBtn"> <!--
