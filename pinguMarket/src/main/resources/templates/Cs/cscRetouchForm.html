@@ -35,8 +35,8 @@
 
 
                 <div class="askconContainer">
-                    <form th:object="${csquestionForm}"  method="post">
-                    	<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+                    <form th:object="${question}"  method="post">
+                    	<!--<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">-->
                     	
                     	
                         <div class="type">
@@ -45,13 +45,9 @@
                             </div>
                             <div class="typeSelect">
                                 <div class="SelectAll">
-                                    <select name="SelectType">
-                                        <option value="SelectType1">주문번호를 선택해주세요.</option>
-                                        <option value="SelectType2">20241016-001</option>
-                                        <option value="SelectType3">20241016-002</option>
-                                        <option value="SelectType4">20241016-003</option>
-                                        <option value="SelectType5">20241016-004</option>
-                                        <option value="SelectType6">20241016-005</option>
+                                    <select name="orderNo">
+                                        <option value="">주문번호를 선택해주세요.</option>
+                                       <option th:each="payment : ${payList}" th:value="${payment.orderNo}" th:text="${payment.orderNo}"></option>
                                     </select>
                                 </div>                 
                             </div>

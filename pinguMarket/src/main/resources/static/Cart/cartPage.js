@@ -88,7 +88,7 @@ document.addEventListener("DOMContentLoaded", function () {
     updateTotalPrice();
     
 
-    // *****************************************************장바구니 제품 삭제 비동기처리************************************************************
+    // *****************************************************장바구니 제품 삭제************************************************************
     
     deleteBtn.addEventListener("click", function () {
         const selectedIds = Array.from(document.querySelectorAll("input[name='productSelect']:checked"))

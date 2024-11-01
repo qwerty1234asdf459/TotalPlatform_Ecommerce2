@@ -15,6 +15,10 @@ public interface PaymentRepository extends JpaRepository<Payment, Integer>{
 
 	List<Payment> findByUser_UserId(Integer userId);
 	
+	/*  관리자 사용 > 유저 ID(기본키)로 결제 테이블 조회  */
+	@Query(value = "SELECT * FROM payment WHERE user_id = :id" , nativeQuery = true)
+	List<Payment> findByUserId(@Param("id") Integer userId);
+	
 //	@Query(value ="select u.user_id, p.payment_id, pd.pdetail_id, pd.product_id, pr.name "
 //			+ "from user u "
 //			+ "inner join payment p "

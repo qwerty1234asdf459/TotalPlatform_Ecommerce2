@@ -35,20 +35,14 @@
 
 
                 <div class="askconContainer">
-                    <form>
                         <div class="type">
                             <div class="orderNum">
                                 <label for="label-text">주문번호</label>
                             </div>
                             <div class="typeSelect">
                                 <div class="SelectAll">
-                                    <select name="SelectType">
-                                        <option value="SelectType1">주문번호를 선택해주세요.</option>
-                                        <option value="SelectType2">20241016-001</option>
-                                        <option value="SelectType3">20241016-002</option>
-                                        <option value="SelectType4">20241016-003</option>
-                                        <option value="SelectType5">20241016-004</option>
-                                        <option value="SelectType6">20241016-005</option>
+                                    <select name="orderNo">
+                                        <option th:value="${question.orderNo}" th:text="${question.orderNo}"></option>
                                     </select>
                                 </div>                 
                             </div>
@@ -133,11 +127,10 @@
 	                    </th:block>
 
                         <div class="submitContainer">
-                            <button type="submit" class="retouchBtn" th:href="@{|/csc/modify/${question.csQuestionId}|}">수정</button>
+                            <button type="submit" class="retouchBtn" th:onclick="questionModify([[${question.csQuestionId}]])">수정</button>
                             <button type="submit" class="deleteBtn" href="javascript:void(0);" th:data-uri="@{|/csc/delete/${question.csQuestionId}|}">삭제</button>
                         </div>
               
-                    </form>
                 </div>
 
             </div>

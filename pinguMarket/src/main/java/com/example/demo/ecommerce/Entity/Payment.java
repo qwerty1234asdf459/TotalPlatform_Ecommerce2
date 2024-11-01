@@ -54,7 +54,7 @@ public class Payment {
 	private String deliveryState;
 	
 	@Column(name = "order_no")
-	private String orderNo; //주문번호
+	private String orderNo;
 
 	
 	@OneToMany(mappedBy = "payment", cascade = CascadeType.PERSIST)
