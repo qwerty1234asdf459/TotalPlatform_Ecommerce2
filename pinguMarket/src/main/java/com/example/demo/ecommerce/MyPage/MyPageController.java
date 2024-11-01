@@ -5,14 +5,20 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+
+import org.aspectj.weaver.patterns.ThrowsPattern;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.demo.ecommerce.Coupon.CouponService;
 import com.example.demo.ecommerce.Entity.Coupon;
@@ -22,10 +28,12 @@ import com.example.demo.ecommerce.Payment.PaymentService;
 import com.example.demo.ecommerce.Review.CanNotFoundException;
 import com.example.demo.ecommerce.User.UserModifyForm;
 import com.example.demo.ecommerce.User.UserService;
+import com.example.demo.lms.service.LmsCouponService;
 
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import net.bytebuddy.implementation.bytecode.Throw;
 
 
 @RequiredArgsConstructor
@@ -35,6 +43,7 @@ public class MyPageController {
 	private final UserService us;
 	private final PaymentService ps;
 	private final CouponService cs;
+	private final LmsCouponService lcs;
 	
 	@GetMapping("/myorder")
 	public String myOrderPage(Model model, Principal principal) throws CanNotFoundException {
@@ -180,6 +189,22 @@ public class MyPageController {
 		return "Mypage/mycoupon";
 	}
 	
+
+	@PostMapping("/mycoupon/inputcoupon")
+	public ResponseEntity<String> useCoupon(@RequestParam("code")String code)
+			throws CanNotFoundException,CouponOverlappingException {
+		
+		if(lcs.existCoupon(code) && !lcs.useCheck(code)) {
+			cs.createCoupon(code);
+			lcs.useCoupon(code);
+			System.out.println(lcs.existCoupon(code)+","+lcs.useCheck(code));
+			return ResponseEntity.ok("쿠폰 정상 입력");
+		}
+		else {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("쿠폰에러");
+		}
+	}
+
 	@GetMapping("/signout")
 	public String singoutPage(Model model, Principal principal) throws CanNotFoundException {
 		User user = this.us.getUser(1);
@@ -188,5 +213,5 @@ public class MyPageController {
 		
 		return "Mypage/signout";
 	}
-	
+
 }
