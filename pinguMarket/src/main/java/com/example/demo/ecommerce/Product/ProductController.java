@@ -54,7 +54,7 @@ public class ProductController {
 		
 		return "Cart/cartPage";
 	}
-  
+   
 	
 	@GetMapping("/product/{productId}") //상품상세페이지
     public String ProductDetail(Model model, @PathVariable("productId") Integer productId) throws CanNotFoundException {

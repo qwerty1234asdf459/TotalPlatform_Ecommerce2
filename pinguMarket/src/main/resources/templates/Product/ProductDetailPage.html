@@ -55,7 +55,7 @@
                         <td>
                             <div class="countbox">
                                 <button class="countdown" type="button" aria-label="수량내리기">–</button>
-                                <div class="count">1</div>
+                                <div id="count" class="count" value="1">1</div>
                                 <button class="countup" type="button" aria-label="수량올리기">+</button>
                             </div>
                         </td>
@@ -159,6 +159,10 @@
                 </li>
             </ul>
         </div>
+         <form th:action="@{/product/addcart}" method="post" id="addCartForm">
+        	<input type="hidden" id="cart_count" name="cart_count">
+        	<input type="hidden" id="product" name="product" th:value="${p.productId}">
+    	</form>
     </main>
 </div>
 <script th:src="@{/Product/ATeamModul.js}"></script>
