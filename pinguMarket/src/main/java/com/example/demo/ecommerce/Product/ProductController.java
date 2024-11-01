@@ -31,7 +31,7 @@ public class ProductController {
 //	---------------------------------------------장바구니----------------------------------------------------------------------------------------------
 	@GetMapping("/product/{productId}/addcart")
 	public String addcart(@PathVariable(value = "productId")Integer productId, Model model, Principal principal) throws Exception {
-		User u = this.us.getUser(principal.getName());
+		User u = this.us.getUser(1); // 유저정보 강제 입력(추후 principal.getName()으로 변경해야 함
 		Product p = this.ps.getProduct(productId);
 		
 		try {
@@ -43,7 +43,16 @@ public class ProductController {
 			this.carts.createCart(u, p);
 		}
 		model.addAttribute("user", u);
-		return "Cart";
+		return "Cart/cartPage";
+	}
+	
+	@GetMapping("/cart") // 장바구니 전체
+	public String viewcart(Model model, Principal principal) throws Exception {
+		User u = this.us.getUser(1); // 유저정보 강제 입력(추후 principal.getName()으로 변경해야 함
+		
+		model.addAttribute("user", u);
+		
+		return "Cart/cartPage";
 	}
   
 	

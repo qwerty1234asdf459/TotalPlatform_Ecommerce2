@@ -2,7 +2,7 @@
 <div layout:decorate="~{Layout/layout}">
     <!-- *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-* MAIN *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*--*-*-*-*-*-*-*-*-*-* -->
     <main layout:fragment="content">
-    <link rel="stylesheet" th:href="@{/Cs/csPageStyle.css}">
+        <link rel="stylesheet" th:href="@{/Cs/csPageStyle.css}">
         <div class="csContainer">
             <div class="csSideNav">
                 <div class="csSideNavTitle">
@@ -11,7 +11,7 @@
                 <ul>
                     <li class="on">
                         <a href="#">
-                        	<p th:href="@{/csc}">1:1 문의</p>
+                            <p th:href="@{/csc}">1:1 문의</p>
                             <i class="fa-solid fa-angle-right"></i>
                         </a>
                     </li>
@@ -25,7 +25,7 @@
             </div>
 
             <ul>
-            	<li class="csContent on">
+                <li class="csContent on">
                     <div class="csTitle">1:1문의</div>
                     <table class="csInfo">
                         <tr>
@@ -34,18 +34,50 @@
                             <th>작성일</th>
                             <th>답변상태</th>
                         </tr>
-                        <tr th:each="CsQuestion, loop : ${paging}">
-                        	<td th:text="${paging.totalElements - (paging.number * paging.size) - loop.index}"></td>
-                            <td><a  th:href="@{|/csc/detail/${CsQuestion.CsQuestionId}|}" th:text="${CsQuestion.title}"></a></td>
+                        <tr th:each="CsQuestion, loop : ${questionList}">
+                            <td th:text="${loop.count + ((page.pageNo-1) * page.pageSize)}"></td>
+                            <td><a th:href="@{|/csc/detail/${CsQuestion.CsQuestionId}|}"
+                                    th:text="${CsQuestion.title}"></a></td>
                             <td th:text="${#temporals.format(CsQuestion.updateDate, 'yyyy-MM-dd HH:mm:ss')}"></td>
                             <td th:text="${CsQuestion.CsAnswer==null} ? 'N' : 'Y'"></td>
                         </tr>
-                    </table> 
+                    </table>
                     <div class="askBtn">
                         <a th:href="@{csc/form}">문의하기</a>
-                    </div>                                   
+                    </div>
+
+                    <!-- 페이징 버튼 -->
+                <div id="pageBtn" th:if="${page.totalPage} > 1">
+                    <ul>
+                        <li th:classappend="${page.pageNo == 1} ? 'disabled'">
+                            <a class="page-link" href="javascript:void(0)" th:data-page="1">처음으로</a>
+                        </li>
+                        <li>
+                            <a class="page-link" href="javascript:void(0)" th:if="${page.pageNo>1}"
+                                th:data-page="${page.pageNo-1}">이전</a>
+                        </li>
+                        <li th:each="num : ${#numbers.sequence(page.startPage, page.endPage)}"
+                            th:classappend="${page.pageNo == num} ? 'active'">
+                            <a class="page-link" href="javascript:void(0)" th:text="${num}"
+                                th:data-page="${num}"></a>
+                        </li>
+                        <li>
+                            <a class="page-link" href="javascript:void(0)" th:if="${page.pageNo < page.totalPage}"
+                                th:data-page="${page.pageNo+1}">다음</a>
+                        </li>
+                        <li th:classappend="${page.pageNo == page.totalPage} ? 'disabled'">
+                            <a class="page-link" href="javascript:void(0)"
+                                th:data-page="${page.totalPage}">마지막으로</a>
+                        </li>
+                    </ul>
+                </div>
+                <!-- 페이징 버튼 end -->   
+                    
+
                 </li>
+
                 
+
                 <li class="csContent">
                     <div class="csTitle">공지사항<span>회사의 새로운 소식들과 유용한 정보들을 한곳에서 확인하세요.</span></div>
                     <table class="csInfo">
@@ -56,144 +88,23 @@
                             <th>작성일</th>
                         </tr>
                         <tr>
-                            <td>1</td>
-                            <td>Lorem ipsum dsectetur adipisicing elit. Consequuntur eaque quisquam architecto aliquam
-                                repudiandae</td>
+                            <!--<td>1</td>
+                            <td th:text="${Notice.title}"></td>
                             <td>company</td>
-                            <td>2022.10.14</td>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>Lorem ipsum tur adipisicing elit. Consequuntur eaque quisquam architecto aliquam
-                                repudiandae</td>
-                            <td>company</td>
-                            <td>2022.10.14</td>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>Lorem ipsum dtur adipisicing elit. Consequuntur eaque quisquam architecto aliquam
-                                repudiandae</td>
-                            <td>company</td>
-                            <td>2022.10.14</td>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>Lorem ipsum dtur adipisicing elit. Consequuntur eaque quisquam architecto aliquam
-                                repudiandae</td>
-                            <td>company</td>
-                            <td>2022.10.14</td>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>Lorem ipsum dtur adipisicing elit. Consequuntur eaque quisquam architecto aliquam
-                                repudiandae</td>
-                            <td>company</td>
-                            <td>2022.10.14</td>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>Lorem ipsum dtur adipisicing elit. Consequuntur eaque quisquam architecto aliquam
-                                repudiandae</td>
-                            <td>company</td>
-                            <td>2022.10.14</td>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>Lorem ipsum dtur adipisicing elit. Consequuntur eaque quisquam architecto aliquam
-                                repudiandae</td>
-                            <td>company</td>
-                            <td>2022.10.14</td>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>Lorem ipsum dtur adipisicing elit. Consequuntur eaque quisquam architecto aliquam
-                                repudiandae</td>
-                            <td>company</td>
-                            <td>2022.10.14</td>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>Lorem ipsum dtur adipisicing elit. Consequuntur eaque quisquam architecto aliquam
-                                repudiandae</td>
-                            <td>company</td>
-                            <td>2022.10.14</td>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>Lorem ipsum dtur adipisicing elit. Consequuntur eaque quisquam architecto aliquam
-                                repudiandae</td>
-                            <td>company</td>
-                            <td>2022.10.14</td>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>Lorem ipsum dtur adipisicing elit. Consequuntur eaque quisquam architecto aliquam
-                                repudiandae</td>
-                            <td>company</td>
-                            <td>2022.10.14</td>
+                            <td th:text="${#temporals.format(Notice.updateDate, 'yyyy-MM-dd HH:mm:ss')}"></td>-->
                         </tr>
                     </table>
+                    
                 </li>
-
-                      
-                
-               <!-- <div class="paginBtn">pagingBtn</div>-->
-                <!-- 페이징 버튼 -->
-                <ul class="pagination justify-content-center">
-	                <li class="page-item" th:classappend="${!paging.hasPrevious} ? 'disabled'">
-					    <a class="page-link" th:href="@{|?page=${paging.number-1}|}">
-		                    <span>이전</span>
-		                </a>
-		            </li>
-	                <th:block th:switch="${#strings.toString(paging.number)}">
-					    <th:block th:case="0">
-					    	<li th:each="page: ${#numbers.sequence(0, paging.totalPages-1)}"
-				            	th:if="${page >= paging.number-0 and page <= paging.number+4}" 
-				            	th:classappend="${page == paging.number} ? 'active'" class="page-item">
-				                <a th:text="${page}" class="page-link" th:href="@{|?page=${page}|}"></a>
-				            </li>
-					    </th:block>
-					    <th:block th:case="1">
-					    	<li th:each="page: ${#numbers.sequence(0, paging.totalPages-1)}"
-				            	th:if="${page >= paging.number-1 and page <= paging.number+3}" 
-				            	th:classappend="${page == paging.number} ? 'active'" class="page-item">
-				                <a th:text="${page}" class="page-link" th:href="@{|?page=${page}|}"></a>
-				            </li>
-					    </th:block>
-					    <th:block th:case="${paging.totalPages-2}">
-					    	<li th:each="page: ${#numbers.sequence(0, paging.totalPages-1)}"
-				            	th:if="${page >= paging.number-3 and page <= paging.number+1}" 
-				            	th:classappend="${page == paging.number} ? 'active'" class="page-item">
-				                <a th:text="${page}" class="page-link" th:href="@{|?page=${page}|}"></a>
-				            </li>
-					    </th:block>
-					    <th:block th:case="${paging.totalPages-1}">
-					    	<li th:each="page: ${#numbers.sequence(0, paging.totalPages-1)}"
-				            	th:if="${page >= paging.number-4 and page <= paging.number+0}" 
-				            	th:classappend="${page == paging.number} ? 'active'" class="page-item">
-				                <a th:text="${page}" class="page-link" th:href="@{|?page=${page}|}"></a>
-				            </li>
-					    </th:block>
-					    <th:block th:case="*">
-					    	<li th:each="page: ${#numbers.sequence(0, paging.totalPages-1)}"
-				            	th:if="${page >= paging.number-2 and page <= paging.number+2}" 
-				            	th:classappend="${page == paging.number} ? 'active'" class="page-item">
-				                <a th:text="${page}" class="page-link" th:href="@{|?page=${page}|}"></a>
-				            </li>
-					    </th:block>
-					</th:block>
-					<li class="page-item" th:classappend="${!paging.hasNext} ? 'disabled'">
-		            	<a class="page-link" th:href="@{|?page=${paging.number+1}|}">
-		                    <span>다음</span>
-		                </a>
-		            </li>
-                </ul>
-				<!-- 페이징 버튼 end -->
-           	
             </ul>
-
         </div>
 
+
+
+        <!--  page 데이터 넘기기 -->
+        <form th:action="@{/csc}" method="get" id="searchForm">
+            <input type="hidden" id="page" name="page">
+        </form>
 
     </main>
 </div>

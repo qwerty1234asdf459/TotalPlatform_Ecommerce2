@@ -14,5 +14,7 @@ public class CsQuestionForm {
 	
 	@NotEmpty(message="내용이 없습니다")
 	private String contents;
+	
+	private Integer paymentId;
 
 }

@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.util.Optional;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.example.demo.ecommerce.Entity.Cart;
 import com.example.demo.ecommerce.Entity.Product;
@@ -14,6 +15,7 @@ import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 @Service
+@Transactional //  예외 발생 시 롤백, 정상 종료 시 커밋 등의 필요한 코드를 삽입
 public class CartService {
 	
 	private final CartRepository car;
@@ -44,6 +46,7 @@ public class CartService {
 			throw new nosignException("존재하지 않는 카트입니다.");
 		}
 	}
+	
 	
 	public void delete(Cart cart) {
 		this.car.delete(cart);
