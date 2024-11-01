@@ -44,6 +44,7 @@ public class ReviewController {
 		Product p = this.ps.getProduct(productId);
 		
 		ReviewCreateForm reviewform = new ReviewCreateForm();
+		model.addAttribute("user", u);
 		model.addAttribute("reviewCreateForm", reviewform);
 		
 		
@@ -100,11 +101,13 @@ public class ReviewController {
 			@PathVariable ("reviewId") Integer reviewId,
 			ReviewCreateForm reviewCreateform) throws CanNotFoundException {
 		
+		User u = us.getUser(1);
 		Review review = rs.getReview(reviewId);
 		reviewCreateform.setScope(review.getScope());
 		reviewCreateform.setTitle(review.getTitle());
 		reviewCreateform.setContents(review.getContents());
 		
+		model.addAttribute("user", u);
 		model.addAttribute("reviewCreateForm", reviewCreateform);
 		
 		return "/Mypage/reviewform";

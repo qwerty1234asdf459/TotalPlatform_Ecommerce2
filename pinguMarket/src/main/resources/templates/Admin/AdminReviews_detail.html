@@ -27,13 +27,13 @@
                         </tr>
                         <tr class="writing-id-date">
                             <td class="writing-td-title">작성자</td>
-                            <td th:text="${r.user}" class="writing-td-content"></td>
+                            <td th:text="${r.user.id}" class="writing-td-content"></td>
                             <td class="writing-td-title">작성일</td>
                             <td th:text="${r.updateDate}"  class="writing-td-content">update_date</td>
                         </tr>
                         <tr class="product">
                             <td class="writing-td-title">상품명</td>
-                            <td th:text="${r.product}" class="writing-td-content"></td>
+                            <td th:text="${r.product.name}" class="writing-td-content"></td>
                             <td class="writing-td-title">별점</td>
                             <td th:text="${r.scope}" class="writing-td-content"></td>
                         </tr>
@@ -47,12 +47,23 @@
                 </div>
 
                 <div>
-                    <button id="delete-btn" class="btn-style">리뷰 삭제</button>
-                    <!-- 삭제하시겠습니까? 팝업띄우기 -->
+                    <a id="delete-btn" class="btn-style" href="javascript:void(0);" th:data-uri="@{|/admin/Reviews/detail/delete/${r.reviewId}|}">리뷰 삭제</a>
+                    <!-- th:attr="data-id=${r.reviewId}" -->
                 </div>
             
         </div><!--메인 끝-->
     </div>
-    
+    <script>
+    const deleteBtn = document.querySelector("#delete-btn");/* 삭제버튼 */
+    /* 리뷰 삭제 버튼 클릭시 */
+    //삭제하시겠습니까?메세지 "확인"을 선택했을때 해당 컴포넌트의 data-uri 값으로 URL 호출을 하라는 의미
+    deleteBtn.addEventListener('click', function(){
+        if(confirm("정말로 삭제하시겠습니까?")){
+            location.href = this.dataset.uri;
+        }
+    });
+
+
+    </script>
 </body>
 </html>
