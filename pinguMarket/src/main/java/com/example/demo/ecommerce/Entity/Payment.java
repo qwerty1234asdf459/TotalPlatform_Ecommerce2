@@ -40,7 +40,7 @@ public class Payment {
 	@Column(name = "create_date")
 	private LocalDateTime createDate;
 	
-	private String deliveryno;
+	private String deliveryno; //배송번호
 
 	private String address;
 	
@@ -53,8 +53,9 @@ public class Payment {
 	@Column(name = "delivery_state")	
 	private String deliveryState;
 	
-	@Column(name= "order_no")
-	private String orderNo;
+	@Column(name = "order_no")
+	private String orderNo; //주문번호
+
 	
 	@OneToMany(mappedBy = "payment", cascade = CascadeType.PERSIST)
 	private List<PaymentDetail> paymentDetailList;

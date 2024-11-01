@@ -37,14 +37,14 @@
                 <span>작성자</span>
                 <span>작성일</span>
             </div>
-            <div class="Rows" th:each="NList : ${NList}"> <!--페이징 처리 필요-->
+            <div class="Rows" th:each="NList : ${NList}">
                 <span><input type="checkbox"></span>
                 <a class="list_title" th:href="@{|/admin/Notice/detail/${NList.noticeId}|}" th:text="${NList.title}"></a>
-                <a class="list_admin" th:href="@{|/admin/Notice/detail/${NList.noticeId}|}" th:text="${NList.admin.adminId}"></a>
+                <a class="list_admin" th:href="@{|/admin/Notice/detail/${NList.noticeId}|}" th:text="${NList.admin.adCode}"></a>
                 <a class="list_updateDate" th:href="@{|/admin/Notice/detail/${NList.noticeId}|}" th:text="${NList.updateDate}"></a>
             </div>
             
-            <div id="pageBtn"> <!--
+            <div id="pageBtn"> <!--페이징처리필요
                 <ul>
                     <li th:classappend="${!paging.hasPrevious} ? 'disabled'">
 		        		 <a th:href="@{|?page=${paging.number-1}|}">
@@ -60,8 +60,8 @@
 		              <a th:href="@{|?page=${paging.number+1}|}">
 		                <span>다음</span>
 		              </a>
-                    </li>-->
-                </ul>
+                    </li>
+                </ul>-->
             </div>
 
             

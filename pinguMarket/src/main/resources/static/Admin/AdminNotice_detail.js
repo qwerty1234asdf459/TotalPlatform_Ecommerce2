@@ -33,6 +33,7 @@ updateReBtn.addEventListener('click', function(){
 /* 답변 삭제 버튼 클릭시 */
 deleteBtn.addEventListener('click', function(){
     if(confirm("정말로 삭제하시겠습니까?")){
-        location.href = "/admin/Notice/detail" + deleteBtn.getAttribute("data-id");
+        location.href = this.dataset.uri;
+        // location.href = "/admin/Notice/detail" + deleteBtn.getAttribute("data-id");
     }
 });
