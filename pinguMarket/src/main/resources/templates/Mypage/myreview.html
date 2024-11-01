@@ -73,7 +73,7 @@
                         <p>내정보관리</p>
                         <li><a href="#">배송지관리</a></li>
                         <li><a href="#">나의 스타일</a></li>
-                        <li><a th:href="@{/usermodify}">개인정보수정</a></li>
+                        <li><a th:href="@{/pwcheck}">개인정보수정</a></li>
                     </ul>
                     <ul>
                         <p>서비스안내</p>
@@ -99,7 +99,7 @@
                                 <div class="reviewUserName"><h3 th:text="${review.user.name}"></h3></div>
                                 <div class="reviewProductName"><h3 th:text="${review.product.name}"><a href="#"></a></h3></div> <!-- 리뷰에서 제품명 누르면 링크타지게도 해보기-->
                                 <div class="reviewScope" th:text="${review.scope} + 점"></div>
-                                <div class="reviewDate" th:text="${review.updateDate}"></div>
+                                <div class="reviewDate" th:text="${#temporals.format(review.updateDate, 'yyyy-MM-dd HH:mm:ss')}"></div>
                             </div>
                             <div class="reviewModifyDelete">
                                 <a th:text="수정" th:href="@{|reviewmodify/${review.reviewId}|}"></a>

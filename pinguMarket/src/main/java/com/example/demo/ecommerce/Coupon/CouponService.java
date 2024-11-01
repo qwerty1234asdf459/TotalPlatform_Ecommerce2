@@ -20,12 +20,7 @@ public class CouponService {
 	public List<Coupon> getCoupon(Integer userId) throws CanNotFoundException {
 
 		List<Coupon> coupon = this.cr.findByUserUseYn(userId);
-		if(!coupon.isEmpty()) {
 			return coupon;
-		}
-		else {
-			throw new CanNotFoundException("존재하지 않는 유저입니다");
-		}
 	}
 	
 	
