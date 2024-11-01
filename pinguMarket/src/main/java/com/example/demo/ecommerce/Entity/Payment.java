@@ -55,6 +55,7 @@ public class Payment {
 	
 	@Column(name = "order_no")
 	private String orderNo; //주문번호
+
 	
 	@OneToMany(mappedBy = "payment", cascade = CascadeType.PERSIST)
 	private List<PaymentDetail> paymentDetailList;
