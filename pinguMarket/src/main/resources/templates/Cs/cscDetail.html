@@ -125,19 +125,13 @@
 	                            </div>
 	                        </div>
 	                    </th:block>
-
                         <div class="submitContainer">
                             <button type="submit" class="retouchBtn" th:onclick="questionModify([[${question.csQuestionId}]])">수정</button>
                             <button type="submit" class="deleteBtn" href="javascript:void(0);" th:data-uri="@{|/csc/delete/${question.csQuestionId}|}">삭제</button>
                         </div>
-              
                 </div>
-
             </div>
-
         </div>
-
-
     </main>
 </div>
     <script th:src="@{/Cs/cscDetail.js}"></script>

@@ -97,8 +97,10 @@
             <div class="pwModalBody">
                 <h2>패스워드를 입력해주세요</h2>
                 <form id="pwCheckForm">
+
+                <input type="hidden" id="_csrf" >
               <!--  <input type="hidden" id="_csrf" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"> -->
-                    <input type="hidden" id="_csrf">
+
                     <input type="password" id="password" name="password" required>
                     <button type="submit" id="pwCheckBtn">확인</button>
                 </form>
