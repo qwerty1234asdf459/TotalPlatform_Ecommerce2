@@ -114,10 +114,10 @@
                             <tbody>
                                 <tr class="Rows" th:each="PayList : ${PayList}">
                                     <td><span class="check-item"><input type="checkbox" name="select-item"></span></td>
-                                    <td th:text="${PayList.paymentId}"></td>
+                                    <td th:text="${PayList.orderNo}"></td>
                                     <td th:text="${PayList.createDate}"></td>
                                     <td th:text="|${PayList.paymentState} ${PayList.deliveryState}|"></td>
-                                    <td th:text="${PayList.user}"></td>
+                                    <td th:text="${PayList.user.userId}"></td>
                                     <td th:text="${PayList.deliveryno}"></td>
                                     <td id="openModal" class="drop"><i class="fa-solid fa-chevron-down"></i></td>
                                 </tr>
@@ -141,7 +141,7 @@
                             <p>배 송 번 호 : </p>
                         </div>
                         <div class="subR">
-                            <P th:text="${PayList.paymentId}"></P>
+                            <P th:text="${PayList.orderNo}"></P>
                             <P th:text="${PayList.createDate}"></P>
                             <P th:text="|${PayList.paymentState} ${PayList.deliveryState}|"></P>
                             <P th:text="${PayList.user}"></P>

@@ -28,49 +28,48 @@
                 <input type="text" placeholder="작성자 ID, 또는 상품명을 입력해주세요.">
                 <button class="fa-solid fa-magnifying-glass searchbtn"></button>
 
-                <button class="userDelete" type="">리뷰 삭제</button>
-                <!-- 다중선택 삭제 기능, 삭제 전 확인 문구 띄우기 -->
+                <button class="selectDel" disabled>리뷰 삭제</button>
             </div>
 
             <div id="columnBox"> <!-- 테이블 컬럼 -->
-                <span><input type="checkbox"></span>
+                <span><input type="checkbox" id="Select01" name="SelectAll"></span>
                 <span>ID</span>
                 <span>상품명</span>
                 <span>별점</span> 
                 <span>등록일</span>
             </div>
-            <div class="Rows" th:each="RList : ${RList}"> <!--페이징 처리 필요-->
-                <span><input type="checkbox"></span>
-                <a class="list_user" th:href="@{|/admin/Reviews/${RList.reviewId}|}" th:text="${RList.user.name}"></a>
-                <a class="list_product" th:href="@{|/admin/Reviews/${RList.reviewId}|}" th:text="${RList.product.name}"></a>
-                <a class="list_scope" th:href="@{|/admin/Reviews/${RList.reviewId}|}" th:text="${RList.scope}"></a>
-                <a class="list_updateDate" th:href="@{|/admin/Reviews/${RList.reviewId}|}" th:text="${RList.updateDate}"></a>
+            <div class="Rows" th:each="RList : ${RList}">
+                <span><input type="checkbox" th:id="'Select'+${RList.reviewId}" name="Select"></span>
+                <a class="list_user" th:href="@{|/admin/Reviews/detail/${RList.reviewId}|}" th:text="${RList.user.name}"></a>
+                <a class="list_product" th:href="@{|/admin/Reviews/detail/${RList.reviewId}|}" th:text="${RList.product.name}"></a>
+                <a class="list_scope" th:href="@{|/admin/Reviews/detail/${RList.reviewId}|}" th:text="${RList.scope}"></a>
+                <a class="list_updateDate" th:href="@{|/admin/Reviews/detail/${RList.reviewId}|}" th:text="${RList.updateDate}"></a>
             </div>
             
-            <div id="pageBtn"> <!--
-                <ul>
-                    <li th:classappend="${!paging.hasPrevious} ? 'disabled'">
-		        		 <a th:href="@{|?page=${paging.number-1}|}">
-		        		        <span>이전</span>
-		        		 </a>
-                    </li>
-                    <li th:each="page : ${#numbers.sequence(0, paging.totalPages-1)}"
-                        th:if="${page >= paging.number-2 and page <= paging.number+2}"
-                        th:classappend="${page == paging.number} ? 'active'">
-                        <a th:text="${page}" th:href="@{|?page=${page}|}"></a>
-                    </li>
-                    <li th:classappend="${!paging.hasNext} ? 'disabled'">
-		              <a th:href="@{|?page=${paging.number+1}|}">
-		                <span>다음</span>
-		              </a>
-                    </li>-->
-                </ul>
+            <div id="pageBtn"><!-- 페이징처리필요 
+               <ul>
+                <li th:classappend="${!paging.hasPrevious} ? 'disabled'">
+                     <a th:href="@{|?page=${paging.number-1}|}">
+                            <span>이전</span>
+                     </a>
+                </li>
+                <li th:each="page : ${#numbers.sequence(0, paging.totalPages-1)}"
+                    th:if="${page >= paging.number-2 and page <= paging.number+2}"
+                    th:classappend="${page == paging.number} ? 'active'">
+                    <a th:text="${page}" th:href="@{|?page=${page}|}"></a>
+                </li>
+                <li th:classappend="${!paging.hasNext} ? 'disabled'">
+                  <a th:href="@{|?page=${paging.number+1}|}">
+                    <span>다음</span>
+                  </a>
+                </li>
+            </ul>-->
             </div>
 
 
 
         </div><!--메인 끝-->
     </div>
-    
+    <script th:src="@{/Admin/AdminReviews.js}"></script>
 </body>
 </html>

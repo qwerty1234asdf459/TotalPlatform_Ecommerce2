@@ -41,11 +41,10 @@ public class UserService {
 	
 
 	public void userModify(User user,
-			String email1, String email2, String name,
+			String email1, String email2,
 			String address1,String address2,String addressDetail,
 			String gender, String tell) {
 			user.setEmail(email1+"@"+email2);
-			user.setName(name);
 //			bu.setRegisterDate(LocalDateTime.now());
 //			이 RegisterDate는 가입일이라서 수정일 변수가 필요
 		    user.setAddress(address1+" "+address2);
@@ -63,6 +62,12 @@ public class UserService {
 	
 	public boolean pwCheck(String password, String pw) {
 		return passwordEncoder.matches(password, pw);
+		
+	}
+
+	public void userSignout(User user, String signoutYn) {
+		user.setSignoutYn(signoutYn);
+		this.ur.save(user);
 		
 	}
 	

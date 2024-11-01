@@ -30,16 +30,13 @@ public class CsQuestion {
 	@JoinColumn(name = "user_id")
 	private User user;
 	
-	@ManyToOne
-	@JoinColumn(name = "payment_id")
-	private Payment payment;
-	
 	@Column(nullable = false)
 	private String title;
 	
 	@Column(nullable = false)
 	private String contents;
 	
+	@Column(name = "order_no")
 	private String orderNo;
 	
 	@Column(name ="update_date",nullable = false)

@@ -71,16 +71,17 @@ table .writing-td-content-pre{ /* 내용 값 */
     white-space: pre-wrap; /* 줄바꿈 설정 */
     line-height: 22px;
     padding: 1rem;
-    overflow: scroll; /*넘치면 스크롤*/
+    overflow-y: auto; /*넘치면 스크롤*/
 }
 
-/* 버튼 스타일 */
+/* 삭제 버튼 스타일 */
 .btn-style {
+    display: inline-block;
+    text-align: center; font-size: 14px;
     margin-top: 20px;
     margin-left: 20px;
     background-color: #fce699;
-    width: 90px;
-    height: 40px;
+    width: 90px; height: 40px; line-height: 40px;
     border: 0px;
     border-radius: 10px;
     color: black;

@@ -77,8 +77,8 @@
                     <ul>
                         <p>내정보관리</p>
                         <li><a href="#">배송지관리</a></li>
-                        <li><a href="#">나의 스타일</a></li>
-                        <li><a th:href="@{/pwcheck}">개인정보수정</a></li>
+                        <li><a th:href="@{/usermodify}">개인정보수정</a></li>
+                        <li><a th:href="@{/signout}">회원 탈퇴</a></li>
                     </ul>
                     <ul>
                         <p>서비스안내</p>
@@ -97,7 +97,10 @@
             <div class="pwModalBody">
                 <h2>패스워드를 입력해주세요</h2>
                 <form id="pwCheckForm">
+
                 <input type="hidden" id="_csrf" >
+              <!--  <input type="hidden" id="_csrf" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"> -->
+
                     <input type="password" id="password" name="password" required>
                     <button type="submit" id="pwCheckBtn">확인</button>
                 </form>
@@ -127,12 +130,12 @@
                       <option value="kakao.com">kakao.com</option>
                     </select>
                 </div>
-                  
-                  
-                     <div class="userInfoName">
-                     <div>이름</div>
-                     <input type="text" th:field="*{name}">
-                     </div>
+                
+                <div class="userInfoTel">
+                  <div>전화번호</div>
+                  <input type="tel" th:field="*{tell}" onfocus="this.placeholder=''" maxlength="13" oninput="autoHyphen(this)" pattern="010-[0-9]{3,4}-[0-9]{4}" placeholder="- 없이 숫자만 입력하세요" 
+                  id="tel" autocomplete="off" name="users_phone"  onblur="this.placeholder = '- 없이 숫자만 입력하세요'"/>
+                </div>
                      
                      
                     <div class="userInfoAdress">
@@ -152,12 +155,7 @@
                      <label for="female">여성</label>
                      <input type="radio" th:field="*{gender}" value="여성">
                      </div>
-                     
-                  <div class="userInfoTel">
-                  <div>전화번호</div>
-                  <input type="tel" th:field="*{tell}" onfocus="this.placeholder=''" maxlength="13" oninput="autoHyphen(this)" pattern="010-[0-9]{3,4}-[0-9]{4}" placeholder="- 없이 숫자만 입력하세요" 
-                  id="tel" autocomplete="off" name="users_phone"  onblur="this.placeholder = '- 없이 숫자만 입력하세요'"/>
-                </div>
+
 
                      <input type="submit" value="수정하기">
                   </form>
@@ -189,9 +187,9 @@
     .then(data => {
 	// 받아온 json 데이터가 담긴 data
         if(data.pwChecked) {  // data에 있는 pwChecked값 체크
-            document.getElementById('pwModal').style.display = 'none'; // 모달창 none
+            document.getElementById('pwModal').style.display = 'none'; // pwChecked가 true면 모달창 none
         } else {
-            document.getElementById('pwError').style.display = 'block'; // 에러메세지 켜기
+            document.getElementById('pwError').style.display = 'block'; // pwChecked가 false면 에러메세지 켜기
         }
     })
     .catch(error => {
