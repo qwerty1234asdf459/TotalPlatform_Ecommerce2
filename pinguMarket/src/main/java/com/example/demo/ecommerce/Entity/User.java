@@ -47,6 +47,12 @@ public class User {
 	@Column(name = "signout_yn")
 	private String signoutYn;
 	
+	@Column(name = "refresh_token")
+	private String refreshToken;
+	
+	@Column(name = "role")
+	private String role;
+	
 	@OneToMany(mappedBy = "user", cascade = CascadeType.PERSIST)
 	private List<Payment> paymentList;
 	

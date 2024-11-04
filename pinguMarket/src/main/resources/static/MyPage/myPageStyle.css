@@ -112,8 +112,8 @@
     transition: .3s;
 }
 
-.myPageTitle>ul>li.on>a{
-    background-color: rgb(58, 58, 58);
+.myPageTitle>ul>li>a.on{
+    background-color:  rgb(58, 58, 58);
     color: white;
 }
 
@@ -135,7 +135,7 @@
     text-align: center;
     background-color: rgb(238, 238, 238);
 }
-.couponHeader span {
+.contentHeader span {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;

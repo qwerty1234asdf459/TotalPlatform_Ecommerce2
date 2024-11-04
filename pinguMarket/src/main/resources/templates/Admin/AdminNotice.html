@@ -26,19 +26,19 @@
                 <input type="text" placeholder="제목을 입력해주세요.">
                 <button class="fa-solid fa-magnifying-glass searchbtn"></button>
 
-                <button class="userDelete" type="">게시글 삭제</button>
+                <a class="selectDel" th:data-uri="@{|/admin/Notice/delete|}">게시글 삭제</a>
                 <button class="createbtn" type="" th:onclick="|location.href='@{/createnotice}'|">게시글 등록</button>
                 <!-- 다중선택 삭제 기능, 삭제 전 확인 문구 띄우기 -->
             </div>
 
             <div id="columnBox"> <!-- 테이블 컬럼 -->
-                <span>선택</span>
+                <span><input type="checkbox" id="Select01" name="SelectAll"></span>
                 <span>제목</span>
                 <span>작성자</span>
                 <span>작성일</span>
             </div>
             <div class="Rows" th:each="NList : ${NList}">
-                <span><input type="checkbox"></span>
+                <span><input type="checkbox" th:id="'Select'+${NList.noticeId}" name="Select" class="Select"></span>
                 <a class="list_title" th:href="@{|/admin/Notice/detail/${NList.noticeId}|}" th:text="${NList.title}"></a>
                 <a class="list_admin" th:href="@{|/admin/Notice/detail/${NList.noticeId}|}" th:text="${NList.admin.adCode}"></a>
                 <a class="list_updateDate" th:href="@{|/admin/Notice/detail/${NList.noticeId}|}" th:text="${NList.updateDate}"></a>
@@ -67,6 +67,6 @@
             
         </div><!--메인 끝-->
     </div>
-    
+    <script th:src="@{/Admin/AdminNotice.js}"></script>
 </body>
 </html>

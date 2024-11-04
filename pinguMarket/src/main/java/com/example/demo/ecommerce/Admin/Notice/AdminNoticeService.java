@@ -57,6 +57,7 @@ public class AdminNoticeService {
 		return this.anr.findAll();
 	}
 
+
 	
 	
 	//**************************고객센터 > 공지사항 총 count 조회***************************************************
@@ -72,5 +73,13 @@ public class AdminNoticeService {
 
 
 
+
+
+
+//---------------	공지사항 삭제  ---------------------
+	public void delete(Notice n) {
+		this.anr.delete(n);
+		
+	}
 
 }

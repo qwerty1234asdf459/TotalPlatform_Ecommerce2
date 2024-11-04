@@ -101,11 +101,12 @@ textarea {
 
 /* --버튼 스타일 -------------------------------------*/
 .btn-style {
+    display: inline-block;
+    text-align: center; font-size: 14px;
     margin-top: 20px;
     margin-left: 20px;
     background-color: #fce699;
-    width: 90px;
-    height: 40px;
+    width: 90px; height: 40px; line-height: 40px;
     border: 0px;
     border-radius: 10px;
     color: black;
