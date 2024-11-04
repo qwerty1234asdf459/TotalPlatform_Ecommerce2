@@ -24,8 +24,8 @@ public class CsQuestionService {
 	private final CsQuestionUserRepository userRepository;
 	
 		
-		public CsQuestion getQuestion(Integer id) throws UserException {
-			Optional<CsQuestion> q1 = this.qr.findById(id);
+		public CsQuestion getQuestion(Integer csQuestionId) throws UserException {
+			Optional<CsQuestion> q1 = this.qr.findById(csQuestionId);
 			if(q1.isPresent()) {
 				return q1.get();
 			}else {
@@ -33,6 +33,7 @@ public class CsQuestionService {
 			}
 		}
 
+		// 1:1 문의 작성
 		public void create(String orderNo, String title, String contents, Integer id) throws UserException {
 			CsQuestion q = new CsQuestion();
 			q.setOrderNo(orderNo);
@@ -42,14 +43,16 @@ public class CsQuestionService {
 			q.setUser(getUser(id));
 			this.qr.save(q);
 		}
-
+		
+		// 1:1 문의 수정
 		public void modify(CsQuestion q, String orderNo, String title, String contents) {
 			q.setTitle(title);
 			q.setOrderNo(orderNo);
 			q.setContents(contents);
 			this.qr.save(q);
 		}
-
+		
+		// 1:1 문의 삭제
 		public void delete(CsQuestion q) {
 			this.qr.delete(q);
 		}

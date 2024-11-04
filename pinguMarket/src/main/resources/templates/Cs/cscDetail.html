@@ -2,28 +2,8 @@
 <div layout:decorate="~{Layout/layout}">
     <!-- *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-* MAIN *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*--*-*-*-*-*-*-*-*-*-* -->
     <main layout:fragment="content">
-    <link rel="stylesheet" th:href="@{/Cs/cscDetailStyle.css}">
+        <link rel="stylesheet" th:href="@{/Cs/cscDetailStyle.css}">
         <div class="csContainer">
-            <div class="csSideNav">
-                <div class="csSideNavTitle">
-                    <p>고객센터</p>
-                </div>
-                <ul>
-                    <li class="on">
-                        <a th:href="@{/csc}">
-                            <p>1:1 문의</p>
-                            <i class="fa-solid fa-angle-right"></i>
-                        </a>
-                    </li>
-                    <li>
-                        <a>
-                            <p>공지사항</p>
-                            <i class="fa-solid fa-angle-right"></i>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-
             <div class="askContainer">
                 <div class="askCon">
                     <div class="askTitleCon">
@@ -33,116 +13,106 @@
                     </div>
                 </div>
 
-
                 <div class="askconContainer">
-                        <div class="type">
-                            <div class="orderNum">
-                                <label for="label-text">주문번호</label>
-                            </div>
-                            <div class="typeSelect">
-                                <div class="SelectAll">
-                                    <select name="orderNo">
-                                        <option th:value="${question.orderNo}" th:text="${question.orderNo}"></option>
-                                    </select>
-                                </div>                 
+                    <div class="type">
+                        <div class="orderNum">
+                            <label for="label-text">주문번호</label>
+                        </div>
+                        <div class="typeSelect">
+                            <div class="SelectAll">
+                                <select name="orderNo">
+                                    <option th:value="${question.orderNo}" th:text="${question.orderNo}"></option>
+                                </select>
                             </div>
                         </div>
+                    </div>
 
 
-
-                        <div class="type">
-                            <div class="subject">
-                                <label for="label-text">제목
-                                    <span class="imp">*</span>
-                                </label>
+                    <div class="type">
+                        <div class="subject">
+                            <label for="label-text">제목
+                                <span class="imp">*</span>
+                            </label>
+                        </div>
+                        <div class="inputSubject">
+                            <div class="SubBox">
+                                <input placeholder="제목을 입력해주세요" type="text" class="subjectText"
+                                    th:value="${question.title}" readonly>
                             </div>
-                            <div class="inputSubject">
-                                <div class="SubBox">
-                                    <input placeholder="제목을 입력해주세요" type="text" class="subjectText" th:value="${question.title}" readonly>
+                        </div>
+                    </div>
+
+
+
+
+                    <div class="type">
+                        <div class="content">
+                            <label for="label-text">내용
+                                <span class="imp">*</span>
+                            </label>
+                        </div>
+                        <div class="inputContent">
+                            <div class="detailContent">
+                                <div class="contentCon">
+                                    <textarea inputmode="text" class="inquiry-contents" oninput="handleInput(this)"
+                                        th:text="${question.contents}" readonly></textarea>
+                                    <div class="conPlaceholder" id="conPlaceholder">
+                                        <div class="contentNoti"></div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
+                    </div>
 
-
-
-
-                        <div class="type">
-                            <div class="content">
-                                <label for="label-text">내용
-                                    <span class="imp">*</span>
-                                </label>
+                    <!----------------------------------관리자 답변란-------------------------------------------->
+                    <th:block th:if="${question.CsAnswer!=null}">
+                        <div class="adminReply">
+                            <div class="type">
+                                <div class="reply">
+                                    <label for="label-text">관리자 답변 제목</label>
+                                </div>
+                                <div class="inputReply">
+                                    <div class="detailReply">
+                                        <div class="replyContainer">
+                                            <textarea inputmode="text" class="inquiry-reply"></textarea>
+                                            <div class="conPlaceholder">
+                                                <div class="replyCon">
+                                                    <!-- <p th:text="@{|/csc/answer/${csAnswer.title}|}"></p>-->
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="inputContent">
-                                <div class="detailContent">
-                                    <div class="contentCon">
-                                        <textarea inputmode="text" class="inquiry-contents" oninput="handleInput(this)" th:text="${question.contents}" readonly ></textarea>
-                                        <div class="conPlaceholder" id="conPlaceholder">
-                                            <div class="contentNoti"></div>
+                            <div class="type">
+                                <div class="reply">
+                                    <label for="label-text">관리자 답변 내용</label>
+                                </div>
+                                <div class="inputReply">
+                                    <div class="detailReply">
+                                        <div class="replyContainer">
+                                            <textarea inputmode="text" class="inquiry-reply"></textarea>
+                                            <div class="conPlaceholder">
+                                                <div class="replyCon">
+                                                    <!--<p th:text="@{|/csc/answer/${csAnswer.contents}|}"></p>-->
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        
-                        <!-- --------------------------------관리자 답변란-------------------------------------------->
-                        <th:block th:if="${question.CsAnswer!=null}">
-	                        <div class="adminReply">
-	                            <div class="type">
-	                                <div class="reply">
-	                                    <label for="label-text">관리자 답변 제목</label>
-	                                </div>
-	                                <div class="inputReply">
-	                                    <div class="detailReply">
-	                                        <div class="replyContainer">
-	                                            <textarea inputmode="text" class="inquiry-reply"></textarea>
-	                                            <div class="conPlaceholder">
-	                                                <div class="replyCon">
-	                                                    <!-- <p th:href="@{|/csc/answer/${question.CsAnswer.csAnswerId}|}"></p> -->
-                                                        <p></p>
-	                                                </div>
-	                                            </div>
-	                                        </div>
-	                                    </div>
-	                                </div>
-	                            </div>
-                                <div class="type">
-	                                <div class="reply">
-	                                    <label for="label-text">관리자 답변 내용</label>
-	                                </div>
-	                                <div class="inputReply">
-	                                    <div class="detailReply">
-	                                        <div class="replyContainer">
-	                                            <textarea inputmode="text" class="inquiry-reply"></textarea>
-	                                            <div class="conPlaceholder">
-	                                                <div class="replyCon">
-	                                                    <!-- <p th:href="@{|/csc/answer/${question.CsAnswer.csAnswerId}|}"></p> -->
-                                                        <p></p>
-	                                                </div>
-	                                            </div>
-	                                        </div>
-	                                    </div>
-	                                </div>
-	                            </div>
-	                        </div>
-	                    </th:block>
-                        <div class="submitContainer">
-                            <button type="submit" class="retouchBtn" th:onclick="questionModify([[${question.csQuestionId}]])">수정</button>
-                            <button type="submit" class="deleteBtn" href="javascript:void(0);" th:data-uri="@{|/csc/delete/${question.csQuestionId}|}">삭제</button>
-                        </div>
+                    </th:block>
+                    <div class="submitContainer">
+                        <button type="submit" class="retouchBtn"
+                            th:onclick="questionModify([[${question.csQuestionId}]])">수정</button>
+                        <!-- <a href="javascript:void(0);" th:data-uri="@{|/csc/delete/${question.csQuestionId}|}"
+                            class="deleteBtn">삭제</a> sec:authorize="isAuthenticated()" 추후 추가 -->
+                        <a class="listBtn" th:href="@{/csc}">목록</a>
+                    </div>
                 </div>
             </div>
         </div>
     </main>
 </div>
-    <script th:src="@{/Cs/cscDetail.js}"></script>
-    <script type="text/javascript">
-		//삭제 버튼 클릭
-		let del = document.querySelectorAll(".delete");
-	    for(let el of del){
-	        el.addEventListener('click',function(){
-	            if(confirm("정말로 삭제하시겠습니까?")){
-	                location.href = this.dataset.uri;
-	            }
-	        });
-	    }
-	</script>
+<script th:src="@{/Cs/cscDetail.js}"></script>
