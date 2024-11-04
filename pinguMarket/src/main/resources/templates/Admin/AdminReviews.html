@@ -28,7 +28,8 @@
                 <input type="text" placeholder="작성자 ID, 또는 상품명을 입력해주세요.">
                 <button class="fa-solid fa-magnifying-glass searchbtn"></button>
 
-                <button class="selectDel" disabled>리뷰 삭제</button>
+                <a class="selectDel" th:data-uri="@{|/admin/Reviews/delete|}">리뷰 삭제</a>
+                <!--href="javascript:void(0);" : 클릭 시 페이지가 다른 페이지로 이동하거나 현재 페이지를 다시 로딩하지 않게 함 -->
             </div>
 
             <div id="columnBox"> <!-- 테이블 컬럼 -->
@@ -39,7 +40,7 @@
                 <span>등록일</span>
             </div>
             <div class="Rows" th:each="RList : ${RList}">
-                <span><input type="checkbox" th:id="'Select'+${RList.reviewId}" name="Select"></span>
+                <span><input  type="checkbox" th:id="'Select'+${RList.reviewId}" name="Select" class="Select"></span>
                 <a class="list_user" th:href="@{|/admin/Reviews/detail/${RList.reviewId}|}" th:text="${RList.user.name}"></a>
                 <a class="list_product" th:href="@{|/admin/Reviews/detail/${RList.reviewId}|}" th:text="${RList.product.name}"></a>
                 <a class="list_scope" th:href="@{|/admin/Reviews/detail/${RList.reviewId}|}" th:text="${RList.scope}"></a>

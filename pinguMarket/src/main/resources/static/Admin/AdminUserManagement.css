@@ -43,16 +43,19 @@
     background-color: #fce699;
     position: absolute;
 }
-.userDelete{
+.selectDel{
+    display: inline-block;
     margin-left: 15px;
     border-radius: 10px;
     border: 0px;
     width: 100px;
-    height: 30px;
+    height: 30px; line-height: 30px;
     color: black;
     background-color: #fce699;
     position: relative;
     left: 100px;
+    font-size: 14px; text-align: center;
+    cursor: pointer;
 }
 button:hover{
     cursor: pointer;

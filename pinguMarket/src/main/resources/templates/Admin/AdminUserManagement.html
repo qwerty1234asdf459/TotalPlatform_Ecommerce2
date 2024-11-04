@@ -27,12 +27,11 @@
                 <input type="text" placeholder="ID명 또는 이름을 입력해주세요.">
                 <button class="fa-solid fa-magnifying-glass searchbtn"></button>
 
-                <button class="userDelete" type="">회원 삭제</button>
-                <!-- 다중선택 삭제 기능, 삭제 전 확인 문구 띄우기 -->
+                <a class="selectDel" th:data-uri="@{|/admin/User/delete|}">회원 삭제</a>
             </div>
 
             <div id="columnBox"> <!-- 테이블 컬럼 -->
-                <span><input type="checkbox"></span>
+                <span><input type="checkbox" id="Select01" name="SelectAll"></span>
                 <span>ID</span>
                 <span>이름</span>
                 <span>전화번호</span>
@@ -42,7 +41,7 @@
                 <span>등록일</span>
             </div>
             <div class="Rows" th:each="UList : ${UList}"> <!--페이징 처리 필요-->
-                <span><input type="checkbox"></span>
+                <span><input type="checkbox" th:id="'Select'+${UList.userId}" name="Select" class="Select"></span>
                 <span th:text="${UList.id}"></span>
                 <span th:text="${UList.name}"></span>
                 <span th:text="${UList.tell}"></span>
@@ -99,5 +98,6 @@
          });     
      </script>
 --> 
+<script th:src="@{/Admin/AdminUserManagement.js}"></script>
 </body>
 </html>
