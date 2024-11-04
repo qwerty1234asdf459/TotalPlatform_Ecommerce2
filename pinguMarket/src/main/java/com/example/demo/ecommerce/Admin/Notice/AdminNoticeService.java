@@ -6,6 +6,7 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
+import com.example.demo.ecommerce.Admin.AdminRepository;
 import com.example.demo.ecommerce.Entity.Admin;
 import com.example.demo.ecommerce.Entity.Notice;
 import lombok.RequiredArgsConstructor;
@@ -14,6 +15,7 @@ import lombok.RequiredArgsConstructor;
 @Service
 public class AdminNoticeService {
 	private final AdminNoticeRepository anr;
+	private final AdminRepository ar;
 
 	public Notice returnCreate(Admin admin, String title, String contents) {
 		Notice n = new Notice();
@@ -54,6 +56,24 @@ public class AdminNoticeService {
 	public List<Notice> findAll() {	
 		return this.anr.findAll();
 	}
+
+
+	
+	
+	//**************************고객센터 > 공지사항 총 count 조회***************************************************
+	public int getNoticeCountAll() {
+		return this.anr.countNoticeAll(); //유저정보 강제 입력함. 
+	}
+	
+	//**************************고객센터 > 공지사항 count 조회***************************************************
+
+	public List<Notice> getNoticePaging(int startNo, int pageSize) {
+		return this.anr.findNoticeByAdminId(startNo, pageSize);
+	}
+
+
+
+
 
 
 //---------------	공지사항 삭제  ---------------------

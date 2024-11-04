@@ -2,7 +2,7 @@
 <div layout:decorate="~{Layout/layout}">
     <!-- *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-* MAIN *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*--*-*-*-*-*-*-*-*-*-* -->
     <main layout:fragment="content">
-    <link rel="stylesheet" th:href="@{/Cs/csNotiDetailStyle.css}">
+        <link rel="stylesheet" th:href="@{/Cs/csNotiDetailStyle.css}">
         <div class="mainWhole">
             <div class="NoticeHeader">
                 <div class="NoticeTitle">공지사항</div>
@@ -12,7 +12,7 @@
             <div class="mainContainer">
                 <div class="contentCon">
                     <div class="mainTitle">제목</div>
-                    <div class="mainSub"  th:text="${notice.title}"></div>
+                    <div class="mainSub" th:text="${notice.title}"></div>
                 </div>
                 <div class="contentCon">
                     <div class="mainTitle">작성자</div>
@@ -28,18 +28,18 @@
                     <div>
                         <p>
                             <img src="">
-                            <p th:text="${notice.contents}"></p>
+                        <p th:text="${notice.contents}"></p>
                         </p>
                     </div>
                 </div>
 
                 <div class="invenContainer">
                     <a th:href="@{/csc}">
-                        <button class="invenBtn" type="button" >
+                        <button class="invenBtn" type="button">
                             <span class="invenText">목록</span>
                         </button>
                     </a>
-                </div> 
+                </div>
             </div>
         </div>
     </main>

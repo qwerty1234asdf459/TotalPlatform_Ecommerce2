@@ -33,9 +33,11 @@ main>.csContainer>.csSideNav {
     color: rgb(136, 136, 136);
     font-weight: 600;
 }
-.csSideNav>ul>li>a:last-child{
+
+.csSideNav>ul>li>a:last-child {
     border-bottom: none;
 }
+
 .csSideNav>ul>li>a>p,
 .csSideNav>ul>li>a>i {
     color: rgb(209, 209, 209);
@@ -52,16 +54,17 @@ main>.csContainer>.csSideNav {
 }
 
 
-main>.csContainer{
+main>.csContainer {
     width: 100%;
-    height: 80vh;
+    /* height: 80vh; */
 }
 
 main>.csContainer>ul {
     width: 100%;
     position: relative;
 }
-main>.csContainer>ul>.csContent{
+
+main>.csContainer>ul>.csContent {
     width: 100%;
     position: absolute;
     top: 0;
@@ -70,7 +73,8 @@ main>.csContainer>ul>.csContent{
     z-index: -1;
     transition: .2s;
 }
-main>.csContainer>ul>.csContent.on{
+
+main>.csContainer>ul>.csContent.on {
     opacity: 1;
     z-index: 10;
 }
@@ -89,47 +93,53 @@ main>.csContainer>ul>.csContent.on{
     padding-left: 1rem;
 }
 
-.csContent>.csInfo{
+.csContent>.csInfo {
     border-collapse: collapse;
-    font-weight:lighter;
+    font-weight: lighter;
     width: 100%;
 }
-.csContent tr{
+
+.csContent tr {
     border-bottom: 1px solid rgb(226, 226, 226);
 }
-.csContent tr:first-child{
+
+.csContent tr:first-child {
     border-top: 2px solid rgb(49, 49, 49);
     border-bottom: 1px solid rgb(49, 49, 49);
 }
 
-th , td{ 
+th,
+td {
     padding: 1rem 0 1rem 0;
     text-align: center;
     color: rgb(68, 68, 68);
 }
-td{
+
+td {
     font-weight: 400;
 
 }
-th , td{
+
+th,
+td {
     width: 15%;
 }
 
-th:nth-child(2){
+th:nth-child(2) {
     width: 50%;
     text-align: center;
 }
 
-td:nth-child(2){
+td:nth-child(2) {
     text-align: left;
 }
 
-.askBtn{
+.askBtn {
     position: relative;
     margin-top: 3rem;
 }
 
-.askBtn > a{
+.askBtn>a {
     position: absolute;
     display: flex;
     justify-content: center;
@@ -144,6 +154,9 @@ td:nth-child(2){
     border-radius: 5px;
 }
 
+.pagemargin {
+    margin-top: 3rem;
+}
 
 /* 페이징 처리  */
 
@@ -155,6 +168,7 @@ td:nth-child(2){
     display: flex;
     justify-content: center;
 }
+
 
 .pagination>li {
     padding-left: 1rem;
@@ -173,49 +187,73 @@ td:nth-child(2){
 
 
 /* 페이징 버튼 */
-#pageBtn > ul {
-	display: flex;
-	list-style-type: none;
+
+
+.pageBtn>ul {
+    display: flex;
+    list-style-type: none;
+    margin-top: 1.5rem;
     margin-bottom: 100px;
-	justify-content: center;
+    justify-content: center;
 }
-#pageBtn li:not(.active):not(.disabled):hover {
-	background-color: #eee;
+
+.pageBtn li:not(.active):not(.disabled):hover {
+    background-color: #eee;
 }
-#pageBtn li:not(.active):not(.disabled):hover > a {
-	color: var(--mainColor);
+
+.pageBtn li:not(.active):not(.disabled):hover>a {
+    color: var(--mainColor);
 }
-#pageBtn li {
-	display: inline-block;
-	background-color: white;
-	border: 1px solid #ddd;
-	margin-left: -1px;
+
+.pageBtn li {
+    display: inline-block;
+    background-color: white;
+    border: 1px solid #ddd;
+    margin-left: -1px;
 }
-#pageBtn li:first-child {
-	border-top-left-radius: 5px;
-	border-bottom-left-radius: 5px;
+
+.pageBtn li:first-child {
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
 }
-#pageBtn li:last-child {
-	border-top-right-radius: 5px;
-	border-bottom-right-radius: 5px;
+
+.pageBtn li:last-child {
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
 }
-#pageBtn a {
-	text-decoration: none;
-	display: inline-block;
-	padding: 6px 12px;
-	/*color: rgb(206, 154, 0);*/
+
+.pageBtn a {
+    text-decoration: none;
+    display: inline-block;
+    padding: 6px 12px;
+    /*color: rgb(206, 154, 0);*/
 }
-#pageBtn .active {
-	background-color: var(--mainColor);
+
+.pageBtn .active {
+    background-color: var(--mainColor);
 }
-#pageBtn .active > a {
-	color: white;
-	pointer-events: none; /* 포인터 이벤트 동작 X */
+
+.pageBtn .active>a {
+    color: white;
+    pointer-events: none;
+    /* 포인터 이벤트 동작 X */
 }
-#pageBtn .disabled {
-	background-color: #ddd;
+
+.pageBtn .disabled {
+    background-color: #ddd;
 }
-#pageBtn .disabled > a {
-	pointer-events: none; /* 포인터 이벤트 동작 X */
-	color: rgb(68, 68, 68);
+
+.pageBtn .disabled>a {
+    pointer-events: none;
+    /* 포인터 이벤트 동작 X */
+    color: rgb(68, 68, 68);
+}
+
+.pageBtn.on {
+    display: none;
+    /* 기본적으로 버튼 숨기기 */
+}
+
+#pageBtn2 {
+    margin-top: 50rem;
 }
