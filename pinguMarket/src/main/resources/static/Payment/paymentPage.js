@@ -30,6 +30,7 @@ changeAdressBtn.addEventListener("click", function(){
 const couponSelect = document.querySelector(".couponSelect");
 
 couponSelect.addEventListener("click",priceCalculate);
+const paymentSubmit = document.getElementById("paymentSubmit");
 
 function priceCalculate(){
 	const orderPrice = document.getElementById("orderPrice");
@@ -37,14 +38,16 @@ function priceCalculate(){
 	const discountPrice = document.getElementById("discountPrice");
 	const deliveryPrice = document.getElementById("deliveryPrice");
 	const finalPrice = document.getElementById("finalPrice");
-	const paymentSubmit = document.getElementById("paymentSubmit");
 	
 	let sumPrice = 0;
 	let deliPrice = 3000;
-	let couPrice = parseInt(document.querySelector(".couponSelect").value)*-1;
 	let discount = 0;
 	let totalPrice = 0;
-	
+	let couPrice = 0;
+	if(parseInt(document.querySelector(".couponSelect").value)!=NaN){
+		couPrice = parseInt(document.querySelector(".couponSelect").value)*-1;
+	}
+
 	couponPrice.textContent = couPrice+"원";
 	
 	
@@ -62,6 +65,20 @@ function priceCalculate(){
 	deliveryPrice.textContent = deliPrice+"원";
 	finalPrice.textContent = totalPrice+"원";
 	paymentSubmit.textContent = totalPrice+"원 결제하기";
+
+	console.log(parseInt(document.querySelector(".couponSelect").value))
 }
 
 priceCalculate();
+
+paymentSubmit.addEventListener("click",function(){
+	const selectedCartList = document.querySelectorAll(".productTitle");
+	const cartArr = new Array;
+
+	selectedCartList.forEach((cart)=>{
+		cartArr.push(cart.value);
+	})
+	document.getElementById("paymentAddress").value = document.getElementById("adressTextArea").value;
+	console.log(document.querySelector(".couponSelect").children);
+	//document.getElementById("paymentCoupon").value = 
+});

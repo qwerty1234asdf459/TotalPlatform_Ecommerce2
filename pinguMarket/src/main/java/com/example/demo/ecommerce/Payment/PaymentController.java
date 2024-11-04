@@ -36,10 +36,10 @@ public class PaymentController {
 	
 	
 	@GetMapping("/payment")
-	public String payment(Model model, @RequestParam("cartData")String productData
+	public String payment(Model model, @RequestParam("cartData")String cartData
 			,@RequestParam("countData")String countData) throws Exception {
 			User u = this.userService.getUser(1);
-		 List<String> cartIdList = new ObjectMapper().readValue(productData, new TypeReference<List<String>>() {});
+		 List<String> cartIdList = new ObjectMapper().readValue(cartData, new TypeReference<List<String>>() {});
 		 List<String> countList = new ObjectMapper().readValue(countData, new TypeReference<List<String>>() {});
 		 
 		 for(int i =0; i < cartIdList.size();i++) {
@@ -57,7 +57,11 @@ public class PaymentController {
 	}
 	
 	@PostMapping("/payment")
-	public String payment() {
+	public String payment(@RequestParam("address")String address,@RequestParam("couponId")Integer couponId,
+			@RequestParam("cartData")String cartData,@RequestParam("delRequest")String delRequest) {
+		
+		
+		
 		return "redirect:/cart";
 	}
 	

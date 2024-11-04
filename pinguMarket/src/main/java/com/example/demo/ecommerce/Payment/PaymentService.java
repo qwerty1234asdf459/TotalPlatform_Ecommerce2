@@ -1,8 +1,12 @@
 package com.example.demo.ecommerce.Payment;
 
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
+import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.ecommerce.Entity.Coupon;
@@ -18,11 +22,29 @@ public class PaymentService {
 	
 	private final PaymentRepository pr;
 	
-	public Payment createPayment(User user, Coupon coupon,String delRequest) {
+	public void createPayment(User user, Coupon coupon,String address, String delRequest) {
 		Payment p = new Payment();
-		return p;
+		p.setUser(user);
+		p.setCoupon(coupon);
+		p.setCreateDate(LocalDateTime.now());
+		p.setDeliveryno(" ");
+		p.setAddress(address);
+		p.setName(user.getName());
+		p.setTell(user.getTell());
+		p.setPaymentState("결제 완료");
+		p.setDeliveryno("배송준비중");
+		p.setOrderNo(createOrderNo());
+		
+		this.pr.save(p);
 	}
 	
+	public String createOrderNo() {
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
+		String currentTime = dateFormat.format(new Date());
+		String randomAlpa = RandomStringUtils.randomAlphabetic(4);
+		
+		return randomAlpa+currentTime;
+	}
 	public List<Payment> getPayment(Integer id) throws CanNotFoundException {
 		List<Payment> p = this.pr.findByUser_UserId(id);
 		if(!p.isEmpty()) {

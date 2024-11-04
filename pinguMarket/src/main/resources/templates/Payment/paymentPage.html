@@ -16,7 +16,7 @@
                         <div class="productImg">
                             <img src="" alt="">
                         </div>
-                        <div class="productTitle">
+                        <div class="productTitle" th:value="${cart.cartId}">
                             <p th:text="${cart.product.name}"></p>
                             <p class="productPrice" th:text="${cart.product.price}+원+' | '+${cart.productCount}+개"></p>
                             <input type="hidden" class="price" th:value="${cart.product.price}">
@@ -89,9 +89,9 @@
                             <p id="usableCoupon" class="orderL" th:text="사용가능한+' '+쿠폰+' '+갯수+' '+${#lists.size(user.couponList)}+개"></p>
                             <p class="orderR">
                                 <select class="couponSelect">
-                                	<option value="0">선택안함</option>
+                                	<option>선택안함</option>
                        				<option th:each="coupon : ${user.couponList}" th:text="${coupon.discount}+원+' '+할인쿠폰"
-                       				 th:value="${coupon.discount}" id="couponDiscount"></option>
+                       				 th:value="${coupon.discount}+' '+${coupon.couponId}" th:id="${coupon.couponId}"></option>
                                 </select>
                             </p>
                             <!-- <p class="c-impossible">쿠폰 적용 불가 상품입니다.</p> -->
@@ -192,11 +192,11 @@
                 </div>
             </div>
         </div>
-        <form action id="paymentSubmitForm" th:action="@{/payment}" method="post">
-        	<input type="hidden">
-        	<input type="hidden">
-        	<input type="hidden">
-        	<input type="hidden">
+        <form id="paymentSubmitForm" th:action="@{/payment}" method="post">
+        	<input type="hidden" id="paymentAddress" name="address">
+        	<input type="hidden" id="paymentCoupon" name="couponId">
+        	<input type="hidden" id="paymentRequest" name="delRequest">
+        	<input type="hidden" id="cartArr" name="cartData">
         </form>
     </main>
 </div>
