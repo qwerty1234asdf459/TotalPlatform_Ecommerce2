@@ -4,55 +4,13 @@ main{
 }
 
 main>.csContainer {
-    padding-left: var(--layoutpadding);
-    padding-right: var(--layoutpadding);
+    padding-left: 15vw;
+    padding-right: 15vw;
     min-width: var(--pageMinWidth);
     display: flex;
     gap: 2rem;
     padding-top: 5rem;
     padding-bottom: 5rem;
-}
-
-main>.csContainer>.csSideNav {
-    width: 20%;
-}
-
-.csSideNav>.csSideNavTitle {
-    font-size: 30px;
-    font-weight: 500;
-    padding-bottom: 2rem;
-}
-
-.csSideNav>ul {
-    border: 1px solid rgb(209, 209, 209);
-    box-shadow: 0px 2px 2px rgb(223, 223, 223);
-}
-
-.csSideNav>ul>li>a {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 1rem 0.5rem 1rem 0.5rem;
-    border-bottom: 1px solid rgb(209, 209, 209);
-    color: rgb(136, 136, 136);
-    font-weight: 600;
-}
-.csSideNav>ul>li>a:last-child{
-    border-bottom: none;
-}
-.csSideNav>ul>li>a>p,
-.csSideNav>ul>li>a>i {
-    color: rgb(209, 209, 209);
-    font-weight: 600;
-}
-
-.csSideNav>ul>li.on {
-    background-color: rgb(240, 240, 240);
-}
-
-.csSideNav>ul>li.on>a>p,
-.csSideNav>ul>li.on>a>i {
-    color: var(--mainColor);
 }
 
 main>.csContainer{
@@ -78,7 +36,7 @@ main>.csContainer>ul>.csContent.on{
 }
 
 .askContainer{
-    width: 80%;
+    width: 100%;
 }
 
 .askContainer>.askCon{
@@ -105,7 +63,7 @@ main>.csContainer>ul>.csContent.on{
  }
 
  .askconContainer{
-    width: 80%;
+    width: 100%;
     padding: 4px, 20px;
     border-top: 2px solid rgb(51, 51, 51);
  }

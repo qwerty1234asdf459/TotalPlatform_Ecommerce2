@@ -5,6 +5,7 @@
     <link rel="stylesheet" href="/MyPage/myPageStyle.css">
     <style>
     
+
     .pwModal{
             position:absolute;
             display:flex;
@@ -29,6 +30,10 @@
         #pwError{
 	display:none;
 }
+       .signoutTerms{
+        border: 1.5px solid black;
+        border-radius: 10px;
+       }
     </style>
         <div class="myPageContainer">
 
@@ -103,7 +108,12 @@
                 <p id="pwError">비밀번호가 일치하지 않습니다.</p>
             </div>
         </div>
-                    
+        
+        <div class="signoutTerms">
+            <p>약관Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae, saepe. Fugiat saepe, pariatur delectus repudiandae omnis sint blanditiis tempore eius dolore accusamus, atque sequi? Minima, iusto esse! Cum, voluptate accusamus.</p>
+        </div>
+
+
                        <form th:action="@{/signout}" method="POST">
                             <input type="checkbox" required />
                             회원탈퇴에 동의합니다.

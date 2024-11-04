@@ -6,6 +6,8 @@ import java.security.Principal;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.demo.ecommerce.Admin.Product.AdminProductService;
 import com.example.demo.ecommerce.Cart.CartService;
@@ -29,22 +31,25 @@ public class ProductController {
 	
 	
 //	---------------------------------------------장바구니----------------------------------------------------------------------------------------------
-	@GetMapping("/product/{productId}/addcart")
-	public String addcart(@PathVariable(value = "productId")Integer productId, Model model, Principal principal) throws Exception {
+	@PostMapping("/product/addcart")
+	public String addcart(@RequestParam("cart_count")Integer count,
+			@RequestParam("product")Integer productId, Model model, Principal principal) throws Exception {
 		User u = this.us.getUser(1); // 유저정보 강제 입력(추후 principal.getName()으로 변경해야 함
 		Product p = this.ps.getProduct(productId);
-		
 		try {
-			Cart ct = this.carts.getCart(u.getUserId(), productId);
-			if(!u.getCartList().contains(ct)) {
-				this.carts.createCart(u, p);
+			if(carts.cartOverlappingCheck(p, u)) {
+				this.carts.createCart(u, p, count);
+			}else {
+				return "redirect:/product/"+Integer.toString(productId);
 			}
 		} catch (Exception e) {
-			this.carts.createCart(u, p);
+			e.printStackTrace();
 		}
-		model.addAttribute("user", u);
-		return "Cart/cartPage";
+		return "redirect:/cart";
 	}
+	
+	
+	
 	
 	@GetMapping("/cart") // 장바구니 전체
 	public String viewcart(Model model, Principal principal) throws Exception {

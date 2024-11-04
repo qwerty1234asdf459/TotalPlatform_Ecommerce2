@@ -33,5 +33,11 @@ public interface PaymentRepository extends JpaRepository<Payment, Integer>{
 //			+ "    where payment_id = p.payment_id and "
 //			+ "    u.user_id = 2)", nativeQuery = true)
 //	List<Payment> findByUserId(@Param("userId") Integer userId);
+	
+	@Query(value = "select * "
+			+ "from payment "
+			+ "where create_date >= now() - interval :period month "
+			+ "and user_id = :userId", nativeQuery = true)
+	List<Payment> findByUserCreate(@Param("userId") Integer userId, @Param("period") Integer period);
 
 }

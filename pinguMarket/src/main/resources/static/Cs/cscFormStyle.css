@@ -1,11 +1,11 @@
-main{
+main {
     box-sizing: border-box;
     margin: 0;
 }
 
 main>.csContainer {
-    padding-left: var(--layoutpadding);
-    padding-right: var(--layoutpadding);
+    padding-left: 15vw;
+    padding-right: 15vw;
     min-width: var(--pageMinWidth);
     display: flex;
     gap: 2rem;
@@ -13,49 +13,7 @@ main>.csContainer {
     padding-bottom: 5rem;
 }
 
-main>.csContainer>.csSideNav {
-    width: 20%;
-}
-
-.csSideNav>.csSideNavTitle {
-    font-size: 30px;
-    font-weight: 500;
-    padding-bottom: 2rem;
-}
-
-.csSideNav>ul {
-    border: 1px solid rgb(209, 209, 209);
-    box-shadow: 0px 2px 2px rgb(223, 223, 223);
-}
-
-.csSideNav>ul>li>a {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 1rem 0.5rem 1rem 0.5rem;
-    border-bottom: 1px solid rgb(209, 209, 209);
-    color: rgb(136, 136, 136);
-    font-weight: 600;
-}
-.csSideNav>ul>li>a:last-child{
-    border-bottom: none;
-}
-.csSideNav>ul>li>a>p,
-.csSideNav>ul>li>a>i {
-    color: rgb(209, 209, 209);
-    font-weight: 600;
-}
-
-.csSideNav>ul>li.on {
-    background-color: rgb(240, 240, 240);
-}
-
-.csSideNav>ul>li.on>a>p,
-.csSideNav>ul>li.on>a>i {
-    color: var(--mainColor);
-}
-
-main>.csContainer{
+main>.csContainer {
     width: 100%;
 }
 
@@ -63,7 +21,8 @@ main>.csContainer>ul {
     width: 100%;
     position: relative;
 }
-main>.csContainer>ul>.csContent{
+
+main>.csContainer>ul>.csContent {
     width: 100%;
     position: absolute;
     top: 0;
@@ -72,16 +31,17 @@ main>.csContainer>ul>.csContent{
     z-index: 0;
     transition: .2s;
 }
-main>.csContainer>ul>.csContent.on{
+
+main>.csContainer>ul>.csContent.on {
     opacity: 1;
     z-index: 10;
 }
 
-.askContainer{
-    width: 80%;
+.askContainer {
+    width: 100%;
 }
 
-.askContainer>.askCon{
+.askContainer>.askCon {
     display: flex;
     flex-direction: row;
     width: 100%;
@@ -90,59 +50,62 @@ main>.csContainer>ul>.csContent.on{
     justify-content: space-between;
     font-size: var(--titleFont);
     font-weight: 500;
- }
-.askTitleCon{
+}
+
+.askTitleCon {
     display: flex;
     flex-direction: row;
     align-items: center;
- }
+}
 
- h2{
+h2 {
     font-weight: 500;
     font-size: 24px;
     color: rgb(51, 51, 51);
     line-height: 48px;
- }
+}
 
- .askconContainer{
-    width: 80%;
+.askconContainer {
+    width: 100%;
     padding: 4px, 20px;
     border-top: 2px solid rgb(51, 51, 51);
- }
- .type{
+}
+
+.type {
     display: flex;
     padding: 12px 0px;
     align-items: start;
- }
- 
- .type>
- .orderNum,.subject,.content{
+}
+
+.type>.orderNum,
+.subject,
+.content {
     width: 15%;
     font-size: 14px;
     line-height: 44px;
- }
- 
- .imp{
+}
+
+.imp {
     color: red;
- }
+}
 
- .typeSelect,
- .inputSubject,
- .inputContent{
+.typeSelect,
+.inputSubject,
+.inputContent {
     width: 85%;
- }
+}
 
- .typeSelect select,
- .subjectText{
-     width: 100%;
-     height: 44px;
-     padding: 0px 54px 0px 16px;
-     border: 1px solid rgb(221, 221, 221);
-     border-radius: 5px;
-     font-size: 14px;
- }
+.typeSelect select,
+.subjectText {
+    width: 100%;
+    height: 44px;
+    padding: 0px 54px 0px 16px;
+    border: 1px solid rgb(221, 221, 221);
+    border-radius: 5px;
+    font-size: 14px;
+}
 
-.contentCon{
+.contentCon {
     position: relative;
     display: flex;
     flex-direction: column;
@@ -150,8 +113,9 @@ main>.csContainer>ul>.csContent.on{
     background-color: rgb(255, 255, 255);
     border: 1px solid rgb(221, 221, 221);
     border-radius: 5px;
-} 
-.inquiry-contents{
+}
+
+.inquiry-contents {
     display: block;
     width: 100%;
     height: 100%;
@@ -171,7 +135,8 @@ main>.csContainer>ul>.csContent.on{
 textarea {
     overflow: auto;
 }
-.conPlaceholder{
+
+.conPlaceholder {
     position: absolute;
     top: 0px;
     left: 0px;
@@ -180,49 +145,55 @@ textarea {
     padding: 15px 15px 32px;
 }
 
-.contentNoti{
+.contentNoti {
     font-size: 12px;
     line-height: 20px;
     color: rgb(203, 203, 203);
 }
-.contentNoti>.detail1{
+
+.contentNoti>.detail1 {
     display: block;
     margin: 0px 0px 4px;
     font-weight: 500;
 }
-.contentNoti>.detail2{
+
+.contentNoti>.detail2 {
     color: rgb(240, 63, 64);
     padding: 4px 0px 0px 15px;
 }
+
 .detail2::before {
     display: inline-block;
     width: 15px;
     margin: 0px 0px 0px -15px;
     content: "※";
 }
-.contentNoti>.detail3{
+
+.contentNoti>.detail3 {
     display: block;
     margin: 16px 0px 4px;
     font-weight: 500;
 }
-.contentNoti>
-.detail4{
+
+.contentNoti>.detail4 {
     padding: 4px 0px 0px 10px;
 }
-.detail4::before{
+
+.detail4::before {
     display: inline-block;
     width: 10px;
     margin: 0px 0px 0px -10px;
     content: "·";
 }
 
-.submitContainer{
+.submitContainer {
     display: flex;
     justify-content: center;
     align-items: center;
     padding-top: 40px;
 }
-.submitBtn{
+
+.submitBtn {
     width: 160px;
     height: 56px;
     padding: 0px 10px;

@@ -50,11 +50,15 @@ public class ReviewController {
 		
 		try {
 			Review review = this.rs.getReview(u.getUserId(), productId);
+//			유저 id와 productid로 review 테이블을 조회
 			PaymentDetail paymentDetail = this.pds.getPaymentDetail(u.getUserId(), productId);
+//			유저 id와 productid로 payment_detail 테이블을 조회
 			if(review != null) {
 				return "redirect:/myreview";
+//				이미 review가 있다면 myreview로 리다이렉트
 			}else if(paymentDetail == null) {
 				return "redirect:/myreview";
+//				해당 상품을 구매한 적이 없다면 myreview로 리다이렉트
 			}else {
 				return "/Mypage/reviewform";
 			}

@@ -48,6 +48,16 @@ public class PaymentService {
 				.mapToInt(detail -> detail.getPrice() * detail.getCount())
 				.sum();
 	}
+
+	public List<Payment> getPayment(Integer userId, Integer period) throws CanNotFoundException {
+		List<Payment> p = this.pr.findByUserCreate(userId, period);
+		if(!p.isEmpty()) {
+			return p;
+		}
+		else {
+			throw new CanNotFoundException("데이터를 찾을 수 없습니다.");
+		}
+	}
 	
 }
 

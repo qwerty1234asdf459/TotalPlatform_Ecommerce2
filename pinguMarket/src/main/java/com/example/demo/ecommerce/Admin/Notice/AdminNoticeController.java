@@ -1,15 +1,18 @@
 package com.example.demo.ecommerce.Admin.Notice;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.demo.ecommerce.Admin.AdminService;
 import com.example.demo.ecommerce.Entity.Admin;
@@ -77,6 +80,14 @@ public class AdminNoticeController {
 	        return "redirect:/admin/Notice";
 	    }
 
+//		@PreAuthorize("isAuthenticated()") // 로그인 한 경우에만 요청 처리
+		@GetMapping("/admin/Notice/detail/delete/{noticeId}") //개별 삭제
+		public String NoticeDelete(@PathVariable("noticeId") Integer noticeId) throws CanNotFoundException {
+			Notice n = ans.getNotice(noticeId);
+			this.ans.delete(n);
+			return "redirect:/admin/Notice";
+		
+	  }
 		
 		//---------------관리자페이지 > 공지사항 페이지(리스트)-----------------------------
 //		@PreAuthorize("isAuthenticated()") // 로그인 한 경우에만 요청 처리
@@ -87,4 +98,27 @@ public class AdminNoticeController {
 	                          //" "안에 있는 값이 html에서 인식할 텍스트
 	        return "/Admin/AdminNotice";  
 		}
+		//---------------관리자페이지 > 공지사항 페이지(다중 선택 삭제)-----------------------------
+//		@PreAuthorize("isAuthenticated()") // 로그인 한 경우에만 요청 처리
+		@PostMapping("/admin/Notice/delete")
+		@ResponseBody
+		public Map<String, Object> AdminNoticesDelete(@RequestBody Map<String, List<String>> payload) {
+		    Map<String, Object> response = new HashMap<>();
+		    List<String> ids = payload.get("ids"); 					//ids = id값들을 저장한 리스트
+		    System.out.println("Received IDs: " + ids);
+		try {
+		        for (String noticeIdStr : ids) {
+		            int noticeId = Integer.parseInt(noticeIdStr); 	//저장한 json타입의 id값을 Integer타입으로 변환해 noticeId에 할당
+		            System.out.println("id확인: " + noticeId);
+		            Notice n = this.ans.getNotice(noticeId); 		//noticeId로 리뷰 데이터를 받아옴
+		            this.ans.delete(n);								//받아온 리뷰 데이터 삭제
+		        }
+		        response.put("success", true);						//성공적으로 삭제
+		    } catch (Exception e) {
+		        e.printStackTrace();
+		        response.put("success", false);						//삭제 실패 시 false 값을 넘김(실패했습니다 알림창)
+		    }
+		    return response;
+	    }	
+		
 }

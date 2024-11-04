@@ -15,8 +15,7 @@
 }
 /* ---------버튼스타일----------------------- */
 .btn-style{
-    margin-top: 15px;
-    margin-right: 10px;
+    margin-top: 15px; margin-right: 15px;
     border-radius: 5px;
     padding: 0 9px;
     border: 0px;
@@ -43,6 +42,18 @@
     background-color: #fce699; /* 버튼 호버 시 배경색 */
     color: black; /* 버튼 호버 시 텍스트 색상 */
     border: 1px solid #fce699;
+}
+.selectDel{
+    display: inline-block;
+    margin-top: 15px; padding: 0 9px;
+    border-radius: 5px;
+    border: 0px;
+    width: 150px;
+    height: 30px; line-height: 30px;
+    color: black;
+    background-color: #fce699;
+    font-size: 14px; text-align: center;
+    cursor: pointer;
 }
 
 /* ---------searchLine----------------------- */

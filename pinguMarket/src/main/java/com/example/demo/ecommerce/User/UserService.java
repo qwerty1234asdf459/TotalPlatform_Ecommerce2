@@ -55,9 +55,9 @@ public class UserService {
 		}
 //	     회원정보 바꾸는 메서드
 	
-//	public String pwEncode(String password) {
-//		return passwordEncoder.encode(password);
-//	}
+	public String pwEncode(String password) {
+		return passwordEncoder.encode(password);
+	}
 //	비밀번호 확인용 비밀번호 암호화 메서드인데 딱히 쓸데가 없어서 주석처리
 	
 	public boolean pwCheck(String password, String pw) {
@@ -68,6 +68,12 @@ public class UserService {
 	public void userSignout(User user, String signoutYn) {
 		user.setSignoutYn(signoutYn);
 		this.ur.save(user);
+		
+	}
+
+	//회원정보 삭제
+	public void delete(User u) {
+		this.ur.delete(u);
 		
 	}
 	

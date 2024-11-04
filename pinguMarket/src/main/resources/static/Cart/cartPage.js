@@ -111,14 +111,28 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 
+// ****************************************************선택한 제품들 결제페이지로 데이터 전송************************************************************
     paymentBtn.addEventListener("click", function (event) {
         const selectedProducts = document.querySelectorAll("input[name='productSelect']:checked");
-
+        const keyarr = new Array;
+        const countArr = new Array;
+        
         if (selectedProducts.length === 0) {
             event.preventDefault(); // 창 이동 막기
             alert("제품을 선택해주세요."); // 알림 표시
-        }
+        }else{
+			selectedProducts.forEach((checkedbox2) => {
+           		keyarr.push(checkedbox2.value);
+           		const productContainer = checkedbox2.closest(".cartProduct"); // closest: 자기자신 포함해 위쪽으로 트리 순회
+           		countArr.push(parseInt(productContainer.querySelector(".productCount p.count").innerText));
+           		document.getElementById('cartArr').value = JSON.stringify(keyarr);
+				document.getElementById('countArr').value = JSON.stringify(countArr);
+				document.getElementById('cartPaymentForm').submit();
+            });
+		}
     });
 });
+
+
 
 

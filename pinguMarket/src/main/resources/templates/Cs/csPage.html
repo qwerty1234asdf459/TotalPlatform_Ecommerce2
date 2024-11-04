@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <div layout:decorate="~{Layout/layout}">
-    <!-- *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-* MAIN *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*--*-*-*-*-*-*-*-*-*-* -->
     <main layout:fragment="content">
         <link rel="stylesheet" th:href="@{/Cs/csPageStyle.css}">
         <div class="csContainer">
@@ -9,14 +8,14 @@
                     <p>고객센터</p>
                 </div>
                 <ul>
-                    <li class="on">
-                        <a href="#">
-                            <p th:href="@{/csc}">1:1 문의</p>
+                    <li th:classappend="${activePageType == 'inquiry'} ? 'on'">
+                        <a href="javascript:void(0);" th:data-page-type="'inquiry'" class="tab-link">
+                            <p>1:1 문의</p>
                             <i class="fa-solid fa-angle-right"></i>
                         </a>
                     </li>
-                    <li>
-                        <a>
+                    <li th:classappend="${activePageType == 'notice'} ? 'on'">
+                        <a href="javascript:void(0);" th:data-page-type="'notice'" class="tab-link">
                             <p>공지사항</p>
                             <i class="fa-solid fa-angle-right"></i>
                         </a>
@@ -25,8 +24,8 @@
             </div>
 
             <ul>
-                <li class="csContent on">
-                    <div class="csTitle">1:1문의</div>
+                <li th:classappend="${activePageType == 'inquiry'} ? 'csContent on' : 'csContent'">
+                    <div class="csTitle">1:1 문의</div>
                     <table class="csInfo">
                         <tr>
                             <th>번호</th>
@@ -39,43 +38,39 @@
                             <td><a th:href="@{|/csc/detail/${CsQuestion.CsQuestionId}|}"
                                     th:text="${CsQuestion.title}"></a></td>
                             <td th:text="${#temporals.format(CsQuestion.updateDate, 'yyyy-MM-dd HH:mm:ss')}"></td>
-                            <td th:text="${CsQuestion.CsAnswer==null} ? 'N' : 'Y'"></td>
+                            <td th:text="${CsQuestion.CsAnswer == null} ? 'N' : 'Y'"></td>
                         </tr>
                     </table>
                     <div class="askBtn">
                         <a th:href="@{csc/form}">문의하기</a>
                     </div>
-
-                    <!-- 페이징 버튼 -->
-                <div id="pageBtn" th:if="${page.totalPage} > 1">
-                    <ul>
-                        <li th:classappend="${page.pageNo == 1} ? 'disabled'">
-                            <a class="page-link" href="javascript:void(0)" th:data-page="1">처음으로</a>
-                        </li>
-                        <li>
-                            <a class="page-link" href="javascript:void(0)" th:if="${page.pageNo>1}"
-                                th:data-page="${page.pageNo-1}">이전</a>
-                        </li>
-                        <li th:each="num : ${#numbers.sequence(page.startPage, page.endPage)}"
-                            th:classappend="${page.pageNo == num} ? 'active'">
-                            <a class="page-link" href="javascript:void(0)" th:text="${num}"
-                                th:data-page="${num}"></a>
-                        </li>
-                        <li>
-                            <a class="page-link" href="javascript:void(0)" th:if="${page.pageNo < page.totalPage}"
-                                th:data-page="${page.pageNo+1}">다음</a>
-                        </li>
-                        <li th:classappend="${page.pageNo == page.totalPage} ? 'disabled'">
-                            <a class="page-link" href="javascript:void(0)"
-                                th:data-page="${page.totalPage}">마지막으로</a>
-                        </li>
-                    </ul>
-                </div>
-                <!-- 페이징 버튼 end -->                       
+                    <div class="pageBtn" th:if="${page.totalPage} > 1">
+                        <ul>
+                            <li th:classappend="${page.pageNo == 1} ? 'disabled'">
+                                <a class="page-link" href="javascript:void(0)" th:data-page="1">처음으로</a>
+                            </li>
+                            <li>
+                                <a class="page-link" href="javascript:void(0)" th:if="${page.pageNo > 1}"
+                                    th:data-page="${page.pageNo - 1}">이전</a>
+                            </li>
+                            <li th:each="num : ${#numbers.sequence(page.startPage, page.endPage)}"
+                                th:classappend="${page.pageNo == num} ? 'active'">
+                                <a class="page-link" href="javascript:void(0)" th:text="${num}"
+                                    th:data-page="${num}"></a>
+                            </li>
+                            <li>
+                                <a class="page-link" href="javascript:void(0)" th:if="${page.pageNo < page.totalPage}"
+                                    th:data-page="${page.pageNo + 1}">다음</a>
+                            </li>
+                            <li th:classappend="${page.pageNo == page.totalPage} ? 'disabled'">
+                                <a class="page-link" href="javascript:void(0)"
+                                    th:data-page="${page.totalPage}">마지막으로</a>
+                            </li>
+                        </ul>
+                    </div>
                 </li>
-                
 
-                <li class="csContent">
+                <li th:classappend="${activePageType == 'notice'} ? 'csContent on' : 'csContent'">
                     <div class="csTitle">공지사항<span>회사의 새로운 소식들과 유용한 정보들을 한곳에서 확인하세요.</span></div>
                     <table class="csInfo">
                         <tr>
@@ -85,25 +80,45 @@
                             <th>작성일</th>
                         </tr>
                         <tr th:each="Notice, loop : ${noticeList}">
-                            <td>1</td>
-                            <td><a th:href="@{|/csc/notice/${Notice.NoticeId}|}"
-                            	   th:text="${Notice.title}"></a></td>
+                            <td th:text="${loop.count + ((page2.pageNo-1) * page2.pageSize)}"></td>
+                            <td><a th:href="@{|/csc/notice/${Notice.NoticeId}|}" th:text="${Notice.title}"></a></td>
                             <td th:text="${Notice.admin.adminId}"></td>
                             <td th:text="${#temporals.format(Notice.updateDate, 'yyyy-MM-dd HH:mm:ss')}"></td>
                         </tr>
                     </table>
+                    <div class="pageBtn" th:if="${page2.totalPage} > 1">
+                        <ul>
+                            <li th:classappend="${page2.pageNo == 1} ? 'disabled'">
+                                <a class="page-link" href="javascript:void(0)" th:data-page="1">처음으로</a>
+                            </li>
+                            <li>
+                                <a class="page-link" href="javascript:void(0)" th:if="${page2.pageNo > 1}"
+                                    th:data-page="${page2.pageNo - 1}">이전</a>
+                            </li>
+                            <li th:each="num : ${#numbers.sequence(page2.startPage, page2.endPage)}"
+                                th:classappend="${page2.pageNo == num} ? 'active'">
+                                <a class="page-link" href="javascript:void(0)" th:text="${num}"
+                                    th:data-page="${num}"></a>
+                            </li>
+                            <li>
+                                <a class="page-link" href="javascript:void(0)" th:if="${page2.pageNo < page2.totalPage}"
+                                    th:data-page="${page2.pageNo + 1}">다음</a>
+                            </li>
+                            <li th:classappend="${page2.pageNo == page2.totalPage} ? 'disabled'">
+                                <a class="page-link" href="javascript:void(0)"
+                                    th:data-page="${page2.totalPage}">마지막으로</a>
+                            </li>
+                        </ul>
+                    </div>
                 </li>
             </ul>
         </div>
 
-
-
-
-        <!--  page 데이터 넘기기 -->
         <form th:action="@{/csc}" method="get" id="searchForm">
-            <input type="hidden" id="page" name="page">
+            <input type="hidden" id="page1" name="page1" th:value="${page.pageNo}" />
+            <input type="hidden" id="page2" name="page2" th:value="${page2.pageNo}" />
+            <input type="hidden" id="pageType" name="pageType" th:value="${activePageType}" />
         </form>
-
     </main>
 </div>
 <script th:src="@{/Cs/csPageModul.js}"></script>

@@ -3,6 +3,7 @@ package com.example.demo.ecommerce.CsQuestion;
 import java.security.Principal;
 import java.util.List;
 
+import org.aspectj.weaver.patterns.TypePatternQuestions.Question;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -31,25 +32,37 @@ private final CsQuestionService qr;
 private final AdminService ar;
 private final AdminNoticeService ans;
 	
-//  ------------------------------------------------------------------고객센터 페이지 연결------------------------------------------------------
+//  ------------------------------------------------------------------고객센터 페이지 연결---------------------------------------------------------------------------------
 //	@PreAuthorize("isAuthenticated()")
 	@GetMapping("/csc")
-	public String csCenter(Model model, @RequestParam(value="page", defaultValue="0") int page, Principal principal) throws UserException {
-		//EzenPaging ezenPaging = new EzenPaging(현재 페이지 번호, 페이지당 글 갯수, 총 글 갯수, 페이징 버튼 갯수)
-				EzenPaging ezenPaging = new EzenPaging(page, 10, ar.getQuestionCountByAll(1), 5); // 유저정보 강제 입력 1 대신 (principal.getName() 넣기
-				List<CsQuestion> questionList = this.ar.getUserByKeyword(1, ezenPaging.getStartNo(), ezenPaging.getPageSize()); // 유저정보 강제 입력 1 대신 (principal.getName() 넣기
-				
-				List<Notice> noticeList = this.ans.findAll(); // 공지사항 List 
-				
-				model.addAttribute("questionList", questionList);
-				model.addAttribute("page", ezenPaging);
-				model.addAttribute("noticeList", noticeList);
-				
-				return "Cs/csPage";
+	public String csCenter(Model model, 
+	                       @RequestParam(value="page1", defaultValue="0") int page1,
+	                       @RequestParam(value="page2", defaultValue="0") int page2, 
+	                       @RequestParam(value="pageType", defaultValue="inquiry") String pageType,
+	                       Principal principal, 
+	                       @RequestParam(value="chk", defaultValue="on") String chk) throws UserException {
+	    
+	    // 1:1 문의 페이징
+	    EzenPaging ezenPaging = new EzenPaging(page1, 10, ar.getQuestionCountByAll(1), 5); // 유저정보 강제 입력 1 대신 (principal.getName() 넣기
+	    List<CsQuestion> questionList = ar.getUserByKeyword(1, ezenPaging.getStartNo(), ezenPaging.getPageSize()); // 유저정보 강제 입력 1 대신 (principal.getName() 넣기
+	
+	    // 공지사항 페이징
+	    EzenPaging ezenPaging2 = new EzenPaging(page2, 10, ans.getNoticeCountAll(), 5);
+	    List<Notice> noticeList = ans.getNoticePaging(ezenPaging2.getStartNo(), ezenPaging2.getPageSize());
+	
+	    model.addAttribute("questionList", questionList);
+	    model.addAttribute("page", ezenPaging); 
+	    model.addAttribute("page2", ezenPaging2);
+	    model.addAttribute("noticeList", noticeList);
+	
+	    // 현재 활성화된 페이지 타입 정보 추가
+	    model.addAttribute("activePageType", pageType);
+	
+	    return "Cs/csPage";
 	}
 
 	
-//  -----------------------------------------------1:1 문의> 상세페이지 연결-----------------------------------------------
+//  ----------------------------------------------------고객센터 > 1:1 문의 > 상세페이지 연결-------------------------------------------------------
 //	@PreAuthorize("isAuthenticated()")
 	@GetMapping(value = "/csc/detail/{id}")
 	public String detail(Model model, @PathVariable("id") Integer id, CsQuestionForm csquestionForm) throws UserException {
@@ -60,7 +73,7 @@ private final AdminNoticeService ans;
 	}
 	
 	
-//  -----------------------------------------------1:1 문의 작성 form 페이지-----------------------------------------------
+//  -----------------------------------------------고객센터 > 1:1 문의 작성 form-----------------------------------------------
 //	@PreAuthorize("isAuthenticated()")
 	@GetMapping("/csc/form")
 	public String csquestionForm(CsQuestionForm csquestionForm, Model model) {
@@ -72,7 +85,7 @@ private final AdminNoticeService ans;
 		return "Cs/cscForm";
 	}
 	
-	//   -----------------------------------------------1:1 문의 문의한 내용을 받아와 처리하는 곳 -----------------------------------------------
+	//   -----------------------------------------------고객센터 > 1:1 문의한 내용을 받아와 처리 -----------------------------------------------
 	//	@PreAuthorize("isAuthenticated()")
 		@PostMapping("/csc/form")
 		public String questionCreate(@Valid CsQuestionForm csquestionForm, 
@@ -85,7 +98,7 @@ private final AdminNoticeService ans;
 			return "redirect:/csc";
 		}
 		
-	//   -----------------------------------------------관리자 답변 미등록 시 1:1문의 수정 페이지 연결 -----------------------------------------------
+	//   -----------------------------------------------고객센터 > 1:1문의 수정-----------------------------------------------
 	//	@PreAuthorize("isAuthenticated()")
 		@GetMapping("/csc/modify/{id}")
 		public String questionModify(Model model, CsQuestionForm csquestionForm, @PathVariable("id") Integer id) throws UserException {
@@ -101,7 +114,7 @@ private final AdminNoticeService ans;
 			
 		}
 	
-	//  -----------------------------------------------1:1 문의 수정이 처리되는 곳-----------------------------------------------
+	//  -----------------------------------------------고객센터 > 1:1 문의 수정한 내용 받아와 처리-----------------------------------------------
 	//	@PreAuthorize("isAuthenticated()")
 		@PostMapping("/csc/modify/{id}")
 		public String questionModify(@Valid CsQuestionForm csquestionForm, 
@@ -117,30 +130,30 @@ private final AdminNoticeService ans;
 			return "redirect:/csc/detail/{id}";
 		}
 
-	//   -----------------------------------------------1:1 문의 삭제페이지 연결-----------------------------------------------
+	//   -----------------------------------------------고객센터 > 1:1 문의 삭제-----------------------------------------------
 	//	@PreAuthorize("isAuthenticated()")
-		@GetMapping("/csc/delete/{id}")
-		public String questionDelete(CsQuestionForm csquestionForm, @PathVariable("id") Integer id) throws UserException {
-			
-			CsQuestion q = this.qr.getQuestion(id);
-			this.qr.delete(q);
-			
-			return "redirect:/csc";
-		}
+//		@GetMapping("/csc/delete/{id}")
+//		public String questionDelete(CsQuestionForm csquestionForm, @PathVariable("id") Integer id) throws UserException {
+//			
+//			CsQuestion q = this.qr.getQuestion(csQuestionId);
+//			this.qr.delete(q);
+//			
+//			return "redirect:/csc";
+//		}
 		
 
-		//  1:1 문의 답변페이지 연결
+	//  -----------------------------------------------고객센터 > 1:1 문의 > 관리자 답변 조회-----------------------------------------------
 //		@PreAuthorize("isAuthenticated()")
-		@GetMapping("/csc/answer/{id}")
-		public String answerDetail(Model model, @PathVariable("id") Integer id) {
-			
-			model.addAttribute("answer", this.ar.getAnswer(id));
-			
-			return "";
-		}
+//		@GetMapping("/csc/answer/{id}")
+//		public String answerDetail(Model model, @PathVariable("id") Integer id) {
+//			
+//			model.addAttribute("answer", this.ar.getAnswer(id));
+//			
+//			return "Cs/cscDetail";
+//		}
 		
 		
-		// -----------------------------------------------공지사항 상세페이지 조회-----------------------------------------------
+		// -----------------------------------------------고객센터 > 공지사항 > 상세페이지 조회-----------------------------------------------
 		@GetMapping(value ="/csc/notice/{id}")
 		public String noticeDetail(Model model, @PathVariable("id") Integer noticeId, AdminNoticeForm adminNoticeForm) throws UserException {
 			
@@ -150,7 +163,5 @@ private final AdminNoticeService ans;
 			return "Cs/csNotiDetail"; 
 			
 		}
-	
-	
 
 }

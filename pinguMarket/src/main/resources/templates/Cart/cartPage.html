@@ -27,7 +27,8 @@
                     <div class="cartProductContainer">
                         <div th:each="cart : ${user.cartList}" class="cartProduct">                            
                             <div class="productCheckBox">
-                                <input type="checkbox" th:id="'productSelect'+${cart.cartId}" name="productSelect" class="productSelectBox">
+                                <input type="checkbox" th:id="'productSelect'+${cart.cartId}" name="productSelect"
+                                	 class="productSelectBox" th:value="${cart.cartId}">
                                 <label th:for="'productSelect'+${cart.cartId}">
                                     <div class="inputSquire" th:id="${cart.cartId}" name="cartbox">
                                         <i class="fa-solid fa-check"></i>
@@ -89,12 +90,15 @@
                         </div>
                     </div>
                     <div class="accountBtn" id="payment">
-                        <input type="hidden" name="data" id="jsonData">
-                        <a th:href="@{/payment}">결제하기</a>
+                        <a href="javascript:void(0)">결제하기</a>
                     </div>
                 </div>
             </div>
         </div>
+        <form th:action="@{/payment}" id="cartPaymentForm" method="get">
+        	<input type="hidden" id="cartArr" name="cartData">
+        	<input type="hidden" id="countArr" name="countData">
+        </form>
     </main>
 </div>
 
