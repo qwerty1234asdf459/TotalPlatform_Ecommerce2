@@ -8,6 +8,7 @@ import java.util.Map;
 
 import org.aspectj.weaver.patterns.ThrowsPattern;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 
@@ -22,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.demo.ecommerce.Coupon.CouponService;
+import com.example.demo.ecommerce.Email.EmailService;
 import com.example.demo.ecommerce.Entity.Coupon;
 import com.example.demo.ecommerce.Entity.Payment;
 import com.example.demo.ecommerce.Entity.User;
@@ -46,12 +48,14 @@ public class MyPageController {
 	private final PaymentService ps;
 	private final CouponService cs;
 	private final LmsCouponService lcs;
+	private final EmailService es;
 
 //	@PreAuthorize("isAuthenticated()")
 	@GetMapping("/myorder")
 	public String myOrderPage(Model model, Principal principal) throws CanNotFoundException {
 //		User u = this.us.getUser(principal.getName());
 		User u = this.us.getUser(1);
+		
 		List<Payment> payment = this.ps.getPayment(u.getUserId());
 		
 		List<String> productNames = payment.stream()
@@ -67,6 +71,28 @@ public class MyPageController {
 		model.addAttribute("productNames", productNames);
 		model.addAttribute("totalprice", totalPrice);
 		return "Mypage/myorder";
+		
+	}
+	
+	@PostMapping("periodloading")
+	public ResponseEntity<List<Payment>> periodLoading(@RequestParam("period") Integer period,
+			Model model, Principal principal) throws CanNotFoundException{
+		
+		User u = this.us.getUser(1);
+		List<Payment> paymentList =this.ps.getPayment(u.getUserId(), period);
+		
+//		get(2) 해놓고 아웃오브바운드가 발생하고 6개월 이상을 고르면 3개 다 나오는 것으로 보아
+//		3개월 선택시 id가 1인 유저이고 3개월 이내에 있는 값만 잘 조회하고 있음
+//		그럼 이제 이 payment 목록을 리턴해서 myorder 페이지에 적용시켜야 하는데
+//		여태까진 그냥 model.addAttribute 쓰면 알아서 잘 됐는데 비동기로 이걸 어떻게?
+//		일단 esponseEntity.ok로 리턴하면 response에 payment 리스트가 있기는 할 것 같은데
+//		그렇다고 그냥 String이랑 boolean 리턴해서 단순 값을 쓰던 거랑
+//		이 리스트를 타임리프 문법으로 적용시켜야 하는 거랑은 좀 차이가 클 것 같은데..
+//		json으로 map 형태로 반환? 이것도 잘 모르겠는데
+		
+		
+		
+		return ResponseEntity.ok(paymentList);
 		
 	}
 	
@@ -181,6 +207,23 @@ public class MyPageController {
 		
 	}
 	
+	
+	@PostMapping("/sendcode")
+	public ResponseEntity<Map<String, String>> emailAuth(@RequestParam("email") String email) {
+		Map<String, String> response = new HashMap<>();
+		try {
+			String code = es.sendCode(email);
+			response.put("code", code);
+			return ResponseEntity.ok(response);
+//			이거 리턴해서 chars가 나와야 함
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			response.put("error", "에러남");
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
+		}
+	}
+	
 //	@PreAuthorize("isAuthenticated()")	
 	@GetMapping("usermodify/pw")
 	public String myPwModifyPage(EditPwForm editPwForm,
@@ -242,12 +285,14 @@ public class MyPageController {
 		
 		model.addAttribute("user", user);
 		
+		
+		
 		return "Mypage/signout";
 	}
 	
 //	@PreAuthorize("isAuthenticated()")
 	@PostMapping("/signout") 
-	public String singoutPage(Principal principal) throws CanNotFoundException {
+	public String signoutPage(Principal principal) throws CanNotFoundException {
 		
 		User user = this.us.getUser(1);
 		

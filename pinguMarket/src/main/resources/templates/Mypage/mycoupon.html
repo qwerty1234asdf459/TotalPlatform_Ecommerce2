@@ -134,7 +134,7 @@
                      <div class="contentHeader">
                         <span>쿠폰 일자</span>
                         <span>코드</span>
-                        <span>할인율</span>
+                        <span>할인량</span>
                      </div>
 
 				    <!-- 쿠폰이 없을 때 표시 -->
@@ -148,7 +148,7 @@
 				        <div class="contentListInfo">
 				            <span th:text="${#temporals.format(coupon.createDate, 'yyyy-MM-dd')}"></span>
 				            <span th:text="${coupon.code}"></span>
-				            <span th:text="${coupon.discount}"></span>
+				            <span th:text="${coupon.discount}"><p></p></span>
 				        </div>
 
                    </div> <!-- couponListContainer 끝 -->
