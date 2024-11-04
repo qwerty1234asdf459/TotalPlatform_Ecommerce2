@@ -36,7 +36,7 @@ public class PaymentController {
 	
 	
 	@GetMapping("/payment")
-	public String paymentTest(Model model, @RequestParam("cartData")String productData
+	public String payment(Model model, @RequestParam("cartData")String productData
 			,@RequestParam("countData")String countData) throws Exception {
 			User u = this.userService.getUser(1);
 		 List<String> cartIdList = new ObjectMapper().readValue(productData, new TypeReference<List<String>>() {});
@@ -56,9 +56,9 @@ public class PaymentController {
 		return "Payment/paymentPage";
 	}
 	
-	@GetMapping("/paymentView")
+	@PostMapping("/payment")
 	public String payment() {
-		return "Payment/paymentPage";
+		return "redirect:/cart";
 	}
 	
 	

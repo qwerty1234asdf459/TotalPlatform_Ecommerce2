@@ -5,8 +5,9 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
-
+import com.example.demo.ecommerce.Entity.Coupon;
 import com.example.demo.ecommerce.Entity.Payment;
+import com.example.demo.ecommerce.Entity.User;
 import com.example.demo.ecommerce.Review.CanNotFoundException;
 
 import lombok.RequiredArgsConstructor;
@@ -16,6 +17,11 @@ import lombok.RequiredArgsConstructor;
 public class PaymentService {
 	
 	private final PaymentRepository pr;
+	
+	public Payment createPayment(User user, Coupon coupon,String delRequest) {
+		Payment p = new Payment();
+		return p;
+	}
 	
 	public List<Payment> getPayment(Integer id) throws CanNotFoundException {
 		List<Payment> p = this.pr.findByUser_UserId(id);

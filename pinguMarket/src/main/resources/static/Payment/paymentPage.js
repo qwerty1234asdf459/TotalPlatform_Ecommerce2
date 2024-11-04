@@ -45,7 +45,7 @@ function priceCalculate(){
 	let discount = 0;
 	let totalPrice = 0;
 	
-	couponPrice.textContent = couPrice;
+	couponPrice.textContent = couPrice+"원";
 	
 	
 	document.querySelectorAll(".productTitle").forEach((product)=>{
@@ -54,13 +54,13 @@ function priceCalculate(){
 		
 		sumPrice += price * count;
 		
-		orderPrice.textContent = sumPrice;
+		orderPrice.textContent = sumPrice+"원";
 	});
 	
 	totalPrice = sumPrice+deliPrice+couPrice;
 	
-	deliveryPrice.textContent = deliPrice;
-	finalPrice.textContent = totalPrice;
+	deliveryPrice.textContent = deliPrice+"원";
+	finalPrice.textContent = totalPrice+"원";
 	paymentSubmit.textContent = totalPrice+"원 결제하기";
 }
 
