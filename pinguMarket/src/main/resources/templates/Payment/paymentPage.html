@@ -11,14 +11,16 @@
                 <div class="order-product">
                     <p>주문 상품</p>
                 </div>
-                <div class="productCon">
+                <div class="productCon" th:each="cart : ${cartList}">
                     <div class="productSub">
                         <div class="productImg">
                             <img src="" alt="">
                         </div>
                         <div class="productTitle">
-                            <p>[피지오겔] DMT 페이셜 크림 150mL</p>
-                            <p class="productPrice">13,500원 | 1개</p>
+                            <p th:text="${cart.product.name}"></p>
+                            <p class="productPrice" th:text="${cart.product.price}+원+' | '+${cart.productCount}+개"></p>
+                            <input type="hidden" class="price" th:value="${cart.product.price}">
+                            <input type="hidden" class="count" th:value="${cart.productCount}">
                         </div>
                     </div>
                 </div>
@@ -32,15 +34,15 @@
                     <div class="orderContent">
                         <div class="order-info">
                             <p class="orderL">보내는 분</p>
-                            <p class="orderR">홍길동</p>
+                            <p class="orderR" th:text="${user.name}"></p>
                         </div>
                         <div class="order-info">
                             <p class="orderL">휴대폰</p>
-                            <p class="orderR">010-1111-1111</p>
+                            <p class="orderR" th:text="${user.tell}"></p>
                         </div>
                         <div class="order-info">
                             <p class="orderL">이메일</p>
-                            <p class="orderR">gunchim@naver.com</p>
+                            <p class="orderR" th:text="${user.email}"></p>
                         </div>
                     </div>
                 </div>
@@ -50,10 +52,15 @@
                 <div class="shippingContent">
                     <div class="shipping-infoCon">
                         <p>배송 정보</p>
+                        <div>
+                        	<input type="radio" id="existingAd" name="adressSelect" checked>기존주소
+                        	<input type="radio" id="changeAd" name="adressSelect"> 직접입력
+                        </div>
                     </div>
                     <div class="shipping-info">
                         <p class="orderL">배송지</p>
-                        <p class="orderR">경기도 안산시 단원구 산단로 1 1동 101호</p>
+                        <input type="hidden" id="userAddress" th:value="${user.address}+' '+${user.addressDetail}">
+                        <textarea id="adressTextArea" class="orderR"></textarea>
                         <section class="change-button">
                         <div class="btn">변경</div>
                         </section>
@@ -79,16 +86,15 @@
                             <p>쿠폰</p>
                         </div>
                         <div class="coupon-info">
-                            <p class="orderL">쿠폰 적용</p>
+                            <p id="usableCoupon" class="orderL" th:text="사용가능한+' '+쿠폰+' '+갯수+' '+${#lists.size(user.couponList)}+개"></p>
                             <p class="orderR">
-                                <select class="couponSelect" id="">
-                                    <option value="">사용가능 쿠폰 0장 / 전체 3장</option>
-                                    <option value="coupon1">신규가입 고객 1,000원 할인</option>
-                                    <option value="coupon2">배송비 3,000원 할인</option>
-                                    <option value="coupon3">1,000원 할인</option>
+                                <select class="couponSelect">
+                                	<option value="0">선택안함</option>
+                       				<option th:each="coupon : ${user.couponList}" th:text="${coupon.discount}+원+' '+할인쿠폰"
+                       				 th:value="${coupon.discount}" id="couponDiscount"></option>
                                 </select>
                             </p>
-                            <p class="c-impossible">쿠폰 적용 불가 상품입니다.</p>
+                            <!-- <p class="c-impossible">쿠폰 적용 불가 상품입니다.</p> -->
                         </div>
 
 
@@ -141,7 +147,7 @@
                         <div class="paybtnCon">
                             <div class="paybutton">
                                 <div class="payBtn">
-                                    <a href="#">11,500원 결제하기</a>
+                                    <a id="paymentSubmit" href="#">0</a>
                                 </div>
                             </div>
                         </div>
@@ -157,27 +163,27 @@
                                 <div class="accountCon">
                                     <div class="orderAmount">
                                         <p>주문금액</p>
-                                        <p class="money">13,500원</p>
+                                        <p id="orderPrice" class="money"></p>
                                     </div>
 
                                     <div class="productSale">
                                         <p>상품할인금액</p>
-                                        <p class="money">-5,000원</p>
+                                        <p id="discountPrice" class="money"></p>
                                     </div>
 
                                     <div class="coupon">
                                         <p>쿠폰할인</p>
-                                        <p class="money">0원</p>
+                                        <p id="couponPrice" class="money"></p>
                                     </div>
 
                                     <div class="delivery">
                                         <p>배송비</p>
-                                        <p class="money">3,000원</p>
+                                        <p id="deliveryPrice" class="money"></p>
                                     </div>
 
                                     <div class="finalPay">
                                         <p>최종결제금액</p>
-                                        <p class="money">11,500원</p>
+                                        <p id="finalPrice" class="money"></p>
                                     </div>
                                 </div>
                             </div>
@@ -188,3 +194,5 @@
         </div>
     </main>
 </div>
+
+<script th:src="@{/Payment/paymentPage.js}"></script>
