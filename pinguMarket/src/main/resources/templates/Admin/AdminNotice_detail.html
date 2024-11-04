@@ -63,9 +63,11 @@
             </form>
             <div>
                 <button id="updateBtn" class="btn-style">게시글 수정</button>
-                <!-- <button id="updateReBtn" class="btn-style" type="submit">게시글 저장</button> -->
                 <button id="updateReBtn" class="btn-style" th:attr="data-id=${n.noticeId}" type="submit">게시글 저장</button>
-                <button id="deleteBtn" class="btn-style" th:attr="data-id=${n.noticeId}">게시글 삭제</button>
+                <a id="deleteBtn" class="btn-style" th:data-uri="@{|/admin/Notice/detail/delete/${n.noticeId}|}" href="javascript:void(0);">게시글 삭제</a>
+                <!-- <button id="deleteBtn" class="btn-style" onclick="|location.href='@{/admin/Notice/detail/delete/${n.noticeId}}'|" href="javascript:void(0);">게시글 삭제</button> -->
+                <!-- href="javascript:void(0);" th:data-uri="@{|/admin/Notice/detail/delete/${n.noticeId}|}" -->
+                <!-- onclick="location.href=@{|/admin/Notice/detail/delete/${n.noticeId}|}" -->
             </div>
         </div><!--메인 끝-->
     </div>    

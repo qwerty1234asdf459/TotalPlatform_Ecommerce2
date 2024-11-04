@@ -13,9 +13,9 @@ import lombok.RequiredArgsConstructor;
 @Service
 public class AdminProductService {
 	private final AdminProductRepository apr;
+//상품조회는 ProductService에 있음
 
-
-
+//상품등록
 	public Product returnCreate(String name, String category, Integer price, Integer amount) {
 		// 
 		Product a = new Product();
@@ -29,6 +29,13 @@ public class AdminProductService {
 		
 		this.apr.save(a);
 		return a;
+	}
+
+
+//상품 삭제 
+	public void delete(Product p) {
+		this.apr.delete(p);
+		
 	}
 	
 //	public AdminProduct Create(String name, String category, Integer price, Integer amount) {

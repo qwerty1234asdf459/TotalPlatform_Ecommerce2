@@ -55,4 +55,11 @@ public class AdminNoticeService {
 		return this.anr.findAll();
 	}
 
+
+//---------------	공지사항 삭제  ---------------------
+	public void delete(Notice n) {
+		this.anr.delete(n);
+		
+	}
+
 }

@@ -1,6 +1,5 @@
 const updateBtn = document.querySelector("#updateBtn"); /* 수정  */
 const updateReBtn = document.querySelector("#updateReBtn"); /* 수정 저장 */
-const deleteBtn = document.querySelector("#deleteBtn");/* 삭제 */
 
 const title = document.querySelector("#writing-td-text"); /*제목 */
 const content = document.querySelector("#writing-td-textarea"); /*내용 */
@@ -31,9 +30,16 @@ updateReBtn.addEventListener('click', function(){
 });
 
 /* 답변 삭제 버튼 클릭시 */
-deleteBtn.addEventListener('click', function(){
-    if(confirm("정말로 삭제하시겠습니까?")){
-        location.href = this.dataset.uri;
-        // location.href = "/admin/Notice/detail" + deleteBtn.getAttribute("data-id");
-    }
-});
+// deleteBtn.addEventListener('click', function(){
+//     if(confirm("정말로 삭제하시겠습니까?")){
+//         location.href = this.dataset.uri;
+//     }
+// });
+
+const deleteBtn = document.querySelector("#deleteBtn");/* 삭제버튼 */
+//삭제하시겠습니까?메세지 "확인"을 선택했을때 해당 컴포넌트의 data-uri 값으로 URL 호출을 하라는 의미
+    deleteBtn.addEventListener('click', function(){
+        if(confirm("정말로 삭제하시겠습니까?")){
+            location.href = this.dataset.uri;
+        }
+    });

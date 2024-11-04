@@ -70,5 +70,11 @@ public class UserService {
 		this.ur.save(user);
 		
 	}
+
+	//회원정보 삭제
+	public void delete(User u) {
+		this.ur.delete(u);
+		
+	}
 	
 }

@@ -13,6 +13,7 @@
             answerTable.style.display = "table";
             nav.style.height = "1600px";
             btnBox.style.display = "block";
+            answerBtn.tyle.display = "none";
         });
 
         /* 초기화 버튼 클릭시 */
