@@ -16,54 +16,91 @@
         <nav th:replace="~{/Admin/Adminnavbar :: AdminnavbarFragment}"></nav><!--네비바 -->     
         
         <section class="Inquiry_dtailMain"><!--메인****************************************************************-->
-            <!-- 삭제, 답변 가능 : 스프링연결코드 수정필요-->
             <h1>문의 관리 > 상세페이지</h1>
             <div id="content-box">
-                <div class="content_border">
-                    <table>
-                        <tr class="writing-title">
-                            <td th:text="${Q.title}" colspan="4">TITILE</td>
-                        </tr>
-                        <tr class="writing-id-date">
-                            <td class="writing-td-title">ID</td>
-                            <td th:text="${Q.user.id}" class="writing-td-content">작성자 ID</td>
-                            <td class="writing-td-title">등록날짜</td>
-                            <td th:text="${Q.updateDate}" class="writing-td-content">yyyy-MM-dd HH:mm:ss</td>
-                        </tr>
-                        <tr class="writing-content">
-                            <td class="writing-td-title">내용</td>
-                            <td class="writing-td-content" colspan="3">
-                                <pre th:text="${Q.contents}" class="writing-td-content-pre">내용연결</pre>
-                            </td>
-                        </tr>
-                    </table>
-                </div>
-                <button id="answer-btn" class="btn-style">답변 등록</button>
-
-                <!-- 답변 등록 버튼 클릭 시 나타남 -->
-                <form th:action="@{/admin/cs/{csQuestionId}}" th:object = "${CsAnswerForm}" method="post">
+                <!-- 문의 조회 영역 -->
+                <div style="margin-right: 15px; display: flex; flex-direction: column;" >
                     <div class="content_border">
-                        <table id="answer-table">
+                        <table>
+                            <tr class="writing-title">
+                                <td th:text="${Q.title}" colspan="4" class="qTitle">TITILE</td>
+                            </tr>
                             <tr class="writing-id-date">
-                                <td class="writing-td-title">제목</td>
-                                <td class="writing-td-content">
-                                    <input type="text" name="title" id="writing-td-text" spellcheck="false">
-                                </td>
+                                <td class="writing-td-title">ID</td>
+                                <td th:text="${Q.user.id}" class="writing-td-content">작성자 ID</td>
+                                <td class="writing-td-title">등록날짜</td>
+                                <td th:text="${Q.updateDate}" class="writing-td-content">yyyy-MM-dd HH:mm:ss</td>
                             </tr>
                             <tr class="writing-content">
                                 <td class="writing-td-title">내용</td>
-                                <td class="writing-td-content">
-                                    <textarea name="contents" id="writing-td-textarea" spellcheck="false"></textarea>
+                                <td class="writing-td-content" colspan="3">
+                                    <pre th:text="${Q.contents}" class="writing-td-content-pre">내용연결</pre>
                                 </td>
                             </tr>
                         </table>
                     </div>
-                        <div id="btn-box">
-                            <button type="submit" class="btn-style">저장</button>
-                            <button type="button" id="btn-clear" class="btn-style">초기화</button>
+                    <!-- <button id="answer-btn" class="btn-style">답변 등록</button> -->
+                </div>
+
+                <div class="Answer-box">
+                    <!-- 답변 신규 등록 영역 : 답변 등록 버튼 클릭 시 나타남 -->
+                                    <!--액션주소 확인 필-->
+                    <form th:action="@{/admin/cs/{csQuestionId}}" th:object = "${CsAnswerForm}" method="post">
+                        <div class="content_border">
+                            <table id="answer-table">
+                                <tr class="writing-id-date">
+                                    <td class="writing-td-title">제목</td>
+                                    <td class="writing-td-content">
+                                        <input type="text" class="aTitle" name="title" id="writing-td-text" spellcheck="false">
+                                    </td>
+                                </tr>
+                                <tr class="writing-content">
+                                    <td class="writing-td-title">내용</td>
+                                    <td class="writing-td-content">
+                                        <textarea name="contents" class="writing-td-content-pre" spellcheck="false"></textarea>
+                                        <div id="btn-box" class="btnboxs">
+                                            <button type="submit" id="btn-submit" class="btn-style">답변 신규 등록</button>
+                                            <button type="button" id="btn-clear" class="btn-style">초기화</button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
                         </div>
-                        <input type="hidden" name="csQuestionId" th:value="${Q.csQuestionId}">
-                </form>
+                            <input type="hidden" name="csQuestionId" th:value="${Q.csQuestionId}">
+                    </form>
+    
+                    <!-- 기존 답변 조회/수정 영역 : 기존 답변이 존재할 때 나타남 -->
+                    <form th:action="@{/admin/cs/{csQuestionId}}" id="updateTable" method="post"> <!--액션주소 확인 필-->
+                        <input type="hidden" name="csAnswerId">
+                        <!-- <input type="hidden" name="csAnswerId" th:value="${Q.csAnswerId}"> -->
+                        <div class="content_border">
+                            <table>
+                                <tr class="writing-id-date">
+                                    <td class="writing-td-title">제목</td>
+                                    <td th:text="${Q.csAnswer.title}" colspan="3" class="writing-td-content">
+                                        <input type="text" class="writing-td-content aTitle" id="writing-td-text" name="title" th:value="${Q.csAnswer.title}" required>
+                                    </td>
+                                </tr>
+                                <tr class="writing-id-date">
+                                    <td class="writing-td-title">작성자</td>
+                                    <td class="writing-td-content">작성자 ID 연결필요</td><!--th:text="${관리자Id}"-->
+                                    <td class="writing-td-title">등록날짜</td>
+                                    <td th:text="${Q.csAnswer.updateDate}" class="writing-td-content">yyyy-MM-dd HH:mm:ss</td>
+                                </tr>
+                                <tr class="writing-content">
+                                    <td class="writing-td-title">내용</td>
+                                    <td class="writing-td-content" colspan="3">
+                                        <textarea class="writing-td-content-pre" id="writing-td-textarea" name="contents" th:text="${Q.csAnswer.contents}" required></textarea>
+                                        <div class="btnboxs">
+                                            <!-- <button type="submit" id="btn-updateRe" class="btn-style">답변 수정</button> -->
+                                            <button type="submit" id="btn-updateRe" class="btn-style" th:attr="data-id=${Q.csAnswer.csAnswerId}">수정 하기</button>
+                                            <button type="submit" id="btn-delete" class="btn-style" th:attr="data-id=${Q.csAnswer.csAnswerId}">답변 삭제</button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                </div>
             </div>
         </section>
 
