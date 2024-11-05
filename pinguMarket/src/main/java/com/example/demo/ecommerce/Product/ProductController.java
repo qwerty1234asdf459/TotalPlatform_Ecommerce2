@@ -29,6 +29,12 @@ public class ProductController {
 	private final ProductService ps;
     private final AdminProductService aps;
 	
+//	---------------------------------------------상품리스트 페이지----------------------------------------------------------------------------------------------
+    @GetMapping("/category")
+    public String productList() {
+    	return "Category/categoryPage";
+    }
+    
 	
 //	---------------------------------------------장바구니----------------------------------------------------------------------------------------------
 	@PostMapping("/product/addcart")

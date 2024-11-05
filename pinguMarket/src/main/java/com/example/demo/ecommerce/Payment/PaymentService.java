@@ -32,8 +32,9 @@ public class PaymentService {
 		p.setName(user.getName());
 		p.setTell(user.getTell());
 		p.setPaymentState("결제 완료");
-		p.setDeliveryno("배송준비중");
+		p.setDeliveryno("11111");
 		p.setOrderNo(createOrderNo());
+		p.setDeliveryState("상품 준비중");
 		
 		this.pr.save(p);
 	}

@@ -16,4 +16,5 @@ public interface CouponRepository extends JpaRepository<Coupon, Integer>{
 			+ "user_id = :userId", nativeQuery = true)
 	List<Coupon> findByUserUseYn(@Param("userId") Integer userId);
 
+	Coupon findByCouponId(Integer couponId);
 }
