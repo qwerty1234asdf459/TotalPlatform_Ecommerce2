@@ -16,7 +16,7 @@ main {
 }
 
 
-.cartContent{
+.cartContent {
     display: flex;
     gap: 2rem;
     align-items: start;
@@ -30,33 +30,35 @@ main {
 
 
 
-.cartLeft{
+.cartLeft {
     width: 70%;
 }
+
 /* allselect */
-.allselect{
+.allselect {
     padding: 1rem;
-    border-radius: 1rem;
-    border: 1px solid rgb(239, 239, 239);;
-    box-shadow: 0px 2px 4px gray;
+    border-radius: 0.5rem;
+    border: 1px solid rgb(239, 239, 239);
+    ;
+    box-shadow: 0px 1px 2px rgb(239, 239, 239);
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 2rem;
 }
 
-.selectCon>label{
+.selectCon>label {
     display: flex;
     align-items: center;
     cursor: pointer;
 }
 
 
-input[type="checkbox"]{
+input[type="checkbox"] {
     display: none;
 }
 
-.inputSquire{
+.inputSquire {
     width: 1.5rem;
     height: 1.5rem;
     border-radius: 0.3rem;
@@ -66,29 +68,29 @@ input[type="checkbox"]{
     justify-content: center;
 }
 
-.allselect>label>.inputSquire{
+.allselect>label>.inputSquire {
     margin-right: 1rem;
 }
 
-.inputSquire>i{
+.inputSquire>i {
     opacity: 0;
 }
 
-input[type="checkbox"]:checked + label > .inputSquire{
-    background-color: rgb(33, 33, 33);
+input[type="checkbox"]:checked+label>.inputSquire {
+    background-color: var(--mainColor);
     border: none;
 }
 
-input[type="checkbox"]:checked + label > .inputSquire>i{
+input[type="checkbox"]:checked+label>.inputSquire>i {
     color: white;
     opacity: 1;
 }
 
-input[type="checkbox"]:disabled + label{
+input[type="checkbox"]:disabled+label {
     opacity: 0.5;
 }
 
-.selectDel{
+.selectDel {
     border: 1px solid rgb(230, 230, 230);
     background-color: white;
     padding: 0.3rem 1rem 0.3rem 1rem;
@@ -99,22 +101,24 @@ input[type="checkbox"]:disabled + label{
     cursor: pointer;
 }
 
-.selectDel:disabled{
+.selectDel:disabled {
     opacity: 0.5;
 }
 
 /* CART PRODUCT */
 
-.cartContentNone{
+.cartContentNone {
     display: flex;
     flex-direction: column;
     align-items: center;
     padding: 15rem 0 15rem 0;
 }
-.cartContentNone.off{
+
+.cartContentNone.off {
     display: none;
 }
-.cartContentNone>p:first-child{
+
+.cartContentNone>p:first-child {
     border: 1px solid;
     width: 8rem;
     height: 8rem;
@@ -125,90 +129,120 @@ input[type="checkbox"]:disabled + label{
     background-color: rgb(54, 54, 54);
     margin-bottom: 3rem;
 }
-.cartContentNone>p>i{
+
+.cartContentNone>p>i {
     font-size: 50px;
     color: white;
 }
 
-.cartContentNone>p:nth-child(2){
+.cartContentNone>p:nth-child(2) {
     font-size: var(--subtitleFont);
     font-weight: 500;
 }
 
 
 /* cartProduct */
-.cartProductContainer{
+.cartProductContainer {
     border: 1px solid rgb(197, 197, 197);
     padding: 2rem 0 2rem 0;
-    border-radius: 1rem;
-    box-shadow: 0px 2px 4px gray;
+    border-radius: 0.5rem;
+    box-shadow: 0px 2px 4px rgb(197, 197, 197);
     margin-bottom: 5rem;
+    overflow-y: auto;
+    height: 700px;
+
 }
 
+.cartProductContainer::-webkit-scrollbar {
+    width: 12px;
+}
 
-.cartProduct{
+.cartProductContainer::-webkit-scrollbar-track {
+    /* background: #f1f1f1; */
+    background-color: white;
+    border-radius: 10px;
+}
+
+.cartProductContainer::-webkit-scrollbar-thumb {
+    background-color: var(--subColor);
+    border-radius: 5px;
+}
+
+.cartProductContainer::-webkit-scrollbar-thumb:hover {
+    background-color: var(--mainColor);
+}
+
+.cartProduct {
     border-top: 1px solid rgb(198, 198, 198);
     display: flex;
     padding: 2rem 0 2rem 0;
     position: relative;
 }
 
-.deletBtn{
+.deletBtn {
     position: absolute;
     top: 2rem;
     right: 2rem;
 }
-.deletBtn>i{
+
+.deletBtn>i {
     color: var(--subFontColor);
     font-size: var(--subtitleFont);
     cursor: pointer;
     padding: 0.5rem;
 }
-.productCheckBox{
+
+.productCheckBox {
     padding: 0 1rem 0 1rem;
 }
 
-.productCon{
+.productCon {
     width: 100%;
 }
-.productCon>.productTitle{
+
+.productCon>.productTitle {
     padding-bottom: 1rem;
     font-size: var(--subtitleFont);
 }
-.productCon>.productTitle>.productSubTitle{
+
+.productCon>.productTitle>.productSubTitle {
     font-size: var(--contentFont);
     color: rgb(150, 150, 150);
     padding: 0.5rem 0 0.5rem 0;
 }
 
 
-.productIntro{
+.productIntro {
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
     justify-content: space-between;
     height: 7rem;
+
 }
 
-.productImg{
+.productImg {
     width: 20%;
     height: 100%;
     padding-right: 1rem;
 }
-.productImg>img{
+
+.productImg>img {
     background-color: gray;
     display: block;
     width: 100%;
     height: 100%;
     border-radius: 1rem;
 }
-.productPrice{
+
+.productPrice {
     width: 80%;
     height: 50%;
     font-weight: 700;
     font-size: var(--subtitleFont);
 }
-.productCount{
+
+.productCount {
     background-color: rgb(215, 215, 215);
     width: 8rem;
     height: 35%;
@@ -217,7 +251,8 @@ input[type="checkbox"]:disabled + label{
     border-radius: 2rem;
     overflow: hidden;
 }
-.count{
+
+.count {
     flex: 1;
     font-size: var(--subtitleFont);
     height: 100%;
@@ -225,64 +260,70 @@ input[type="checkbox"]:disabled + label{
     align-items: center;
     justify-content: center;
 }
-.plusBtn{
+
+.plusBtn {
     cursor: pointer;
 }
-.minusBtn{
+
+.minusBtn {
     cursor: pointer;
 }
 
 /*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-* CART RIGHT *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
 
-.cartRight{
+.cartRight {
     width: 30%;
     position: sticky;
     top: 9rem;
     margin-bottom: 1rem;
 }
 
-.accountContainer{
+.accountContainer {
     border-radius: 1rem;
-    border: 1px solid rgb(239, 239, 239);;
+    border: 1px solid rgb(239, 239, 239);
+    ;
     /* background-color: rgb(239, 239, 239); */
     padding: 1rem 1rem 0 1rem;
     box-shadow: 1px 1px 4px gray;
 }
 
-.accountContainer>.accountTitle{
+.accountContainer>.accountTitle {
     padding-bottom: 1rem;
     font-size: var(--subtitleFont);
 }
 
-.accountContainer>div{
+.accountContainer>div {
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
     margin-bottom: 1rem;
 }
-.productSale>.money{
+
+.productSale>.money {
     color: rgb(255, 64, 0);
 }
-.money{
+
+.money {
     font-weight: 700;
 }
 
 
-.SDamout{
+.SDamout {
     padding: 1rem 0 1rem;
     border-top: 1px solid rgb(205, 205, 205);
 }
 
-.SDamout>.money{
+.SDamout>.money {
     font-size: 30px;
 }
-.SDamout>.noti{
+
+.SDamout>.noti {
     width: 100%;
     text-align: end;
     font-size: 12px;
 }
 
-.accountBtn{
+.accountBtn {
     margin-top: 1rem;
     text-align: center;
     border-radius: 1rem;
@@ -291,7 +332,7 @@ input[type="checkbox"]:disabled + label{
     overflow: hidden;
 }
 
-.accountBtn>a{
+.accountBtn>a {
     display: flex;
     width: 100%;
     height: 100%;

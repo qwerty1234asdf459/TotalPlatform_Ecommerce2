@@ -151,37 +151,6 @@ header {
 	position: relative;
 }
 
-.customerService>ul{
-	position: absolute;
-	border: 1px solid;
-	top: 100%;
-	right: 0;
-	width: 10rem;
-	background-color: white;
-	border: 1px solid rgb(215, 215, 215);
-	z-index: -1;
-	opacity: 0;
-	transition: .2s;
-}
-.customerService>ul>li>a{
-	display: block;
-	font-size: 14px;
-	padding: 0.3rem 0 0.3rem 0.5rem;
-	z-index: 100;
-	opacity: 1;
-	transition: .2s;
-}
-
-.customerService:hover >ul{
-	z-index: 100;
-	opacity: 1;
-}
-
-.customerService>ul>li>a:hover{
-	color: var(--mainColor);
-	background-color: rgb(240, 240, 240);
-}
-
 
 /*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-* headerDown Style *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
 .headerDown_Container {

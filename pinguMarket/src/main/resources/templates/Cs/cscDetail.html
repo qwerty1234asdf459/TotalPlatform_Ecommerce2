@@ -2,7 +2,7 @@
 <div layout:decorate="~{Layout/layout}">
     <!-- *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-* MAIN *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*--*-*-*-*-*-*-*-*-*-* -->
     <main layout:fragment="content">
-        <link rel="stylesheet" th:href="@{/Cs/cscDetailStyle.css}">
+        <link rel="stylesheet" th:href="@{/substatic/Cs/cscDetailStyle.css}">
         <div class="csContainer">
             <div class="askContainer">
                 <div class="askCon">
@@ -43,8 +43,6 @@
                     </div>
 
 
-
-
                     <div class="type">
                         <div class="content">
                             <label for="label-text">내용
@@ -69,32 +67,17 @@
                         <div class="adminReply">
                             <div class="type">
                                 <div class="reply">
-                                    <label for="label-text">관리자 답변 제목</label>
+                                    <label for="label-text">관리자 답변</label>
                                 </div>
+                                
                                 <div class="inputReply">
                                     <div class="detailReply">
                                         <div class="replyContainer">
                                             <textarea inputmode="text" class="inquiry-reply"></textarea>
                                             <div class="conPlaceholder">
                                                 <div class="replyCon">
-                                                    <!-- <p th:text="@{|/csc/answer/${csAnswer.title}|}"></p>-->
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="type">
-                                <div class="reply">
-                                    <label for="label-text">관리자 답변 내용</label>
-                                </div>
-                                <div class="inputReply">
-                                    <div class="detailReply">
-                                        <div class="replyContainer">
-                                            <textarea inputmode="text" class="inquiry-reply"></textarea>
-                                            <div class="conPlaceholder">
-                                                <div class="replyCon">
-                                                    <!--<p th:text="@{|/csc/answer/${csAnswer.contents}|}"></p>-->
+                                                    <p class="replyTitle"></p>
+                                                    <p class="replyContent"></p>
                                                 </div>
                                             </div>
                                         </div>
@@ -103,11 +86,12 @@
                             </div>
                         </div>
                     </th:block>
+                    
                     <div class="submitContainer">
                         <button type="submit" class="retouchBtn"
                             th:onclick="questionModify([[${question.csQuestionId}]])">수정</button>
-                        <!-- <a href="javascript:void(0);" th:data-uri="@{|/csc/delete/${question.csQuestionId}|}"
-                            class="deleteBtn">삭제</a> sec:authorize="isAuthenticated()" 추후 추가 -->
+                        <a href="javascript:void(0);" th:data-uri="@{|/csc/delete/${question.csQuestionId}|}"
+                            class="deleteBtn">삭제</a> <!-- sec:authorize="isAuthenticated()" 추후 추가 -->
                         <a class="listBtn" th:href="@{/csc}">목록</a>
                     </div>
                 </div>
@@ -115,4 +99,4 @@
         </div>
     </main>
 </div>
-<script th:src="@{/Cs/cscDetail.js}"></script>
+<script th:src="@{/substatic/Cs/cscDetail.js}"></script>

@@ -5,7 +5,7 @@ main>.csContainer {
     display: flex;
     gap: 2rem;
     padding-top: 5rem;
-    padding-bottom: 5rem;
+    padding-bottom: 15rem;
 }
 
 
@@ -188,11 +188,10 @@ td:nth-child(2) {
 
 /* 페이징 버튼 */
 
-
 .pageBtn>ul {
     display: flex;
     list-style-type: none;
-    margin-top: 1.5rem;
+    margin-top: 3rem;
     margin-bottom: 100px;
     justify-content: center;
 }
@@ -252,8 +251,4 @@ td:nth-child(2) {
 .pageBtn.on {
     display: none;
     /* 기본적으로 버튼 숨기기 */
-}
-
-#pageBtn2 {
-    margin-top: 50rem;
 }

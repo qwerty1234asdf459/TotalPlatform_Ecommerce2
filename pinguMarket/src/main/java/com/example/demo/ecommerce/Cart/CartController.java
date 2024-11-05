@@ -21,21 +21,21 @@ public class CartController {
 	private final CartService cas;
 
 	
-//	---------제품 삭제-------------------
+//	---------------------------------------------제품 삭제----------------------------------------------
 	@GetMapping("/cart/delete")
 	// @PreAuthorize(value = "isAuthenticated()")
 	@ResponseBody
 	public Map<String, Object> deleteSelectedItems(@RequestParam("id") List<Integer> ids) {
 	    Map<String, Object> response = new HashMap<>();
 	    try {
-	        for (Integer cartId : ids) {
+	        for (Integer cartId : ids) { 	// cartId를 ids에 저장
 	            Cart c = this.cas.getCart(cartId);
 	            this.cas.delete(c);
 	        }
-	        response.put("success", true);
+	        response.put("success", true); // 성공 시
 	    } catch (Exception e) {
 	        e.printStackTrace();
-	        response.put("success", false);
+	        response.put("success", false); // 실패 시
 	    }
 	    return response;
 	}

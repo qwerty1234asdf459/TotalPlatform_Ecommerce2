@@ -1,14 +1,9 @@
 package com.example.demo.ecommerce.CsQuestion;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
+
 import java.util.Optional;
 
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.ecommerce.Entity.CsQuestion;
@@ -23,7 +18,7 @@ public class CsQuestionService {
 	private final CsQuestionRepository qr;
 	private final CsQuestionUserRepository userRepository;
 	
-		
+//		---------------------------------------------1:1 문의 내용 가져오기 ------------------------------------
 		public CsQuestion getQuestion(Integer csQuestionId) throws UserException {
 			Optional<CsQuestion> q1 = this.qr.findById(csQuestionId);
 			if(q1.isPresent()) {
@@ -33,7 +28,7 @@ public class CsQuestionService {
 			}
 		}
 
-		// 1:1 문의 작성
+		// ----------------------------------------------1:1 문의 작성--------------------------------------------
 		public void create(String orderNo, String title, String contents, Integer id) throws UserException {
 			CsQuestion q = new CsQuestion();
 			q.setOrderNo(orderNo);
@@ -44,7 +39,7 @@ public class CsQuestionService {
 			this.qr.save(q);
 		}
 		
-		// 1:1 문의 수정
+		// ---------------------------------------------1:1 문의 수정---------------------------------------------
 		public void modify(CsQuestion q, String orderNo, String title, String contents) {
 			q.setTitle(title);
 			q.setOrderNo(orderNo);
@@ -52,12 +47,12 @@ public class CsQuestionService {
 			this.qr.save(q);
 		}
 		
-		// 1:1 문의 삭제
+		// ---------------------------------------------1:1 문의 삭제---------------------------------------------
 		public void delete(CsQuestion q) {
 			this.qr.delete(q);
 		}
 		
-		//유저 정보 가져오기
+		//---------------------------------------------유저 정보 가져오기---------------------------------------
 		public User getUser(Integer id) throws UserException {
 			Optional<User> user = this.userRepository.findById(id);
 			
@@ -68,9 +63,5 @@ public class CsQuestionService {
 			}
 		}
 
-	
-	
-	
-	
 
 }

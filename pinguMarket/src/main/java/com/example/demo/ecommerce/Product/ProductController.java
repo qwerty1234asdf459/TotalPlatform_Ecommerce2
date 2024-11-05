@@ -30,7 +30,7 @@ public class ProductController {
     private final AdminProductService aps;
 	
 	
-//	---------------------------------------------장바구니----------------------------------------------------------------------------------------------
+//	---------------------------------------------장바구니----------------------------------------------------------------
 	@PostMapping("/product/addcart")
 	public String addcart(@RequestParam("cart_count")Integer count,
 			@RequestParam("product")Integer productId, Model model, Principal principal) throws Exception {
@@ -47,8 +47,6 @@ public class ProductController {
 		}
 		return "redirect:/cart";
 	}
-	
-	
 	
 	
 	@GetMapping("/cart") // 장바구니 전체

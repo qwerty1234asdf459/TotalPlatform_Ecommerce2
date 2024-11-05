@@ -2,7 +2,7 @@
 <div layout:decorate="~{Layout/layout}">
     <!-- *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-* MAIN *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*--*-*-*-*-*-*-*-*-*-* -->
     <main layout:fragment="content">
-    <link rel="stylesheet" th:href="@{/cart/cartPageStyle.css}">
+    <link rel="stylesheet" th:href="@{/substatic/cart/cartPageStyle.css}">
         <div class="cartContainer">
             <div class="cartTitle">
                 <p>장바구니</p>
@@ -60,10 +60,6 @@
                 </div>
             
         
-        
-
-
-                
                 <div class="cartRight ">
                     <div class="accountContainer">
                         <p class="accountTitle">
@@ -95,12 +91,14 @@
                 </div>
             </div>
         </div>
+
         <form th:action="@{/payment}" id="cartPaymentForm" method="get">
         	<input type="hidden" id="cartArr" name="cartData">
         	<input type="hidden" id="countArr" name="countData">
         </form>
+        
     </main>
 </div>
 
-<script th:src="@{/cart/cartPage.js}"></script>
+<script th:src="@{/substatic/cart/cartPage.js}"></script>
 

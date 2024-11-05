@@ -43,8 +43,8 @@ private final AdminNoticeService ans;
 	                       @RequestParam(value="chk", defaultValue="on") String chk) throws UserException {
 	    
 	    // 1:1 문의 페이징
-	    EzenPaging ezenPaging = new EzenPaging(page1, 10, ar.getQuestionCountByAll(1), 5); // 유저정보 강제 입력 1 대신 (principal.getName() 넣기
-	    List<CsQuestion> questionList = ar.getUserByKeyword(1, ezenPaging.getStartNo(), ezenPaging.getPageSize()); // 유저정보 강제 입력 1 대신 (principal.getName() 넣기
+	    EzenPaging ezenPaging = new EzenPaging(page1, 10, ar.getQuestionCountByAll(1), 5); // 유저정보 강제 입력, 1 대신 (principal.getName()
+	    List<CsQuestion> questionList = ar.getUserByKeyword(1, ezenPaging.getStartNo(), ezenPaging.getPageSize()); // 유저정보 강제 입력, 1 대신 (principal.getName()
 	
 	    // 공지사항 페이징
 	    EzenPaging ezenPaging2 = new EzenPaging(page2, 10, ans.getNoticeCountAll(), 5);
@@ -78,7 +78,7 @@ private final AdminNoticeService ans;
 	@GetMapping("/csc/form")
 	public String csquestionForm(CsQuestionForm csquestionForm, Model model) {
 		
-		String userId = "test"; //principal.getName();으로 바꿔주기
+		String userId = "test"; //principal.getName();으로 수정
 		List<Payment> payList = this.ar.getPaymentList(userId);
 		model.addAttribute("payList", payList);
 		
@@ -94,11 +94,11 @@ private final AdminNoticeService ans;
 			if(bindingResult.hasErrors()) {				
 				return "Cs/cscForm";
 			}
-			this.qr.create(csquestionForm.getOrderNo(), csquestionForm.getTitle(), csquestionForm.getContents(), 1); // 유저정보 강제 입력 1 대신 (principal.getName() 넣기			
+			this.qr.create(csquestionForm.getOrderNo(), csquestionForm.getTitle(), csquestionForm.getContents(), 1); // 유저정보 강제 입력, 1 대신 (principal.getName()
 			return "redirect:/csc";
 		}
 		
-	//   -----------------------------------------------고객센터 > 1:1문의 수정-----------------------------------------------
+	//   -----------------------------------------------------------고객센터 > 1:1문의 수정-----------------------------------------------------------------
 	//	@PreAuthorize("isAuthenticated()")
 		@GetMapping("/csc/modify/{id}")
 		public String questionModify(Model model, CsQuestionForm csquestionForm, @PathVariable("id") Integer id) throws UserException {
@@ -106,7 +106,7 @@ private final AdminNoticeService ans;
 			CsQuestion q = this.qr.getQuestion(id);
 			model.addAttribute("question", q);
 			
-			String userId = "test"; //test말고 principal.getName();으로 수정 필요
+			String userId = "test"; //test말고 principal.getName();으로 수정
 			List<Payment> payList = this.ar.getPaymentList(userId);
 			model.addAttribute("payList", payList);
 			
@@ -132,36 +132,24 @@ private final AdminNoticeService ans;
 
 	//   -----------------------------------------------고객센터 > 1:1 문의 삭제-----------------------------------------------
 	//	@PreAuthorize("isAuthenticated()")
-//		@GetMapping("/csc/delete/{id}")
-//		public String questionDelete(CsQuestionForm csquestionForm, @PathVariable("id") Integer id) throws UserException {
-//			
-//			CsQuestion q = this.qr.getQuestion(csQuestionId);
-//			this.qr.delete(q);
-//			
-//			return "redirect:/csc";
-//		}
+		@GetMapping("/csc/delete/{id}")
+		public String questionDelete(CsQuestionForm csQuestionForm, @PathVariable("id") Integer id) throws UserException {
+			CsQuestion q = this.qr.getQuestion(id);
+			this.qr.delete(q);
+			
+			return "redirect:/csc";
+		}
 		
 
-	//  -----------------------------------------------고객센터 > 1:1 문의 > 관리자 답변 조회-----------------------------------------------
-//		@PreAuthorize("isAuthenticated()")
-//		@GetMapping("/csc/answer/{id}")
-//		public String answerDetail(Model model, @PathVariable("id") Integer id) {
-//			
-//			model.addAttribute("answer", this.ar.getAnswer(id));
-//			
-//			return "Cs/cscDetail";
-//		}
-		
-		
-		// -----------------------------------------------고객센터 > 공지사항 > 상세페이지 조회-----------------------------------------------
+		// -------------------------------------------------------고객센터 > 공지사항 상세페이지 조회------------------------------------------------------
 		@GetMapping(value ="/csc/notice/{id}")
 		public String noticeDetail(Model model, @PathVariable("id") Integer noticeId, AdminNoticeForm adminNoticeForm) throws UserException {
 			
 			Notice notice = this.ans.getNotice(noticeId);
 			model.addAttribute("notice", notice);
 			
-			return "Cs/csNotiDetail"; 
-			
+			return "Cs/csNotiDetail"; 		
 		}
 
+		
 }
