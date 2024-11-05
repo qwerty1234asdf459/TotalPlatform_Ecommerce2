@@ -44,7 +44,7 @@ public class EmailService {
            msgg += "<br>";
            msgg += "<br>";
            msgg += "<div align='center' style='border:1px solid black'>";
-           msgg += "<h3 style='color:blue'>회원가입 인증코드 입니다</h3>";
+           msgg += "<h3 style='color:blue'>인증코드 입니다</h3>";
            msgg += "<div style='font-size:130%'>";
            msgg += "<strong>" + tempPassword + "</strong></div><br/>" ; // 메일에 인증번호 ePw 넣기
            msgg += "</div>";

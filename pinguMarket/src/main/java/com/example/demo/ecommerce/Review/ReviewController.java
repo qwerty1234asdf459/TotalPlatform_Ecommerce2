@@ -40,12 +40,12 @@ public class ReviewController {
 	public String reviewCreate(Model model,
 			@PathVariable ("productId") Integer productId,
 			Principal principal) throws CanNotFoundException {
-		User u = this.us.getUser(1);
+		User u = this.us.getUser(2);
 		Product p = this.ps.getProduct(productId);
 		
-		ReviewCreateForm reviewform = new ReviewCreateForm();
+		ReviewForm reviewForm = new ReviewForm();
 		model.addAttribute("user", u);
-		model.addAttribute("reviewCreateForm", reviewform);
+		model.addAttribute("reviewForm", reviewForm);
 		
 		
 		try {
@@ -75,13 +75,13 @@ public class ReviewController {
 	@PostMapping("/reviewcreate/{productId}")
 	public String reviewCreate(Model model,
 			@PathVariable ("productId") Integer productId,
-			@Valid ReviewCreateForm reviewCreateForm, BindingResult bindingResult,
+			@Valid ReviewForm reviewForm, BindingResult bindingResult,
 			Principal principal) throws CanNotFoundException {
 //		Product p = this.ps.getProduct(productId);
 //		User u = this.us.getUser(principal.getName());
 		
 		Product p = this.ps.getProduct(productId);
-		User u = this.us.getUser(1);
+		User u = this.us.getUser(2);
 		
 		if(bindingResult.hasErrors()) {
 			return "/Mypage/reviewform";
@@ -90,9 +90,9 @@ public class ReviewController {
 //		추후 해당 유저에게 결제내역이 있는지 확인하는 절차 필요
 		
 		this.rs.reviewCreate(p, u,
-	             reviewCreateForm.getScope(),
-                 reviewCreateForm.getTitle(),
-	             reviewCreateForm.getContents());
+	             reviewForm.getScope(),
+                 reviewForm.getTitle(),
+	             reviewForm.getContents());
 
 //		return String.format("redirect:/product/%s", productId);
 		return "redirect:/myreview";
@@ -103,26 +103,43 @@ public class ReviewController {
 	@GetMapping("/reviewmodify/{reviewId}")
 	public String reviewModify(Model model,
 			@PathVariable ("reviewId") Integer reviewId,
-			ReviewCreateForm reviewCreateform) throws CanNotFoundException {
+			ReviewForm reviewform) throws CanNotFoundException {
 		
-		User u = us.getUser(1);
-		Review review = rs.getReview(reviewId);
-		reviewCreateform.setScope(review.getScope());
-		reviewCreateform.setTitle(review.getTitle());
-		reviewCreateform.setContents(review.getContents());
+		User u = this.us.getUser(2);
 		
-		model.addAttribute("user", u);
-		model.addAttribute("reviewCreateForm", reviewCreateform);
+		try {
+			Review review = this.rs.getReviewModify(u.getUserId(), reviewId);
+//			유저 id와 reviewId로 review 테이블을 조회
+			if(review == null) {
+				return "redirect:/myreview";
+//				해당 userId로 해당 reviewId에 해당이 안 되면 myreview로 리다이렉트
+			}else {
+				reviewform.setScope(review.getScope());
+				reviewform.setTitle(review.getTitle());
+				reviewform.setContents(review.getContents());
+				
+				model.addAttribute("user", u);
+				model.addAttribute("reviewForm", reviewform);
+				
+				return "/Mypage/reviewform";
+//				reviewform 페이지에 기존 리뷰의 제목, 내용, 평점을 세팅하고 reviewform으로 리턴
+			}
+	       
+	    } catch (CanNotFoundException e) {
+	        // 리뷰가 없으면 예외가 발생해서 myreview로 보냄
+	        return "redirect:/myreview";
+	    }
+		} 
 		
-		return "/Mypage/reviewform";
+
 		
-	}
+	
 	
 //	@PreAuthorize("isAuthenticated()")
 	@PostMapping("/reviewmodify/{reviewId}")
 	public String reviewModify(Model model,
 			@PathVariable ("reviewId") Integer reviewId,
-			@Valid ReviewCreateForm reviewCreateForm, BindingResult bindingResult,
+			@Valid ReviewForm reviewForm, BindingResult bindingResult,
 			Principal principal) throws CanNotFoundException {
 		
 		Review r = rs.getReview(reviewId);
@@ -132,18 +149,19 @@ public class ReviewController {
 		}
 		
 		this.rs.reviewModify(r,
-				 reviewCreateForm.getScope(),
-                 reviewCreateForm.getTitle(),
-	             reviewCreateForm.getContents());
+				 reviewForm.getScope(),
+                 reviewForm.getTitle(),
+	             reviewForm.getContents());
 		
 		return "redirect:/myreview";
-//		리뷰를하고 나서 어디로 리다이렉트 할지는 좀 생각을 해봐야 할 것 같음
+//		리뷰를 하고 나서 어디로 리다이렉트 할지는 좀 생각을 해봐야 할 것 같음
 	}
 	
 	@GetMapping("/reviewdelete/{reviewId}")
 	public String reviewDelete(@PathVariable("reviewId") Integer reviewId) throws CanNotFoundException {
 		Review r = rs.getReview(reviewId);
 		this.rs.delete(r);
+//		리뷰 삭제
 		return "redirect:/myreview";
 	
   }

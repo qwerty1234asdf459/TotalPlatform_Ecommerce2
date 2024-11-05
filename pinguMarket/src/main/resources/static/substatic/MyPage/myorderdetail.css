@@ -1,0 +1,60 @@
+* {
+		    box-sizing: border-box;
+		}
+		.pdetailListContainer {
+		    display: flex;
+		    align-items: center;
+		    border: 1px solid #ccc;
+		    border-radius: 10px;
+		    margin: 0.5rem 0;
+		    overflow: hidden;
+		}
+		.pdetailHeader {
+		    display: grid;
+		    margin-top: 1rem;
+		    padding-left:10px;
+		    grid-template-columns: 1fr 1.7fr 1fr 1fr 1fr;
+		    font-weight: bold;
+		    padding: 0.5rem;
+		    border-bottom: 2px solid;
+		    text-align: center;
+		    background-color: rgb(238, 238, 238);
+		}
+		.pdetailHeader span {
+		    white-space: nowrap;
+		    overflow: hidden;
+		    text-overflow: ellipsis;
+		}
+		
+		.productImage {
+		    width: 75px;
+		    height: 75px;
+		    flex-shrink: 0;
+		}
+		
+		.productImage img {
+		    width: 100%;
+		    height: 100%;
+		    object-fit: cover;
+		}
+		
+		.pdetailListInfo {
+		    display: grid;
+		    grid-template-columns: 1fr 1.7fr 1fr 1fr 1fr;
+		    align-items: center;
+		    text-align: center;
+		    width: 100%;
+		    padding: 0.5rem;
+		    gap: 0.5rem;
+		}
+		
+		.pdetailListInfo span {
+		    white-space: nowrap;
+		    overflow: hidden;
+		    text-overflow: ellipsis;
+		}
+		.createReviewLink{
+			display: flex;
+		    justify-content: center;
+		    align-items: center;
+		}

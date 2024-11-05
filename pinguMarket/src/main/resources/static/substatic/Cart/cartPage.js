@@ -7,7 +7,9 @@ document.addEventListener("DOMContentLoaded", function () {
     const totalPriceElement = document.getElementById("totalPrice"); // 결제예정금액
     const paymentBtn = document.querySelector("#payment a"); // 결제하기 버튼
 
+
     // *****************************************************체크박스 선택 기능************************************************************
+
 
     function updateDeleteButtonState() { // 개별 체크박스의 체크가 하나라도 표시 안되어있으면 선택삭제 disabled
         const anyChecked = Array.from(document.querySelectorAll("input[name='productSelect']")).some(box => box.checked);
@@ -53,13 +55,15 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 
+    
     // *****************************************************장바구니 제품 수량 조절 기능************************************************************
     function updateProductPrice(countElement, pricePerUnit) {
         const count = parseInt(countElement.innerText) || 0; // 제품 수량 or 0
-        const updatedPrice = pricePerUnit * count;
+        const updatedPrice = pricePerUnit * count; 
         productPricePop.innerText = `${updatedPrice.toLocaleString()}원`; // 수량에 따라 가격 반영
         updateTotalPrice();
     }
+
 
     document.querySelectorAll(".plusBtn").forEach(button => {
         button.addEventListener("click", function () { // + 버튼 클릭 시
@@ -88,6 +92,7 @@ document.addEventListener("DOMContentLoaded", function () {
     updateTotalPrice();
 
 
+
     // *****************************************************장바구니 제품 삭제************************************************************
 
     deleteBtn.addEventListener("click", function () {
@@ -112,10 +117,12 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     // ****************************************************선택한 제품들 결제페이지로 데이터 전송************************************************************
+
     paymentBtn.addEventListener("click", function (event) {
         const selectedProducts = document.querySelectorAll("input[name='productSelect']:checked");
         const keyarr = new Array;
         const countArr = new Array;
+
 
         if (selectedProducts.length === 0) {
             event.preventDefault(); // 창 이동 막기
@@ -130,6 +137,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 document.getElementById('cartPaymentForm').submit();
             });
         }
+
     });
 });
 

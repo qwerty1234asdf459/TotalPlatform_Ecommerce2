@@ -16,6 +16,7 @@ main {
 }
 
 
+
 .cartContent {
     display: flex;
     gap: 2rem;
@@ -30,6 +31,7 @@ main {
 
 
 
+
 .cartLeft {
     width: 70%;
 }
@@ -41,17 +43,21 @@ main {
     border: 1px solid rgb(239, 239, 239);
     ;
     box-shadow: 0px 1px 2px rgb(239, 239, 239);
+
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 2rem;
 }
 
+
 .selectCon>label {
+
     display: flex;
     align-items: center;
     cursor: pointer;
 }
+
 
 
 input[type="checkbox"] {
@@ -59,6 +65,7 @@ input[type="checkbox"] {
 }
 
 .inputSquire {
+
     width: 1.5rem;
     height: 1.5rem;
     border-radius: 0.3rem;
@@ -67,6 +74,7 @@ input[type="checkbox"] {
     align-items: center;
     justify-content: center;
 }
+
 
 .allselect>label>.inputSquire {
     margin-right: 1rem;
@@ -86,11 +94,13 @@ input[type="checkbox"]:checked+label>.inputSquire>i {
     opacity: 1;
 }
 
+
 input[type="checkbox"]:disabled+label {
     opacity: 0.5;
 }
 
 .selectDel {
+
     border: 1px solid rgb(230, 230, 230);
     background-color: white;
     padding: 0.3rem 1rem 0.3rem 1rem;
@@ -101,13 +111,17 @@ input[type="checkbox"]:disabled+label {
     cursor: pointer;
 }
 
+
 .selectDel:disabled {
+
     opacity: 0.5;
 }
 
 /* CART PRODUCT */
 
+
 .cartContentNone {
+
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -119,6 +133,7 @@ input[type="checkbox"]:disabled+label {
 }
 
 .cartContentNone>p:first-child {
+
     border: 1px solid;
     width: 8rem;
     height: 8rem;
@@ -131,17 +146,20 @@ input[type="checkbox"]:disabled+label {
 }
 
 .cartContentNone>p>i {
+
     font-size: 50px;
     color: white;
 }
 
 .cartContentNone>p:nth-child(2) {
+
     font-size: var(--subtitleFont);
     font-weight: 500;
 }
 
 
 /* cartProduct */
+
 .cartProductContainer {
     border: 1px solid rgb(197, 197, 197);
     padding: 2rem 0 2rem 0;
@@ -173,24 +191,29 @@ input[type="checkbox"]:disabled+label {
 }
 
 .cartProduct {
+
     border-top: 1px solid rgb(198, 198, 198);
     display: flex;
     padding: 2rem 0 2rem 0;
     position: relative;
 }
 
+
 .deletBtn {
+
     position: absolute;
     top: 2rem;
     right: 2rem;
 }
 
 .deletBtn>i {
+
     color: var(--subFontColor);
     font-size: var(--subtitleFont);
     cursor: pointer;
     padding: 0.5rem;
 }
+
 
 .productCheckBox {
     padding: 0 1rem 0 1rem;
@@ -212,15 +235,14 @@ input[type="checkbox"]:disabled+label {
 }
 
 
+
 .productIntro {
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
     justify-content: space-between;
     height: 7rem;
-
 }
-
 .productImg {
     width: 20%;
     height: 100%;
@@ -234,6 +256,7 @@ input[type="checkbox"]:disabled+label {
     height: 100%;
     border-radius: 1rem;
 }
+
 
 .productPrice {
     width: 80%;
@@ -281,7 +304,6 @@ input[type="checkbox"]:disabled+label {
 .accountContainer {
     border-radius: 1rem;
     border: 1px solid rgb(239, 239, 239);
-    ;
     /* background-color: rgb(239, 239, 239); */
     padding: 1rem 1rem 0 1rem;
     box-shadow: 1px 1px 4px gray;
@@ -323,6 +345,7 @@ input[type="checkbox"]:disabled+label {
     font-size: 12px;
 }
 
+
 .accountBtn {
     margin-top: 1rem;
     text-align: center;
@@ -331,6 +354,7 @@ input[type="checkbox"]:disabled+label {
     color: white;
     overflow: hidden;
 }
+
 
 .accountBtn>a {
     display: flex;

@@ -1,0 +1,24 @@
+.myReviewContainer{
+    background-color: white;
+    border-radius: 0.5rem;
+    padding: 1rem 2rem 1rem 2rem;
+}
+.myReviewContainer>p{
+    padding-bottom: 1rem ;
+    font-size: var(--titleFont);
+    border-bottom: 2px solid;
+}
+
+        .reviewListContainer{
+            margin: 0.5vw;
+            border: 1.5px solid black;
+            border-radius: 10px;
+            word-break: break-all;
+            overflow-wrap: break-word;
+        }
+        .reviewListContainer > div{
+            padding: 0.5vw;
+        }
+        .reviewListTop{
+            display: flex;
+        }
