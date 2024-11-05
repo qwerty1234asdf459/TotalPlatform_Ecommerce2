@@ -54,17 +54,21 @@ public class MyPageController {
 	@GetMapping("/myorder")
 	public String myOrderPage(Model model, Principal principal) throws CanNotFoundException {
 //		User u = this.us.getUser(principal.getName());
-		User u = this.us.getUser(1);
+		User u = this.us.getUser(2);
+		// 임시용 user 1
 		
 		List<Payment> payment = this.ps.getPayment(u.getUserId());
+//		해당 사용자의 userId로 payment 테이블을 조회
 		
 		List<String> productNames = payment.stream()
 	            .map(ps::getFirstProductName)
 	            .toList();
+//		getPayment로 조회한 리스트를 바탕으로 첫 상품의 이름을 가져옴
 		
 		List<Integer> totalPrice = payment.stream()
 				.map(ps::getTotalPrice)
 				.toList();
+//		getPayment로 조회한 리스트를 바탕으로 해당 결제의 총 가격을 가져옴
 		
 		model.addAttribute("user", u);
 		model.addAttribute("paymentList", payment);
@@ -75,24 +79,34 @@ public class MyPageController {
 	}
 	
 	@PostMapping("periodloading")
-	public ResponseEntity<List<Payment>> periodLoading(@RequestParam("period") Integer period,
+	@ResponseBody
+	public ResponseEntity<MyOrderResponseDTO> periodLoading(@RequestParam("period") Integer period,
 			Model model, Principal principal) throws CanNotFoundException{
 		
-		User u = this.us.getUser(1);
-		List<Payment> paymentList =this.ps.getPayment(u.getUserId(), period);
+		User u = this.us.getUser(2);
 		
-//		get(2) 해놓고 아웃오브바운드가 발생하고 6개월 이상을 고르면 3개 다 나오는 것으로 보아
-//		3개월 선택시 id가 1인 유저이고 3개월 이내에 있는 값만 잘 조회하고 있음
-//		그럼 이제 이 payment 목록을 리턴해서 myorder 페이지에 적용시켜야 하는데
-//		여태까진 그냥 model.addAttribute 쓰면 알아서 잘 됐는데 비동기로 이걸 어떻게?
-//		일단 esponseEntity.ok로 리턴하면 response에 payment 리스트가 있기는 할 것 같은데
-//		그렇다고 그냥 String이랑 boolean 리턴해서 단순 값을 쓰던 거랑
-//		이 리스트를 타임리프 문법으로 적용시켜야 하는 거랑은 좀 차이가 클 것 같은데..
-//		json으로 map 형태로 반환? 이것도 잘 모르겠는데
+		List<Payment> payments =this.ps.getPaymentPeriod(u.getUserId(), period);
+//		user_id와 전송받은 period 파라미터를 이용해서 조회
+		
+		List<String> productNames = payments.stream()
+				.map(ps::getFirstProductName)
+				.toList();
+//		getPaymentPeriod로 조회한 리스트를 바탕으로 첫 상품의 이름을 가져옴
+		
+		List<Integer> totalPrice = payments.stream()
+				.map(ps::getTotalPrice)
+				.toList();
+//		getPaymentPeriod로 조회한 리스트를 바탕으로 해당 결제의 총 가격을 가져옴
+		
+		MyOrderResponseDTO responseDTO = new MyOrderResponseDTO(payments, productNames, totalPrice);
+		responseDTO.setPayments(payments);
+		responseDTO.setProductNames(productNames);
+		responseDTO.setTotalPrices(totalPrice);
+//		responseDTO에 각 값들을 저장
 		
 		
-		
-		return ResponseEntity.ok(paymentList);
+		  return ResponseEntity.ok(responseDTO);
+//		  예외 안 떴으면 responseDTO 반환
 		
 	}
 	
@@ -101,8 +115,9 @@ public class MyPageController {
 	public String myOrderDetailPage(Model model,
 			@PathVariable ("paymentId") Integer id, Principal principal) throws CanNotFoundException {
 //		User u = this.us.getUser(principal.getName());
-		User u = this.us.getUser(1);
+		User u = this.us.getUser(2);
 		Payment p = this.ps.getPayment1(id);
+//		해당 payment 정보를 가져옴
 //		
 		model.addAttribute("user", u);	
 		model.addAttribute("payment", p);
@@ -115,7 +130,7 @@ public class MyPageController {
 	public String myReviewPage(Model model,
 			Principal principal) throws CanNotFoundException {
 //		User u = this.us.getUser(principal.getName());
-		User u = this.us.getUser(1);
+		User u = this.us.getUser(2);
 	
 		model.addAttribute("user", u);		
 		return "Mypage/myreview";
@@ -213,9 +228,11 @@ public class MyPageController {
 		Map<String, String> response = new HashMap<>();
 		try {
 			String code = es.sendCode(email);
+//			메일을 전송하고 인증코드를 저장
 			response.put("code", code);
+//			인증코드를 response map에 저장
 			return ResponseEntity.ok(response);
-//			이거 리턴해서 chars가 나와야 함
+//			문제없이 코드가 작동했을 경우 response map을 반환
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
@@ -284,9 +301,7 @@ public class MyPageController {
 		User user = this.us.getUser(1);
 		
 		model.addAttribute("user", user);
-		
-		
-		
+
 		return "Mypage/signout";
 	}
 	
@@ -296,9 +311,11 @@ public class MyPageController {
 		
 		User user = this.us.getUser(1);
 		
-		us.userSignout(user, "n");
+		us.userSignout(user, "y");
+//		해당 사용자의 signoutYn 컬럼을 y로 변경
 		
 //		return "redirect:/user/logout";
+//		로그인 기능이 생길 경우 logout 페이지로 보내서 바로 로그아웃시켜야 함
 		return "redirect:/myorder";
 	}
 

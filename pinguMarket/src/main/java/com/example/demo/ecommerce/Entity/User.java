@@ -2,6 +2,8 @@ package com.example.demo.ecommerce.Entity;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -53,6 +55,7 @@ public class User {
 	@Column(name = "role")
 	private String role;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy = "user", cascade = CascadeType.PERSIST)
 	private List<Payment> paymentList;
 	

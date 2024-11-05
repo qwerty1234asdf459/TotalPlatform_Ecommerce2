@@ -44,12 +44,12 @@ public class PaymentService {
     }
 	
 	public Integer getTotalPrice(Payment payment) {
-		return payment.getPaymentDetailList().stream()
-				.mapToInt(detail -> detail.getPrice() * detail.getCount())
-				.sum();
+		return payment.getPaymentDetailList().stream() // Payment의 PaymentDetail 리스트를 스트림으로 변환
+				.mapToInt(detail -> detail.getPrice() * detail.getCount()) // 각 paymentdetail의 가격과 갯수를 곱함
+				.sum(); // 해당 결제내역의 총 가격을 계산
 	}
 
-	public List<Payment> getPayment(Integer userId, Integer period) throws CanNotFoundException {
+	public List<Payment> getPaymentPeriod(Integer userId, Integer period) throws CanNotFoundException {
 		List<Payment> p = this.pr.findByUserCreate(userId, period);
 		if(!p.isEmpty()) {
 			return p;
@@ -58,6 +58,7 @@ public class PaymentService {
 			throw new CanNotFoundException("데이터를 찾을 수 없습니다.");
 		}
 	}
+//	myorder 페이지에서 전송받은 period 파라미터로 기간 조회하는 메서드
 	
 }
 
