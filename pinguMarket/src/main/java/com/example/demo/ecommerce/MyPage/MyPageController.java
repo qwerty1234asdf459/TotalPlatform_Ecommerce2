@@ -54,7 +54,7 @@ public class MyPageController {
 	@GetMapping("/myorder")
 	public String myOrderPage(Model model, Principal principal) throws CanNotFoundException {
 //		User u = this.us.getUser(principal.getName());
-		User u = this.us.getUser(2);
+		User u = this.us.getUser(1);
 		// 임시용 user 1
 		
 		List<Payment> payment = this.ps.getPayment(u.getUserId());
@@ -73,7 +73,7 @@ public class MyPageController {
 		model.addAttribute("user", u);
 		model.addAttribute("paymentList", payment);
 		model.addAttribute("productNames", productNames);
-		model.addAttribute("totalprice", totalPrice);
+		model.addAttribute("totalprices", totalPrice);
 		return "Mypage/myorder";
 		
 	}
@@ -81,33 +81,25 @@ public class MyPageController {
 	@PostMapping("periodloading")
 	@ResponseBody
 	public ResponseEntity<MyOrderResponseDTO> periodLoading(@RequestParam("period") Integer period,
-			Model model, Principal principal) throws CanNotFoundException{
-		
-		User u = this.us.getUser(2);
-		
-		List<Payment> payments =this.ps.getPaymentPeriod(u.getUserId(), period);
+	        Principal principal) throws CanNotFoundException {
+	    User u = this.us.getUser(1);
+	    
+	    List<Payment> payments = this.ps.getPaymentPeriod(u.getUserId(), period);
 //		user_id와 전송받은 period 파라미터를 이용해서 조회
-		
-		List<String> productNames = payments.stream()
-				.map(ps::getFirstProductName)
-				.toList();
+	    
+	    List<String> productNames = payments.stream()
+	            .map(ps::getFirstProductName)
+	            .toList();
 //		getPaymentPeriod로 조회한 리스트를 바탕으로 첫 상품의 이름을 가져옴
-		
-		List<Integer> totalPrice = payments.stream()
-				.map(ps::getTotalPrice)
-				.toList();
+	    
+	    List<Integer> totalPrices = payments.stream()
+	            .map(ps::getTotalPrice)
+	            .toList();
 //		getPaymentPeriod로 조회한 리스트를 바탕으로 해당 결제의 총 가격을 가져옴
-		
-		MyOrderResponseDTO responseDTO = new MyOrderResponseDTO(payments, productNames, totalPrice);
-		responseDTO.setPayments(payments);
-		responseDTO.setProductNames(productNames);
-		responseDTO.setTotalPrices(totalPrice);
+	    MyOrderResponseDTO responseDTO = new MyOrderResponseDTO(payments, productNames, totalPrices);
 //		responseDTO에 각 값들을 저장
-		
-		
-		  return ResponseEntity.ok(responseDTO);
-//		  예외 안 떴으면 responseDTO 반환
-		
+	    return ResponseEntity.ok(responseDTO);
+//		문제 없으면 responseDTO 반환
 	}
 	
 //	@PreAuthorize("isAuthenticated()")	
@@ -115,7 +107,7 @@ public class MyPageController {
 	public String myOrderDetailPage(Model model,
 			@PathVariable ("paymentId") Integer id, Principal principal) throws CanNotFoundException {
 //		User u = this.us.getUser(principal.getName());
-		User u = this.us.getUser(2);
+		User u = this.us.getUser(1);
 		Payment p = this.ps.getPayment1(id);
 //		해당 payment 정보를 가져옴
 //		
@@ -130,7 +122,7 @@ public class MyPageController {
 	public String myReviewPage(Model model,
 			Principal principal) throws CanNotFoundException {
 //		User u = this.us.getUser(principal.getName());
-		User u = this.us.getUser(2);
+		User u = this.us.getUser(1);
 	
 		model.addAttribute("user", u);		
 		return "Mypage/myreview";
@@ -140,7 +132,7 @@ public class MyPageController {
 	@GetMapping("myPage")
 	public String myPage(Model model) throws CanNotFoundException {
 		
-		User u = this.us.getUser(2);
+		User u = this.us.getUser(1);
 		model.addAttribute("user", u);
 		return "Mypage/myPage";
 	}

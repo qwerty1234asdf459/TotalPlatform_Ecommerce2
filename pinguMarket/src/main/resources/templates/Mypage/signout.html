@@ -2,8 +2,8 @@
 <div layout:decorate="~{Layout/layout}">
     <!-- *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-* MAIN *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*--*-*-*-*-*-*-*-*-*-* -->
     <main layout:fragment="content">
-    <link rel="stylesheet" href="/substatic/MyPage/myPageStyle.css">
-    <link rel="stylesheet" href="/substatic/MyPage/signout.css">
+    <link rel="stylesheet" href="/MyPage/myPageStyle.css">
+    <link rel="stylesheet" href="/MyPage/signout.css">
         <div class="myPageContainer">
 
             <div class="myPageLeft">
@@ -67,16 +67,18 @@
                     
                     <div class="pwModal" id="pwModal">
             <div class="pwModalBody">
-                <h2>패스워드를 입력해주세요</h2>
+                <div class="pwModalContent"><h2>패스워드를 입력해주세요</h2></div>
+            <div class="pwModalContent">
                 <form id="pwCheckForm">
               <!--  <input type="hidden" id="_csrf" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"> -->
                     <input type="hidden" id="_csrf">
                     <input type="password" id="password" name="password" required>
-                    <div class="btn">
                     <button type="submit" id="pwCheckBtn">확인</button>
-                    </div>
                 </form>
+            </div>
+            <div class="pwModalContent">
                 <p id="pwError">비밀번호가 일치하지 않습니다.</p>
+            </div>
             </div>
         </div>
         
@@ -90,7 +92,7 @@
                        <form th:action="@{/signout}" method="POST">
                             <input type="checkbox" required />
                             회원탈퇴에 동의합니다.
-                         <button type="submit">탈퇴</button>
+                         <button type="submit" class="signoutBtn">탈퇴</button>
                        </form>
         </div>
        </div>
@@ -101,4 +103,4 @@
     
 </div>
 
-    <script th:src="@{/substatic/MyPage/signout.js}"></script>
+    <script th:src="@{/MyPage/signout.js}"></script>

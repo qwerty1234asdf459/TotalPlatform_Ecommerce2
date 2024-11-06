@@ -2,8 +2,8 @@
 <div layout:decorate="~{Layout/layout}">
     <!-- *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-* MAIN *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*--*-*-*-*-*-*-*-*-*-* -->
     <main layout:fragment="content">
-    <link rel="stylesheet" href="/substatic/MyPage/myPageStyle.css">
-    <link rel="stylesheet" href="/substatic/MyPage/myorderdetail.css">
+    <link rel="stylesheet" href="/MyPage/myPageStyle.css">
+    <link rel="stylesheet" href="/MyPage/myorderdetail.css">
 
         <div class="myPageContainer">
 
@@ -78,7 +78,7 @@
 
                         <div class="pdetailListInfo">
                             <!--  상품명, 구매일자, 주문번호, 총 가격 등의 정보 작성용 -->
-                             <div class="productImage"><img src="/substatic/img/ordertest.jpg" alt=""></div>
+                             <div class="productImage"><img src="/img/ordertest.jpg" alt=""></div>
                              <div class="productName"><h4 th:text="${paymentdetail.product.name}"></h4></div>
                              <div class="paymentDetailPrice"><h4 th:text="${paymentdetail.price}"> </h4 ></div> <!-- th:text="${payment.가격}" -->
                              <div class="paymentDetailCount"><h4 th:text="${paymentdetail.count}"></h4></div>

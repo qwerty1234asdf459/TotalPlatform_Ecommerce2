@@ -40,7 +40,7 @@ public class ReviewController {
 	public String reviewCreate(Model model,
 			@PathVariable ("productId") Integer productId,
 			Principal principal) throws CanNotFoundException {
-		User u = this.us.getUser(2);
+		User u = this.us.getUser(1);
 		Product p = this.ps.getProduct(productId);
 		
 		ReviewForm reviewForm = new ReviewForm();
@@ -81,13 +81,11 @@ public class ReviewController {
 //		User u = this.us.getUser(principal.getName());
 		
 		Product p = this.ps.getProduct(productId);
-		User u = this.us.getUser(2);
+		User u = this.us.getUser(1);
 		
 		if(bindingResult.hasErrors()) {
 			return "/Mypage/reviewform";
 		}
-
-//		추후 해당 유저에게 결제내역이 있는지 확인하는 절차 필요
 		
 		this.rs.reviewCreate(p, u,
 	             reviewForm.getScope(),
@@ -105,7 +103,7 @@ public class ReviewController {
 			@PathVariable ("reviewId") Integer reviewId,
 			ReviewForm reviewform) throws CanNotFoundException {
 		
-		User u = this.us.getUser(2);
+		User u = this.us.getUser(1);
 		
 		try {
 			Review review = this.rs.getReviewModify(u.getUserId(), reviewId);

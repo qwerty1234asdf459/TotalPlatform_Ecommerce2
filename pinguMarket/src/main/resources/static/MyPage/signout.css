@@ -18,6 +18,9 @@
             background-color: white;
             border-radius:10px;
         }
+        .pwModalContent{
+	margin: 0.5rem;
+}
         #pwError{
 	display:none;
 }
@@ -43,4 +46,7 @@
 	flex-direction:column;
 	justify-content: center;
 	align-items:center;
+}
+       .signoutBtn{
+	padding: 0.15rem;
 }
