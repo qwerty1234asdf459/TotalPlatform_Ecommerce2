@@ -6,7 +6,7 @@ import org.springframework.data.repository.query.Param;
 
 import com.example.demo.ecommerce.Entity.Image;
 
-public interface FileRepository extends JpaRepository<Image, Integer> {
+public interface ImageRepository extends JpaRepository<Image, Integer> {
 
 	/* 파일명으로 파일ID 조회 */
 	@Query(value = "SELECT image_id FROM image WHERE image_name = :fileName", nativeQuery = true)

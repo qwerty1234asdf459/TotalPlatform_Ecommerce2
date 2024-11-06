@@ -69,7 +69,7 @@ public class CartService {
 		this.car.save(cart);
 	}
 	
-	//////////////////////////////cartId의 리스트를 Cart엔티티의 리스트로 바꾸는 메소드///////////////////////////
+	//////////////////////////////cart의 Id 리스트를 Cart의 엔티티 리스트로 바꾸는 메소드///////////////////////////
 	public List<Cart> getCartByList(List<String> cartIdList) throws Exception {
 		List<Cart> cartList = new ArrayList<Cart>();
 		
