@@ -36,35 +36,35 @@ public class AdminService {
 	public CsQuestion getQuestion(Integer id) {
 		return this.cqr.findById(id).get();
 	}
+	//CsAnswerService과 중복되는 내용 주석처리
+//	public void answerCreate(String title, String contents, CsQuestion question) {
+//		CsAnswer ca = new CsAnswer();
+//		ca.setTitle(title);
+//		ca.setContents(contents);
+//		ca.setUpdateDate(LocalDateTime.now());
+//		ca.setCsQuestion(question);
+//		
+//		this.car.save(ca);
+//	}
 	
-	public void answerCreate(String title, String contents, CsQuestion question) {
-		CsAnswer ca = new CsAnswer();
-		ca.setTitle(title);
-		ca.setContents(contents);
-		ca.setUpdateDate(LocalDateTime.now());
-		ca.setCsQuestion(question);
-		
-		this.car.save(ca);
-	}
+//	public void answerDelete(Integer id) {
+//		this.car.deleteById(id);
+//	}
+//	
+//	public CsAnswer getAnswer(Integer id) {
+//		return this.car.findById(id).get();
+//	}
 	
-	public void answerDelete(Integer id) {
-		this.car.deleteById(id);
-	}
-	
-	public CsAnswer getAnswer(Integer id) {
-		return this.car.findById(id).get();
-	}
-	
-public void answerUpdate(String title, String contents, Integer id) {
-		
-		CsAnswer ca  = this.car.findById(id).get();
-		
-		ca.setTitle(title);
-		ca.setContents(contents);
-		ca.setUpdateDate(LocalDateTime.now());
-		
-		this.car.save(ca);
-	}
+//public void answerUpdate(String title, String contents, Integer id) {
+//		
+//		CsAnswer ca  = this.car.findById(id).get();
+//		
+//		ca.setTitle(title);
+//		ca.setContents(contents);
+//		ca.setUpdateDate(LocalDateTime.now());
+//		
+//		this.car.save(ca);
+//	}
 
 
 

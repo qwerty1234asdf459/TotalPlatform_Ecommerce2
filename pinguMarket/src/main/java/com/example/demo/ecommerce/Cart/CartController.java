@@ -29,13 +29,13 @@ public class CartController {
 	    Map<String, Object> response = new HashMap<>();
 	    try {
 	        for (Integer cartId : ids) {
-	            Cart c = this.cas.getCart(cartId);
+	            Cart c = this.cas.getCart(cartId); // cartId를 ids에 저장
 	            this.cas.delete(c);
 	        }
-	        response.put("success", true);
+	        response.put("success", true); // 성공 시
 	    } catch (Exception e) {
 	        e.printStackTrace();
-	        response.put("success", false);
+	        response.put("success", false); // 실패 시
 	    }
 	    return response;
 	}

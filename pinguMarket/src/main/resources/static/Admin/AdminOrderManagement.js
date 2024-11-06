@@ -1,3 +1,22 @@
+//-----------------체크박스 선택 기능----------------------
+const ag01 = document.querySelector("#Select01");
+const ag = document.querySelectorAll(".Select");
+
+console.log(ag01);
+console.log(ag);
+ag01.addEventListener('change',function(){ //전체 선택박스 눌렀을 때(동작함)
+    if (ag01.checked) {
+        console.log("체크");
+        ag.forEach(item => {
+            item.checked = true;
+        });
+    } else {
+        ag.forEach(item => {
+            item.checked = false;
+        });
+    }
+});
+
 let modal = document.getElementById("modal"); 
 let openmodal = document.querySelector(".drop");
 let closeModal = document.querySelector(".closeM");

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>결제 페이지</title>
+    <script src="https://js.tosspayments.com/v1"></script>
+</head>
+<body>
+    <h1>결제 페이지</h1>
+    <button onclick="requestPayment()">결제하기</button>
+    <script th:inline="javascript">
+        var clientKey = 'test_ck_26DlbXAaV0MOP52Gyd6KrqY50Q9R';
+        var tossPayments = TossPayments(clientKey);
+        function requestPayment() {
+            tossPayments.requestPayment('카드', {
+                amount: 15000,
+                orderId: 'ORDER_ID_' + new Date().getTime(),
+                orderName: '토스 티셔츠 외 2건',
+                customerName: '박토스',
+                successUrl: window.location.origin + '/success',
+                failUrl: window.location.origin + '/fail',
+            });
+        }
+    </script>
+</body>
+</html>

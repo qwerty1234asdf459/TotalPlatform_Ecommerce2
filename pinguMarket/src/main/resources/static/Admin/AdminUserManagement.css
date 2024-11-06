@@ -3,7 +3,6 @@
     display: flex;
     justify-content: row;
     /* border: solid 2px black; */
-    background-color: #fffdf6;
     min-width: 1024px;
 }
 /* -----------메인---------------------------------------------- */

@@ -166,7 +166,7 @@ textarea {
     position: relative;
     display: flex;
     flex-direction: column;
-    height: 200px;
+    height: 300px;
     background-color: rgb(255, 255, 255);
     border: 1px solid rgb(221, 221, 221);
     border-radius: 5px;
@@ -195,6 +195,17 @@ textarea {
     color: rgb(203, 203, 203);
 }
 
+.replyTitle {
+    padding-bottom: 3rem;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.replyContent {
+    font-size: 18px;
+}
+
+/* 수정/삭제/목록 버튼 */
 .submitContainer {
     display: flex;
     /* justify-content: center; */

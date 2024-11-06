@@ -6,6 +6,12 @@
     text-decoration: none;
     font-family: "Nunito Sans", sans-serif; 
 }
+body {
+    width: 100%;
+    height: 100%;
+    background-color: #fffdf6;
+    min-height: 100vh;
+  }
 /* -----------상단 타이틀 AdminDashboardHeader----------- */
 .AdminDashboardHeader{
     background-color: #fffdf6;
@@ -33,8 +39,10 @@
     border-radius: 20px;
     width: 10%;
     min-width: 165px;
+    height: 830px;
     background-color: #fff3c7;
     padding-bottom: 1.5rem;
+
 }
 li, a{
     list-style: none;
