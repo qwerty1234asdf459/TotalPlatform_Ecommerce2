@@ -21,18 +21,18 @@ document.addEventListener("DOMContentLoaded", function () {
 
         document.querySelectorAll("input[name='productSelect']:checked").forEach((box) => { // 개별체크박스가 선택되면
             const productContainer = box.closest(".cartProduct"); // closest: 자기자신 포함해 위쪽으로 트리 순회
-            const productPrice = parseInt(productContainer.querySelector(".productPrice p").innerText.replace(/[^0-9]/g, '')) || 0; // 숫자 or 0으로
-            const productCount = parseInt(productContainer.querySelector(".productCount p.count").innerText) || 1; // 숫자 or 1로
+            const productPrice = parseInt(productContainer.querySelector(".productPrice p").innerText.replace(/[^0-9]/g, '')) || 0; // 숫자 or 0
+            const productCount = parseInt(productContainer.querySelector(".productCount p.count").innerText) || 1; // 숫자 or 1
 
             productPriceTotal += productPrice * productCount; // Total 값
-            //saleAmountTotal += (productPrice * productCount) * 0.1; // 할인율 없으므로 추후 필요하면 사용해야함
+            //saleAmountTotal += (productPrice * productCount) * 0.1; // 할인율 없으므로 추후 필요하면 사용하기
         });
 
-        productPricePop.innerText = `${productPriceTotal.toLocaleString()}원`; // toLocaleString()- 숫자 콤마찍기
+        productPricePop.innerText = `${productPriceTotal.toLocaleString()}원`; // toLocaleString() : 숫자 콤마찍기
         saleAmountElement.innerText = `-${saleAmountTotal.toLocaleString()}원`;
         
         const totalPrice = productPriceTotal - saleAmountTotal + deliveryFee;
-        totalPriceElement.innerText = `${totalPrice.toLocaleString()}원`;
+        totalPriceElement.innerText = `${totalPrice.toLocaleString()}원`; // 총 Total 금액
     }
 
     productSelectAll.addEventListener("click", function () { // click 이벤트 사용시
