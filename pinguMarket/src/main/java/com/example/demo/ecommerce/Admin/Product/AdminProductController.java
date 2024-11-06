@@ -89,7 +89,7 @@ public class AdminProductController {
 	       
 	    // ic.thumbfileInsert(request, a);  //썸네일 이미지 저장 메소드
 	    // ic.bannerfileInsert(request, a); //배너 이미지 저장 메소드
-	     return "redirect:/registration"; //URL
+	     return "redirect:/admin/Product"; //URL
 	}
 	
 	
