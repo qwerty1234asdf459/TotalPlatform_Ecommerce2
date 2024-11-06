@@ -11,17 +11,15 @@ import org.springframework.transaction.annotation.Transactional;
 import com.example.demo.ecommerce.Entity.Cart;
 import com.example.demo.ecommerce.Entity.Product;
 import com.example.demo.ecommerce.Entity.User;
-import com.example.demo.ecommerce.User.UserRepository;
 
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 @Service
-@Transactional //  예외 발생 시 롤백, 정상 종료 시 커밋 등의 필요한 코드를 삽입
+@Transactional  //  예외 발생 시 롤백, 정상 종료 시 커밋 등의 필요한 코드를 삽입
 public class CartService {
 	
 	private final CartRepository car;
-	private final UserRepository ur;
 	
 	public void createCart(User user, Product product, Integer count) {
 		Cart cart = new Cart();

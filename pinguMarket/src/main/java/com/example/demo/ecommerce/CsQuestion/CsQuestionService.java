@@ -23,7 +23,7 @@ public class CsQuestionService {
 	private final CsQuestionRepository qr;
 	private final CsQuestionUserRepository userRepository;
 	
-		
+		// 1:1 문의 내용 가져오기
 		public CsQuestion getQuestion(Integer csQuestionId) throws UserException {
 			Optional<CsQuestion> q1 = this.qr.findById(csQuestionId);
 			if(q1.isPresent()) {

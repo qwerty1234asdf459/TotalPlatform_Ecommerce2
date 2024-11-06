@@ -36,9 +36,9 @@ main {
 /* allselect */
 .allselect{
     padding: 1rem;
-    border-radius: 1rem;
+    border-radius: 0.5rem;
     border: 1px solid rgb(239, 239, 239);;
-    box-shadow: 0px 2px 4px gray;
+    box-shadow: 0px 1px 2px rgb(239, 239, 239);
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -75,7 +75,7 @@ input[type="checkbox"]{
 }
 
 input[type="checkbox"]:checked + label > .inputSquire{
-    background-color: rgb(33, 33, 33);
+    background-color: var(--mainColor);
     border: none;
 }
 
@@ -140,11 +140,31 @@ input[type="checkbox"]:disabled + label{
 .cartProductContainer{
     border: 1px solid rgb(197, 197, 197);
     padding: 2rem 0 2rem 0;
-    border-radius: 1rem;
-    box-shadow: 0px 2px 4px gray;
+    border-radius: 0.5rem;
+    box-shadow: 0px 2px 4px rgb(197, 197, 197);
     margin-bottom: 5rem;
+    overflow-y: auto;
+    height: 700px;
 }
 
+.cartProductContainer::-webkit-scrollbar {
+    width: 12px;
+}
+
+.cartProductContainer::-webkit-scrollbar-track {
+    /* background: #f1f1f1; */
+    background-color: white;
+    border-radius: 10px;
+}
+
+.cartProductContainer::-webkit-scrollbar-thumb {
+    background-color: var(--subColor);
+    border-radius: 5px;
+}
+
+.cartProductContainer::-webkit-scrollbar-thumb:hover {
+    background-color: var(--mainColor);
+}
 
 .cartProduct{
     border-top: 1px solid rgb(198, 198, 198);
@@ -244,7 +264,6 @@ input[type="checkbox"]:disabled + label{
 .accountContainer{
     border-radius: 1rem;
     border: 1px solid rgb(239, 239, 239);;
-    /* background-color: rgb(239, 239, 239); */
     padding: 1rem 1rem 0 1rem;
     box-shadow: 1px 1px 4px gray;
 }
