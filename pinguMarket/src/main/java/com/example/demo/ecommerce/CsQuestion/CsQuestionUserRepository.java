@@ -4,6 +4,7 @@ import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import com.example.demo.ecommerce.Entity.CsQuestion;
 import com.example.demo.ecommerce.Entity.User;
 
 

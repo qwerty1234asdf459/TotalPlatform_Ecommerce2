@@ -132,25 +132,13 @@ private final AdminNoticeService ans;
 
 	//   -----------------------------------------------고객센터 > 1:1 문의 삭제-----------------------------------------------
 	//	@PreAuthorize("isAuthenticated()")
-//		@GetMapping("/csc/delete/{id}")
-//		public String questionDelete(CsQuestionForm csquestionForm, @PathVariable("id") Integer id) throws UserException {
-//			
-//			CsQuestion q = this.qr.getQuestion(csQuestionId);
-//			this.qr.delete(q);
-//			
-//			return "redirect:/csc";
-//		}
-		
-
-	//  -----------------------------------------------고객센터 > 1:1 문의 > 관리자 답변 조회-----------------------------------------------
-//		@PreAuthorize("isAuthenticated()")
-//		@GetMapping("/csc/answer/{id}")
-//		public String answerDetail(Model model, @PathVariable("id") Integer id) {
-//			
-//			model.addAttribute("answer", this.ar.getAnswer(id));
-//			
-//			return "Cs/cscDetail";
-//		}
+		@GetMapping("/csc/delete/{id}")
+		public String questionDelete(CsQuestionForm csQuestionForm, @PathVariable("id") Integer id) throws UserException {
+			CsQuestion q = this.qr.getQuestion(id);
+			this.qr.delete(q);
+			
+			return "redirect:/csc";
+		}
 		
 		
 		// -----------------------------------------------고객센터 > 공지사항 > 상세페이지 조회-----------------------------------------------

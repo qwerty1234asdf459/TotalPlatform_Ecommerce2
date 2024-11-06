@@ -23,6 +23,11 @@ public class CouponService {
 			return coupon;
 	}
 	
+	public Coupon getCouponById(Integer couponId) {
+		Coupon c = this.cr.findByCouponId(couponId);
+		return c;
+	}
+	
 	public void createCoupon(String code) throws CanNotFoundException, CouponOverlappingException{
 		
 		User user = this.us.getUser(1);
@@ -38,4 +43,10 @@ public class CouponService {
 		this.cr.save(c);
 	}
 	
+	public void useCoupon(Coupon c) {
+		if(c!=null) {
+			c.setUseYn("y");
+			this.cr.save(c);
+		}
+	}
 }
