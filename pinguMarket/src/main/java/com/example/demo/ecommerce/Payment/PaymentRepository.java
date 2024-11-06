@@ -39,5 +39,6 @@ public interface PaymentRepository extends JpaRepository<Payment, Integer>{
 			+ "where create_date >= now() - interval :period month "
 			+ "and user_id = :userId", nativeQuery = true)
 	List<Payment> findByUserCreate(@Param("userId") Integer userId, @Param("period") Integer period);
+//	myorder 페이지에서 전송받은 period 파라미터로 기간 조회하는 쿼리
 
 }

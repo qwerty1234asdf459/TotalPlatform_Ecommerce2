@@ -1,0 +1,13 @@
+.userInfoPassword{
+	display:flex;
+	flex-direction: column;
+	width: 20rem;
+	height: 10rem;
+	justify-content: space-around
+}
+.userInfoPassword input{
+	border: 1px solid black;
+	border-radius: 5px;
+	height: 2rem;
+	padding: 0.5rem;
+}

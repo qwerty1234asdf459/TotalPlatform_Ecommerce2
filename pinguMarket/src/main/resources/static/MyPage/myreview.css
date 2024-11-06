@@ -1,0 +1,37 @@
+.myReviewContainer {
+    background-color: white;
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-top: 1rem;
+}
+.myReviewContainer>p{
+    padding-bottom: 1rem ;
+    font-size: var(--titleFont);
+    border-bottom: 2px solid;
+}
+
+        .reviewListContainer{
+            margin: 0.5vw;
+            border: 1.5px solid black;
+            border-radius: 10px;
+            word-break: break-all;
+            overflow-wrap: break-word;
+        }
+        .reviewListContainer > div{
+            padding: 0.5vw;
+        }
+        .reviewListTop {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgb(238, 238, 238);
+            padding-bottom: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+        .reviewListInfo{
+	        display: flex;
+	        align-items: center;
+	        gap: 1rem;
+        }
+        
+        
