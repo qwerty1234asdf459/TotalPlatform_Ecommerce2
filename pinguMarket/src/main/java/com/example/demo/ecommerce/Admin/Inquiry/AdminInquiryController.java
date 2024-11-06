@@ -116,18 +116,18 @@ public class AdminInquiryController {
 	
 	//---------------관리자페이지 > 문의 관리 > 상세페이지 > 답변 수정하기-------------------
 //	@PreAuthorize("isAuthenticated()") // 로그인 한 경우에만 요청 처리
-//	@PostMapping("/cs/updateAnswer") 
-//    public String updateCsAnswer(@Valid CsAnswerForm csAnswerForm, 
-//    		@RequestParam(value="noticeId") Integer noticeId) throws CanNotFoundException {
-//		Admin admin = this.as.getAdmin(1);
-////		로그인 기능 구현 전이라 임의로 1을 넘김
-//		CsAnswer ca = this.cas.getCsAnswer(csAnswerId);
-////		수정한 데이터 저장하는 메소드 호출
-//		this.cas.update(ca, csAnswerForm.getTitle(), csAnswerForm.getContents());
-//		
-//		cas.update(ca);
-//        return "redirect:/admin/cs";
-//    }
+	@PostMapping("/cs/updateAnswer") 
+    public String updateCsAnswer(@Valid CsAnswerForm csAnswerForm, 
+    		@RequestParam(value="csAnswerId") Integer csAnswerId) throws CanNotFoundException {
+		Admin admin = this.as.getAdmin(1);
+//		로그인 기능 구현 전이라 임의로 1을 넘김
+		CsAnswer ca = this.cas.getCsAnswer(csAnswerId);
+//		수정한 데이터 저장하는 메소드 호출
+		this.cas.update(ca, csAnswerForm.getTitle(), csAnswerForm.getContents());
+		
+		cas.updateCsAnswer(ca);
+        return "redirect:/admin/cs";
+    }
 	
 
 	
