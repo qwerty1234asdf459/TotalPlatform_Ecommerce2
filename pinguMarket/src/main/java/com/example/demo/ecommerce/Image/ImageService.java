@@ -18,7 +18,7 @@ public class ImageService {
 	@Autowired
 	private ImageRepository imageRepository;
 	
-	public Integer save(HttpServletRequest request, MultipartFile files) throws Exception {
+	public Image save(HttpServletRequest request, MultipartFile files) throws Exception {
 		
 		String sourceFileName = files.getOriginalFilename(); //원본 파일명
 		String sourceFileNameExtension = FilenameUtils.getExtension(sourceFileName).toLowerCase(); //파일 확장자명(소문자)
@@ -43,6 +43,6 @@ public class ImageService {
 		f.setUpdateDate(LocalDateTime.now());
 		this.imageRepository.save(f); //DB file 테이블에 저장
 		
-		return f.getImageId();
+		return f;
 	}
 }
