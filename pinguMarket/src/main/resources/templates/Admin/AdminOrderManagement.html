@@ -102,7 +102,7 @@
                         <table>
                             <thead>
                                 <tr>
-                                    <th><input type="checkbox" id="select-all"></th>
+                                    <th><input type="checkbox" id="Select01" name="SelectAll"></th>
                                     <th>주문번호</th>
                                     <th>결제일</th>
                                     <th>처리 상태</th>
@@ -113,7 +113,8 @@
                             </thead>
                             <tbody>
                                 <tr class="Rows" th:each="PayList : ${PayList}">
-                                    <td><span class="check-item"><input type="checkbox" name="select-item"></span></td>
+                                    <td><span class="check-item"><input type="checkbox" th:id="'Select'+${PayList.orderNo}" name="Select" class="Select"></span></td>
+                                    <!-- th:id="'Select'+${PayList.orderNo}" 수정 필요해 보임 -->
                                     <td th:text="${PayList.orderNo}"></td>
                                     <td th:text="${PayList.createDate}"></td>
                                     <td th:text="|${PayList.paymentState} ${PayList.deliveryState}|"></td>
@@ -137,14 +138,14 @@
                             <p>주 문 번 호 : </p>
                             <pre>결   제   일 : </pre>
                             <p>처 리 상 태 : </p>
-                            <p>회 원 번 호 : </p>
+                            <p>주 문 자 ID : </p>
                             <p>배 송 번 호 : </p>
                         </div>
                         <div class="subR">
                             <P th:text="${PayList.orderNo}"></P>
                             <P th:text="${PayList.createDate}"></P>
                             <P th:text="|${PayList.paymentState} ${PayList.deliveryState}|"></P>
-                            <P th:text="${PayList.user}"></P>
+                            <P th:text="${PayList.user.Id}"></P>
                             <P th:text="${PayList.deliveryno}"></P>
                         </div>
                     </li>

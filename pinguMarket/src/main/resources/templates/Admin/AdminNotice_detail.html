@@ -43,7 +43,6 @@
             </div>
             <form th:action="@{|/admin/Notice/detail|}" method="post" id="NoticeForm"> <!--수정하기(수정버튼 눌렀을때 보여줌)-->
                 <input type="hidden" name="noticeId" id="noticeId" th:value="${n.noticeId}">
-                <!-- 타입 넘버로 바꿔도 안됨,,,텍스트도 안됨 ㅡㅡ -->
                 <div class="content_border">
                     <table>
                         <tr class="writing-title">
@@ -65,9 +64,6 @@
                 <button id="updateBtn" class="btn-style">게시글 수정</button>
                 <button id="updateReBtn" class="btn-style" th:attr="data-id=${n.noticeId}" type="submit">게시글 저장</button>
                 <a id="deleteBtn" class="btn-style" th:data-uri="@{|/admin/Notice/detail/delete/${n.noticeId}|}" href="javascript:void(0);">게시글 삭제</a>
-                <!-- <button id="deleteBtn" class="btn-style" onclick="|location.href='@{/admin/Notice/detail/delete/${n.noticeId}}'|" href="javascript:void(0);">게시글 삭제</button> -->
-                <!-- href="javascript:void(0);" th:data-uri="@{|/admin/Notice/detail/delete/${n.noticeId}|}" -->
-                <!-- onclick="location.href=@{|/admin/Notice/detail/delete/${n.noticeId}|}" -->
             </div>
         </div><!--메인 끝-->
     </div>    
