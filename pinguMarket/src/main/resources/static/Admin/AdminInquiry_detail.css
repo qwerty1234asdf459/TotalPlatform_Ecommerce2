@@ -106,7 +106,7 @@ section table .writing-td-content-pre{ /* 내용 값 */
 .Answer-box table, #updateTable table  {
     border-collapse: collapse;
     width: 800px;
-    height: 300px;
+    height: 700px;
     border-style: hidden; /* 두께 맞추기 위해 border-style 숨김 */
 }
 .Answer-box .writing-td-content
@@ -118,14 +118,14 @@ section table .writing-td-content-pre{ /* 내용 값 */
     /*답변 제목*/
     border-width: 0px;
     width: 630px;
-    height: 30px;
+    height: 100px;
     outline: none; /* 포커스 상태일때 두께 생기는거 없애기 */
     font-size: 17px;
 }
 .Answer-box .writing-td-content-pre{
     border-width: 0px;
     width: 640px;
-    height: 250px;
+    height: 623px;
     outline: none; /* 포커스 상태일때 두께 생기는거 없애기 */
     font-size: 17px;
     resize: none;

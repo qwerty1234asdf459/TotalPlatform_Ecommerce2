@@ -46,7 +46,7 @@
                     <!-- 답변 신규 등록 영역 : 답변 등록 버튼 클릭 시 나타남 -->
                                     <!--액션주소 확인 필-->
                     <form th:action="@{/admin/cs/{csQuestionId}}" th:object = "${CsAnswerForm}" method="post">
-                        <div class="content_border">
+                        <div th:if="${Q.csAnswer == null}" class="content_border">
                             <table id="answer-table">
                                 <tr class="writing-id-date">
                                     <td class="writing-td-title">제목</td>
@@ -71,14 +71,14 @@
     
                     <!-- 기존 답변 조회/수정 영역 : 기존 답변이 존재할 때 나타남 -->
                     <form th:action="@{/admin/cs/{csQuestionId}}" id="updateTable" method="post"> <!--액션주소 확인 필-->
-                        <input type="hidden" name="csAnswerId">
-                        <!-- <input type="hidden" name="csAnswerId" th:value="${Q.csAnswerId}"> -->
-                        <div class="content_border">
+                        <div th:if="${Q.csAnswer != null}" class="content_border">
+                            <!-- <input type="hidden" name="csAnswerId" th:value="${Q.csAnswerId}"> -->
+                            <input type="hidden" name="csAnswerId">
                             <table>
                                 <tr class="writing-id-date">
                                     <td class="writing-td-title">제목</td>
                                     <td th:text="${Q.csAnswer.title}" colspan="3" class="writing-td-content">
-                                        <input type="text" class="writing-td-content aTitle" id="writing-td-text" name="title" th:value="${Q.csAnswer.title}" required>
+                                        <input type="text" class="writing-td-content aTitle" id="writing-td-text" name="title" th:text="${Q.csAnswer.title}" required>
                                     </td>
                                 </tr>
                                 <tr class="writing-id-date">

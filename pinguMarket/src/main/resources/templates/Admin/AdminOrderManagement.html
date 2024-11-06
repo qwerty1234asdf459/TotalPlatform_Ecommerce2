@@ -138,14 +138,14 @@
                             <p>주 문 번 호 : </p>
                             <pre>결   제   일 : </pre>
                             <p>처 리 상 태 : </p>
-                            <p>회 원 번 호 : </p>
+                            <p>주 문 자 ID : </p>
                             <p>배 송 번 호 : </p>
                         </div>
                         <div class="subR">
                             <P th:text="${PayList.orderNo}"></P>
                             <P th:text="${PayList.createDate}"></P>
                             <P th:text="|${PayList.paymentState} ${PayList.deliveryState}|"></P>
-                            <P th:text="${PayList.user}"></P>
+                            <P th:text="${PayList.user.Id}"></P>
                             <P th:text="${PayList.deliveryno}"></P>
                         </div>
                     </li>

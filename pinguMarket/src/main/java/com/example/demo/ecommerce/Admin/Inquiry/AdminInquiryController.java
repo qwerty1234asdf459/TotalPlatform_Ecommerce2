@@ -68,7 +68,7 @@ public class AdminInquiryController {
 	            int csQuestionId = Integer.parseInt(csQuestionIdStr); 	//저장한 json타입의 id값을 Integer타입으로 변환해 csQuestionId에 할당
 	            System.out.println("id확인: " + csQuestionId);
 	            CsQuestion cq = this.cqs.getQuestion(csQuestionId); 	//csQuestionId로 리뷰 데이터를 받아옴
-	            this.cqs.delete(cq);									//받아온 문의글(질문) 데이터 삭제 -> 답변도 같이 삭제 되도록
+	            this.cqs.delete(cq);									//받아온 문의글(질문) 데이터 삭제 -> 답변도 같이 삭제되는지?
 	        }
 	        response.put("success", true);								//성공적으로 삭제
 	    } catch (Exception e) {
@@ -81,14 +81,6 @@ public class AdminInquiryController {
 	
 	//---------------관리자페이지 > 문의 관리 > 상세페이지-------------------------------
 //	@PreAuthorize("isAuthenticated()") // 로그인 한 경우에만 요청 처리
-//	@GetMapping("/cs/{csQuestionId}") 
-//    public String AdminInquiry(Model model, @PathVariable("csQuestionId") Integer csQuestionId, CsQuestionForm csQuestionForm) 
-//    		throws UserException{
-//		//csQuestionId로 조회해서 가져오기
-//		CsQuestion Q = this.cqs.getQuestion(csQuestionId);
-//        model.addAttribute("Q", Q);
-//        return "/Admin/AdminInquiry_detail";
-//    }
 	@GetMapping("/cs/{csQuestionId}") 
     public String AdminInquiry(Model model, @PathVariable("csQuestionId") Integer csQuestionId, CsAnswerForm csAnswerForm) 
     		throws UserException{
@@ -128,9 +120,9 @@ public class AdminInquiryController {
 //    public String updateCsAnswer(@Valid CsAnswerForm csAnswerForm, 
 //    		@RequestParam(value="noticeId") Integer noticeId) throws CanNotFoundException {
 //		Admin admin = this.as.getAdmin(1);
-//		로그인 기능 구현 전이라 임의로 1을 넘김
+////		로그인 기능 구현 전이라 임의로 1을 넘김
 //		CsAnswer ca = this.cas.getCsAnswer(csAnswerId);
-//		수정한 데이터 저장하는 메소드 호출
+////		수정한 데이터 저장하는 메소드 호출
 //		this.cas.update(ca, csAnswerForm.getTitle(), csAnswerForm.getContents());
 //		
 //		cas.update(ca);
