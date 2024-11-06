@@ -3,38 +3,7 @@
     <!-- *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-* MAIN *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*--*-*-*-*-*-*-*-*-*-* -->
     <main layout:fragment="content">
     <link rel="stylesheet" href="/MyPage/myPageStyle.css">
-    <style>
-    
-
-    .pwModal{
-            position:absolute;
-            display:flex;
-            justify-content: center;
-            top:0;
-            left:0;
-            width:100%;
-            height:100%;
-            background-color: rgba(0,0,0,0.4);
-        }
-        
-        .pwModalBody{
-            position:absolute;
-            top:50%;
-            width:35%;
-            height:20%;
-            padding:1.5rem;  
-            text-align: center;
-            background-color: white;
-            border-radius:10px;
-        }
-        #pwError{
-	display:none;
-}
-       .signoutTerms{
-        border: 1.5px solid black;
-        border-radius: 10px;
-       }
-    </style>
+    <link rel="stylesheet" href="/MyPage/signout.css">
         <div class="myPageContainer">
 
             <div class="myPageLeft">
@@ -76,8 +45,8 @@
                     </ul>
                     <ul>
                         <p>내정보관리</p>
-                        <li><a href="#">배송지관리</a></li>
-                        <li><a th:href="@{/usermodify}">개인정보수정</a></li>
+                        <li><a th:href="@{/usermodify}">개인정보 수정</a></li>
+                        <li><a th:href="@{/usermodify/pw}">비밀번호 수정</a></li>
                         <li><a th:href="@{/signout}">회원 탈퇴</a></li>
                     </ul>
                     <ul>
@@ -98,68 +67,40 @@
                     
                     <div class="pwModal" id="pwModal">
             <div class="pwModalBody">
-                <h2>패스워드를 입력해주세요</h2>
+                <div class="pwModalContent"><h2>패스워드를 입력해주세요</h2></div>
+            <div class="pwModalContent">
                 <form id="pwCheckForm">
               <!--  <input type="hidden" id="_csrf" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"> -->
                     <input type="hidden" id="_csrf">
                     <input type="password" id="password" name="password" required>
                     <button type="submit" id="pwCheckBtn">확인</button>
                 </form>
+            </div>
+            <div class="pwModalContent">
                 <p id="pwError">비밀번호가 일치하지 않습니다.</p>
+            </div>
             </div>
         </div>
         
+       <div class="signoutContainer">
         <div class="signoutTerms">
-            <p>약관Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae, saepe. Fugiat saepe, pariatur delectus repudiandae omnis sint blanditiis tempore eius dolore accusamus, atque sequi? Minima, iusto esse! Cum, voluptate accusamus.</p>
+            <h1>회원탈퇴 약관</h1>
+            <p>ipsum dolor sit amet consectetur adipisicing elit. Molestiae, saepe. Fugiat saepe, pariatur delectus repudiandae omnis sint blanditiis tempore eius dolore accusamus, atque sequi? Minima, iusto esse! Cum, voluptate accusamus.</p>
         </div>
 
-
+        <div class"signoutConfirm">
                        <form th:action="@{/signout}" method="POST">
                             <input type="checkbox" required />
                             회원탈퇴에 동의합니다.
-                         <button type="submit">회원탈퇴</button>
+                         <button type="submit" class="signoutBtn">탈퇴</button>
                        </form>
-
-
-
-
+        </div>
+       </div>
                 </div>
-                
-            
             </div>
         </div>
     </main>
     
 </div>
 
-    <script>
-let pwBtn = document.querySelector('#pwCheckBtn');
-        pwBtn.addEventListener('click', function(e) {
-    e.preventDefault();
-    
-    const password = document.getElementById('password').value; // 입력한 값을 password로 저장
-    const csrfToken = document.getElementById('_csrf').value;
-    
-    fetch('http://localhost:8080/pwcheck', { // http://localhost:8080/pwcheck에 요청을 보냄
-        method: 'POST', // post 형식
-        headers: {
-            'Content-Type': 'application/x-www-form-urlencoded', // 컨텐츠 타입 정해주기 솔직히 이거 뭔지 잘 모르겠는데 예제에 있던거 그냥 넣음
-            'X-CSRF-TOKEN': csrfToken // 서프토큰도 같이
-        },
-        body: new URLSearchParams({password: password}) // 현 페이지에서 입력한 password값을 password로 전송?
-    })
-    .then(response => response.json())  // 응답을 JSON 객체로 변환하여 받아오기
-    .then(data => {
-	// 받아온 json 데이터가 담긴 data
-        if(data.pwChecked) {  // data에 있는 pwChecked값 체크
-            document.getElementById('pwModal').style.display = 'none'; // pwChecked가 true면 모달창 none
-        } else {
-            document.getElementById('pwError').style.display = 'block'; // pwChecked가 false면 에러메세지 켜기
-        }
-    })
-    .catch(error => {
-        alert("연결에 실패하였습니다.");
-        console.error('Error:', error);
-    });
-});
-    </script>
+    <script th:src="@{/MyPage/signout.js}"></script>

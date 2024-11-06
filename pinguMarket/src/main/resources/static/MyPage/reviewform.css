@@ -1,0 +1,9 @@
+    #title, #contents{
+	width: 50rem;
+	height: 3rem;
+	border-radius: 5px;
+	padding: 0.5rem;
+}
+.reviewContainer div{
+	margin: 1rem 0;
+}

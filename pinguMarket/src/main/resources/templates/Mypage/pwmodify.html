@@ -3,38 +3,8 @@
     <!-- *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-* MAIN *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*--*-*-*-*-*-*-*-*-*-* -->
     <main layout:fragment="content">
     <link rel="stylesheet" href="/MyPage/myPageStyle.css">
-    <style>
-    .userModify > div{
-        padding: 1rem;
+    <link rel="stylesheet" href="/MyPage/pwmodify.css">
 
-}
-
-    .pwModal{
-            position:absolute;
-            display:flex;
-            justify-content: center;
-            top:0;
-            left:0;
-            width:100%;
-            height:100%;
-            background-color: rgba(0,0,0,0.4);
-        }
-        
-        .pwModalBody{
-            position:absolute;
-            top:50%;
-            width:35%;
-            height:20%;
-            padding:1.5rem;  
-            text-align: center;
-            background-color: white;
-            border-radius:10px;
-        }
-        #pwError{
-	display:none;
-}
-    
-    </style>
         <div class="myPageContainer">
 
             <div class="myPageLeft">
@@ -76,8 +46,8 @@
                     </ul>
                     <ul>
                         <p>내정보관리</p>
-                        <li><a href="#">배송지관리</a></li>
-                        <li><a th:href="@{/usermodify}">개인정보수정</a></li>
+                        <li><a th:href="@{/usermodify}">개인정보 수정</a></li>
+                        <li><a th:href="@{/usermodify/pw}">비밀번호 수정</a></li>
                         <li><a th:href="@{/signout}">회원 탈퇴</a></li>
                     </ul>
                     <ul>
@@ -96,18 +66,15 @@
                     
 
         <div id="userModifyContainer">
-            <form th:action="@{/pwmodify}" th:object="${editPwForm}" method="post">
+            <form th:action="@{/usermodify/pw}" th:object="${editPwForm}" method="post">
                  <!--  <div id="erorrs" th:replace="~{login/form_errors :: formErrorsFragment}"></div>
                   -->
                   
                   
                   <div class="userInfoPassword">
-                  <p>현재 비밀번호 입력</p>
-                  <input type="password" th:field="*{prePassword}"/>
-                  <p>비밀번호 입력</p>
-                  <input type="password" th:field="*{password}"/>
-                  <p>비밀번호 확인</p>
-                  <input type="password" th:field="*{password2}"/>
+                  <input type="password" placeholder="현재 비밀번호" th:field="*{prePassword}"/>
+                  <input type="password" placeholder="새 비밀번호" th:field="*{password}"/>
+                  <input type="password" placeholder="새 비밀번호 확인" th:field="*{password2}"/>
                 </div>
                      <input type="submit" value="수정하기">
                   </form>
@@ -117,7 +84,5 @@
         </div>
     </main>
 </div>
-	<script>
-	
-	</script>
+<script th:src="@{/MyPage/pwmodify.js}"></script>
  

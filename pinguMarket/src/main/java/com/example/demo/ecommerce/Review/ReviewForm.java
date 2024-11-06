@@ -6,7 +6,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class ReviewCreateForm {
+public class ReviewForm {
 	
 	@NotEmpty(message = "별점을 선택해주세요.")
 	private String scope;

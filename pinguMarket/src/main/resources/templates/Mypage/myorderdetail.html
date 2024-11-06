@@ -3,67 +3,8 @@
     <!-- *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-* MAIN *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*--*-*-*-*-*-*-*-*-*-* -->
     <main layout:fragment="content">
     <link rel="stylesheet" href="/MyPage/myPageStyle.css">
-    <style>
-		* {
-		    box-sizing: border-box;
-		}
-		.contentListContainer {
-		    display: flex;
-		    align-items: center;
-		    border: 1px solid #ccc;
-		    border-radius: 10px;
-		    margin: 0.5rem 0;
-		    overflow: hidden;
-		}
-		.contentHeader {
-		    display: grid;
-		    padding-left:10px;
-		    grid-template-columns: 1fr 1.7fr 1fr 1fr 1fr;
-		    font-weight: bold;
-		    padding: 0.5rem;
-		    border-bottom: 2px solid;
-		    text-align: center;
-		    background-color: rgb(238, 238, 238);
-		}
-		.contentHeader span {
-		    white-space: nowrap;
-		    overflow: hidden;
-		    text-overflow: ellipsis;
-		}
-		
-		.productImage {
-		    width: 75px;
-		    height: 75px;
-		    flex-shrink: 0;
-		}
-		
-		.productImage img {
-		    width: 100%;
-		    height: 100%;
-		    object-fit: cover;
-		}
-		
-		.contentListInfo {
-		    display: grid;
-		    grid-template-columns: 1fr 1.7fr 1fr 1fr 1fr;
-		    align-items: center;
-		    text-align: center;
-		    width: 100%;
-		    padding: 0.5rem;
-		    gap: 0.5rem;
-		}
-		
-		.contentListInfo span {
-		    white-space: nowrap;
-		    overflow: hidden;
-		    text-overflow: ellipsis;
-		}
-		.createReviewLink{
-			display: flex;
-		    justify-content: center;
-		    align-items: center;
-		}
-    </style>
+    <link rel="stylesheet" href="/MyPage/myorderdetail.css">
+
         <div class="myPageContainer">
 
             <div class="myPageLeft">
@@ -105,8 +46,8 @@
                     </ul>
                     <ul>
                         <p>내정보관리</p>
-                        <li><a href="#">배송지관리</a></li>
-                        <li><a th:href="@{/usermodify}">개인정보수정</a></li>
+                        <li><a th:href="@{/usermodify}">개인정보 수정</a></li>
+                        <li><a th:href="@{/usermodify/pw}">비밀번호 수정</a></li>
                         <li><a th:href="@{/signout}">회원 탈퇴</a></li>
                     </ul>
                     <ul>
@@ -122,7 +63,7 @@
                 <div class="myPageTitle">
                     <p>상세 주문내역</p>
                     
-                    <div class="contentHeader">
+                    <div class="pdetailHeader">
                         <span></span>
                         <span>상품명</span>
                         <span>가격</span>
@@ -133,9 +74,9 @@
                     <!-- <div th:if="${리스트.isEmpty()}">
                         구매내역이 없습니다.
                     </div> -->
-                    <div class="contentListContainer" th:each="paymentdetail : ${payment.paymentDetailList}"> <!-- 반복 용도의 div이라서 나중에 th:each="" th:if="${!리스트.isEmpty()}" 붙이기 -->
+                    <div class="pdetailListContainer" th:each="paymentdetail : ${payment.paymentDetailList}"> <!-- 반복 용도의 div이라서 나중에 th:each="" th:if="${!리스트.isEmpty()}" 붙이기 -->
 
-                        <div class="contentListInfo">
+                        <div class="pdetailListInfo">
                             <!--  상품명, 구매일자, 주문번호, 총 가격 등의 정보 작성용 -->
                              <div class="productImage"><img src="/img/ordertest.jpg" alt=""></div>
                              <div class="productName"><h4 th:text="${paymentdetail.product.name}"></h4></div>

@@ -3,33 +3,8 @@
     <!-- *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-* MAIN *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*--*-*-*-*-*-*-*-*-*-* -->
     <main layout:fragment="content">
         <link rel="stylesheet" href="/MyPage/myPageStyle.css">
-    <style>
-    
+        <link rel="stylesheet" href="/MyPage/myreview.css">
 
-
-.myReviewContainer{
-    background-color: white;
-    border-radius: 0.5rem;
-    padding: 1rem 2rem 1rem 2rem;
-}
-.myReviewContainer>p{
-    padding-bottom: 1rem ;
-    font-size: var(--titleFont);
-    border-bottom: 2px solid;
-}
-
-        .reviewListContainer{
-            margin: 0.5vw;
-            border: 1.5px solid black;
-            border-radius: 10px;
-        }
-        .reviewListContainer > div{
-            padding: 0.5vw;
-        }
-        .reviewListTop{
-            display: flex;
-        }
-    </style>
         <div class="myPageContainer">
 
             <div class="myPageLeft">
@@ -71,8 +46,8 @@
                     </ul>
                     <ul>
                         <p>내정보관리</p>
-                        <li><a href="#">배송지관리</a></li>
-                        <li><a th:href="@{/usermodify}">개인정보수정</a></li>
+                        <li><a th:href="@{/usermodify}">개인정보 수정</a></li>
+                        <li><a th:href="@{/usermodify/pw}">비밀번호 수정</a></li>
                         <li><a th:href="@{/signout}">회원 탈퇴</a></li>
                     </ul>
                     <ul>
@@ -120,14 +95,4 @@
         </div>
     </main>
 </div>
-	<script>
-	let del = document.querySelectorAll(".delete");
-	        for(let el of del){
-		el.addEventListener('click', function(){
-			if(confirm("정말로 삭제?")){
-				location.href = this.dataset.uri;
-	//                         삭제의 data.uri가 dataset-uri에 저장하는 것이기 때문에 누른 버튼의 uri를 가져옴
-			}
-		});
-	};
-	</script>
+<script th:src="@{/MyPage/myreview.js}"></script>
