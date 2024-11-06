@@ -11,11 +11,17 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.example.demo.ecommerce.Entity.Image;
 import com.example.demo.ecommerce.Entity.Product;
+import com.example.demo.ecommerce.Entity.ProductImg;
+import com.example.demo.ecommerce.Image.ImageService;
 import com.example.demo.ecommerce.Product.ProductRepository;
 import com.example.demo.ecommerce.Product.ProductService;
+import com.example.demo.ecommerce.productimg.ProductImgService;
 
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
@@ -27,6 +33,8 @@ public class AdminProductController {
 	private final AdminProductService aps;
 	private final ProductRepository pr;
 	private final ProductService ps;
+	private final ImageService imageService;
+	private final ProductImgService productImgService;
 	
 	//------------------관리자페이지 > 상품 관리(리스트)--------------------------
 	//@PreAuthorize("isAuthenticated()") // 로그인 한 경우에만 요청 처리
@@ -73,7 +81,7 @@ public class AdminProductController {
 	//@PreAuthorize(value = "isAuthenticated()")  //로그인 한 경우에만 요청 처리
 	@PostMapping("/registration")
 	public String createProduct(AdminProductForm adminProductForm, BindingResult bindingResult,
-			HttpServletRequest request) throws Exception{
+			HttpServletRequest request, @RequestParam("productImg") MultipartFile files) throws Exception{
 		 if (bindingResult.hasErrors()) {
 //		        for (FieldError error : bindingResult.getFieldErrors()) {
 //		            System.out.println("Field: " + error.getField());
@@ -86,6 +94,8 @@ public class AdminProductController {
 		 Product a = this.aps.returnCreate(adminProductForm.getName(),adminProductForm.getCategory(),adminProductForm.getPrice()
 	    		   ,adminProductForm.getAmount());
 	      
+		 Image i = this.imageService.save(request, files);
+		 this.productImgService.create(a, i);
 	       
 	    // ic.thumbfileInsert(request, a);  //썸네일 이미지 저장 메소드
 	    // ic.bannerfileInsert(request, a); //배너 이미지 저장 메소드

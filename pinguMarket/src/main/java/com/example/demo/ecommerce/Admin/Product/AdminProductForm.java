@@ -1,5 +1,7 @@
 package com.example.demo.ecommerce.Admin.Product;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import jakarta.validation.constraints.NotEmpty;
 import lombok.Getter;
 import lombok.Setter;
@@ -22,8 +24,8 @@ public class AdminProductForm {
 	@NotEmpty
 	private Integer amount; //상품수량
 
-	//@NotEmpty
-	//private MultipartFile mainImg; //대표이미지
+	@NotEmpty
+	private MultipartFile Img; //대표이미지
 	
 	//@NotEmpty
 	//private MultipartFile detailImg; //상세이미지
