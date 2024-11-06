@@ -1,12 +1,18 @@
 package com.example.demo.ecommerce.Payment;
 
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
+import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.stereotype.Service;
 
-
+import com.example.demo.ecommerce.Entity.Coupon;
 import com.example.demo.ecommerce.Entity.Payment;
+import com.example.demo.ecommerce.Entity.User;
 import com.example.demo.ecommerce.Review.CanNotFoundException;
 
 import lombok.RequiredArgsConstructor;
@@ -17,6 +23,49 @@ public class PaymentService {
 	
 	private final PaymentRepository pr;
 	
+	
+	
+	
+	//////////////////////////////////API관련///////////////////////////////////
+	
+	private final TossPaymentsApiClient tossPaymentsApiClient;
+	public String requestPayment(PaymentRequest request) throws IOException {
+		return tossPaymentsApiClient.requestPayment(request);
+	}
+	public String confirmPayment(String paymentKey, String orderId, Long amount) throws IOException {
+	    return tossPaymentsApiClient.confirmPayment(paymentKey, orderId, amount);
+	}
+	public String getPayment(String paymentKey) throws IOException {
+	    return tossPaymentsApiClient.getPayment(paymentKey);
+	}
+	
+	/////////////////////////////////////////////////////////////////////////////
+	public Payment createPayment(User user, Coupon coupon,String address, String delRequest) {
+		Payment p = new Payment();
+		p.setUser(user);
+		p.setCoupon(coupon);
+		p.setCreateDate(LocalDateTime.now());
+		p.setDeliveryno(" ");
+		p.setAddress(address);
+		p.setName(user.getName());
+		p.setTell(user.getTell());
+		p.setPaymentState("결제 완료");
+		p.setDeliveryno("11111");
+		p.setOrderNo(createOrderNo());
+		p.setDeliveryState("상품 준비중");
+		
+		this.pr.save(p);
+		
+		return p;
+	}
+	
+	public String createOrderNo() {
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
+		String currentTime = dateFormat.format(new Date());
+		String randomAlpa = RandomStringUtils.randomAlphabetic(4);
+		
+		return randomAlpa+currentTime;
+	}
 	public List<Payment> getPayment(Integer id) throws CanNotFoundException {
 		List<Payment> p = this.pr.findByUser_UserId(id);
 		if(!p.isEmpty()) {
@@ -44,12 +93,12 @@ public class PaymentService {
     }
 	
 	public Integer getTotalPrice(Payment payment) {
-		return payment.getPaymentDetailList().stream() // Payment의 PaymentDetail 리스트를 스트림으로 변환
-				.mapToInt(detail -> detail.getPrice() * detail.getCount()) // 각 paymentdetail의 가격과 갯수를 곱함
-				.sum(); // 해당 결제내역의 총 가격을 계산
+		return payment.getPaymentDetailList().stream()
+				.mapToInt(detail -> detail.getPrice() * detail.getCount())
+				.sum();
 	}
 
-	public List<Payment> getPaymentPeriod(Integer userId, Integer period) throws CanNotFoundException {
+	public List<Payment> getPayment(Integer userId, Integer period) throws CanNotFoundException {
 		List<Payment> p = this.pr.findByUserCreate(userId, period);
 		if(!p.isEmpty()) {
 			return p;
@@ -58,7 +107,16 @@ public class PaymentService {
 			throw new CanNotFoundException("데이터를 찾을 수 없습니다.");
 		}
 	}
-//	myorder 페이지에서 전송받은 period 파라미터로 기간 조회하는 메서드
+	
+	public List<Payment> getPaymentPeriod(Integer userId, Integer period) throws CanNotFoundException {
+	      List<Payment> p = this.pr.findByUserCreate(userId, period);
+	      if(!p.isEmpty()) {
+	         return p;
+	      }
+	      else {
+	         throw new CanNotFoundException("데이터를 찾을 수 없습니다.");
+	      }
+	   }
 	
 }
 
