@@ -80,16 +80,19 @@ section table .writing-td-content-pre{ /* 내용 값 */
 
 /* ------------------버튼 스타일------------------ */
 .btn-style {
+    display: inline-block;
+    text-align: center; font-size: 14px;
     margin-top: 5px;
     background-color: #fce699;
     width: 120px;
-    height: 40px;
+    height: 40px; line-height: 40px;
     border: 0px;
     border-radius: 10px;
     color: black;
     cursor: pointer;
     margin-right: 20px;
 }
+
 /* 저장, 초기화 버튼 */
 .btnboxs {
     margin-bottom: 5px;
@@ -106,7 +109,7 @@ section table .writing-td-content-pre{ /* 내용 값 */
 .Answer-box table, #updateTable table  {
     border-collapse: collapse;
     width: 800px;
-    height: 700px;
+    height: 683px;
     border-style: hidden; /* 두께 맞추기 위해 border-style 숨김 */
 }
 .Answer-box .writing-td-content
@@ -118,17 +121,22 @@ section table .writing-td-content-pre{ /* 내용 값 */
     /*답변 제목*/
     border-width: 0px;
     width: 630px;
-    height: 100px;
+    height: 70px;
     outline: none; /* 포커스 상태일때 두께 생기는거 없애기 */
     font-size: 17px;
 }
 .Answer-box .writing-td-content-pre{
     border-width: 0px;
     width: 640px;
-    height: 623px;
     outline: none; /* 포커스 상태일때 두께 생기는거 없애기 */
     font-size: 17px;
     resize: none;
     line-height: 22px;
     overflow-y: auto;
+}
+.Answer-box .writing-td-content-pre{
+    height: 603px; /*기존 답변 내용영역 높이 조절*/
+}
+.Answer-box #newContents{
+    height: 652px; /*신규 답변 내용영역 높이 조절*/
 }

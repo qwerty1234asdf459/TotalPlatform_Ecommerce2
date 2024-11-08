@@ -45,13 +45,14 @@
                 <div class="Answer-box">
                     <!-- 답변 신규 등록 영역 : 답변 등록 버튼 클릭 시 나타남 -->
                                     <!--액션주소 확인 필-->
-                    <form th:action="@{/admin/cs/{csQuestionId}}" th:object = "${CsAnswerForm}" method="post">
+                    <form th:action="@{/admin/cs/newAnswer/{csQuestionId}}" method="post">
                         <div th:if="${Q.csAnswer == null}" class="content_border">
+                            <input type="hidden" name="csQuestionId" th:value="${Q.csQuestionId}">
                             <table id="answer-table">
                                 <tr class="writing-id-date">
                                     <td class="writing-td-title">제목</td>
                                     <td class="writing-td-content">
-                                        <input type="text" class="aTitle" name="title" id="writing-td-text newTitle" spellcheck="false">
+                                        <input type="text" class="aTitle" name="title" id="newTitle" spellcheck="false">
                                     </td>
                                 </tr>
                                 <tr class="writing-content">
@@ -60,46 +61,47 @@
                                         <textarea name="contents" class="writing-td-content-pre" id="newContents" spellcheck="false"></textarea>
                                         <div id="btn-box" class="btnboxs">
                                             <button type="submit" id="btn-submit" class="btn-style">답변 신규 등록</button>
-                                            <button type="button" id="btn-clear" class="btn-style">초기화</button>
+                                            <button type="button" id="btn-clear" class="btn-style" onclick="clearA()">초기화</button>
                                         </div>
                                     </td>
                                 </tr>
                             </table>
                         </div>
-                            <input type="hidden" name="csQuestionId" th:value="${Q.csQuestionId}">
                     </form>
     
                     <!-- 기존 답변 조회/수정 영역 : 기존 답변이 존재할 때 나타남 -->
-                    <form th:action="@{/admin/cs/{csQuestionId}}" id="updateTable" method="post"> <!--액션주소 확인 필-->
+                    <form th:action="@{/admin/cs/updateAnswer/{csAnswerId}}" id="updateTable" method="post"> <!--액션주소 확인 필-->
                         <div th:if="${Q.csAnswer != null}" class="content_border">
-                            <!-- <input type="hidden" name="csAnswerId" th:value="${Q.csAnswerId}"> -->
-                            <input type="hidden" name="csAnswerId">
+                            <input type="hidden" name="csAnswerId" th:value="${Q.csAnswer.csAnswerId}">
+                         
                             <table>
                                 <tr class="writing-id-date">
                                     <td class="writing-td-title">제목</td>
-                                    <td th:text="${Q.csAnswer.title}" colspan="3" class="writing-td-content">
-                                        <input type="text" class="writing-td-content aTitle" id="writing-td-text" name="title" th:text="${Q.csAnswer.title}" required>
+                                    <td colspan="3" class="writing-td-content">
+                                        <input type="text" class="writing-td-content aTitle" id="writing-td-text" name="title" th:value="${Q.csAnswer.title}" required>
                                     </td>
                                 </tr>
                                 <tr class="writing-id-date">
                                     <td class="writing-td-title">작성자</td>
-                                    <td class="writing-td-content">작성자 ID 연결필요</td><!--th:text="${관리자Id}"-->
+                                    <td th:text="${Q.csAnswer.admin.adCode}" class="writing-td-content">작성자 ID 연결필요</td>
                                     <td class="writing-td-title">등록날짜</td>
-                                    <td th:text="${Q.csAnswer.updateDate}" class="writing-td-content">yyyy-MM-dd HH:mm:ss</td>
+                                    <td th:text="${#temporals.format(Q.csAnswer.updateDate, 'yyyy-MM-dd HH:mm')}" class="writing-td-content">yyyy-MM-dd HH:mm:ss</td>
                                 </tr>
                                 <tr class="writing-content">
                                     <td class="writing-td-title">내용</td>
                                     <td class="writing-td-content" colspan="3">
                                         <textarea class="writing-td-content-pre" id="writing-td-textarea" name="contents" th:text="${Q.csAnswer.contents}" required></textarea>
                                         <div class="btnboxs">
-                                            <!-- <button type="submit" id="btn-updateRe" class="btn-style">답변 수정</button> -->
                                             <button type="submit" id="btn-updateRe" class="btn-style" th:attr="data-id=${Q.csAnswer.csAnswerId}">수정 하기</button>
-                                            <button type="submit" id="btn-delete" class="btn-style" th:attr="data-id=${Q.csAnswer.csAnswerId}">답변 삭제</button>
+                                            <a id="btn-delete" class="btn-style" onclick="deleteA()">답변 삭제</a>
+                                            <!-- href="javascript:void(0);" -->
+                                            <!-- th:data-uri="@{|/admin/cs/answerDelete/${Q.csAnswer.csAnswerId}|}" -->
                                         </div>
                                     </td>
                                 </tr>
                             </table>
                         </div>
+                    </form>
                 </div>
             </div>
         </section>

@@ -41,10 +41,10 @@
             </div>
             <div class="Rows"th:each="Q : ${Q}"> <!--페이징 처리 필요-->
                 <span><input type="checkbox" th:id="'Select'+${Q.csQuestionId}" name="Select" class="Select"></span>
-                <a class="list_updateDate" th:href="@{|/admin/cs/${Q.csQuestionId}|}" th:text="${Q.updateDate}">작성일</a>
+                <a class="list_updateDate" th:href="@{|/admin/cs/${Q.csQuestionId}|}" th:text="${#temporals.format(Q.updateDate, 'yyyy-MM-dd HH:mm')}">작성일</a>
                 <a class="list_userId" th:href="@{|/admin/cs/${Q.csQuestionId}|}" th:text="${Q.user.id}">글쓴이</a>
                 <a class="list_title" th:href="@{|/admin/cs/${Q.csQuestionId}|}" th:text="${Q.title}">제목</a>
-                <a class="list_anwerYN" href="#">N</a>
+                <a class="list_anwerYN" th:href="@{|/admin/cs/${Q.csQuestionId}|}" th:text="${Q.CsAnswer == null} ? 'N' : 'Y'"></a>
             </div>
             
             <div id="pageBtn"> <!--

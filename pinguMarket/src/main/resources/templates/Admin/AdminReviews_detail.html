@@ -29,7 +29,7 @@
                             <td class="writing-td-title">작성자</td>
                             <td th:text="${r.user.id}" class="writing-td-content"></td>
                             <td class="writing-td-title">작성일</td>
-                            <td th:text="${r.updateDate}"  class="writing-td-content">update_date</td>
+                            <td th:text="${#temporals.format(r.updateDate, 'yyyy-MM-dd HH:mm')}" class="writing-td-content">update_date</td>
                         </tr>
                         <tr class="product">
                             <td class="writing-td-title">상품명</td>

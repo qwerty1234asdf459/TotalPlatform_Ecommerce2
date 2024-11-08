@@ -36,7 +36,7 @@ public class CsAnswerService {
 	}
 	
 	//---------------	답변(신규) 생성-----------------------------
-	public void returnCreate(String adCode, CsQuestion q, String title, String contents) throws UserException {
+	public CsAnswer returnCreate(String adCode, CsQuestion q, String title, String contents) throws UserException {
 		CsAnswer csAnswer = new CsAnswer();
 		csAnswer.setAdmin(getAdmin(adCode));
 		csAnswer.setCsQuestion(q);
@@ -44,6 +44,7 @@ public class CsAnswerService {
 		csAnswer.setContents(contents);
 		csAnswer.setUpdateDate(LocalDateTime.now());
 		this.car.save(csAnswer);
+		return csAnswer;
 		
 	}
 	

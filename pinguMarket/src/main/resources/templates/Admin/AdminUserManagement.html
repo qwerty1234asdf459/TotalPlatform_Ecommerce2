@@ -48,7 +48,7 @@
                 <span th:text="|${UList.address} ${UList.addressDetail}|"></span> 
                 <span>--건</span>
                 <span>--건</span>
-                <span th:text="${UList.createDate}"></span>
+                <span th:text="${#temporals.format(UList.createDate, 'yyyy-MM-dd HH:mm')}"></span>
             </div>
             <div id="pageBtn"> <!--
                     <li th:classappend="${!paging.hasPrevious} ? 'disabled'">

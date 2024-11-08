@@ -41,7 +41,7 @@
                 <span><input type="checkbox" th:id="'Select'+${NList.noticeId}" name="Select" class="Select"></span>
                 <a class="list_title" th:href="@{|/admin/Notice/detail/${NList.noticeId}|}" th:text="${NList.title}"></a>
                 <a class="list_admin" th:href="@{|/admin/Notice/detail/${NList.noticeId}|}" th:text="${NList.admin.adCode}"></a>
-                <a class="list_updateDate" th:href="@{|/admin/Notice/detail/${NList.noticeId}|}" th:text="${NList.updateDate}"></a>
+                <a class="list_updateDate" th:href="@{|/admin/Notice/detail/${NList.noticeId}|}" th:text="${#temporals.format(NList.updateDate, 'yyyy-MM-dd HH:mm')}"></a>
             </div>
             
             <div id="pageBtn"> <!--페이징처리필요
