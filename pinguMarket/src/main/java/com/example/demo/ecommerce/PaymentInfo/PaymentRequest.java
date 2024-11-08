@@ -1,4 +1,4 @@
-package com.example.demo.ecommerce.Payment;
+package com.example.demo.ecommerce.PaymentInfo;
 
 import lombok.Builder;
 import lombok.Getter;
