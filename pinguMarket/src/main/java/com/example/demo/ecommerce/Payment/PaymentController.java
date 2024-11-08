@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -65,7 +66,7 @@ public class PaymentController {
 	}
 	
 	@PostMapping("/payment")
-	public String createPayment(@RequestParam("address")String address,@RequestParam(required = false,value="couponId")Integer couponId,
+	public ResponseEntity<String> createPayment(@RequestParam("address")String address,@RequestParam(required = false,value="couponId")Integer couponId,
 			@RequestParam("cartData")String cartData,@RequestParam("delRequest")String delRequest,@RequestParam("orderId")String orderId) throws Exception{
 		
 		User u = this.userService.getUser(1);
@@ -87,7 +88,7 @@ public class PaymentController {
 			this.cartService.delete(cartList.get(i));
 			this.paymentDetailService.createPaymentDetail(p, cartList.get(i));
 		}
-		return "Payment/paymentPage";
+		return ResponseEntity.ok("주문 생성");
 	}
 	
 	

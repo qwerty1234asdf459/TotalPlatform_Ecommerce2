@@ -127,38 +127,13 @@ const random = (length = 4) => {
 
 let orderId = random()+new Date().getTime();
 
-function submitPayment(){
-	const selectedCartList = document.querySelectorAll(".carts");
-	
-	const cartArr = new Array;
-
-	selectedCartList.forEach((cart)=>{
-		cartArr.push(cart.value);
-		console.log(cart.value);
-	})
-	document.getElementById("paymentAddress").value = document.getElementById("adressTextArea").value
-												+" "+document.getElementById("adressTextArea2").value;
-	document.getElementById("paymentCoupon").value = couponSelect.options[couponSelect.selectedIndex].id
-	document.getElementById("paymentRequest").value = delRequest.value
-	document.getElementById("cartArr").value = JSON.stringify(cartArr);
-	document.getElementById("orderId").value = orderId;
-	
-	//console.log(document.getElementById("orderId").value);
-	//console.log(document.getElementById("paymentCoupon").value);
-	//console.log(document.getElementById("paymentRequest").value);
-	//console.log(document.getElementById("cartArr").value);
-	document.getElementById("paymentSubmitForm").submit();
-	
-}
-///////////////////////////////////////////////////
-
-	const titleList = document.querySelectorAll(".productName");
+const titleList = document.querySelectorAll(".productName");
 	const nameArr = new Array;
 	titleList.forEach((name)=>{
 		nameArr.push(name.textContent);
 	})
 
-	var clientKey = 'test_ck_26DlbXAaV0MOP52Gyd6KrqY50Q9R';
+var clientKey = 'test_ck_26DlbXAaV0MOP52Gyd6KrqY50Q9R';
     var tossPayments = TossPayments(clientKey);
     function requestPayment() {
         tossPayments.requestPayment('카드', {
@@ -171,5 +146,48 @@ function submitPayment(){
         });
     }
 
+const psf = document.getElementById("paymentSubmitForm");
+	psf.addEventListener('click',function(e){
+		e.preventDefault();
+			
+		const selectedCartList = document.querySelectorAll(".carts");
+	
+		const cartArr = new Array;
+
+		selectedCartList.forEach((cart)=>{
+			cartArr.push(cart.value);
+			console.log(cart.value);
+		})
+		document.getElementById("paymentAddress").value = document.getElementById("adressTextArea").value
+												+" "+document.getElementById("adressTextArea2").value;
+		document.getElementById("paymentCoupon").value = couponSelect.options[couponSelect.selectedIndex].id
+		document.getElementById("paymentRequest").value = delRequest.value
+		document.getElementById("cartArr").value = JSON.stringify(cartArr);
+		document.getElementById("orderId").value = orderId;
+			
+		fetch("http://localhost:8080/payment",{
+			method: 'POST',
+			headers: {
+    			"Content-Type": 'application/x-www-form-urlencoded',
+    				},
+			body : new URLSearchParams({code:code})
+		})
+		.then(response => {
+			if(response.ok){
+				requestPayment()
+			}else{
+				alert("결제에 실패했습니다.");
+				console.error(response);
+			}
+		})
+		.catch(error =>{
+			alert("연결에 실패하였습니다");
+			console.error('Error: ',error);
+		})
+	})
+
+///////////////////////////////////////////////////
+
+	
 
 paymentSubmit.addEventListener("click",requestPayment);
