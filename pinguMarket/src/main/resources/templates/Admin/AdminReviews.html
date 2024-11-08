@@ -44,7 +44,7 @@
                 <a class="list_user" th:href="@{|/admin/Reviews/detail/${RList.reviewId}|}" th:text="${RList.user.name}"></a>
                 <a class="list_product" th:href="@{|/admin/Reviews/detail/${RList.reviewId}|}" th:text="${RList.product.name}"></a>
                 <a class="list_scope" th:href="@{|/admin/Reviews/detail/${RList.reviewId}|}" th:text="${RList.scope}"></a>
-                <a class="list_updateDate" th:href="@{|/admin/Reviews/detail/${RList.reviewId}|}" th:text="${RList.updateDate}"></a>
+                <a class="list_updateDate" th:href="@{|/admin/Reviews/detail/${RList.reviewId}|}" th:text="${#temporals.format(RList.updateDate, 'yyyy-MM-dd HH:mm')}"></a>
             </div>
             
             <div id="pageBtn"><!-- 페이징처리필요 

@@ -29,7 +29,7 @@
                             <td class="writing-td-title">작성자</td>
                             <td th:text="${n.admin.adCode}" class="writing-td-content"></td>
                             <td class="writing-td-title">등록날짜</td>
-                            <td th:text="${n.updateDate}" class="writing-td-content"></td>
+                            <td th:text="${#temporals.format(n.updateDate, 'yyyy-MM-dd HH:mm')}" class="writing-td-content"></td>
                         </tr>
                         <tr class="writing-content">
                             <td class="writing-td-title">내용</td>

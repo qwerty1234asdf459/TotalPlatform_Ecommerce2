@@ -32,16 +32,14 @@ public class CsAnswerService {
 //			throw new UserException("데이터를 찾을수 없습니다");
 //		}
 //	}
-	
-	public CsAnswer getCsAnswer(Integer questionId) {
-	
-		CsQuestion question = this.qr.findById(questionId).get();
-		
-		return this.car.findByCsQuestion(question).get();
+  
+	//---------------	csAnswerId로 답변 조회---------------------
+	public CsAnswer getCsAnswer(Integer id) {
+		return this.car.findById(id).get();
 	}
 	
-	public void returnCreate(String adCode, CsQuestion q, String title, String contents) throws UserException {
-		// 답변(신규) 생성
+	//---------------	답변(신규) 생성-----------------------------
+	public CsAnswer returnCreate(String adCode, CsQuestion q, String title, String contents) throws UserException {
 		CsAnswer csAnswer = new CsAnswer();
 		csAnswer.setAdmin(getAdmin(adCode));
 		csAnswer.setCsQuestion(q);
@@ -49,10 +47,11 @@ public class CsAnswerService {
 		csAnswer.setContents(contents);
 		csAnswer.setUpdateDate(LocalDateTime.now());
 		this.car.save(csAnswer);
+		return csAnswer;
 		
 	}
 	
-
+	//---------------	관리자(작성자) 정보 가져오기---------------------
 	private Admin getAdmin(String adCode) throws UserException {
 		// 관리자(작성자) 정보 가져오기
 		Optional<Admin> admin = this.ar.findByAdCode(adCode);
@@ -64,7 +63,7 @@ public class CsAnswerService {
 		}
 	}
 
-	
+	//---------------	답변 수정------------------------------------
 	public void update(CsAnswer n, String title, String contents) {
 		// 답변 수정
 	//	n.setAdmin(getAdmin(adminId));
@@ -73,11 +72,15 @@ public class CsAnswerService {
 		n.setContents(contents);
 		n.setUpdateDate(LocalDateTime.now());
 		this.car.save(n);
-		
 	}
 	
+	public void updateCsAnswer(CsAnswer ca) {
+		car.save(ca);
+	}
+	
+	//---------------	답변 삭제------------------------------------
 	public void delete(CsAnswer a) {
-		//답변만 삭제
 		this.car.delete(a);
 	}
+
 }
