@@ -1,9 +1,8 @@
-const emailBtn = document.querySelector('#emailAuthBtn')
+    const emailBtn = document.querySelector('#emailAuthBtn')
 	const pwBtn = document.querySelector('#pwCheckBtn');
 	const codeInput = document.querySelector('#codeInput');
 	let codeCheckBtn = document.querySelector('#codeCheckBtn');
 	let codeCheck = document.querySelector('#codeCheck');
-	console.log(codeInput.value);
 	
 		
 		// 이메일 인증코드 전송

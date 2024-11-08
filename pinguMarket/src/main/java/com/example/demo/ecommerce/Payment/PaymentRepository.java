@@ -40,5 +40,7 @@ public interface PaymentRepository extends JpaRepository<Payment, Integer>{
 			+ "and user_id = :userId", nativeQuery = true)
 	List<Payment> findByUserCreate(@Param("userId") Integer userId, @Param("period") Integer period);
 	
+	Payment findByOrderNo(String orderNo);
+	
 
 }

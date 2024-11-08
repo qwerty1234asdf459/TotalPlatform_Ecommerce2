@@ -78,6 +78,9 @@ const paymentSubmit = document.getElementById("paymentSubmit");
 const couponPrice = document.getElementById("couponPrice");
 
 // **********************결제금액 계산(업데이트)********************************
+
+let totalPrice = 0;
+
 function priceCalculate(){
 	const orderPrice = document.getElementById("orderPrice");
 	const discountPrice = document.getElementById("discountPrice");
@@ -87,7 +90,6 @@ function priceCalculate(){
 	let sumPrice = 0;
 	let deliPrice = 3000;
 	let discount = 0;
-	let totalPrice = 0;
 	let couPrice = parseInt(document.querySelector(".couponSelect").value)*-1;
 	
 	couponPrice.textContent = couPrice+"원";
@@ -113,30 +115,79 @@ function priceCalculate(){
 priceCalculate();
 
 // **********************결제하기 버튼 눌렀을때 이벤트(결제정보를 DB에 저장시키기 위한 함수)********************************
-function submitPayment(){
-	const selectedCartList = document.querySelectorAll(".carts");
-	
-	const cartArr = new Array;
 
-	selectedCartList.forEach((cart)=>{
-		cartArr.push(cart.value);
-		console.log(cart.value);
+const random = (length = 4) => {
+  const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+  let str = '';
+  for (let i = 0; i < length; i++) {
+    str += chars.charAt(Math.floor(Math.random() * chars.length));
+  }
+  return str;
+};
+
+let orderId = random()+new Date().getTime();
+
+const titleList = document.querySelectorAll(".productName");
+	const nameArr = new Array;
+	titleList.forEach((name)=>{
+		nameArr.push(name.textContent);
 	})
-	document.getElementById("paymentAddress").value = document.getElementById("adressTextArea").value
+
+var clientKey = 'test_ck_26DlbXAaV0MOP52Gyd6KrqY50Q9R';
+    var tossPayments = TossPayments(clientKey);
+    function requestPayment() {
+        tossPayments.requestPayment('카드', {
+            amount: totalPrice,
+            orderId: orderId,
+            orderName: nameArr[0]+" 외 "+(nameArr.length-1)+"건",
+            customerName: '유저1',
+            successUrl: window.location.origin + '/success',
+            failUrl: window.location.origin + '/fail',
+        });
+    }
+
+const psf = document.getElementById("paymentSubmitForm");
+	psf.addEventListener('click',function(e){
+		e.preventDefault();
+			
+		const selectedCartList = document.querySelectorAll(".carts");
+	
+		const cartArr = new Array;
+
+		selectedCartList.forEach((cart)=>{
+			cartArr.push(cart.value);
+			console.log(cart.value);
+		})
+		document.getElementById("paymentAddress").value = document.getElementById("adressTextArea").value
 												+" "+document.getElementById("adressTextArea2").value;
-	document.getElementById("paymentCoupon").value = couponSelect.options[couponSelect.selectedIndex].id
-	document.getElementById("paymentRequest").value = delRequest.value
-	document.getElementById("cartArr").value = JSON.stringify(cartArr);
-	
-	console.log(document.getElementById("paymentAddress").value);
-	console.log(document.getElementById("paymentCoupon").value);
-	console.log(document.getElementById("paymentRequest").value);
-	console.log(document.getElementById("cartArr").value);
-	
-	document.getElementById("paymentSubmitForm").submit();
-	
-}
+		document.getElementById("paymentCoupon").value = couponSelect.options[couponSelect.selectedIndex].id
+		document.getElementById("paymentRequest").value = delRequest.value
+		document.getElementById("cartArr").value = JSON.stringify(cartArr);
+		document.getElementById("orderId").value = orderId;
+			
+		fetch("http://localhost:8080/payment",{
+			method: 'POST',
+			headers: {
+    			"Content-Type": 'application/x-www-form-urlencoded',
+    				},
+			body : new URLSearchParams({code:code})
+		})
+		.then(response => {
+			if(response.ok){
+				requestPayment()
+			}else{
+				alert("결제에 실패했습니다.");
+				console.error(response);
+			}
+		})
+		.catch(error =>{
+			alert("연결에 실패하였습니다");
+			console.error('Error: ',error);
+		})
+	})
 
+///////////////////////////////////////////////////
 
+	
 
-paymentSubmit.addEventListener("click",submitPayment);
+paymentSubmit.addEventListener("click",requestPayment);

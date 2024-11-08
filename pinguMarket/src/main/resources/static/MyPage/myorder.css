@@ -1,3 +1,24 @@
+.deliveryModal{
+            position:absolute;
+            display:none;
+            justify-content: center;
+            top:0;
+            left:0;
+            width:100vw;
+            height:100%;
+            background-color: rgba(0,0,0,0.4);
+        }
+
+        .deliveryModalBody{
+            position:absolute;
+            top:50%;
+            width:30rem;
+            padding:1.5rem;
+            text-align: center;
+            background-color: white;
+            border-radius:10px;
+        }
+
 .contentListContainer {
 		    display: flex;
 		    align-items: center;

@@ -9,9 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.example.demo.ecommerce.Admin.Product.AdminProductService;
 import com.example.demo.ecommerce.Cart.CartService;
-import com.example.demo.ecommerce.Entity.Cart;
 import com.example.demo.ecommerce.Entity.Product;
 import com.example.demo.ecommerce.Entity.User;
 import com.example.demo.ecommerce.Review.CanNotFoundException;
@@ -27,9 +25,8 @@ public class ProductController {
 	private final CartService carts;
 	private final UserService us;
 	private final ProductService ps;
-    private final AdminProductService aps;
-	
-//	---------------------------------------------상품리스트 페이지----------------------------------------------------------------------------------------------
+    
+	//	---------------------------------------------상품리스트 페이지----------------------------------------------------------------------------------------------
     @GetMapping("/category")
     public String productList() {
     	return "Category/categoryPage";

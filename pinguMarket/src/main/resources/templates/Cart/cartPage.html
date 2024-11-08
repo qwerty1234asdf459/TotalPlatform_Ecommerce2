@@ -42,8 +42,12 @@
                                 </div>
         
                                 <div class="productIntro">
-                                    <div class="productImg">
-                                        <img src="" alt="">
+                                    <div class="productImg"> 
+                                        <img th:each="image : ${cart.product.productImgList}" 
+                                         th:if="${#strings.contains(cart.product.productImgList[0].image.imageUrl,'img')&& !#strings.isEmpty(cart.product.productImgList[0].image.imageOriginal)}" 
+                                         th:src="@{|/img/${cart.product.productImgList[0].image.imageName}|}"> 
+                                        <img th:each="image : ${cart.product.productImgList}" 
+                                        th:if="${#strings.contains(cart.product.productImgList[0].image.imageUrl,'img') && #strings.isEmpty(cart.product.productImgList[0].image.imageOriginal)}" src="/img/noimage.jpg">
                                     </div>
                                     <div class="productPrice">
                                         <p th:text="|${#numbers.formatInteger(cart.product.price, 0, 'COMMA')}원|"></p>

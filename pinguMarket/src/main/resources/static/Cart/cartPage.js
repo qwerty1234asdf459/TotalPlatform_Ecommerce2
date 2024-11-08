@@ -64,7 +64,7 @@ document.addEventListener("DOMContentLoaded", function () {
     document.querySelectorAll(".plusBtn").forEach(button => { 
         button.addEventListener("click", function () { // + 버튼 클릭 시
             const countElement = this.previousElementSibling; // previousElementSibling : 공백 제외한 요소만 카운트함
-            let count = parseInt(countElement.innerText) || 0; // parseInt: 정수값으로 리턴함 / countElement 또는 0
+            let count = parseInt(countElement.innerText) || 0; // parseInt: 정수값으로 리턴
             const pricePerUnit = parseInt(this.closest(".productCon").querySelector(".productPrice p").innerText.replace(/[^0-9]/g, ''));
 
             countElement.innerText = ++count; // 값 증가
@@ -74,8 +74,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
     document.querySelectorAll(".minusBtn").forEach(button => {
         button.addEventListener("click", function () { // - 버튼 클릭 시
-            const countElement = this.nextElementSibling;  // previousElementSibling : 공백 제외한 요소만 카운트함
-            let count = parseInt(countElement.innerText) || 0; // parseInt: 정수값으로 리턴함 / countElement 또는 0
+            const countElement = this.nextElementSibling;  // nextElementSibling : 공백, 텍스트를 포함하지 않은 Element(요소)만 가져옴
+            let count = parseInt(countElement.innerText) || 0; // parseInt: 정수값으로 리턴
             const pricePerUnit = parseInt(this.closest(".productCon").querySelector(".productPrice p").innerText.replace(/[^0-9]/g, ''));
 
             if (count > 1) { // count>1 이상일때만 - 버튼 클릭 가능(최소수량 1)
@@ -102,6 +102,7 @@ document.addEventListener("DOMContentLoaded", function () {
             .then(response => response.json())
             .then(data => {
                 if (data.success) {
+                    alert("선택된 항목을 삭제하였습니다.");
                     window.location.reload(); // 삭제 후 페이지 새로고침
                 } else {
                     alert("선택된 항목을 삭제하는데 실패했습니다.");

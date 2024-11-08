@@ -13,8 +13,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+
 import com.example.demo.ecommerce.Admin.AdminService;
 import com.example.demo.ecommerce.Admin.Notice.AdminNoticeForm;
 import com.example.demo.ecommerce.CsAnswer.CsAnswerForm;
@@ -36,7 +39,6 @@ import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor //final 혹은 @NotNull이 붙은 필드의 생성자를 자동으로 만들어 줌
 @Controller
-@RequestMapping("/admin")
 public class AdminInquiryController {
 	
 	private final CsQuestionService cqs;
@@ -47,7 +49,7 @@ public class AdminInquiryController {
 	
 	//---------------관리자페이지 > 문의 관리(리스트)----------------------------------
 //	@PreAuthorize("isAuthenticated()") // 로그인 한 경우에만 요청 처리
-	@GetMapping("/cs") 
+	@GetMapping("/admin/cs") 
 	public String Inquiry(Model model) {
         List<CsQuestion> Q = this.cqr.findAll();
         model.addAttribute("Q", Q);
@@ -57,7 +59,7 @@ public class AdminInquiryController {
 	
 	//---------------관리자페이지 > 문의 관리(다중 선택 삭제)----------------------------
 //	@PreAuthorize("isAuthenticated()") // 로그인 한 경우에만 요청 처리
-	@PostMapping("/cs/delete")
+	@PostMapping("/admin/cs/delete")
 	@ResponseBody
 	public Map<String, Object> AdminInquiryDelete(@RequestBody Map<String, List<String>> payload) {
 	    Map<String, Object> response = new HashMap<>();
@@ -78,11 +80,42 @@ public class AdminInquiryController {
 	    return response;
     }	
 	
+	//---------------관리자페이지 > 문의 관리 > 상세페이지 > 답변 개별 삭제-----------------
+//	@PreAuthorize("isAuthenticated()")
+//	@PostMapping("/cs/answerDelete/{csAnswerId}")
+	
+	@RequestMapping(value = "/admin/cs/answerDelete", method = RequestMethod.POST)
+    public String answerDelete(@RequestParam(value="csAnswerId") Integer csAnswerId) {
+		CsAnswer answer = this.cas.getCsAnswer(csAnswerId);
+		
+        this.cas.delete(answer);
+        return String.format("redirect:/admin/cs/%s", answer.getCsQuestion().getCsQuestionId());
+    }
+	
+//	@RequestMapping(value = "/admin/cs/answerDelete", method = RequestMethod.GET)
+//    public String csAnswerDelete(@RequestParam(value="csAnswerId") Integer csAnswerId) {
+//		CsAnswer answer = this.cas.getCsAnswer(csAnswerId);
+//		
+//        this.cas.delete(answer);
+//        return String.format("redirect:/admin/cs/%s", answer.getCsQuestion().getCsQuestionId());
+//    }
+	
+	
+//	@GetMapping("/delete/{id}") 개별 삭제 참고 코드
+//    public String answerDelete(Principal principal, @PathVariable("id") Integer id) {
+//        Answer answer = this.answerService.getAnswer(id);
+//        if (!answer.getAuthor().getUsername().equals(principal.getName())) {
+//            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "삭제권한이 없습니다.");
+//        }
+//        this.answerService.delete(answer);
+//        return String.format("redirect:/question/detail/%s", answer.getQuestion().getId());
+//    }
+	
 	
 	//---------------관리자페이지 > 문의 관리 > 상세페이지-------------------------------
 //	@PreAuthorize("isAuthenticated()") // 로그인 한 경우에만 요청 처리
-	@GetMapping("/cs/{csQuestionId}") 
-    public String AdminInquiry(Model model, @PathVariable("csQuestionId") Integer csQuestionId, CsAnswerForm csAnswerForm) 
+	@GetMapping("/admin/cs/{csQuestionId}") 
+    public String AdminInquiry(Model model, @PathVariable("csQuestionId") Integer csQuestionId) 
     		throws UserException{
 		//csQuestionId로 조회해서 가져오기
 		CsQuestion Q = this.cqs.getQuestion(csQuestionId);
@@ -92,20 +125,31 @@ public class AdminInquiryController {
 
 	//---------------관리자페이지 > 문의 관리 > 상세페이지 > 답변 신규등록-------------------
 //	@PreAuthorize("isAuthenticated()") // 로그인 한 경우에만 요청 처리
-//	@PostMapping("/cs/newAnswer/{id}")
+	@PostMapping("/admin/cs/newAnswer/{csQuestionId}")
+    public String createAnswer(Model model, @RequestParam(value="csQuestionId") Integer csQuestionId,
+    							@RequestParam(value="title") String title, //html : name=title
+								@RequestParam(value="contents") String contents) throws UserException {
+	//	Admin admin = this.as.getAdmin(adCode);
+		CsQuestion q = this.cqs.getQuestion(csQuestionId);
+		this.cas.returnCreate("aaa", q, title, contents); //관리자 로그인 구현x으로 임의로 집어넣음
+        return String.format("redirect:/admin/cs/%s", q.getCsQuestionId());
+    }
+
+	
+	//참고코드
+//	@PostMapping("/cs/newAnswer/{csQuestionId}") 
 //	public String createAnswer(Model model, @PathVariable("csQuestionId") Integer csQuestionId,
 //			@RequestParam(value="content") String content,
 //			@Valid CsAnswerForm answerForm, BindingResult bindingResult,
 //			Principal principal) {
 //		try {
 //			CsQuestion q1 = this.cqs.getQuestion(csQuestionId);
-//			Admin admin  = this.cas.getAdmin.get();
+//			Admin admin  = this.cas.getAdmin.get(principal.getadCode());
 //			if(bindingResult.hasErrors()) {
 //				model.addAttribute("question", q1);
 //				return "/Admin/AdminInquiry";
 //			}
-//			this.as.returnCreate(answerForm,answerForm.getContents(), admin);
-//			//create(q1, answerForm.getContent(), admin);
+//			this.cas.returnCreate(adCode, q, answerForm.getTitle(). answerForm.getContents());
 //		} catch (CanNotFoundException e) {
 //			e.printStackTrace();
 //		}
@@ -116,18 +160,19 @@ public class AdminInquiryController {
 	
 	//---------------관리자페이지 > 문의 관리 > 상세페이지 > 답변 수정하기-------------------
 //	@PreAuthorize("isAuthenticated()") // 로그인 한 경우에만 요청 처리
-//	@PostMapping("/cs/updateAnswer") 
-//    public String updateCsAnswer(@Valid CsAnswerForm csAnswerForm, 
-//    		@RequestParam(value="noticeId") Integer noticeId) throws CanNotFoundException {
-//		Admin admin = this.as.getAdmin(1);
-////		로그인 기능 구현 전이라 임의로 1을 넘김
-//		CsAnswer ca = this.cas.getCsAnswer(csAnswerId);
-////		수정한 데이터 저장하는 메소드 호출
-//		this.cas.update(ca, csAnswerForm.getTitle(), csAnswerForm.getContents());
-//		
-//		cas.update(ca);
-//        return "redirect:/admin/cs";
-//    }
+	@PostMapping("/admin/cs/updateAnswer/{csAnswerId}")
+//	updateAnswer
+    public String updateCsAnswer(@Valid CsAnswerForm csAnswerForm, 
+    		@RequestParam(value="csAnswerId") Integer csAnswerId) throws CanNotFoundException {
+		Admin admin = this.as.getAdmin(1);
+//		로그인 기능 구현 전이라 임의로 1을 넘김
+		CsAnswer ca = this.cas.getCsAnswer(csAnswerId);
+//		수정한 데이터 저장하는 메소드 호출
+		this.cas.update(ca, csAnswerForm.getTitle(), csAnswerForm.getContents());
+		
+		cas.updateCsAnswer(ca);
+		return String.format("redirect:/admin/cs/%s", ca.getCsQuestion().getCsQuestionId());
+    }
 	
 
 	

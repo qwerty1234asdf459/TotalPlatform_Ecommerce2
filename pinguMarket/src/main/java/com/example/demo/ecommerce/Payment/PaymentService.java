@@ -24,23 +24,7 @@ public class PaymentService {
 	private final PaymentRepository pr;
 	
 	
-	
-	
-	//////////////////////////////////API관련///////////////////////////////////
-	
-	private final TossPaymentsApiClient tossPaymentsApiClient;
-	public String requestPayment(PaymentRequest request) throws IOException {
-		return tossPaymentsApiClient.requestPayment(request);
-	}
-	public String confirmPayment(String paymentKey, String orderId, Long amount) throws IOException {
-	    return tossPaymentsApiClient.confirmPayment(paymentKey, orderId, amount);
-	}
-	public String getPayment(String paymentKey) throws IOException {
-	    return tossPaymentsApiClient.getPayment(paymentKey);
-	}
-	
-	/////////////////////////////////////////////////////////////////////////////
-	public Payment createPayment(User user, Coupon coupon,String address, String delRequest) {
+	public Payment createPayment(User user, Coupon coupon,String address, String delRequest,String OrderId) {
 		Payment p = new Payment();
 		p.setUser(user);
 		p.setCoupon(coupon);
@@ -51,7 +35,7 @@ public class PaymentService {
 		p.setTell(user.getTell());
 		p.setPaymentState("결제 완료");
 		p.setDeliveryno("11111");
-		p.setOrderNo(createOrderNo());
+		p.setOrderNo(OrderId);
 		p.setDeliveryState("상품 준비중");
 		
 		this.pr.save(p);
@@ -59,13 +43,13 @@ public class PaymentService {
 		return p;
 	}
 	
-	public String createOrderNo() {
-		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
-		String currentTime = dateFormat.format(new Date());
-		String randomAlpa = RandomStringUtils.randomAlphabetic(4);
-		
-		return randomAlpa+currentTime;
-	}
+//	public String createOrderNo() {
+//		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
+//		String currentTime = dateFormat.format(new Date());
+//		String randomAlpa = RandomStringUtils.randomAlphabetic(4);
+//		
+//		return randomAlpa+currentTime;
+//	}
 	public List<Payment> getPayment(Integer id) throws CanNotFoundException {
 		List<Payment> p = this.pr.findByUser_UserId(id);
 		if(!p.isEmpty()) {

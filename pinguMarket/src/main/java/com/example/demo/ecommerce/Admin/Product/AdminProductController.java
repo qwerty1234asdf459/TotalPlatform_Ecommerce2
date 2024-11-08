@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -21,6 +22,7 @@ import com.example.demo.ecommerce.Entity.ProductImg;
 import com.example.demo.ecommerce.Image.ImageService;
 import com.example.demo.ecommerce.Product.ProductRepository;
 import com.example.demo.ecommerce.Product.ProductService;
+import com.example.demo.ecommerce.Review.CanNotFoundException;
 import com.example.demo.ecommerce.productimg.ProductImgService;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -89,6 +91,43 @@ public class AdminProductController {
 //		            System.out.println("Default Message: " + error.getDefaultMessage());
 //		        }
 		        return "/Admin/AdminRegistration"; // 에러가 있는 경우 반환할 뷰
+		    }
+	//	 Member m = this.ms.getUser(principal.getName());
+		 Product a = this.aps.returnCreate(adminProductForm.getName(),adminProductForm.getCategory(),adminProductForm.getPrice()
+	    		   ,adminProductForm.getAmount());
+	      
+		 Image i = this.imageService.save(request, files);
+		 this.productImgService.create(a, i);
+	       
+	    // ic.thumbfileInsert(request, a);  //썸네일 이미지 저장 메소드
+	    // ic.bannerfileInsert(request, a); //배너 이미지 저장 메소드
+	     return "redirect:/admin/Product"; //URL
+	}
+	
+	
+	//////////////////////////제품 수정///////////////////////////////////
+	@GetMapping("/registration/{id}/modify")
+	public String modifyProduct(@PathVariable(value = "id")Integer productId, Model model) throws CanNotFoundException {
+		Product p = this.ps.getProduct(productId);
+		Image img = p.getProductImgList().get(0).getImage();
+		
+		model.addAttribute("product", p);
+		model.addAttribute("image", img);
+		
+		return "/Admin/AdminRegistrationModify";
+	}
+	
+	
+	@PostMapping("/registration/{id}/modify")
+	public String modifyProduct(@PathVariable(value = "id")Integer productId, AdminProductForm adminProductForm, BindingResult bindingResult,
+			HttpServletRequest request, @RequestParam("productImg") MultipartFile files) throws Exception{
+		 if (bindingResult.hasErrors()) {
+//		        for (FieldError error : bindingResult.getFieldErrors()) {
+//		            System.out.println("Field: " + error.getField());
+//		            System.out.println("Error Code: " + error.getCode());
+//		            System.out.println("Default Message: " + error.getDefaultMessage());
+//		        }
+		        return "/Admin/AdminRegistrationModify"; // 에러가 있는 경우 반환할 뷰
 		    }
 	//	 Member m = this.ms.getUser(principal.getName());
 		 Product a = this.aps.returnCreate(adminProductForm.getName(),adminProductForm.getCategory(),adminProductForm.getPrice()
