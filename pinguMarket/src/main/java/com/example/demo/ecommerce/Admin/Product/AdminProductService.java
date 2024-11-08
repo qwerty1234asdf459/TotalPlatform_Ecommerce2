@@ -3,9 +3,12 @@ package com.example.demo.ecommerce.Admin.Product;
 import java.time.LocalDateTime;
 
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.example.demo.ecommerce.Entity.AdminProduct;
 import com.example.demo.ecommerce.Entity.Product;
+import com.example.demo.ecommerce.Image.ImageService;
+import com.example.demo.ecommerce.productimg.ProductImgService;
 
 import lombok.RequiredArgsConstructor;
 
@@ -13,6 +16,7 @@ import lombok.RequiredArgsConstructor;
 @Service
 public class AdminProductService {
 	private final AdminProductRepository apr;
+
 //상품조회는 ProductService에 있음
 
 //상품등록
@@ -25,7 +29,6 @@ public class AdminProductService {
 		a.setAmount(amount);
 		a.setCancelYn("N");
 		a.setUpdateDate(LocalDateTime.now());
-
 		
 		this.apr.save(a);
 		return a;

@@ -35,8 +35,10 @@
                         </tr>
                         <tr th:each="CsQuestion, loop : ${questionList}">
                             <td th:text="${loop.count + ((page.pageNo-1) * page.pageSize)}"></td>
-                            <td><a th:href="@{|/csc/detail/${CsQuestion.CsQuestionId}|}"
-                                    th:text="${CsQuestion.title}"></a></td>
+                            <td>
+                            	<a th:if="${CsQuestion.CsAnswer != null}" th:href="@{|/csc/detail/${CsQuestion.CsQuestionId}|}" th:text="${CsQuestion.title}"></a>
+                            	<a th:if="${CsQuestion.CsAnswer == null}" th:href="@{|/csc/detail2/${CsQuestion.CsQuestionId}|}" th:text="${CsQuestion.title}"></a>
+                            </td>
                             <td th:text="${#temporals.format(CsQuestion.updateDate, 'yyyy-MM-dd HH:mm:ss')}"></td>
                             <td th:text="${CsQuestion.CsAnswer == null} ? 'N' : 'Y'"></td>
                         </tr>

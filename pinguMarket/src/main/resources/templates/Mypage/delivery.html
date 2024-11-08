@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>배송 조회</title>
+</head>
+<body>
+    <div class="delivery-tracking-container">
+        <h1>배송 조회</h1>
+        <div class="tracking-search">
+            <input
+                type="text"
+                id="trackingNumberInput"
+                placeholder="운송장 번호 입력"
+            >
+            <button onclick="searchDeliveryStatus()">조회</button>
+        </div>
+        <div id="deliveryStatusResult" class="delivery-status-result">
+            <!-- 배송 상태 결과 표시 영역 -->
+        </div>
+    </div>
+    <script th:inline="javascript">
+        function searchDeliveryStatus() {
+            const trackingNumber = document.getElementById('trackingNumberInput').value;
+            fetch(`/api/delivery/tracking/${trackingNumber}`)
+                .then(response => response.json())
+                .then(data => {
+                    const resultDiv = document.getElementById('deliveryStatusResult');
+                    resultDiv.innerHTML = `
+                        <h2>배송 상태</h2>
+                        <p>운송장 번호: ${data.trackingNumber}</p>
+                        <p>현재 상태: ${data.status}</p>
+                        <p>위치: ${data.currentLocation}</p>
+                        <p>예상 배송일: ${data.expectedDeliveryDate}</p>
+                    `;
+                })
+                .catch(error => {
+                    console.error('배송 조회 중 오류:', error);
+                    alert('배송 정보를 불러오는 데 실패했습니다.');
+                });
+        }
+    </script>
+</body>
+</html>

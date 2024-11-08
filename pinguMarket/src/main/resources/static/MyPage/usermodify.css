@@ -1,5 +1,40 @@
-    .userInfoContainer{
-	margin: 1rem 0;
+    .userModifyContainer{
+	display: flex;
+	flex-direction: column;
+	margin: 2rem 0;
+}
+.userInfoContainer{
+	display: flex;
+	margin: 2rem 0;
+}
+.infoName{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width:7.5rem;
+	border-right: 3px solid rgb(238, 238, 238);
+}
+.userInfo{
+	margin-left: 2.5rem;
+	width: 50rem;
+}
+.userInfo input[type=text], input[type=tel], select{
+	padding: 0.5rem;
+	width: 200px;
+	height: 40px;
+}
+.userInfo input[type=button]{
+	width: 100px;
+	height: 40px;
+}
+#emailAuthBtn, #codeCheckBtn, #modify{
+	width: 100px;
+	height: 35px;
+	margin: 0.3rem;
+}
+#codeCheck{
+	width: 200px;
+	height: 35px;	
 }
 /*
     .pwModal{
@@ -27,3 +62,5 @@
         #pwError,  */ #modify{
 	display:none;
 	}
+	
+	
