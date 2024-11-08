@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.example.demo.ecommerce.Admin.AdminService;
 import com.example.demo.ecommerce.Admin.Notice.AdminNoticeForm;
 import com.example.demo.ecommerce.Admin.Notice.AdminNoticeService;
+import com.example.demo.ecommerce.CsAnswer.CsAnswerService;
+import com.example.demo.ecommerce.Entity.CsAnswer;
 import com.example.demo.ecommerce.Entity.CsQuestion;
 import com.example.demo.ecommerce.Entity.Notice;
 import com.example.demo.ecommerce.Entity.Payment;
@@ -29,6 +31,7 @@ import lombok.RequiredArgsConstructor;
 public class CsController {
 	
 private final CsQuestionService qr;
+private final CsAnswerService as;
 private final AdminService ar;
 private final AdminNoticeService ans;
 	
@@ -64,9 +67,23 @@ private final AdminNoticeService ans;
 	
 //  ----------------------------------------------------고객센터 > 1:1 문의 > 상세페이지 연결-------------------------------------------------------
 //	@PreAuthorize("isAuthenticated()")
-	@GetMapping(value = "/csc/detail/{id}")
+	@GetMapping(value = "/csc/detail/{id}") // 관리자 답변 달려있을 때
 	public String detail(Model model, @PathVariable("id") Integer id, CsQuestionForm csquestionForm) throws UserException {
 		CsQuestion q = this.qr.getQuestion(id);
+		CsAnswer a = this.as.getCsAnswer(id);
+		
+		model.addAttribute("question",  q);
+		model.addAttribute("answer", a);
+		
+		return "Cs/cscDetail";
+	}
+	
+	
+//	@PreAuthorize("isAuthenticated()")
+	@GetMapping(value = "/csc/detail2/{id}") // 관리자 답변 안 달려있을 때 
+	public String detai2l(Model model, @PathVariable("id") Integer id, CsQuestionForm csquestionForm) throws UserException {
+		CsQuestion q = this.qr.getQuestion(id);
+		
 		model.addAttribute("question",  q);
 		
 		return "Cs/cscDetail";
@@ -127,7 +144,7 @@ private final AdminNoticeService ans;
 			CsQuestion q = this.qr.getQuestion(id);
 			this.qr.modify(q, csquestionForm.getOrderNo(), csquestionForm.getTitle(), csquestionForm.getContents());
 			
-			return "redirect:/csc/detail/{id}";
+			return "redirect:/csc/detail2/{id}";
 		}
 
 	//   -----------------------------------------------고객센터 > 1:1 문의 삭제-----------------------------------------------

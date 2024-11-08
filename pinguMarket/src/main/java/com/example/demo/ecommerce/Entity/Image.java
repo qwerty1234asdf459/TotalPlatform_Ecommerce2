@@ -37,4 +37,6 @@ public class Image {
 	@Column(name = "update_date")
 	private LocalDateTime updateDate;
 
+
+
 }
