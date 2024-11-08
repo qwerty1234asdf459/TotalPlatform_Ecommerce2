@@ -16,7 +16,7 @@
         <nav th:replace="~{/Admin/Adminnavbar :: AdminnavbarFragment}"></nav><!--네비바 -->      
         
         <!--메인****************************************************************-->
-        <form th:action="@{/registration}" th:object = "${AdminProductForm}" method="post" enctype="multipart/form-data" class="RegistrationMain">
+        <form th:action="@{/registration/{product.productId}/modify}" th:object = "${AdminProductForm}" method="post" enctype="multipart/form-data" class="RegistrationMain">
             <h2>상품관리 > 신규등록</h2>
             <section>
                 <span>노출 상품명 : </span>

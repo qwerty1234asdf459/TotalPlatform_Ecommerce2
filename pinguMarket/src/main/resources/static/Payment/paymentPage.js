@@ -78,6 +78,9 @@ const paymentSubmit = document.getElementById("paymentSubmit");
 const couponPrice = document.getElementById("couponPrice");
 
 // **********************결제금액 계산(업데이트)********************************
+
+let totalPrice = 0;
+
 function priceCalculate(){
 	const orderPrice = document.getElementById("orderPrice");
 	const discountPrice = document.getElementById("discountPrice");
@@ -87,7 +90,6 @@ function priceCalculate(){
 	let sumPrice = 0;
 	let deliPrice = 3000;
 	let discount = 0;
-	let totalPrice = 0;
 	let couPrice = parseInt(document.querySelector(".couponSelect").value)*-1;
 	
 	couponPrice.textContent = couPrice+"원";
@@ -113,6 +115,18 @@ function priceCalculate(){
 priceCalculate();
 
 // **********************결제하기 버튼 눌렀을때 이벤트(결제정보를 DB에 저장시키기 위한 함수)********************************
+
+const random = (length = 4) => {
+  const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+  let str = '';
+  for (let i = 0; i < length; i++) {
+    str += chars.charAt(Math.floor(Math.random() * chars.length));
+  }
+  return str;
+};
+
+let orderId = random()+new Date().getTime();
+
 function submitPayment(){
 	const selectedCartList = document.querySelectorAll(".carts");
 	
@@ -127,16 +141,35 @@ function submitPayment(){
 	document.getElementById("paymentCoupon").value = couponSelect.options[couponSelect.selectedIndex].id
 	document.getElementById("paymentRequest").value = delRequest.value
 	document.getElementById("cartArr").value = JSON.stringify(cartArr);
+	document.getElementById("orderId").value = orderId;
 	
-	console.log(document.getElementById("paymentAddress").value);
-	console.log(document.getElementById("paymentCoupon").value);
-	console.log(document.getElementById("paymentRequest").value);
-	console.log(document.getElementById("cartArr").value);
-	
+	//console.log(document.getElementById("orderId").value);
+	//console.log(document.getElementById("paymentCoupon").value);
+	//console.log(document.getElementById("paymentRequest").value);
+	//console.log(document.getElementById("cartArr").value);
 	document.getElementById("paymentSubmitForm").submit();
 	
 }
+///////////////////////////////////////////////////
+
+	const titleList = document.querySelectorAll(".productName");
+	const nameArr = new Array;
+	titleList.forEach((name)=>{
+		nameArr.push(name.textContent);
+	})
+
+	var clientKey = 'test_ck_26DlbXAaV0MOP52Gyd6KrqY50Q9R';
+    var tossPayments = TossPayments(clientKey);
+    function requestPayment() {
+        tossPayments.requestPayment('카드', {
+            amount: totalPrice,
+            orderId: orderId,
+            orderName: nameArr[0]+" 외 "+(nameArr.length-1)+"건",
+            customerName: '유저1',
+            successUrl: window.location.origin + '/success',
+            failUrl: window.location.origin + '/fail',
+        });
+    }
 
 
-
-paymentSubmit.addEventListener("click",submitPayment);
+paymentSubmit.addEventListener("click",requestPayment);
