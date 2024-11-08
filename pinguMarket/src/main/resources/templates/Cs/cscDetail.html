@@ -77,8 +77,8 @@
                                             <textarea inputmode="text" class="inquiry-reply"></textarea>
                                             <div class="conPlaceholder">
                                                 <div class="replyCon">
-                                                	<p class="replyTitle"></p>
-                                                    <p class="replyContent"></p>
+                                                	<p th:text="${answer.title}" class="replyTitle"></p>
+                                                    <p th:text="${answer.contents}" class="replyContent"></p>
                                                 </div>
                                             </div>
                                         </div>

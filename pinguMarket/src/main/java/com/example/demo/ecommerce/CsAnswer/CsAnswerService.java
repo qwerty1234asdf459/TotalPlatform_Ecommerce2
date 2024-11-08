@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.ecommerce.Admin.AdminRepository;
+import com.example.demo.ecommerce.CsQuestion.CsQuestionRepository;
 import com.example.demo.ecommerce.CsQuestion.UserException;
 import com.example.demo.ecommerce.Entity.Admin;
 import com.example.demo.ecommerce.Entity.CsAnswer;
@@ -19,11 +20,12 @@ public class CsAnswerService {
 	private final CsAnswerRepository car;
 //	private final CsQuestionUserRepository ur;
 	private final AdminRepository ar;
+	private final CsQuestionRepository qr;
 	
 	
-//	public CsAnswer getCsAnswer(Integer csAnswerId) throws UserException { //throws UserException맞나?
+//	public CsAnswer getCsAdminAnswer(Integer csQuestionId) throws UserException { //throws UserException맞나?
 //		//csAnswerId로 답변 조회
-//		Optional<CsAnswer> a1 = this.car.findByCsAnswerId(csAnswerId);
+//		Optional<CsAnswer> a1 = this.car.findByCsAnswerId(csQuestionId);
 //		if(a1.isPresent()) {
 //			return a1.get();
 //		}else {
@@ -31,9 +33,11 @@ public class CsAnswerService {
 //		}
 //	}
 	
-	public CsAnswer getCsAnswer(Integer id) {
-		//csAnswerId로 답변 조회
-		return this.car.findById(id).get();
+	public CsAnswer getCsAnswer(Integer questionId) {
+	
+		CsQuestion question = this.qr.findById(questionId).get();
+		
+		return this.car.findByCsQuestion(question).get();
 	}
 	
 	public void returnCreate(String adCode, CsQuestion q, String title, String contents) throws UserException {
