@@ -36,55 +36,56 @@ closeModal.addEventListener("click", function(e){
 //  ismodalOpen = false;
     modal.style.display = 'none';
 });
-
+//추후 모달 영역 회 클릭시 모달 닫기 기능 추가하기
 
 
 //-------여러개의 요소에서 특정 요소만 선택---------
-elements.forEach(element => {
-  element.addEventListener('click', function() {
-      // 이전 선택된 요소가 있다면 스타일 제거
-      if (selectedElement) {
-          selectedElement.classList.remove('selected');
-      }
+// elements.forEach(element => {
+//   element.addEventListener('click', function() {
+//       // 이전 선택된 요소가 있다면 스타일 제거
+//       if (selectedElement) {
+//           selectedElement.classList.remove('selected');
+//       }
 
-      // 현재 클릭한 요소를 선택된 요소로 설정
-      selectedElement = this;
+//       // 현재 클릭한 요소를 선택된 요소로 설정
+//       selectedElement = this;
 
-      // 선택된 요소에 스타일 추가
-      selectedElement.classList.add('selected');
+//       // 선택된 요소에 스타일 추가
+//       selectedElement.classList.add('selected');
 
-      // 선택된 요소에 대한 추가 동작
-      console.log(selectedElement.textContent + '가 선택되었습니다.');
-  });
-});
-
-
-
-
-
-///////////////////////다른 방법
-//모달 영역 외 클릭 시 모달 닫기
-// document.body.addEventListener("click", function(e){
-//   if (e.target === modal) {
-//            modal.style.display = 'none';
-//        }
+//       // 선택된 요소에 대한 추가 동작
+//       console.log(selectedElement.textContent + '가 선택되었습니다.');
+//   });
 // });
-// function handleClickOutside(event) {
-//   if (ismodalOpen && !modal.contains(event.target)) {
-//     modal.style.display = 'none';
-//   }
-// }
-// document.addEventListener('click', handleClickOutside);
-  
-// let subToggle=true; 제이쿼리
-// $(".drop").click(()=>{
-//   if(subToggle){
-//     $(".sub").slideDown(1000);
-//   }else{
-//     $(".sub").slideUp(1000);
-//   }
-//   subToggle=!subToggle;
-// });
+
+//---------------체크박스 개수 세기----------------
+const table = document.getElementById('myTable');
+const totalRowCnt = table.rows.length;
+totalResult.innerText = (totalRowCnt-1);
+
+//---------------체크박스 개수 세기----------------
+//전체 선택 박스 눌렀을때 제대로 안먹힘
+
+function getCheckedCnt()  {
+    // 선택된 목록 가져오기
+    const count = 'input[type="checkbox"]:checked';
+    const selectedElements = 
+        document.querySelectorAll(count);
+    
+    // 선택된 목록의 갯수 세기
+    const selectedElementsCnt =
+          selectedElements.length;
+    
+    // 출력
+    result.innerText = selectedElementsCnt;
+
+    // document.getElementById('result').innerText
+    //   = selectedElementsCnt;
+  }
+
+
+
+
 
 
 
