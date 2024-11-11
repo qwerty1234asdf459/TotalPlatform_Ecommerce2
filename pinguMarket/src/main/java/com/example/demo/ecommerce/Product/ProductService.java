@@ -35,13 +35,6 @@ public class ProductService {
 		}
 	}
   
-	public boolean amountCheck(Product product,Integer amount) {
-		if(product.getAmount()-amount >= 0) {
-			return true;
-		}else {
-			return false;
-		}
-	}
 
 	
 //---------------------	id값으로 퀴즈 데이터 조회---------------------  

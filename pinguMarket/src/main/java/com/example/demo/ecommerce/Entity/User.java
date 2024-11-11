@@ -2,6 +2,7 @@ package com.example.demo.ecommerce.Entity;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import com.example.demo.ecommerce.PaymentInfo.PaymentInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.CascadeType;
@@ -70,6 +71,5 @@ public class User {
 	
 	@OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
 	private List<CsQuestion> csQuestionList;
-	
 	
 }

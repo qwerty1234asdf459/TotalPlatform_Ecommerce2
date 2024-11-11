@@ -6,6 +6,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.example.demo.ecommerce.Authuser.Authuser;
+import com.example.demo.ecommerce.Entity.User;
+
 import lombok.RequiredArgsConstructor;
 
 @Controller
@@ -24,8 +27,7 @@ public class PaymentPageController {
         @RequestParam("paymentKey") String paymentKey,
         @RequestParam("orderId") String orderId,
         @RequestParam("amount") Long amount,
-        Model model
-    ) {
+        Model model) {
         try {
             // 결제 승인 및 저장 처리
         	PaymentResponse response = paymentInfoService.processPaymentSuccess(
