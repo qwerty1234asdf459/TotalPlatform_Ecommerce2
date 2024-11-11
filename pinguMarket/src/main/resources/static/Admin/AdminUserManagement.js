@@ -50,6 +50,8 @@ deleteBtn.addEventListener('click', function(){
     }
 });
 
+
+/***************************************검색/페이징 기능************************************************ */
 const rows = document.querySelectorAll(".Rows");
 const searchBtn = document.querySelector("#searchBtn"); //검색 버튼
 const page_elements = document.getElementsByClassName("page-link"); //페이징 버튼들
