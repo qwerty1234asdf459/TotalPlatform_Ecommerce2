@@ -37,7 +37,7 @@ public class PaymentService {
 		p.setDeliveryno("11111");
 		p.setOrderNo(OrderId);
 		p.setDeliveryState("상품 준비중");
-		
+
 		this.pr.save(p);
 		
 		return p;

@@ -176,6 +176,8 @@ const psf = document.getElementById("paymentSubmit");
     				},
 			body : new URLSearchParams({
 				cartData:JSON.stringify(cartArr),
+				totalPrcie:totalPrice,
+				orderId:orderId
 				})
 		})
 		.then(response => {
@@ -185,7 +187,7 @@ const psf = document.getElementById("paymentSubmit");
 				window.localStorage.setItem('cartData', JSON.stringify(cartArr));
 				window.localStorage.setItem('delRequest', delRequest.value);
 				window.localStorage.setItem('orderId', orderId);
-				requestTossPayment(orderId, totalPrice,orderName)
+				requestTossPayment(orderId, totalPrice,orderName);
 			}else{
 				alert("상품수량이 부족합니다.");
 				location.href = "http://localhost:8081/cart";
