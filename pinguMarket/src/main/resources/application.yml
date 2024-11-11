@@ -1,0 +1,4 @@
+# logging slf4j
+logging:
+  # default Logging 프레임워크 설정 파일을 참조
+  config: classpath:log4j2/log4j2-local.yml 

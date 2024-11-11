@@ -33,8 +33,7 @@
     if (trackingData.status === false) {
       alert(trackingData.msg);
     } else {
-      
-      
+      alert("커밋용");
     }
   })
   .catch(error => {
