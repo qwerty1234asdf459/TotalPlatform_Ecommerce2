@@ -5,7 +5,12 @@
     <link rel="stylesheet" th:href="@{/Product/productDetailPageStyle.css}">
         <div class="productContainer">
             <div class="productImg">
-                <img src="https://via.placeholder.com/400x500.jpg" alt="300 * 300 size image">
+            	<img th:each="image : ${p.productImgList}" 
+                th:if="${#strings.contains(p.productImgList[0].image.imageUrl,'img')&& !#strings.isEmpty(p.productImgList[0].image.imageOriginal)}" 
+                th:src="@{|/img/${p.productImgList[0].image.imageName}|}" alt="300 * 300 size image"> 
+                <img th:each="image : ${p.productImgList}" 
+                th:if="${#strings.contains(p.productImgList[0].image.imageUrl,'img') && #strings.isEmpty(p.productImgList[0].image.imageOriginal)}" 
+                src="/img/noimage.jpg" alt="300 * 300 size image">
             </div>
             <div class="product">
                 <div class="productTitle">
@@ -125,7 +130,7 @@
                 </li>
             </ul>
         </div>
-         <form th:action="@{/product/addcart}" method="post" id="addCartForm">
+         <form id="addCartForm">
         	<input type="hidden" id="cart_count" name="cart_count">
         	<input type="hidden" id="product" name="product" th:value="${p.productId}">
     	</form>

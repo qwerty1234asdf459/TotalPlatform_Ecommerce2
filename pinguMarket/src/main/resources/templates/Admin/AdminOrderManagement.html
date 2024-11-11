@@ -56,12 +56,13 @@
 
                     <div class="searchLine"> <!-- 텍스트 검색 -->
                         <span>텍스트 검색 : </span>
-                        <select name="" id="">
-                            <option value="">주문번호</option>
-                            <option value="">주문자 ID</option>
-                            <option value="">수취인</option>
+                        <select name="searchSelect" id="searchSelect">
+                        	 <option value="total" th:selected="${kwType} == total">전체</option>
+                            <option value="orderNum" th:selected="${kwType} == orderNum">주문번호</option>
+                            <option value="orderUser" th:selected="${kwType} == orderUser">주문자 ID</option>
+                            <option value="receiver" th:selected="${kwType} == receiver">수취인</option>
                         </select>
-                        <input class="searchtext" type="text" placeholder="주문번호, 주문자ID 또는 수취인을 입력해주세요.">
+                        <input class="searchtext" type="text" id="search_kw" placeholder="주문번호, 주문자ID 또는 수취인을 입력해주세요." th:value="${kw}" onkeyup="enterkey()">
                     </div>
                     <div class="searchLine"> <!-- 기간 검색 -->
                         <div class="filter-controls">
@@ -82,12 +83,12 @@
                             </div>
                         </div>
                     </div>
-                    <button type="button" class="fa-solid fa-magnifying-glass btn-style"> 검색</button>
+                    <button type="button" class="fa-solid fa-magnifying-glass btn-style" id="searchBtn"> 검색</button>
                     <button type="button" id="btn-clear" class="btn-style">초기화</button>
                 </div>
             </section>
             <section class="list-box">
-                <div class="title">총 <span id="totalResult"></span>개의 주문 목록 | <span id="result"></span>개 선택 됨</div>
+                <div class="title">총 <span id="totalResult"></span>개의 주문 목록 | <span id="selectResult"></span>개 선택 됨</div>
                 <div>
                     <span>주문 상태 변경 버튼 :</span>
                     <button type="button" class="quick-select-button">배송중</button>
@@ -114,13 +115,13 @@
                             <tbody>
                                 <tr class="Rows" th:each="PayList : ${PayList}">
                                     <td><span class="check-item"><input type="checkbox" th:id="'Select'+${PayList.orderNo}" name="Select" class="Select" onclick='getCheckedCnt()'></span></td>
-                                    <!-- th:id="'Select'+${PayList.orderNo}" 수정 필요해 보임 -->
                                     <td th:text="${PayList.orderNo}"></td>
                                     <td th:text="${PayList.createDate}"></td>
                                     <td th:text="|${PayList.paymentState} ${PayList.deliveryState}|"></td>
                                     <td th:text="${PayList.user.userId}"></td>
                                     <td th:text="${PayList.deliveryno}"></td>
-                                    <td id="openModal" class="drop"><i class="fa-solid fa-chevron-down"></i></td>
+                                    <td th:id="'openModal'+${PayList.paymentId}" class="drop" th:value="${PayList.paymentId}"><i class="fa-solid fa-chevron-down"></i></td>
+                                    
                                 </tr>
                             </tbody>
                         </table>
@@ -180,6 +181,12 @@
                     </li>
                 </ul> 
             </div>
+            
+            <!-- kw, page 데이터 넘기기 -->
+    		<form th:action="@{/admin/OrderManagement}" method="get" id="searchForm">
+				<input type="hidden" id="kw" name="kw" th:value="${kw}">
+				<input type="hidden" id="kwType" name="kwType" th:value="${kwType}">
+    		</form>
                     
                     
         </div><!--메인 끝-->

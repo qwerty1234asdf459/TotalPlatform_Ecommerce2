@@ -26,7 +26,7 @@ const cif = document.getElementById("couponInputForm");
 			if(response.ok){
 				alert("쿠폰이 입력되었습니다.");
 				couponModal.style.display = "none";
-				location.href ="http://localhost:8080/mycoupon";
+				location.href ="http://localhost:8081/mycoupon";
 			}else{
 				alert("유효하지 않은 쿠폰코드 입니다.");
 				console.error(response);

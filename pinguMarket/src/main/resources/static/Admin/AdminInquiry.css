@@ -12,6 +12,8 @@
     /* border: solid 2px orange; */
     width: 90%;
     padding: 1rem;
+    padding-left: 3rem;
+    padding-right: 3rem;
 }
 .InquiryMain>h1{
     padding-left: 15px;
@@ -71,10 +73,11 @@ button:hover, .selectDel:hover{
 #columnBox > span { display: inline-block; 
                     padding-right: 10px;}
 #columnBox > span:nth-child(1) { width: 100px; } /*선택*/
-#columnBox > span:nth-child(2) { width: 200px; } /*등록날짜*/
-#columnBox > span:nth-child(3) { width: 200px; } /*ID*/
-#columnBox > span:nth-child(4) { width: 600px; } /*제목*/
-#columnBox > span:nth-child(5) { width: 150px; } /*답변여부*/
+#columnBox > span:nth-child(2) { width: 100px; } /*번호*/
+#columnBox > span:nth-child(3) { width: 230px; } /*등록날짜*/
+#columnBox > span:nth-child(4) { width: 200px; } /*ID*/
+#columnBox > span:nth-child(5) { width: 600px; } /*제목*/
+#columnBox > span:nth-child(6) { width: 150px; } /*답변여부*/
 
 .Rows {
     padding: 14px;
@@ -88,9 +91,10 @@ button:hover, .selectDel:hover{
     padding-right: 10px;
 }
 .Rows > span { width: 100px; }/*선택*/
-.list_updateDate { width: 200px; }/*등록날짜*/
+.list_num{width: 100px;}/*번호*/
+.list_updateDate { width: 230px; }/*등록날짜*/
 .list_userId { width: 200px; }/*ID*/
-.list_title { width: 600px; }/*제목*/
+.list_title { width: 400px; }/*제목*/
 .list_anwerYN { width: 150px; }/*답변여부*/
 
 input[type="checkbox"]{
@@ -114,7 +118,7 @@ input[type="checkbox"]{
 	background-color: #eee;
 }
 #pageBtn li:not(.active):not(.disabled):hover > a {
-	color: rgb(40, 40, 255);
+	color: #fce699;
 }
 #pageBtn li {
 	display: inline-block;
@@ -137,7 +141,7 @@ input[type="checkbox"]{
 	/*color: rgb(206, 154, 0);*/
 }
 #pageBtn .active {
-	background-color: #0D6EFD;
+	background-color: rgb(252, 230, 153);
 }
 #pageBtn .active > a {
 	color: white;

@@ -9,8 +9,8 @@ public class JasyptConfigTest {
     @Test
     void stringEncryptor() {
         String url = null;
-        String userName = "projm2786@gmail.com";
-        String password = "gelpqvkkacvxysbd";
+        String userName = "";
+        String password = "";
         String redisPassword = null;
 
         System.out.println("En_url : " + jasyptEncoding(url));

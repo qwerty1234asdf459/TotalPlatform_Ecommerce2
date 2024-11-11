@@ -139,6 +139,17 @@ const titleList = document.querySelectorAll(".productName");
 	})
 	
 ///////////////////////////////////////////////////////////
+function requestTossPayment(orderId, totalPrice,orderName) {
+    const tossPayments = TossPayments('test_ck_26DlbXAaV0MOP52Gyd6KrqY50Q9R');
+    tossPayments.requestPayment('카드', {
+        amount: totalPrice,
+        orderId: orderId,
+        orderName:orderName ,
+        successUrl: window.location.origin + '/success',
+        failUrl: window.location.origin + '/fail',
+    });
+}
+
 const psf = document.getElementById("paymentSubmit");
 	psf.addEventListener('click',function(e){
 		e.preventDefault();
@@ -151,30 +162,33 @@ const psf = document.getElementById("paymentSubmit");
 			cartArr.push(cart.value);
 			console.log(cart.value);
 		})
-		//document.getElementById("paymentAddress").value = document.getElementById("adressTextArea").value+" "+document.getElementById("adressTextArea2").value;
-		////document.getElementById("paymentCoupon").value = couponSelect.options[couponSelect.selectedIndex].id
-		//document.getElementById("paymentRequest").value = delRequest.value
-		//document.getElementById("cartArr").value = JSON.stringify(cartArr);
-		//document.getElementById("orderId").value = orderId;
+		
+		let orderName = nameArr[0]
+		if(nameArr.length > 1){
+			orderName = nameArr[0]+" 외"+nameArr.length-1+"건";
+		}
+		
 			
-		fetch("http://localhost:8080/payment",{
+		fetch("http://localhost:8081/paymentAmountCheck",{
 			method: 'POST',
 			headers: {
     			"Content-Type": 'application/x-www-form-urlencoded',
     				},
 			body : new URLSearchParams({
-				address:document.getElementById("adressTextArea").value+" "+document.getElementById("adressTextArea2").value,
-				couponId:couponSelect.options[couponSelect.selectedIndex].id,
 				cartData:JSON.stringify(cartArr),
-				delRequest:delRequest.value,
-				orderId:orderId
 				})
 		})
 		.then(response => {
 			if(response.ok){
-				 handlePayment();
+				window.localStorage.setItem('adress', document.getElementById("adressTextArea").value+" "+document.getElementById("adressTextArea2").value);
+				window.localStorage.setItem('couponId', couponSelect.options[couponSelect.selectedIndex].id);
+				window.localStorage.setItem('cartData', JSON.stringify(cartArr));
+				window.localStorage.setItem('delRequest', delRequest.value);
+				window.localStorage.setItem('orderId', orderId);
+				requestTossPayment(orderId, totalPrice,orderName)
 			}else{
-				alert("결제에 실패했습니다.");
+				alert("상품수량이 부족합니다.");
+				location.href = "http://localhost:8081/cart";
 				console.error(response);
 			}
 		})
@@ -184,45 +198,4 @@ const psf = document.getElementById("paymentSubmit");
 		})
 	})
 
-
-
-function requestTossPayment(orderId, totalPrice) {
-    return new Promise((resolve, reject) => {
-        const tossPayments = TossPayments('test_ck_26DlbXAaV0MOP52Gyd6KrqY50Q9R');
-        tossPayments.requestPayment('카드', {
-            amount: totalPrice,
-            orderId: orderId,
-            orderName: '주문 상품',
-            successUrl: window.location.origin + '/success',
-            failUrl: window.location.origin + '/fail',
-            // 결제창에서 사용자가 취소했을 때 호출되는 콜백 함수
-            onCancel() {
-                reject(new Error('사용자에 의해 결제가 취소되었습니다.'));
-                // 추가적으로 실행 중단 로직이나 UI 업데이트 등을 여기에 작성할 수 있음
-                console.log('결제가');
-                alert('사용자가 결제를 취소했습니다.');
-            }
-        });
-    });
-}
-    
-///////////////////////////////////////////////////
-async function handlePayment() {
-    try {
-        const response = await requestTossPayment(orderId, totalPrice);
-        console.log("결제 성공:", response);
-    } catch (error) {
-        console.error("결제 실패 또는 취소:", error.message);
-        alert("결제가 실패하거나 취소되었습니다.");
-    }
-}
-// 이벤트 핸들러
-paymentSubmit.addEventListener('click', async function(e) {
-    e.preventDefault();
-    try {
-        await handlePayment();
-    } catch (error) {
-        console.error("결제 처리 중 오류 발생:", error.message);
-    }
-});
-	
+///////////////////////////////////////////////////////////////////

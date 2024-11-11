@@ -11,9 +11,9 @@ import org.springframework.web.context.request.NativeWebRequest;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.method.support.ModelAndViewContainer;
 
-import com.example.demo.LoginCheck.LoginCheckService;
-import com.example.demo.LoginCheck.undefinedUserException;
 import com.example.demo.ecommerce.Entity.User;
+import com.example.demo.ecommerce.LoginCheck.LoginCheckService;
+import com.example.demo.ecommerce.LoginCheck.undefinedUserException;
 import com.example.demo.ecommerce.User.UserRepository;
 import com.example.demo.totalplatform.TotalUser;
 import com.example.demo.totalplatform.TotalUserRepository;

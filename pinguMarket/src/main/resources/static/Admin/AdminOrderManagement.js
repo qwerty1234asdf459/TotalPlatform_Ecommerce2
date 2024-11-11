@@ -1,28 +1,56 @@
+//---------------주문목록 개수 세기(전체)----------------
+const table = document.getElementById('myTable');
+const totalRowCnt = table.rows.length;
+totalResult.innerText = (totalRowCnt-1); 
+
 //-----------------체크박스 선택 기능----------------------
 const ag01 = document.querySelector("#Select01");
 const ag = document.querySelectorAll(".Select");
 
-console.log(ag01);
-console.log(ag);
+// console.log(ag01);
+// console.log(ag);
 ag01.addEventListener('change',function(){ //전체 선택박스 눌렀을 때(동작함)
     if (ag01.checked) {
-        console.log("체크");
+//        console.log("체크");
         ag.forEach(item => {
             item.checked = true;
+            selectResult.innerText = (totalRowCnt-1); //전체개수
         });
     } else {
         ag.forEach(item => {
             item.checked = false;
+            selectResult.innerText = 0; //0개
         });
     }
 });
 
+//---------------체크박스 개수 세기----------------
+
+function getCheckedCnt()  {
+
+    // 선택된 목록 가져오기
+    let query = 'input[name="Select"]:checked';
+    let selectedElements = document.querySelectorAll(query);
+
+    // 선택된 목록의 갯수 세기
+    const selectedElementsCnt = selectedElements.length;
+    // 출력
+    selectResult.innerText = selectedElementsCnt;
+
+}
+
+//-----------------모달 > 총 결제금액(구현필요)--------------
+// totalPrice.innerText = ;
+const plusPrice = document.getElementById('plusPrice');
+console.log(plusPrice);
+
+        
+//-----------------모달 열기(젤 위 행만 됨..수정필요)----------------------
 let modal = document.getElementById("modal"); 
 let openmodal = document.querySelector(".drop");
 let closeModal = document.querySelector(".closeM");
 //let ismodalOpen = false; //open close상태를 나타내는 변수
 
-//-----------------모달 열기----------------------
 openmodal.addEventListener("click", function(e){
 //  console.log(e.target);
 //ismodalOpen = true;
@@ -37,6 +65,8 @@ closeModal.addEventListener("click", function(e){
     modal.style.display = 'none';
 });
 //추후 모달 영역 회 클릭시 모달 닫기 기능 추가하기
+
+
 
 
 //-------여러개의 요소에서 특정 요소만 선택---------
@@ -58,37 +88,26 @@ closeModal.addEventListener("click", function(e){
 //   });
 // });
 
-//---------------체크박스 개수 세기----------------
-const table = document.getElementById('myTable');
-const totalRowCnt = table.rows.length;
-totalResult.innerText = (totalRowCnt-1);
-
-//---------------체크박스 개수 세기----------------
-//전체 선택 박스 눌렀을때 제대로 안먹힘
-
-function getCheckedCnt()  {
-    // 선택된 목록 가져오기
-    const count = 'input[type="checkbox"]:checked';
-    const selectedElements = 
-        document.querySelectorAll(count);
-    
-    // 선택된 목록의 갯수 세기
-    const selectedElementsCnt =
-          selectedElements.length;
-    
-    // 출력
-    result.innerText = selectedElementsCnt;
-
-    // document.getElementById('result').innerText
-    //   = selectedElementsCnt;
-  }
 
 
 
 
 
+const rows = document.querySelectorAll(".Rows");
+const searchBtn = document.querySelector("#searchBtn"); //검색 버튼
 
+//검색 버튼 클릭시
+searchBtn.addEventListener('click', function() {
+	document.getElementById('kw').value = document.getElementById('search_kw').value;
+	document.getElementById('kwType').value = document.getElementById('searchSelect').value;
+	document.getElementById('searchForm').submit();
+});
 
-
-
-
+//검색창에서 엔터 버튼 클릭시
+function enterkey() {
+	if (window.event.keyCode == 13) { //엔터키가 눌렸을 때 
+		document.getElementById('kw').value = document.getElementById('search_kw').value;
+		document.getElementById('kwType').value = document.getElementById('searchSelect').value;
+		document.getElementById('searchForm').submit();
+	}
+}

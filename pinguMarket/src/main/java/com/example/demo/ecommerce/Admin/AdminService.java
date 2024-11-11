@@ -80,14 +80,14 @@ public class AdminService {
 
 public int getQuestionCountByAll(Integer userId) {
 	User user = this.ur.searchUser(userId);
-	return this.cqr.countQuestionByAll(1); //유저정보 강제 입력함. 추후 1 대신 user.getUserId()로 변경 필요
+	return this.cqr.countQuestionByAll(userId); //유저정보 강제 입력함. 추후 1 대신 user.getUserId()로 변경 필요
 }
 
 
 // ******************1:1문의하기 페이징 처리******************************************************
 public List<CsQuestion> getUserByKeyword(Integer userId, int startNo, int pageSize) {
 	User user = this.ur.searchUser(userId);
-	return this.cqr.findQestionByUserId(1, startNo, pageSize); // 유저정보 강제 입력함. 추후 1 대신 user.getUserId()로 변경 필요
+	return this.cqr.findQestionByUserId(userId, startNo, pageSize); // 유저정보 강제 입력함. 추후 1 대신 user.getUserId()로 변경 필요
 }
 
 
@@ -202,20 +202,26 @@ public int getCsQuestionCountByKeyword(String kwType, String kw) {
 			case "title": return this.adminCsQuestionRepository.countQuestionByTitle(kw);
 			case "name": return this.adminCsQuestionRepository.countQuestionByName(kw);
 		}
-		
-		
 		return this.adminCsQuestionRepository.countQuestionByKeyword(kw);
 	}
 
 	
 	public CsQuestion getCsQuestion(Integer csQuestionId) {
-
 		Optional<CsQuestion> question = this.adminCsQuestionRepository.findById(csQuestionId);
-		
 		return question.get();				
 
     }
 	
+	/* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ 주문/배송조회 검색기능  ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
+	public List<Payment> getOrderByKeyword(String kwType,String kw) {
+		switch(kwType) {
+		case "total" : return this.pr.findAllByKeyword(kw);
+		case "orderNum": return this.pr.findAllOrderNum(kw);
+		case "orderUser": return this.pr.findAllByOrderUser(kw);
+		case "receiver": return this.pr.findAllByReceiver(kw);
+	}
+		return this.pr.findAllByKeyword(kw);
+	}	
 	
 
 }
