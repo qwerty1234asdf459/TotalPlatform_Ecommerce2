@@ -84,32 +84,17 @@ public class AdminInquiryController {
 //	@PreAuthorize("isAuthenticated()")
 //	@PostMapping("/cs/answerDelete/{csAnswerId}")
 	
-	@RequestMapping(value = "/admin/cs/answerDelete", method = RequestMethod.POST)
-    public String answerDelete(@RequestParam(value="csAnswerId") Integer csAnswerId) {
+	@PostMapping("/admin/cs/answerDelete")
+    public String answerDelete(@RequestParam("csAnswerId") Integer csAnswerId) {
+//		public String answerDelete(@RequestParam("csAnswerId") Integer csAnswerId, Integer csQuestionId) throws UserException {
 		CsAnswer answer = this.cas.getCsAnswer(csAnswerId);
-		
+		System.out.println(answer.getCsQuestion().getCsQuestionId());
+//		CsQuestion q = this.cqs.getQuestion(csAnswerId);
         this.cas.delete(answer);
+        //return String.format("redirect:/admin/cs/1" );
+        //return String.format("redirect:/admin/cs/%s", q.getCsQuestionId());
         return String.format("redirect:/admin/cs/%s", answer.getCsQuestion().getCsQuestionId());
     }
-	
-//	@RequestMapping(value = "/admin/cs/answerDelete", method = RequestMethod.GET)
-//    public String csAnswerDelete(@RequestParam(value="csAnswerId") Integer csAnswerId) {
-//		CsAnswer answer = this.cas.getCsAnswer(csAnswerId);
-//		
-//        this.cas.delete(answer);
-//        return String.format("redirect:/admin/cs/%s", answer.getCsQuestion().getCsQuestionId());
-//    }
-	
-	
-//	@GetMapping("/delete/{id}") 개별 삭제 참고 코드
-//    public String answerDelete(Principal principal, @PathVariable("id") Integer id) {
-//        Answer answer = this.answerService.getAnswer(id);
-//        if (!answer.getAuthor().getUsername().equals(principal.getName())) {
-//            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "삭제권한이 없습니다.");
-//        }
-//        this.answerService.delete(answer);
-//        return String.format("redirect:/question/detail/%s", answer.getQuestion().getId());
-//    }
 	
 	
 	//---------------관리자페이지 > 문의 관리 > 상세페이지-------------------------------
