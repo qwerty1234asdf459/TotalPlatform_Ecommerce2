@@ -1,4 +1,4 @@
-package com.example.demo.LoginCheck;
+package com.example.demo.ecommerce.LoginCheck;
 
 import org.springframework.stereotype.Component;
 import org.springframework.web.method.HandlerMethod;

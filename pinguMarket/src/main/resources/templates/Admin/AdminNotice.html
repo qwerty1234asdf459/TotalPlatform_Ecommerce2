@@ -42,9 +42,9 @@
             </div>
             <div class="Rows" th:each="NList, loop : ${NList}">
                 <span><input type="checkbox" th:id="'Select'+${NList.noticeId}" name="Select" class="Select"></span>
-                <span th:text="${loop.count + ((page.pageNo-1) * page.pageSize)}"></span>
+                <span class="number" th:text="${loop.count + ((page.pageNo-1) * page.pageSize)}"></span>
                 <a class="list_title" th:href="@{|/admin/Notice/detail/${NList.noticeId}|}" th:text="${NList.title}"></a>
-                <a class="list_admin" th:href="@{|/admin/Notice/detail/${NList.noticeId}|}" th:text="${NList.admin.adCode}"></a>
+                <a class="list_admin" th:href="@{|/admin/Notice/detail/${NList.noticeId}|}" th:text="${NList.admin.adminId}"></a>
                 <a class="list_updateDate" th:href="@{|/admin/Notice/detail/${NList.noticeId}|}" th:text="${#temporals.format(NList.updateDate, 'yyyy-MM-dd HH:mm')}"></a>
             </div>
             

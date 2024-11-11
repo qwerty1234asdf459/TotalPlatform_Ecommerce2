@@ -20,12 +20,11 @@
             <h2>상품관리</h2>
             <section class="searchLine">
                 <span>텍스트 검색 : </span>
-                <select name="" id="">
-                    <option value="">상품명</option>
-                    <option value="">상품 ID</option>
+                <select name="searchSelect" id="searchSelect">
+                    <option value="name" th:selected="${kwType} == name">상품명</option>
                 </select>
-                <input class="searchtext" type="text" placeholder="상품명 또는 상품ID를 입력해주세요.">
-                <button type="button" class="fa-solid fa-magnifying-glass btn-style"> 검색</button>
+                <input class="searchtext" type="text" id="search_kw" placeholder="상품명 또는 상품ID를 입력해주세요." th:value="${kw}" onkeyup="enterkey()">
+                <button type="button" class="fa-solid fa-magnifying-glass btn-style" id="searchBtn"> 검색</button>
             </section>
             
             <section class="filterLine">
@@ -80,6 +79,14 @@
                     </div>
                 </div>
             </section>
+            
+            <!-- kw, page 데이터 넘기기 -->
+    		<form th:action="@{/admin/Product}" method="get" id="searchForm">
+				<input type="hidden" id="kw" name="kw" th:value="${kw}">
+				<input type="hidden" id="kwType" name="kwType" th:value="${kwType}">
+    		</form>
+            
+            
         </div><!--메인 끝-->
     </div>
     <script th:src="@{/Admin/AdminProduct.js}"></script>

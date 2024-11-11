@@ -26,6 +26,7 @@ import com.example.demo.ecommerce.Review.CanNotFoundException;
 import com.example.demo.ecommerce.productimg.ProductImgService;
 
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 
 
@@ -41,8 +42,15 @@ public class AdminProductController {
 	//------------------관리자페이지 > 상품 관리(리스트)--------------------------
 	//@PreAuthorize("isAuthenticated()") // 로그인 한 경우에만 요청 처리
 	@GetMapping("/admin/Product") 
-	public String AdminProduct(Model model) {
-        List<Product> PList = this.pr.findAll();
+	public String AdminProduct(Model model,
+			@RequestParam(value = "kw", defaultValue = "") String kw,
+			@RequestParam(value = "kwType", defaultValue = "") String kwType,
+			HttpSession session) {
+		
+		
+       // List<Product> PList = this.pr.findAll();
+		
+		List<Product> PList = this.aps.getProductByKeyword(kwType, kw);
         model.addAttribute("PList", PList);
                           //" "안에 있는 값이 html에서 인식할 텍스트
         return "/Admin/AdminProduct";  

@@ -56,12 +56,13 @@
 
                     <div class="searchLine"> <!-- 텍스트 검색 -->
                         <span>텍스트 검색 : </span>
-                        <select name="" id="">
-                            <option value="">주문번호</option>
-                            <option value="">주문자 ID</option>
-                            <option value="">수취인</option>
+                        <select name="searchSelect" id="searchSelect">
+                        	 <option value="total" th:selected="${kwType} == total">전체</option>
+                            <option value="orderNum" th:selected="${kwType} == orderNum">주문번호</option>
+                            <option value="orderUser" th:selected="${kwType} == orderUser">주문자 ID</option>
+                            <option value="receiver" th:selected="${kwType} == receiver">수취인</option>
                         </select>
-                        <input class="searchtext" type="text" placeholder="주문번호, 주문자ID 또는 수취인을 입력해주세요.">
+                        <input class="searchtext" type="text" id="search_kw" placeholder="주문번호, 주문자ID 또는 수취인을 입력해주세요." th:value="${kw}" onkeyup="enterkey()">
                     </div>
                     <div class="searchLine"> <!-- 기간 검색 -->
                         <div class="filter-controls">
@@ -82,7 +83,7 @@
                             </div>
                         </div>
                     </div>
-                    <button type="button" class="fa-solid fa-magnifying-glass btn-style"> 검색</button>
+                    <button type="button" class="fa-solid fa-magnifying-glass btn-style" id="searchBtn"> 검색</button>
                     <button type="button" id="btn-clear" class="btn-style">초기화</button>
                 </div>
             </section>
@@ -180,6 +181,12 @@
                     </li>
                 </ul> 
             </div>
+            
+            <!-- kw, page 데이터 넘기기 -->
+    		<form th:action="@{/admin/OrderManagement}" method="get" id="searchForm">
+				<input type="hidden" id="kw" name="kw" th:value="${kw}">
+				<input type="hidden" id="kwType" name="kwType" th:value="${kwType}">
+    		</form>
                     
                     
         </div><!--메인 끝-->

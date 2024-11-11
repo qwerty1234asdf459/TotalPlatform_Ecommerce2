@@ -7,10 +7,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import com.example.demo.LoginCheck.LoginCheck;
 import com.example.demo.ecommerce.Authuser.Authuser;
 import com.example.demo.ecommerce.Authuser.AuthuserService;
 import com.example.demo.ecommerce.Entity.User;
+import com.example.demo.ecommerce.LoginCheck.LoginCheck;
 import com.example.demo.ecommerce.User.UserRepository;
 import com.example.demo.totalplatform.TotalUser;
 import com.example.demo.totalplatform.TotalUserRepository;
@@ -30,7 +30,6 @@ public class mainCotroller {
 	private final TotalUserService totalUserService;
 	
 	//---------------------MAIN PAGE--------------------------
-		@LoginCheck
 		@GetMapping("/main")
 		public String mainpage(@Authuser User user) {
 			if(user.getId().equals("null")) {

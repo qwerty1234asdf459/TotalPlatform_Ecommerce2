@@ -4,6 +4,7 @@ main>.csContainer {
     min-width: var(--pageMinWidth);
     display: flex;
     gap: 2rem;
+    height: 1200px;
     padding-top: 5rem;
     padding-bottom: 5rem;
 }

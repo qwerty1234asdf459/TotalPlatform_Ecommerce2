@@ -41,6 +41,23 @@ public interface PaymentRepository extends JpaRepository<Payment, Integer>{
 	List<Payment> findByUserCreate(@Param("userId") Integer userId, @Param("period") Integer period);
 	
 	Payment findByOrderNo(String orderNo);
+
 	
 
+	/********************************** 검색어 : 전체(주문번호 or 주문자ID or 수취인) 조회 **********************************/
+	@Query(value= "select * from payment p where p.order_no like %:kw% or p.user_id like %:kw% or p.name like %:kw%", nativeQuery = true)
+	List<Payment> findAllByKeyword(@Param("kw") String kw);
+	
+
+	/********************************** 검색어 : 주문번호로조회 **********************************/
+	@Query(value = "SELECT * FROM payment p where p.order_no like %:kw%", nativeQuery = true)
+	List<Payment> findAllOrderNum(@Param("kw") String kw);
+	
+	/********************************** 검색어 : 주문자ID로 회원 리스트 조회 **********************************/
+	@Query(value = "SELECT * FROM payment p where p.user_id like %:kw%", nativeQuery = true)
+	List<Payment> findAllByOrderUser(@Param("kw") String kw);
+
+	/********************************** 검색어 : 수취인으로 조회 **********************************/
+	@Query(value = "SELECT * FROM payment p where p.name like %:kw%", nativeQuery = true)
+	List<Payment> findAllByReceiver(@Param("kw") String kw);
 }

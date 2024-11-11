@@ -1,6 +1,7 @@
 package com.example.demo.ecommerce.Admin.Product;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -39,6 +40,14 @@ public class AdminProductService {
 	public void delete(Product p) {
 		this.apr.delete(p);
 		
+	}
+
+	/* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ 상품 조회 > 검색 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
+	public List<Product> getProductByKeyword(String kwType, String kw) {
+		switch(kwType) {
+			case "name": return this.apr.findAllByProductName(kw);	
+		}
+		return this.apr.findAllByProductName(kw);
 	}
 	
 //	public AdminProduct Create(String name, String category, Integer price, Integer amount) {

@@ -71,13 +71,14 @@ button:hover{
 #columnBox > span { display: inline-block; 
                     padding-right: 10px;}
 #columnBox > span:nth-child(1) { width: 50px; } /*선택*/
-#columnBox > span:nth-child(2) { width: 150px; } /*ID*/
-#columnBox > span:nth-child(3) { width: 150px; } /*이름*/
-#columnBox > span:nth-child(4) { width: 200px; } /*전화번호*/
-#columnBox > span:nth-child(5) { width: 400px; } /*주소*/
-#columnBox > span:nth-child(6) { width: 150px; } /*주문건수*/
-#columnBox > span:nth-child(7) { width: 150px; } /*반품건수*/
-#columnBox > span:nth-child(8) { width: 150px; } /*등록일*/
+#columnBox > span:nth-child(2) { width: 100px; } /*번호*/
+#columnBox > span:nth-child(3) { width: 200px; } /*ID*/
+#columnBox > span:nth-child(4) { width: 200px; } /*이름*/
+#columnBox > span:nth-child(5) { width: 200px; } /*전화번호*/
+#columnBox > span:nth-child(6) { width: 500px; } /*주소*/
+#columnBox > span:nth-child(7) { width: 200px; } /*주문건수*/
+#columnBox > span:nth-child(8) { width: 200px; } /*반품건수*/
+#columnBox > span:nth-child(9) { width: 150px; } /*등록일*/
 
 .Rows {
     padding: 14px;
@@ -91,13 +92,14 @@ button:hover{
     padding-right: 10px;
 }
 .Rows > span:nth-child(1) { width: 50px; }
-.Rows > span:nth-child(2) { width: 150px; }
-.Rows > span:nth-child(3) { width: 150px; }
+.Rows > span:nth-child(2) { width: 100px; }
+.Rows > span:nth-child(3) { width: 200px; }
 .Rows > span:nth-child(4) { width: 200px; }
-.Rows > span:nth-child(5) { width: 400px; }
-.Rows > span:nth-child(6) { width: 150px; }
-.Rows > span:nth-child(7) { width: 150px; }
-.Rows > span:nth-child(8) { width: 150px; }
+.Rows > span:nth-child(5) { width: 200px; }
+.Rows > span:nth-child(6) { width: 500px; }
+.Rows > span:nth-child(7) { width: 200px; }
+.Rows > span:nth-child(8) { width: 200px; }
+.Rows > span:nth-child(9) { width: 150px; }
 
 input[type="checkbox"]{
     width: 20px;
@@ -115,7 +117,7 @@ input[type="checkbox"]{
 	background-color: #eee;
 }
 #pageBtn li:not(.active):not(.disabled):hover > a {
-	color: rgb(40, 40, 255);
+	color: #fce699;
 }
 #pageBtn li {
 	display: inline-block;
@@ -138,7 +140,7 @@ input[type="checkbox"]{
 	/*color: rgb(206, 154, 0);*/
 }
 #pageBtn .active {
-	background-color: #0D6EFD;
+	background-color: rgb(252, 230, 153);
 }
 #pageBtn .active > a {
 	color: white;
