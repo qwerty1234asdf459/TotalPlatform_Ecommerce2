@@ -165,9 +165,10 @@ padding-bottom: 1rem;
 
 .productRelateNav{
     position: sticky;
-    top:95px;
+    top:100px;
     display: flex;
     margin-bottom: 2rem;
+    z-index: 19;
 }
 
 .productRelateNav>li{
@@ -188,19 +189,17 @@ padding-bottom: 1rem;
     color: rgb(166, 166, 166);
 }
 
-
-
-
 .productExplainContainer{
     /* border: 1px solid; */
     padding: 1rem 0 1rem 0;
-    height: 200vh;
+    height: 300vh;
+    /* 리뷰가 없을때는 높이를 적게할 필요가 있음.. */
 }
 .productExplainContainer>li{
     /* border: 1px solid red; */
     position: absolute;
     width: 100%;
-    height: 100%;
+    height: 85%;
     z-index: 0;
     opacity: 0;
 }
@@ -230,6 +229,10 @@ padding-bottom: 1rem;
     font-weight: bold;
     line-height: 150px; /*수직정렬*/
     text-align: center; /*수평정렬*/
+}
+.rv_scroller{ /*리뷰 스크롤 -> 추후 페이징으로*/
+    max-height: 100%;
+    overflow-y: auto;
 }
 .rv_filter{
     padding-bottom: 16px;
