@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<div layout:decorate="~{Layout/layout}">
+    <!-- *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-* MAIN *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*--*-*-*-*-*-*-*-*-*-* -->
+    <main layout:fragment="content">
+    <link rel="stylesheet" th:href="@{/Login/loginPageStyle.css}">
+
+        <div class="loginContainer">
+            <p>로그인</p>
+            <form id="LoginForm" method="post">
+                <input id="loginId" type="text" placeholder="아이디를 입력해주세요">
+                <input id="password" type="password" placeholder="비밀번호를 입력해주세요">
+                <div class="findContainer">
+                    <div class="findBtn idFind">
+                        <a href="#">아이디 찾기</a>
+                    </div>
+                    <div class="findBtn passwordFind">
+                        <a href="#">비밀번호 찾기</a>
+                    </div>
+                </div>
+                <div class="loginBtn login"><button type="submit">로그인</button></div>
+                <div class="loginBtn signIn"><a href="http://192.168.17.254:8080/signup">회원가입</a></div>
+            </form>
+        </div>
+             
+    </main>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script th:src="@{/Login/loginPage.js}"></script>

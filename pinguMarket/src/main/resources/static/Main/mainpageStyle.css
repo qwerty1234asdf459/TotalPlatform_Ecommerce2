@@ -1,0 +1,299 @@
+/*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-* Slide Style *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
+main {
+    min-width: var(--pageMinWidth);
+}
+
+.mainSlideContainer {
+    width: 100%;
+    position: relative;
+    height: 30rem;
+    overflow: hidden;
+    margin-bottom: 5rem;
+}
+
+.mainSlideContainer>.slides {
+    display: flex;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+}
+
+.mainSlideContainer>.slides>.slide {
+    flex: 1;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+.mainSlideContainer>.slides>.slide>img {
+    height: 100%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+/* slidebtn  */
+.mainSlideContainer>.slideBtn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(200, 200, 200, 0.5);
+    border-radius: 100%;
+    width: 3rem;
+    height: 3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    opacity: 0;
+    transition: .3s;
+    border-color: var(--mainColor);
+}
+
+.mainSlideContainer>.slideBtn>p>i {
+    transition: .3s;
+}
+
+.mainSlideContainer:hover>.slideBtn {
+    opacity: 1;
+}
+
+.mainSlideContainer>.slideBtn:hover {
+    border: 3px solid var(--mainColor);
+}
+
+.mainSlideContainer>.slideBtn:hover>p>i {
+    color: var(--mainColor);
+    font-size: var(--subtitleFont);
+}
+
+.mainSlideContainer>.preBtn {
+    left: var(--layoutpadding);
+}
+
+.mainSlideContainer>.nextBtn {
+    right: var(--layoutpadding);
+}
+
+
+
+/*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-* Section(Product) Style *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
+section {
+    min-width: var(--pageMinWidth);
+    padding-left: var(--layoutpadding);
+    padding-right: var(--layoutpadding);
+    margin-bottom: 5rem;
+    min-width: var(--pageMinWidth);
+}
+
+.sectionTitle {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: var(--titleFont);
+
+    font-weight: 600;
+}
+
+.sectionSubtitle {
+    font-size: var(--contentFont);
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    font-weight: 400;
+    color: gray;
+}
+
+/*-*-*-*-*-*-*-*-*-*-*-* 상품 레이아웃*-*-*-*-*-*-*-*-*-*-*-*-*/
+.productContainer {
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+.productContainer>.slides {
+    display: flex;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.productContainer>.slides>.slide {
+    flex: 1;
+    display: flex;
+    justify-content: space-between;
+}
+
+.productContainer>.slides>.slide>li {
+    width: 22%;
+}
+
+.product>a {
+    display: block;
+}
+
+/*-*-*-*-*-*-*-*-*-*-*-* 상품섹션 이미지 *-*-*-*-*-*-*-*-*-*-*-*-*/
+.product>a>.productImg {
+    width: 100%;
+    background-color: rgb(200, 200, 200);
+    height: 20vw;
+    border-radius: 0.5em;
+    min-height: 250px;
+}
+
+/*-*-*-*-*-*-*-*-*-*-*-* 상품섹션 버튼 *-*-*-*-*-*-*-*-*-*-*-*-*/
+.product>a>.putBtn {
+    border: 1px solid rgb(200, 200, 200);
+    display: flex;
+    justify-content: center;
+    border-radius: 0.5rem;
+    margin: 1rem 0 1rem 0;
+}
+
+.product>a>.putBtn>p {
+    padding: 0.5vw 0 0.5vw 0;
+    color: gray;
+}
+
+.product>a>.putBtn>p>i {
+    padding: 0 0.5rem 0 0;
+    color: gray;
+}
+
+/*-*-*-*-*-*-*-*-*-*-*-* 상품섹션 상품정보 *-*-*-*-*-*-*-*-*-*-*-*-*/
+.product>a>.productText>div {
+    padding: 0.5rem 0 0.5rem 0;
+}
+
+/* 상품이름관련*/
+.product>a>.productText>.productName {
+    font-size: var(--contentFont);
+}
+
+/* 상품가격관련 */
+.product>a>.productText>.productPrice {
+    font-size: var(--contentFont);
+}
+
+.product>a>.productText>.productPrice>.originalPrice {
+    color: var(--subFontColor);
+    text-decoration: line-through gray;
+    font-size: 14px;
+}
+
+.product>a>.productText>.productPrice>p {
+    font-weight: bold;
+}
+
+.product>a>.productText>.productPrice>p>span {
+    color: rgb(255, 77, 0);
+}
+
+/* 상품리뷰 관련 */
+.productText>.productReview>p {
+    font-size: 14px;
+    color: var(--subFontColor);
+    font-weight: bold;
+}
+
+/*-*-*-*-*-*-*-*-*-* 상품컨테이너 버튼 *-*-*-*-*-*-*-*-*-*/
+.productContainer>.productBtn {
+    background-color: rgba(255, 255, 255, 0.463);
+    position: absolute;
+    width: 3rem;
+    height: 3rem;
+    top: 35%;
+    transform: translateY(-50%);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.productContainer>.productBtn.btnOff {
+    opacity: 0;
+    z-index: -1;
+}
+
+
+
+.productContainer>.preBtn {
+    left: 2rem;
+}
+
+.productContainer>.nextBtn {
+    right: 2rem;
+}
+
+
+
+/*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-* sectionBanner *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
+.sectionBanner {
+    width: 100%;
+    overflow: hidden;
+}
+
+.sectionBanner>a {
+    display: block;
+    width: 100%;
+    height: 10rem;
+    position: relative;
+}
+
+.sectionBanner>a>img {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+/*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-* sectionTimeSale *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
+.timeSale {
+    display: flex;
+    gap: 1rem;
+}
+
+.timeSaleTitle {
+    width: 33%;
+}
+
+.timeSaleTitle>.title {
+    font-size: var(--titleFont);
+    font-weight: bold;
+}
+
+.timeSaleTitle>.subTitle {
+    font-size: var(--contentFont);
+    font-weight: 400;
+    color: var(--subFontColor);
+}
+
+.timeSaleTitle>.timeTimer {
+    font-size: 30px;
+    font-weight: bold;
+    padding: 2rem 0 2rem 0;
+}
+
+.timeSaleTitle>.noti {
+    font-size: var(--contentFont);
+    font-weight: 400;
+    color: var(--subFontColor);
+}
+
+
+
+.timeSaleProduct {
+    width: 66%;
+    display: flex;
+    gap: 1rem;
+}
+
+.timeSaleProduct>.product {
+    flex: 1;
+}
+
