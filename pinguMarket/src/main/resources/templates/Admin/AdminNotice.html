@@ -35,14 +35,14 @@
 
             <div id="columnBox"> <!-- 테이블 컬럼 -->
                 <span><input type="checkbox" id="Select01" name="SelectAll"></span>
-                 <span>번호</span>
+                <span>번호</span>
                 <span>제목</span>
                 <span>작성자</span>
                 <span>작성일</span>
             </div>
             <div class="Rows" th:each="NList, loop : ${NList}">
-                <span><input type="checkbox" th:id="'Select'+${NList.noticeId}" name="Select" class="Select"></span>
-                <span th:text="${loop.count + ((page.pageNo-1) * page.pageSize)}"></span>
+                <span><input type="checkbox" th:id="'Select'+${NList.noticeId}" name="Select" class="Select"></span><!--체크박스-->
+                <span class="list_num" th:text="${loop.count + ((page.pageNo-1) * page.pageSize)}"></span><!--번호-->
                 <a class="list_title" th:href="@{|/admin/Notice/detail/${NList.noticeId}|}" th:text="${NList.title}"></a>
                 <a class="list_admin" th:href="@{|/admin/Notice/detail/${NList.noticeId}|}" th:text="${NList.admin.adCode}"></a>
                 <a class="list_updateDate" th:href="@{|/admin/Notice/detail/${NList.noticeId}|}" th:text="${#temporals.format(NList.updateDate, 'yyyy-MM-dd HH:mm')}"></a>
@@ -58,7 +58,7 @@
 				        <a class="page-link" href="javascript:void(0)" th:if="${page.pageNo>1}" th:data-page="${page.pageNo-1}">이전</a>
 			        </li>
 			        <li th:each="num : ${#numbers.sequence(page.startPage, page.endPage)}" th:classappend="${page.pageNo == num} ? 'active'">
-				        <a class="page-link" href="javascript:void(0)" } th:text="${num}" th:data-page="${num}"></a>
+				        <a class="page-link" href="javascript:void(0)" th:text="${num}" th:data-page="${num}"></a>
 			        </li>
 			        <li>
 				        <a class="page-link" href="javascript:void(0)" th:if="${page.pageNo < page.totalPage}" th:data-page="${page.pageNo+1}">다음</a>

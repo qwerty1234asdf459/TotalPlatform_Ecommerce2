@@ -70,14 +70,15 @@ button:hover{
 }
 #columnBox > span { display: inline-block; 
                     padding-right: 10px;}
-#columnBox > span:nth-child(1) { width: 50px; } /*선택*/
-#columnBox > span:nth-child(2) { width: 150px; } /*ID*/
-#columnBox > span:nth-child(3) { width: 150px; } /*이름*/
-#columnBox > span:nth-child(4) { width: 200px; } /*전화번호*/
-#columnBox > span:nth-child(5) { width: 400px; } /*주소*/
-#columnBox > span:nth-child(6) { width: 150px; } /*주문건수*/
-#columnBox > span:nth-child(7) { width: 150px; } /*반품건수*/
-#columnBox > span:nth-child(8) { width: 150px; } /*등록일*/
+#columnBox > span:nth-child(1) { width: 60px; } /*선택*/
+#columnBox > span:nth-child(2) { width: 80px; } /*번호*/
+#columnBox > span:nth-child(3) { width: 160px; } /*ID*/
+#columnBox > span:nth-child(4) { width: 150px; } /*이름*/
+#columnBox > span:nth-child(5) { width: 200px; } /*전화번호*/
+#columnBox > span:nth-child(6) { width: 450px; } /*주소*/
+#columnBox > span:nth-child(7) { width: 160px; } /*주문건수*/
+#columnBox > span:nth-child(8) { width: 160px; } /*반품건수*/
+#columnBox > span:nth-child(9) { width: 150px; } /*등록일*/
 
 .Rows {
     padding: 14px;
@@ -90,14 +91,15 @@ button:hover{
     display: inline-block; 
     padding-right: 10px;
 }
-.Rows > span:nth-child(1) { width: 50px; }
-.Rows > span:nth-child(2) { width: 150px; }
-.Rows > span:nth-child(3) { width: 150px; }
-.Rows > span:nth-child(4) { width: 200px; }
-.Rows > span:nth-child(5) { width: 400px; }
-.Rows > span:nth-child(6) { width: 150px; }
-.Rows > span:nth-child(7) { width: 150px; }
-.Rows > span:nth-child(8) { width: 150px; }
+.Rows > span:nth-child(1) { width: 60px; }/*선택*/
+.Rows > span:nth-child(2) { width: 80px; }/*번호*/
+.Rows > span:nth-child(3) { width: 160px; }/*ID*/
+.Rows > span:nth-child(4) { width: 150px; }/*이름*/
+.Rows > span:nth-child(5) { width: 200px; }/*전화번호*/
+.Rows > span:nth-child(6) { width: 450px; }/*주소*/
+.Rows > span:nth-child(7) { width: 160px; }/*주문건수*/
+.Rows > span:nth-child(8) { width: 160px; }/*반품건수*/
+.Rows > span:nth-child(9) { width: 150px; }/*등록일*/
 
 input[type="checkbox"]{
     width: 20px;
