@@ -27,7 +27,7 @@ let ApiUrl = "http://192.168.17.254:8080/login"
        //성공시 구현 될 코드
        alert("로그인에 성공하였습니다.")
        let jwtToken = response.headers.get("Authorization"); 
-	   document.cookie = `jwtToken=${jwtToken};path=/main;`
+	   document.cookie = `jwtToken=${jwtToken};path=/;`
 	   		axios({
 		      url: "http://localhost:8080/JwtCookie/request",
 		      method: "post",

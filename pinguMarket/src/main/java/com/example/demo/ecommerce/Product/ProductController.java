@@ -3,6 +3,8 @@ package com.example.demo.ecommerce.Product;
 
 import java.security.Principal;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -35,7 +37,7 @@ public class ProductController {
 	
 //	---------------------------------------------장바구니----------------------------------------------------------------------------------------------
 	@PostMapping("/product/addcart")
-	public String addcart(@RequestParam("cart_count")Integer count,
+	public ResponseEntity<String> addcart(@RequestParam("cart_count")Integer count,
 			@RequestParam("product")Integer productId, Model model, Principal principal) throws Exception {
 		User u = this.us.getUser(1); // 유저정보 강제 입력(추후 principal.getName()으로 변경해야 함
 		Product p = this.ps.getProduct(productId);
@@ -43,12 +45,12 @@ public class ProductController {
 			if(carts.cartOverlappingCheck(p, u)) {
 				this.carts.createCart(u, p, count);
 			}else {
-				return "redirect:/product/"+Integer.toString(productId);
+				return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("이미 장바구니에 등록되어있는 상품 입니다.");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return "redirect:/cart";
+		return ResponseEntity.ok("장바구니에 등록되었습니다.");
 	}
 	
 	
