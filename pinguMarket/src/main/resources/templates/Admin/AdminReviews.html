@@ -42,6 +42,7 @@
             </div>
             <div class="Rows" th:each="RList, loop : ${RList}">
                 <span><input  type="checkbox" th:id="'Select'+${RList.reviewId}" name="Select" class="Select"></span>
+
                 <span class="list_num" th:text="${loop.count + ((page.pageNo-1) * page.pageSize)}"></span>
                 <a class="list_user" th:href="@{|/admin/Reviews/detail/${RList.reviewId}|}" th:text="${RList.user.id}"></a>
                 <a class="list_product" th:href="@{|/admin/Reviews/detail/${RList.reviewId}|}" th:text="${RList.product.name}"></a>

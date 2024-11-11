@@ -80,3 +80,11 @@ main>.loginContainer{
     border: 1px solid var(--mainColor);
     color: var(--mainColor);
 }
+
+.submit{
+	background-color: var(--mainColor);
+    color: white;
+    border: none;
+    cursor: pointer;
+	
+}

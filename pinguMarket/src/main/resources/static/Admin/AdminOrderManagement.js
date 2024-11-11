@@ -93,10 +93,21 @@ closeModal.addEventListener("click", function(e){
 
 
 
+const rows = document.querySelectorAll(".Rows");
+const searchBtn = document.querySelector("#searchBtn"); //검색 버튼
 
+//검색 버튼 클릭시
+searchBtn.addEventListener('click', function() {
+	document.getElementById('kw').value = document.getElementById('search_kw').value;
+	document.getElementById('kwType').value = document.getElementById('searchSelect').value;
+	document.getElementById('searchForm').submit();
+});
 
-
-
-
-
-
+//검색창에서 엔터 버튼 클릭시
+function enterkey() {
+	if (window.event.keyCode == 13) { //엔터키가 눌렸을 때 
+		document.getElementById('kw').value = document.getElementById('search_kw').value;
+		document.getElementById('kwType').value = document.getElementById('searchSelect').value;
+		document.getElementById('searchForm').submit();
+	}
+}

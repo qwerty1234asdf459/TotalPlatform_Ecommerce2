@@ -125,7 +125,7 @@ button:hover{
 	background-color: #eee;
 }
 #pageBtn li:not(.active):not(.disabled):hover > a {
-	color: rgb(40, 40, 255);
+	color: #fce699;
 }
 #pageBtn li {
 	display: inline-block;
@@ -148,7 +148,7 @@ button:hover{
 	/*color: rgb(206, 154, 0);*/
 }
 #pageBtn .active {
-	background-color: #0D6EFD;
+	background-color:rgb(252, 230, 153);
 }
 #pageBtn .active > a {
 	color: white;

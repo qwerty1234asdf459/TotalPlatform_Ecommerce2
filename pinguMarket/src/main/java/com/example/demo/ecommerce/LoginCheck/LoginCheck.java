@@ -1,4 +1,4 @@
-package com.example.demo.LoginCheck;
+package com.example.demo.ecommerce.LoginCheck;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
