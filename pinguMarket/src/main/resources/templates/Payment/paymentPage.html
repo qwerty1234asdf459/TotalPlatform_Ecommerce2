@@ -205,14 +205,8 @@
                 </div>
             </div>
         </div>
-        <form id="paymentSubmitForm">
-        	<input type="hidden" id="paymentAddress" name="address">
-        	<input type="hidden" id="paymentCoupon" name="couponId">
-        	<input type="hidden" id="paymentRequest" name="delRequest">
-        	<input type="hidden" id="cartArr" name="cartData">
-        	<input type="hidden" id="orderId" name="orderId">
-        </form>
     </main>
 </div>
+<script th:src="@{//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js}"></script>
  <script src="https://js.tosspayments.com/v1"></script>
 <script th:src="@{/Payment/paymentPage.js}"></script>
