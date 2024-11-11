@@ -23,7 +23,7 @@
                 <select name="searchSelect" id="searchSelect">
                     <option value="name" th:selected="${kwType} == name">상품명</option>
                 </select>
-                <input class="searchtext" type="text" id="search_kw" placeholder="상품명 또는 상품ID를 입력해주세요." th:value="${kw}" onkeyup="enterkey()">
+                <input class="searchtext" type="text" id="search_kw" placeholder="상품명을 입력해주세요." th:value="${kw}" onkeyup="enterkey()">
                 <button type="button" class="fa-solid fa-magnifying-glass btn-style" id="searchBtn"> 검색</button>
             </section>
             
@@ -42,7 +42,6 @@
             <section class="BtnLine">
                 <button class="btn-style" th:onclick="|location.href='@{/registration}'|">신규 등록</button>
                 <a class="selectDel" th:data-uri="@{|/admin/Product/delete|}">선택상품 일괄 삭제</a>
-                <!-- <button class="btn-style new">선택상품 일괄 삭제</button> -->
             </section>
 
             <section class="list-box">

@@ -90,12 +90,12 @@ button:hover, .selectDel:hover{
     display: inline-block; 
     padding-right: 10px;
 }
-.Rows > span { width: 100px; }/*선택*/
-.list_num{width: 100px;}/*번호*/
+.Rows > span     { width: 100px; }/*선택*/
+.list_num        { width: 100px; }/*번호*/
 .list_updateDate { width: 230px; }/*등록날짜*/
-.list_userId { width: 200px; }/*ID*/
-.list_title { width: 400px; }/*제목*/
-.list_anwerYN { width: 150px; }/*답변여부*/
+.list_userId     { width: 200px; }/*ID*/
+.list_title      { width: 600px; }/*제목*/
+.list_anwerYN    { width: 150px; }/*답변여부*/
 
 input[type="checkbox"]{
     width: 20px;

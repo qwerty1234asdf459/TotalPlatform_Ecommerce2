@@ -114,15 +114,17 @@
                         <div style="white-space: pre;"><button class="ReviewBtn best">추천순</button>  |  <button class="ReviewBtn day">최근등록순</button></div>
                     </div>
                     <!--페이징처리 필요-->
-                    <div class="rv_container" id="myTable" th:each="review : ${p.reviewList}">
-                        <div class="rvLeft">
-                            <div class="rv_Id" th:text="${review.user.id}">userId</div>
-                            <div class="rv_scope">별점 : <span th:text="${review.scope}"></span></div>
-                            <div class="rv_day">작성일 : <span th:text="${#temporals.format(review.updateDate, 'yyyyMMdd')}"></span></div>
-                        </div>
-                        <div class="rvRight">
-                            <div class="rv_text" th:text="${review.contents}">리뷰 내용... </div>
-                            <div class="rv_img">첨부 사진...</div>
+                    <div class="rv_scroller"> <!--추후 페이징처리로 변경 필요-->
+                        <div class="rv_container" id="myTable" th:each="review : ${p.reviewList}">
+                            <div class="rvLeft">
+                                <div class="rv_Id" th:text="${review.user.id}">userId</div>
+                                <div class="rv_scope">별점 : <span th:text="${review.scope}"></span></div>
+                                <div class="rv_day">작성일 : <span th:text="${#temporals.format(review.updateDate, 'yyyyMMdd')}"></span></div>
+                            </div>
+                            <div class="rvRight">
+                                <div class="rv_text" th:text="${review.contents}">리뷰 내용... </div>
+                                <div class="rv_img">첨부 사진...</div>
+                            </div>
                         </div>
                     </div>
                 </li>
