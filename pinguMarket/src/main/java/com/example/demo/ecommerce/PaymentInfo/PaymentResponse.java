@@ -11,6 +11,7 @@ public class PaymentResponse {
     private String paymentKey;
     private String orderId;
     private Long amount;
+    private String paymentMethod;
     private String status;
     private LocalDateTime paymentDate;
 }

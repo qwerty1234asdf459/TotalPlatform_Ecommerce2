@@ -20,52 +20,62 @@
             <!-- 삭제, 답변 가능 -->
             <h1>문의 관리</h1>
             <div id="searchBox"> <!-- 검색창 -->
-                <select name="" id="">
-                    <option>전체</option>
-                    <option value="">작성자 ID</option>
-                    <option value="">상품명</option>
-                    <option value="">제목</option>
+                <select name="searchSelect" id="searchSelect">
+                    <option value="total" th:selected="${kwType} == total">전체</option>
+                    <option value="name" th:selected="${kwType} == name">작성자 ID</option>
+                    <!--<option value="">상품명</option>-->
+                    <option value="title" th:selected="${kwType} == title">제목</option>
                 </select>
-                <input type="text" placeholder="작성자 ID, 상품명 또는 제목을 입력해주세요.">
-                <button class="fa-solid fa-magnifying-glass searchbtn"></button>
+                <input type="text" id="search_kw" placeholder="작성자 ID, 상품명 또는 제목을 입력해주세요." th:value="${kw}" onkeyup="enterkey()">
+                <button class="fa-solid fa-magnifying-glass searchbtn"  id="searchBtn"></button>
 
                 <a class="selectDel" th:data-uri="@{|/admin/cs/delete|}">문의글 삭제</a>
             </div>
 
             <div id="columnBox"> <!-- 테이블 컬럼 -->
                 <span><input type="checkbox" id="Select01" name="SelectAll"></span>
+                <span>번호</span>
                 <span>작성일자</span>
                 <span>ID</span>
                 <span>제목</span>
                 <span>답변여부</span> 
             </div>
-            <div class="Rows"th:each="Q : ${Q}"> <!--페이징 처리 필요-->
+            <div class="Rows"th:each="Q, loop : ${Q}"> <!--페이징 처리 필요-->
                 <span><input type="checkbox" th:id="'Select'+${Q.csQuestionId}" name="Select" class="Select"></span>
+                <span th:text="${loop.count + ((page.pageNo-1) * page.pageSize)}"></span>
                 <a class="list_updateDate" th:href="@{|/admin/cs/${Q.csQuestionId}|}" th:text="${#temporals.format(Q.updateDate, 'yyyy-MM-dd HH:mm')}">작성일</a>
                 <a class="list_userId" th:href="@{|/admin/cs/${Q.csQuestionId}|}" th:text="${Q.user.id}">글쓴이</a>
                 <a class="list_title" th:href="@{|/admin/cs/${Q.csQuestionId}|}" th:text="${Q.title}">제목</a>
                 <a class="list_anwerYN" th:href="@{|/admin/cs/${Q.csQuestionId}|}" th:text="${Q.CsAnswer == null} ? 'N' : 'Y'"></a>
             </div>
             
-            <div id="pageBtn"> <!--
-                <ul>
-                    <li th:classappend="${!paging.hasPrevious} ? 'disabled'">
-		        		 <a th:href="@{|?page=${paging.number-1}|}">
-		        		        <span>이전</span>
-		        		 </a>
-                    </li>
-                    <li th:each="page : ${#numbers.sequence(0, paging.totalPages-1)}"
-                        th:if="${page >= paging.number-2 and page <= paging.number+2}"
-                        th:classappend="${page == paging.number} ? 'active'">
-                        <a th:text="${page}" th:href="@{|?page=${page}|}"></a>
-                    </li>
-                    <li th:classappend="${!paging.hasNext} ? 'disabled'">
-		              <a th:href="@{|?page=${paging.number+1}|}">
-		                <span>다음</span>
-		              </a>
-                    </li>-->
-                </ul>
-            </div>
+            <!-- 페이징 버튼  -->
+            <div id="pageBtn" th:if="${page.totalPage} > 1">
+		        <ul>
+			        <li th:classappend="${page.pageNo == 1} ? 'disabled'">
+				        <a class="page-link" href="javascript:void(0)" th:data-page="1">처음으로</a>
+			        </li>
+			        <li>
+				        <a class="page-link" href="javascript:void(0)" th:if="${page.pageNo>1}" th:data-page="${page.pageNo-1}">이전</a>
+			        </li>
+			        <li th:each="num : ${#numbers.sequence(page.startPage, page.endPage)}" th:classappend="${page.pageNo == num} ? 'active'">
+				        <a class="page-link" href="javascript:void(0)" } th:text="${num}" th:data-page="${num}"></a>
+			        </li>
+			        <li>
+				        <a class="page-link" href="javascript:void(0)" th:if="${page.pageNo < page.totalPage}" th:data-page="${page.pageNo+1}">다음</a>
+			        </li>
+			        <li th:classappend="${page.pageNo == page.totalPage} ? 'disabled'">
+				        <a class="page-link" href="javascript:void(0)" th:data-page="${page.totalPage}">마지막으로</a>
+			        </li>
+		        </ul>
+	        </div>
+
+            <!-- kw, page 데이터 넘기기 -->
+            <form th:action="@{/admin/cs}" method="get" id="searchForm">
+                <input type="hidden" id="kw" name="kw" th:value="${kw}">
+                <input type="hidden" id="kwType" name="kwType" th:value="${kwType}">
+                <input type="hidden" id="page" name="page">
+            </form>
 
 
             

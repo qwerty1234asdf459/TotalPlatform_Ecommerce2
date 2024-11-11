@@ -3,7 +3,7 @@
     <!-- *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-* MAIN *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*--*-*-*-*-*-*-*-*-*-* -->
     <main layout:fragment="content">
     <link rel="stylesheet" href="/MyPage/myPageStyle.css">
-    <link rel="stylesheet" href="/MyPage/pwmodify.css">
+    <link rel="stylesheet" href="/MyPage/MypageEditPw.css">
 
         <div class="myPageContainer">
 
@@ -47,7 +47,7 @@
                     <ul>
                         <p>내정보관리</p>
                         <li><a th:href="@{/usermodify}">개인정보 수정</a></li>
-                        <li><a th:href="@{/usermodify/pw}">비밀번호 수정</a></li>
+                        <li><a th:href="@{/mypage/editpw}">비밀번호 수정</a></li>
                         <li><a th:href="@{/signout}">회원 탈퇴</a></li>
                     </ul>
                     <ul>
@@ -67,7 +67,7 @@
                     
 
         <div id="userModifyContainer">
-            <form th:action="@{/usermodify/pw}" th:object="${editPwForm}" method="post">
+            <form th:action="@{/mypage/editpw}" th:object="${editPwForm}" method="post">
                  <!--  <div id="erorrs" th:replace="~{login/form_errors :: formErrorsFragment}"></div>
                   -->
                   
@@ -85,5 +85,5 @@
         </div>
     </main>
 </div>
-<script th:src="@{/MyPage/pwmodify.js}"></script>
+<script th:src="@{/MyPage/MypageEditPw.js}"></script>
  

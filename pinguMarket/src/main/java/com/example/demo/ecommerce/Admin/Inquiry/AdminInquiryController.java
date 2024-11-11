@@ -31,9 +31,11 @@ import com.example.demo.ecommerce.Entity.Admin;
 import com.example.demo.ecommerce.Entity.CsAnswer;
 import com.example.demo.ecommerce.Entity.CsQuestion;
 import com.example.demo.ecommerce.Entity.Notice;
+import com.example.demo.ecommerce.Paging.EzenPaging;
 import com.example.demo.ecommerce.Review.CanNotFoundException;
 
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
@@ -50,9 +52,19 @@ public class AdminInquiryController {
 	//---------------관리자페이지 > 문의 관리(리스트)----------------------------------
 //	@PreAuthorize("isAuthenticated()") // 로그인 한 경우에만 요청 처리
 	@GetMapping("/admin/cs") 
-	public String Inquiry(Model model) {
-        List<CsQuestion> Q = this.cqr.findAll();
+	public String Inquiry(Model model, @RequestParam(value="page", defaultValue="0") int page,
+			@RequestParam(value = "kw", defaultValue = "") String kw,
+			@RequestParam(value = "kwType", defaultValue = "") String kwType,
+			HttpSession session) {
+		
+		//EzenPaging ezenPaging = new EzenPaging(현재 페이지 번호, 페이지당 글 갯수, 총 글 갯수, 페이징 버튼 갯수)
+		EzenPaging ezenPaging = new EzenPaging(page, 10, as.getCsQuestionCountByKeyword(kwType, kw), 5);
+        List<CsQuestion> Q = this.as.getCsQuetionByKeyword(kwType,kw,ezenPaging.getStartNo(), ezenPaging.getPageSize());
+        
         model.addAttribute("Q", Q);
+        model.addAttribute("page",  ezenPaging);
+        model.addAttribute("kw", kw);
+        model.addAttribute("kwType", kwType);
                           //" "안에 있는 값이 html에서 인식할 텍스트
         return "/Admin/AdminInquiry";  
 	}
@@ -84,32 +96,17 @@ public class AdminInquiryController {
 //	@PreAuthorize("isAuthenticated()")
 //	@PostMapping("/cs/answerDelete/{csAnswerId}")
 	
-	@RequestMapping(value = "/admin/cs/answerDelete", method = RequestMethod.POST)
-    public String answerDelete(@RequestParam(value="csAnswerId") Integer csAnswerId) {
+	@PostMapping("/admin/cs/answerDelete")
+    public String answerDelete(@RequestParam("csAnswerId") Integer csAnswerId) {
+//		public String answerDelete(@RequestParam("csAnswerId") Integer csAnswerId, Integer csQuestionId) throws UserException {
 		CsAnswer answer = this.cas.getCsAnswer(csAnswerId);
-		
+		System.out.println(answer.getCsQuestion().getCsQuestionId());
+//		CsQuestion q = this.cqs.getQuestion(csAnswerId);
         this.cas.delete(answer);
+        //return String.format("redirect:/admin/cs/1" );
+        //return String.format("redirect:/admin/cs/%s", q.getCsQuestionId());
         return String.format("redirect:/admin/cs/%s", answer.getCsQuestion().getCsQuestionId());
     }
-	
-//	@RequestMapping(value = "/admin/cs/answerDelete", method = RequestMethod.GET)
-//    public String csAnswerDelete(@RequestParam(value="csAnswerId") Integer csAnswerId) {
-//		CsAnswer answer = this.cas.getCsAnswer(csAnswerId);
-//		
-//        this.cas.delete(answer);
-//        return String.format("redirect:/admin/cs/%s", answer.getCsQuestion().getCsQuestionId());
-//    }
-	
-	
-//	@GetMapping("/delete/{id}") 개별 삭제 참고 코드
-//    public String answerDelete(Principal principal, @PathVariable("id") Integer id) {
-//        Answer answer = this.answerService.getAnswer(id);
-//        if (!answer.getAuthor().getUsername().equals(principal.getName())) {
-//            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "삭제권한이 없습니다.");
-//        }
-//        this.answerService.delete(answer);
-//        return String.format("redirect:/question/detail/%s", answer.getQuestion().getId());
-//    }
 	
 	
 	//---------------관리자페이지 > 문의 관리 > 상세페이지-------------------------------

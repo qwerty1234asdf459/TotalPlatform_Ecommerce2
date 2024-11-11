@@ -1,7 +1,6 @@
 const couponModal = document.querySelector('.couponModal');
 const openBtn = document.querySelector('.openBtn');
 const modalCloseBtn = document.querySelector('.modalCloseBtn');
-console.log(modalCloseBtn);
 openBtn.addEventListener("click", ()=>{
     couponModal.style.display="flex";
 	});
@@ -14,7 +13,7 @@ const cif = document.getElementById("couponInputForm");
 	cif.addEventListener('submit',function(e){
 		e.preventDefault();
 			
-		const code = document.getElementById('code').value;
+		const code = document.getElementById('codeInput').value;
 			
 		fetch("http://localhost:8080/mycoupon/inputcoupon",{
 			method: 'POST',

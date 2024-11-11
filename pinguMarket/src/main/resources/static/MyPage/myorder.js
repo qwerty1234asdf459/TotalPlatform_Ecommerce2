@@ -16,19 +16,26 @@
       'Content-Type': 'application/x-www-form-urlencoded',
     },
     body: new URLSearchParams({
-      carrierCode: code,
-      invoiceNumber: invoice
+      code: code,
+      invoice: invoice
     })
   })
   .then(response => {
     if (response.ok) {
-      return response.text(); // 서버가 반환하는 응답 처리
+      return response.json();
     } else {
-      throw new Error('Error during fetching delivery status');
+      throw new Error('에러');
     }
   })
   .then(data => {
-    alert("성공: " + data); // 응답 데이터 확인
+	
+	let trackingData = JSON.parse(data.trackingData);
+    if (trackingData.status === false) {
+      alert(trackingData.msg);
+    } else {
+      
+      
+    }
   })
   .catch(error => {
     console.error('Error:', error);
@@ -79,7 +86,6 @@
     return response.json();
 })
 .then(data => {
-    console.log(data); // 받은 데이터 구조 확인
     updateOrderList(data);
 })
 			

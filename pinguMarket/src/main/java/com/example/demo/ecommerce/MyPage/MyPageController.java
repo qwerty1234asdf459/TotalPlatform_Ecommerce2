@@ -109,11 +109,16 @@ public class MyPageController {
 //		User u = this.us.getUser(principal.getName());
 		User u = this.us.getUser(1);
 		Payment p = this.ps.getPayment1(id);
-//		해당 payment 정보를 가져옴
-//		
+		
 		model.addAttribute("user", u);	
 		model.addAttribute("payment", p);
-		return "Mypage/myorderdetail";
+		
+		if(u.getUserId().equals(p.getUser().getUserId())) {
+			return "Mypage/myorderdetail";
+		}
+//		해당 payment 정보를 가져옴
+//		
+		return "redirect:/myorder";
 		
 	}
 	
@@ -234,7 +239,7 @@ public class MyPageController {
 	}
 	
 //	@PreAuthorize("isAuthenticated()")	
-	@GetMapping("usermodify/pw")
+	@GetMapping("/mypage/editpw")
 	public String myPwModifyPage(EditPwForm editPwForm,
 			Model model, Principal principal) throws CanNotFoundException {
 			
@@ -243,19 +248,39 @@ public class MyPageController {
 		model.addAttribute("editPwForm", editPwForm);
 		model.addAttribute("user", user);
 		
-			return "Mypage/pwmodify";
+			return "mypage/MypageEditPw";
 		}
 	
-//	@PreAuthorize("isAuthenticated()")	
-	@PostMapping("usermodify/pw")
+//	@PreAuthorize(value = "isAuthenticated()")
+	@PostMapping("/mypage/editpw")
 	public String myPwModifyPage(Model model, Principal principal,
-			@Valid EditPwForm passwordModifyForm, BindingResult bindingResult) throws CanNotFoundException {
+			@Valid EditPwForm editPwForm, BindingResult bindingResult) throws CanNotFoundException {
 		User user = this.us.getUser(1);
+		model.addAttribute("user", user);
 		
-//		추후 승래님이 만드신 기능 집어넣기
-
-		return "Mypage/pwmodify";
-	}
+		if(us.prePasswordCheck(user, editPwForm.getPrePassword())) {
+            //System.out.println("비밀번호 같아용");
+            if(!editPwForm.getPassword().equals(editPwForm.getPassword2())) {
+                bindingResult.rejectValue("Password2","NoSame", "비밀번호가 일치하지 않습니다");
+//                System.out.println("비밀번호안일치");
+                return "mypage/MypageEditPw";
+            }else {
+                if(us.prePasswordCheck(user, editPwForm.getPassword())) {
+                    bindingResult.rejectValue("Password","SameError", "이미 사용중인 비밀번호 입니다.");
+//                    System.out.println("이미사용중");
+                    return "mypage/MypageEditPw";
+                }
+            }
+            this.us.changePassword(user, editPwForm.getPassword());
+//            System.out.println("변경완료");
+            return "mypage/MypageEditPw";
+        }else {
+            bindingResult.rejectValue("prePassword","NoSame", "현재 비밀번호가 일치하지 않습니다");
+//            System.out.println("현재 비밀번호가 틀림");
+            //System.out.println("비밀번호 틀려용");
+        }
+        return "mypage/MypageEditPw";
+    }
 	
 	
 //	@PreAuthorize("isAuthenticated()")	

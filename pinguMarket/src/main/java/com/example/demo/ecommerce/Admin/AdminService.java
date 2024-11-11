@@ -9,12 +9,16 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
+import com.example.demo.ecommerce.Admin.Inquiry.AdminCsQuestionRepository;
+import com.example.demo.ecommerce.Admin.Review.AdminReviewRepository;
+import com.example.demo.ecommerce.Admin.UserManagement.AdminUserRepository;
 import com.example.demo.ecommerce.CsAnswer.CsAnswerRepository;
 import com.example.demo.ecommerce.CsQuestion.CsQuestionRepository;
 import com.example.demo.ecommerce.Entity.Admin;
 import com.example.demo.ecommerce.Entity.CsAnswer;
 import com.example.demo.ecommerce.Entity.CsQuestion;
 import com.example.demo.ecommerce.Entity.Payment;
+import com.example.demo.ecommerce.Entity.Review;
 import com.example.demo.ecommerce.Entity.User;
 import com.example.demo.ecommerce.Payment.PaymentRepository;
 import com.example.demo.ecommerce.User.UserRepository;
@@ -31,6 +35,10 @@ public class AdminService {
 	private final UserRepository ur;
 	private final AdminRepository ar;
 	private final PaymentRepository pr;
+	private final AdminUserRepository adminUserRepository;
+	private final AdminCsQuestionRepository adminCsQuestionRepository;
+	private final AdminReviewRepository avr;
+	
 	
 	
 	public CsQuestion getQuestion(Integer id) {
@@ -113,6 +121,100 @@ public List<CsQuestion> getUserByKeyword(Integer userId, int startNo, int pageSi
 		return this.pr.findByUserId(user.getUserId());
 	}
 
+	/* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ 유저 조회 > 페이징 처리 및 검색 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
+	public List<User> getUserByKeyword(String kwType, String kw, int startNo, int pageSize){
+		
+		switch(kwType) {
+			case "total": return this.adminUserRepository.findAllByKeyword(kw, startNo, pageSize);
+			case "id": return this.adminUserRepository.findAllByUserId(kw, startNo, pageSize);
+			case "name": return this.adminUserRepository.findAllByUserName(kw, startNo, pageSize);
+		}
+		return this.adminUserRepository.findAllByKeyword(kw, startNo, pageSize);
+	}
+	
+	/* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ 유저 조회 > 검색어의 총 갯수 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
+	public int getUserCountByKeyword(String kwType, String kw) {
+		
+		switch(kwType) {
+			case "total": return this.adminUserRepository.countUserByKeyword(kw);
+			case "id": return this.adminUserRepository.countUserById(kw);
+			case "name": return this.adminUserRepository.countUserByName(kw);
+		}
+		
+		return this.adminUserRepository.countUserByKeyword(kw);
+	}
+	
+	/* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ 모든 회원 조회 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
+	public List<User> getUserList() {
+		return this.adminUserRepository.findAll();
+	}
+	
+	/* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ 회원 1명 조회 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
+	public User getUser(Integer userId) {
+		
+		Optional<User> user = this.adminUserRepository.findById(userId);
+		
+		return user.get();
+	}
+
+	/* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ 리뷰 페이징 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
+	public List<Review> getReviewByKeyword(String kwType,String kw, int startNo, int pageSize) {
+		switch(kwType) {
+		case "total": return this.avr.findAllByKeyword(kw, startNo, pageSize);
+		case "name": return this.avr.findAllByReviewName(kw, startNo, pageSize);
+		case "userId": return this.avr.findAllByReviewProduct(kw, startNo, pageSize);
+	}
+		
+		
+		return this.avr.findAllByKeyword(kw, startNo, pageSize);
+	}	
+
+	/* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ 리뷰 전체조회  ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
+public int getReviewCountByKeyword(String kwType, String kw) {
+		
+		switch(kwType) {
+			case "total": return this.avr.countReviewByKeyword(kw);
+			case "name": return this.avr.countReviewByName(kw);
+			case "userId": return this.avr.countReviewByProduct(kw);
+		}
+		
+		
+		return this.avr.countReviewByKeyword(kw);
+	}
+	
+	/* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ 관리자 1대1 문의 전체 조회 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
+	public List<CsQuestion> getCsQuetionByKeyword(String kwType,String kw, int startNo, int pageSize) {
+		switch(kwType) {
+		case "total": return this.adminCsQuestionRepository.findAllByKeyword(kw, startNo, pageSize);
+		case "title": return this.adminCsQuestionRepository.findAllByQuestionTitle(kw, startNo, pageSize);
+		case "name": return this.adminCsQuestionRepository.findAllByUserName(kw, startNo, pageSize);
+	}
+		
+		
+		return this.adminCsQuestionRepository.findAllByKeyword(kw, startNo, pageSize);
+	}	
+
+	/* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ 관리자 1대1 페이징  ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
+public int getCsQuestionCountByKeyword(String kwType, String kw) {
+		
+		switch(kwType) {
+			case "total": return this.adminCsQuestionRepository.countQuestionByKeyword(kw);
+			case "title": return this.adminCsQuestionRepository.countQuestionByTitle(kw);
+			case "name": return this.adminCsQuestionRepository.countQuestionByName(kw);
+		}
+		
+		
+		return this.adminCsQuestionRepository.countQuestionByKeyword(kw);
+	}
+
+	
+	public CsQuestion getCsQuestion(Integer csQuestionId) {
+
+		Optional<CsQuestion> question = this.adminCsQuestionRepository.findById(csQuestionId);
+		
+		return question.get();				
+
+    }
 	
 	
 

@@ -82,4 +82,27 @@ public class AdminNoticeService {
 		
 	}
 
+
+	/* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ 관리자 공지사항 전체 조회 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
+	public int getNoticeCountByKeyword(String kwType, String kw) {
+		switch(kwType) {
+		case "total": return this.anr.countNoticeByKeyword(kw);
+		case "title": return this.anr.countNoticeByTitle(kw);
+		case "name": return this.anr.countNoticeByAdmin(kw);
+	}
+	
+	return this.anr.countNoticeByKeyword(kw);
+}
+
+
+	/* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ 관리자 공지사항 페이징 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
+	public List<Notice> getNoticeByKeyword(String kwType, String kw, int startNo, int pageSize) {
+		switch(kwType) {
+		case "total": return this.anr.findAllByKeyword(kw, startNo, pageSize);
+		case "title": return this.anr.findAllByNoticeTitle(kw, startNo, pageSize);
+		case "name": return this.anr.findAllByNoticeAdmin(kw, startNo, pageSize);
+	}
+	return this.anr.findAllByKeyword(kw, startNo, pageSize);
+}
+
 }

@@ -38,14 +38,27 @@ public class PaymentInfoService {
         // 2) 응답 데이터 파싱 (Gson 또는 Jackson 사용 가능)
         PaymentInfoDetails details = PaymentInfoDetails.fromJson(confirmResponse);
         // 3) 데이터베이스에 저장할 엔티티 생성 및 저장
-        PaymentInfo paymentInfo = PaymentInfo.builder()
-            .paymentKey(details.getPaymentKey())
-            .orderId(details.getOrderId())
-            .amount(details.getEasyPay().getAmount())
-            .paymentMethod(details.getPaymentMethod())
-            //.cardInfo(details.getCardInfo().getIssuerCode())
-            .build();
-        paymentInfoRepository.save(paymentInfo);
+        
+        if(details.getMethod().equals("간편결제")) {
+        	PaymentInfo paymentInfo = PaymentInfo.builder()
+                    .paymentKey(details.getPaymentKey())
+                    .orderId(details.getOrderId())
+                    .amount(details.getTotalAmount())
+                    .paymentMethod(details.getMethod())
+                    //.cardInfo(details.getCardInfo().getIssuerCode())
+                    .build();
+                paymentInfoRepository.save(paymentInfo);
+                
+        }else if(details.getMethod().equals("카드")) {
+        	PaymentInfo paymentInfo = PaymentInfo.builder()
+                    .paymentKey(details.getPaymentKey())
+                    .orderId(details.getOrderId())
+                    .amount(details.getTotalAmount())
+                    .cardInfo(details.getCard().getIssuerCode())
+                    .build();
+                paymentInfoRepository.save(paymentInfo);
+        }
+    
         // 4) 응답 DTO 반환
         return convertToResponse(details);
     }
@@ -54,8 +67,10 @@ public class PaymentInfoService {
         return PaymentResponse.builder()
             .paymentKey(details.getPaymentKey())
             .orderId(details.getOrderId())
-            .amount(details.getAmount())
+            .amount(details.getTotalAmount())
+            .paymentMethod(details.getMethod())
             .status("COMPLETED")
+            .paymentDate(LocalDateTime.now())
             .build();
     }
 	 

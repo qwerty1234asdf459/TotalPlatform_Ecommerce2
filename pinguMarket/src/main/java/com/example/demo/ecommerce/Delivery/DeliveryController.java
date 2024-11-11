@@ -1,5 +1,7 @@
 package com.example.demo.ecommerce.Delivery;
 
+import java.util.Map;
+
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -14,7 +16,8 @@ public class DeliveryController {
     }
     
     @PostMapping("/api/delivery/status")
-    public String getDeliveryStatus(@RequestParam String carrierCode, @RequestParam String invoiceNumber) {
+    public Map<String, Object> getDeliveryStatus(@RequestParam("code") String carrierCode, @RequestParam("invoice") String invoiceNumber) {
         return deliveryService.getDeliveryStatus(carrierCode, invoiceNumber);
+        
     }
 }
