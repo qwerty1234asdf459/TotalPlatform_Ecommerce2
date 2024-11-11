@@ -17,10 +17,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.example.demo.ecommerce.Admin.AdminService;
 import com.example.demo.ecommerce.Entity.Admin;
 import com.example.demo.ecommerce.Entity.Notice;
+import com.example.demo.ecommerce.Paging.EzenPaging;
 import com.example.demo.ecommerce.Review.CanNotFoundException;
 
 
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
@@ -92,9 +94,19 @@ public class AdminNoticeController {
 		//---------------관리자페이지 > 공지사항 페이지(리스트)-----------------------------
 //		@PreAuthorize("isAuthenticated()") // 로그인 한 경우에만 요청 처리
 		@GetMapping("/admin/Notice") 
-		public String notice(Model model) {
-	        List<Notice> NList = this.anr.findAll();
+		public String notice(Model model, @RequestParam(value="page", defaultValue="0") int page,
+				@RequestParam(value = "kw", defaultValue = "") String kw,
+				@RequestParam(value = "kwType", defaultValue = "") String kwType,
+				HttpSession session) {
+			
+			//EzenPaging ezenPaging = new EzenPaging(현재 페이지 번호, 페이지당 글 갯수, 총 글 갯수, 페이징 버튼 갯수)
+			EzenPaging ezenPaging = new EzenPaging(page, 10, ans.getNoticeCountByKeyword(kwType, kw), 5);
+	        List<Notice> NList = this.ans.getNoticeByKeyword(kwType,kw,ezenPaging.getStartNo(), ezenPaging.getPageSize());
+	        
 	        model.addAttribute("NList", NList);
+	        model.addAttribute("page",  ezenPaging);
+	        model.addAttribute("kw", kw);
+	        model.addAttribute("kwType", kwType);
 	                          //" "안에 있는 값이 html에서 인식할 텍스트
 	        return "/Admin/AdminNotice";  
 		}

@@ -20,11 +20,13 @@
             <!-- 삭제 기능, 등록,수정 버튼 -->
             <h1>공지사항 관리</h1>
             <div id="searchBox"> <!-- 검색창 -->
-                <select name="" id="">
-                    <option value="">제목</option>
+               <select name="searchSelect" id="searchSelect">
+                    <option value="total" th:selected="${kwType} == total">전체</option>
+                    <option value="title" th:selected="${kwType} == title">제목</option>
+                    <option value="name" th:selected="${kwType} == name">관리자 ID</option>
                 </select>
-                <input type="text" placeholder="제목을 입력해주세요.">
-                <button class="fa-solid fa-magnifying-glass searchbtn"></button>
+                <input type="text" id="search_kw" placeholder="제목을 입력해주세요."th:value="${kw}" onkeyup="enterkey()">
+                <button class="fa-solid fa-magnifying-glass searchbtn"  id="searchBtn"></button>
 
                 <a class="selectDel" th:data-uri="@{|/admin/Notice/delete|}">게시글 삭제</a>
                 <button class="createbtn" type="" th:onclick="|location.href='@{/createnotice}'|">게시글 등록</button>
@@ -33,36 +35,46 @@
 
             <div id="columnBox"> <!-- 테이블 컬럼 -->
                 <span><input type="checkbox" id="Select01" name="SelectAll"></span>
+                 <span>번호</span>
                 <span>제목</span>
                 <span>작성자</span>
                 <span>작성일</span>
             </div>
-            <div class="Rows" th:each="NList : ${NList}">
+            <div class="Rows" th:each="NList, loop : ${NList}">
                 <span><input type="checkbox" th:id="'Select'+${NList.noticeId}" name="Select" class="Select"></span>
+                <span th:text="${loop.count + ((page.pageNo-1) * page.pageSize)}"></span>
                 <a class="list_title" th:href="@{|/admin/Notice/detail/${NList.noticeId}|}" th:text="${NList.title}"></a>
                 <a class="list_admin" th:href="@{|/admin/Notice/detail/${NList.noticeId}|}" th:text="${NList.admin.adCode}"></a>
                 <a class="list_updateDate" th:href="@{|/admin/Notice/detail/${NList.noticeId}|}" th:text="${#temporals.format(NList.updateDate, 'yyyy-MM-dd HH:mm')}"></a>
             </div>
             
-            <div id="pageBtn"> <!--페이징처리필요
-                <ul>
-                    <li th:classappend="${!paging.hasPrevious} ? 'disabled'">
-		        		 <a th:href="@{|?page=${paging.number-1}|}">
-		        		        <span>이전</span>
-		        		 </a>
-                    </li>
-                    <li th:each="page : ${#numbers.sequence(0, paging.totalPages-1)}"
-                        th:if="${page >= paging.number-2 and page <= paging.number+2}"
-                        th:classappend="${page == paging.number} ? 'active'">
-                        <a th:text="${page}" th:href="@{|?page=${page}|}"></a>
-                    </li>
-                    <li th:classappend="${!paging.hasNext} ? 'disabled'">
-		              <a th:href="@{|?page=${paging.number+1}|}">
-		                <span>다음</span>
-		              </a>
-                    </li>
-                </ul>-->
-            </div>
+            <!-- 페이징 버튼  -->
+            <div id="pageBtn" th:if="${page.totalPage} > 1">
+		        <ul>
+			        <li th:classappend="${page.pageNo == 1} ? 'disabled'">
+				        <a class="page-link" href="javascript:void(0)" th:data-page="1">처음으로</a>
+			        </li>
+			        <li>
+				        <a class="page-link" href="javascript:void(0)" th:if="${page.pageNo>1}" th:data-page="${page.pageNo-1}">이전</a>
+			        </li>
+			        <li th:each="num : ${#numbers.sequence(page.startPage, page.endPage)}" th:classappend="${page.pageNo == num} ? 'active'">
+				        <a class="page-link" href="javascript:void(0)" } th:text="${num}" th:data-page="${num}"></a>
+			        </li>
+			        <li>
+				        <a class="page-link" href="javascript:void(0)" th:if="${page.pageNo < page.totalPage}" th:data-page="${page.pageNo+1}">다음</a>
+			        </li>
+			        <li th:classappend="${page.pageNo == page.totalPage} ? 'disabled'">
+				        <a class="page-link" href="javascript:void(0)" th:data-page="${page.totalPage}">마지막으로</a>
+			        </li>
+		        </ul>
+	        </div>
+
+            <!-- kw, page 데이터 넘기기 -->
+            <form th:action="@{/admin/Notice}" method="get" id="searchForm">
+                <input type="hidden" id="kw" name="kw" th:value="${kw}">
+                <input type="hidden" id="kwType" name="kwType" th:value="${kwType}">
+                <input type="hidden" id="page" name="page">
+            </form>
 
             
         </div><!--메인 끝-->
