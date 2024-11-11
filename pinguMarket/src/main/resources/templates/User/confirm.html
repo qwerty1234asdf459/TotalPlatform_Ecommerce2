@@ -1,0 +1,35 @@
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script>
+
+
+	  function getCookie(name) { 
+	var value = document.cookie.match('(^|;) ?' + name + '=([^;]*)(;|$)'); return value? value[2] : null; } 
+		
+		
+		
+		let jwtTokenInfo = getCookie("jwtToken");
+
+
+      axios({
+      url: "http://192.168.17.254:8080/agree",
+      method: "post",
+      withCredentials: true,
+      headers : {		  
+	      "Authorization": getCookie("jwtToken")
+	   }
+     
+       })
+      .then(response => {
+       //성공시 구현 될 코드
+	   location.href="http://192.168.17.254:8080/agree?jwtToken="+ jwtTokenInfo;
+  		
+       
+      })
+      .catch(error => {
+       //실패시 구현 될 코드
+       console.error(error);
+      });
+
+
+
+</script>

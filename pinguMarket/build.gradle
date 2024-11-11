@@ -13,6 +13,13 @@ java {
 	}
 }
 
+
+configurations {
+   all {
+       exclude group: 'org.springframework.boot', module: 'spring-boot-starter-logging'
+   }
+}
+
 repositories {
 	mavenCentral()
 }
@@ -39,6 +46,11 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-mail'
     implementation 'com.squareup.okhttp3:okhttp:4.9.1'
 	implementation 'com.google.code.gson:gson:2.8.9'
+    implementation 'org.springframework.boot:spring-boot-starter-aop'
+	implementation 'org.springframework.boot:spring-boot-starter-log4j2'
+	implementation "com.fasterxml.jackson.dataformat:jackson-dataformat-yaml"
+	implementation 'org.springframework.boot:spring-boot-starter-webflux'
+	implementation 'com.github.ulisesbocchio:jasypt-spring-boot-starter:3.0.5'
 	
 }
 
