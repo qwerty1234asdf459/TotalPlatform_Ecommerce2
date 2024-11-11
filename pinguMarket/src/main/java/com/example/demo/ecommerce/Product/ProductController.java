@@ -63,8 +63,8 @@ public class ProductController {
 		return "Cart/cartPage";
 	}
    
-	
-	@GetMapping("/product/{productId}") //상품상세페이지
+//	---------------------------------------------상품상세페이지----------------------------------------------------------------------------------------------	
+	@GetMapping("/product/{productId}")
     public String ProductDetail(Model model, @PathVariable("productId") Integer productId) throws CanNotFoundException {
 		//product_id로 조회해서 가져오기
 		Product p = this.ps.getProduct(productId);

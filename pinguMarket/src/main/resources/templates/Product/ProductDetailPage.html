@@ -10,12 +10,10 @@
             <div class="product">
                 <div class="productTitle">
                     <p th:text="${p.name}"></p>
-                <!--<p class="subTitle">Lorem ipsum dolor sit amet consectetur adipi</p>-->
                 </div>
                 <div class="productPrice">
                 	<p class="originPrice">12,500원 </p>
-                    <p th:text="${p.price}"></p>원
-                    
+                    <p id="sell_price" th:text="${p.price}" th:value="${p.price}"></p>원
                 </div>
                 <div class="productOrigin">
                     <p>원산지 : 상품설명/상세정보 참조</p>
@@ -54,16 +52,16 @@
                         <th>상품선택</th>
                         <td>
                             <div class="countbox">
-                                <button class="countdown" type="button" aria-label="수량내리기">–</button>
-                                <div id="count" class="count" th:data-count="${1}"}>1</div>
-                                <button class="countup" type="button" aria-label="수량올리기">+</button>
+                                <button class="countdown"  name="add" type="button" aria-label="수량내리기">–</button>
+                                <div id="count" name="count" class="count" value="1" th:max="${p.amount}">1</div>
+                                <button class="countup" name="minus" type="button" aria-label="수량올리기">+</button>
                             </div>
                         </td>
                     
                     </tr>
                 </table>
                 <div class="sumPrice">
-                    <p>총 상품금액 : <span>9,900 </span><span>원</span></p>
+                    <p>총 상품금액 : <span id="totalPrice" name="totalPrice" th:value="${p.price}">--</span><span>원</span></p>
                 </div>
                 <div class="detailcartIn">
                     <div class="Con like">
@@ -84,7 +82,7 @@
             <ul class="productRelateNav">
                 <li><a href="#">상품설명</a></li>
                 <li><a href="#">상세정보</a></li>
-                <li><a href="#">후기<span>(61)</span></a></li>
+                <li><a href="#">후기 <span id="totalResult1">--</span></a></li>
                 <li><a th:onclick="|location.href='@{/csc}'|">문의</a></li><!--클릭 시 csc페이지로 연결-->
             </ul>
             <ul class="productExplainContainer">
@@ -107,50 +105,18 @@
                         <div class="imgbox plus">+ 더보기</div>
                     </div>
                     <div class="rv_filter">
-                        <div>총  <span>--</span>개</div>
+                        <div>총  <span id="totalResult2">--</span>개</div>
                         <div style="white-space: pre;"><button class="ReviewBtn best">추천순</button>  |  <button class="ReviewBtn day">최근등록순</button></div>
                     </div>
-                    <div class="rv_container">
+                    <!--페이징처리 필요-->
+                    <div class="rv_container" id="myTable" th:each="review : ${p.reviewList}">
                         <div class="rvLeft">
-                            <div class="rv_Id">userId</div>
-                            <div class="rv_scope">scope</div>
-                            <div class="rv_day">updateDate</div>
+                            <div class="rv_Id" th:text="${review.user.id}">userId</div>
+                            <div class="rv_scope">별점 : <span th:text="${review.scope}"></span></div>
+                            <div class="rv_day">작성일 : <span th:text="${#temporals.format(review.updateDate, 'yyyyMMdd')}"></span></div>
                         </div>
                         <div class="rvRight">
-                            <div class="rv_text">리뷰 내용... Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab id, eius quod explicabo doloribus maxime repellat! Totam aspernatur repellendus sint facilis exercitationem, illum ipsam sapiente voluptate corporis obcaecati sunt explicabo?</div>
-                            <div class="rv_img">첨부 사진...</div>
-                        </div>
-                    </div>
-                    <div class="rv_container"><!--반복,, 백단연결 후 삭제-->
-                        <div class="rvLeft">
-                            <div class="rv_Id">userId</div>
-                            <div class="rv_scope">scope</div>
-                            <div class="rv_day">updateDate</div>
-                        </div>
-                        <div class="rvRight">
-                            <div class="rv_text">리뷰 내용... Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab id, eius quod explicabo doloribus maxime repellat! Totam aspernatur repellendus sint facilis exercitationem, illum ipsam sapiente voluptate corporis obcaecati sunt explicabo?</div>
-                            <div class="rv_img">첨부 사진...</div>
-                        </div>
-                    </div>
-                    <div class="rv_container">
-                        <div class="rvLeft">
-                            <div class="rv_Id">userId</div>
-                            <div class="rv_scope">scope</div>
-                            <div class="rv_day">updateDate</div>
-                        </div>
-                        <div class="rvRight">
-                            <div class="rv_text">리뷰 내용... Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab id, eius quod explicabo doloribus maxime repellat! Totam aspernatur repellendus sint facilis exercitationem, illum ipsam sapiente voluptate corporis obcaecati sunt explicabo?</div>
-                            <div class="rv_img">첨부 사진...</div>
-                        </div>
-                    </div>
-                    <div class="rv_container"> <!--페이징처리 필요-->
-                        <div class="rvLeft">
-                            <div class="rv_Id">userId</div>
-                            <div class="rv_scope">scope</div>
-                            <div class="rv_day">updateDate</div>
-                        </div>
-                        <div class="rvRight">
-                            <div class="rv_text">리뷰 내용... Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab id, eius quod explicabo doloribus maxime repellat! Totam aspernatur repellendus sint facilis exercitationem, illum ipsam sapiente voluptate corporis obcaecati sunt explicabo?</div>
+                            <div class="rv_text" th:text="${review.contents}">리뷰 내용... </div>
                             <div class="rv_img">첨부 사진...</div>
                         </div>
                     </div>

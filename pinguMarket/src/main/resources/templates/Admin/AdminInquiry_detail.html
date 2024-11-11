@@ -93,7 +93,7 @@
                                         <textarea class="writing-td-content-pre" id="writing-td-textarea" name="contents" th:text="${Q.csAnswer.contents}" required></textarea>
                                         <div class="btnboxs">
                                             <button type="submit" id="btn-updateRe" class="btn-style" th:attr="data-id=${Q.csAnswer.csAnswerId}">수정 하기</button>
-                                            <a id="btn-delete" class="btn-style" onclick="deleteA()">답변 삭제</a>
+                                            <a id="btn-delete" class="btn-style" onclick="deleteA(event)">답변 삭제</a>
                                             <!-- href="javascript:void(0);" -->
                                             <!-- th:data-uri="@{|/admin/cs/answerDelete/${Q.csAnswer.csAnswerId}|}" -->
                                         </div>
