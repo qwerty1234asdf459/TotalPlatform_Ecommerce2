@@ -12,10 +12,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.example.demo.ecommerce.Authuser.Authuser;
 import com.example.demo.ecommerce.Entity.PaymentDetail;
 import com.example.demo.ecommerce.Entity.Product;
 import com.example.demo.ecommerce.Entity.Review;
 import com.example.demo.ecommerce.Entity.User;
+import com.example.demo.ecommerce.LoginCheck.LoginCheck;
 import com.example.demo.ecommerce.PaymentDetail.PaymentDetailService;
 import com.example.demo.ecommerce.Product.ProductService;
 import com.example.demo.ecommerce.User.UserService;
@@ -34,14 +36,12 @@ public class ReviewController {
 	private final PaymentDetailService pds;
 	
 	
-//	@PreAuthorize("isAuthenticated()")
-//	@GetMapping("/product/{productId}/createreview")
+	@LoginCheck
 	@GetMapping("/reviewcreate/{productId}")
 	public String reviewCreate(Model model,
 			@PathVariable ("productId") Integer productId,
-			Principal principal) throws CanNotFoundException {
-		User u = this.us.getUser(1);
-		Product p = this.ps.getProduct(productId);
+			@Authuser User user) throws CanNotFoundException {
+		User u = this.us.getUser(user.getId());
 		
 		ReviewForm reviewForm = new ReviewForm();
 		model.addAttribute("user", u);
@@ -71,17 +71,17 @@ public class ReviewController {
 			
 
 	
-//	@PreAuthorize("isAuthenticated()")
+	@LoginCheck
 	@PostMapping("/reviewcreate/{productId}")
 	public String reviewCreate(Model model,
 			@PathVariable ("productId") Integer productId,
 			@Valid ReviewForm reviewForm, BindingResult bindingResult,
-			Principal principal) throws CanNotFoundException {
+			@Authuser User user) throws CanNotFoundException {
 //		Product p = this.ps.getProduct(productId);
 //		User u = this.us.getUser(principal.getName());
 		
 		Product p = this.ps.getProduct(productId);
-		User u = this.us.getUser(1);
+		User u = this.us.getUser(user.getId());
 		
 		if(bindingResult.hasErrors()) {
 			return "/Mypage/reviewform";
@@ -97,13 +97,13 @@ public class ReviewController {
 //		리뷰를하고 나서 어디로 리다이렉트 할지는 좀 생각을 해봐야 할 것 같음
 	}
 	
-//	@PreAuthorize("isAuthenticated()")
+	@LoginCheck
 	@GetMapping("/reviewmodify/{reviewId}")
-	public String reviewModify(Model model,
+	public String reviewModify(Model model, @Authuser User user,
 			@PathVariable ("reviewId") Integer reviewId,
 			ReviewForm reviewform) throws CanNotFoundException {
 		
-		User u = this.us.getUser(1);
+		User u = this.us.getUser(user.getId());
 		
 		try {
 			Review review = this.rs.getReviewModify(u.getUserId(), reviewId);
@@ -133,12 +133,11 @@ public class ReviewController {
 		
 	
 	
-//	@PreAuthorize("isAuthenticated()")
+	@LoginCheck
 	@PostMapping("/reviewmodify/{reviewId}")
 	public String reviewModify(Model model,
 			@PathVariable ("reviewId") Integer reviewId,
-			@Valid ReviewForm reviewForm, BindingResult bindingResult,
-			Principal principal) throws CanNotFoundException {
+			@Valid ReviewForm reviewForm, BindingResult bindingResult) throws CanNotFoundException {
 		
 		Review r = rs.getReview(reviewId);
 		
@@ -155,9 +154,16 @@ public class ReviewController {
 //		리뷰를 하고 나서 어디로 리다이렉트 할지는 좀 생각을 해봐야 할 것 같음
 	}
 	
+	@LoginCheck
 	@GetMapping("/reviewdelete/{reviewId}")
-	public String reviewDelete(@PathVariable("reviewId") Integer reviewId) throws CanNotFoundException {
-		Review r = rs.getReview(reviewId);
+	public String reviewDelete(@PathVariable("reviewId") Integer reviewId,
+			@Authuser User user) throws CanNotFoundException {
+		User u = this.us.getUser(user.getId());
+		Review r = this.rs.getReview(reviewId);
+		
+		if(u.getUserId().equals(r.getUser().getUserId())) {
+			return "redirect:/myreview";
+		}
 		this.rs.delete(r);
 //		리뷰 삭제
 		return "redirect:/myreview";

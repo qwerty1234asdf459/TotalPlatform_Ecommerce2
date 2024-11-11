@@ -11,6 +11,7 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.header.writers.frameoptions.XFrameOptionsHeaderWriter;
@@ -73,9 +74,9 @@ public class SecurityConfig {
 	// 
 	
 	@Bean
-	PasswordEncoder passwordEncoder() { //비밀번호 암,복호화
-		return new BCryptPasswordEncoder();
-	}
+	 public PasswordEncoder passwordEncoder() {
+        return PasswordEncoderFactories.createDelegatingPasswordEncoder();
+    }
 	@Bean
 	AuthenticationManager authenticationManager( //인증과 권한 부여 프로세스를 처리
 			AuthenticationConfiguration authenticationConfiguration) throws Exception {

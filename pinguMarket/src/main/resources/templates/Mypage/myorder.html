@@ -107,8 +107,7 @@
     <!-- 각 결제 내역 반복 -->
     <div class="contentListContainer" 
          th:each="payment, iterStat : ${paymentList}"
-         th:onclick="|location.href='@{/myorder/detail/{paymentId}(paymentId=${payment.paymentId})}'|"
-         th:if="${!paymentList.isEmpty()}">
+         th:onclick="|location.href='@{/myorder/detail/{paymentId}(paymentId=${payment.paymentId})}'|">
          
 
         <!-- 결제 정보 -->
