@@ -4,6 +4,8 @@ package com.example.demo.ecommerce.Product;
 
 
 import org.springframework.dao.InvalidDataAccessApiUsageException;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -39,21 +41,22 @@ public class ProductController {
     
 	
 //	---------------------------------------------장바구니----------------------------------------------------------------------------------------------
+    @LoginCheck
     @PostMapping("/product/addcart")
-   	public String addcart(@RequestParam("cart_count")Integer count,
-   			@RequestParam("product")Integer productId, Model model, @Authuser User user) throws CanNotFoundException, UserException {
-   		User u = this.us.getUser(user.getUserId()); // 유저정보 강제 입력(추후 principal.getName()으로 변경해야 함
+    public ResponseEntity<String> addcart(@RequestParam("cart_count")Integer count,
+   			@RequestParam("product")Integer productId, Model model, @Authuser User u) throws CanNotFoundException, UserException {
+   
    		Product p = this.ps.getProduct(productId);
    		try {
    			if(carts.cartOverlappingCheck(p, u)) {
    				this.carts.createCart(u, p, count);
    			}else {
-   				return "redirect:/product/"+Integer.toString(productId);
+   				return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("상품수량 부족");
    			}
    		} catch (Exception e) {
    			e.printStackTrace();
    		}
-   		return "redirect:/cart";
+   		return ResponseEntity.ok("성공");
    	}
 	
 	

@@ -21,7 +21,7 @@ public interface CsAnswerRepository extends JpaRepository<CsAnswer, Integer>{
 	
 	Optional<CsAnswer> findByCsAnswerId(Integer csAnswerId); //해당 csAnswerId이 있는지 체크
 	
-	//추가
+	//고객센터 1:1문의 > 관리자 답변 조회를 위해 추가
 	Optional<CsAnswer> findByCsQuestion(CsQuestion csQuestion);
 
 }

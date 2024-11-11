@@ -6,11 +6,13 @@ import java.util.stream.Collectors;
 import com.example.demo.ecommerce.Entity.Payment;
 import com.example.demo.ecommerce.Payment.PaymentDTO;
 
+import groovy.transform.builder.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
+@Builder
 public class MyOrderResponseDTO {
     private List<PaymentDTO> payments;
     

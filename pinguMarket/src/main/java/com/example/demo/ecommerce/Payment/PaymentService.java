@@ -37,7 +37,7 @@ public class PaymentService {
 		p.setDeliveryno("11111");
 		p.setOrderNo(OrderId);
 		p.setDeliveryState("상품 준비중");
-		
+
 		this.pr.save(p);
 		
 		return p;
@@ -98,7 +98,7 @@ public class PaymentService {
 	         return p;
 	      }
 	      else {
-	         throw new CanNotFoundException("데이터를 찾을 수 없습니다.");
+	         throw new CanNotFoundException("해당 기간의 결제내역이 없습니다.");
 	      }
 	   }
 	

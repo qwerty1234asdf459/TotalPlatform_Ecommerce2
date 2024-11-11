@@ -11,7 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -29,6 +29,7 @@ import com.example.demo.ecommerce.Email.EmailService;
 import com.example.demo.ecommerce.Entity.Coupon;
 import com.example.demo.ecommerce.Entity.Payment;
 import com.example.demo.ecommerce.Entity.User;
+import com.example.demo.ecommerce.LoginCheck.LoginCheck;
 import com.example.demo.ecommerce.Payment.PaymentService;
 import com.example.demo.ecommerce.Review.CanNotFoundException;
 import com.example.demo.ecommerce.User.EditPwForm;
@@ -52,43 +53,49 @@ public class MyPageController {
 	private final LmsCouponService lcs;
 	private final EmailService es;
 
-
+	@LoginCheck
 	@GetMapping("/myorder")
 	public String myOrderPage(@Authuser User user, Model model) throws CanNotFoundException {
 //		User u = this.us.getUser(principal.getName());
 		User u = this.us.getUser(user.getId());
 		// 임시용 user 1
-		
-		List<Payment> payment = this.ps.getPayment(u.getUserId());
-//		해당 사용자의 userId로 payment 테이블을 조회
-		
-		List<String> productNames = payment.stream()
-	            .map(ps::getFirstProductName)
-	            .toList();
-//		getPayment로 조회한 리스트를 바탕으로 첫 상품의 이름을 가져옴
-		
-		List<Integer> totalPrice = payment.stream()
-				.map(ps::getTotalPrice)
-				.toList();
-//		getPayment로 조회한 리스트를 바탕으로 해당 결제의 총 가격을 가져옴
-		
-		model.addAttribute("user", u);
-		model.addAttribute("paymentList", payment);
-		model.addAttribute("productNames", productNames);
-		model.addAttribute("totalprices", totalPrice);
-		return "Mypage/myorder";
+		try {
+			List<Payment> payment = this.ps.getPayment(u.getUserId());
+//			해당 사용자의 userId로 payment 테이블을 조회
+			
+			List<String> productNames = payment.stream()
+		            .map(ps::getFirstProductName)
+		            .toList();
+//			getPayment로 조회한 리스트를 바탕으로 첫 상품의 이름을 가져옴
+			
+			List<Integer> totalPrice = payment.stream()
+					.map(ps::getTotalPrice)
+					.toList();
+//			getPayment로 조회한 리스트를 바탕으로 해당 결제의 총 가격을 가져옴
+			
+			model.addAttribute("user", u);
+			model.addAttribute("paymentList", payment);
+			model.addAttribute("productNames", productNames);
+			model.addAttribute("totalprices", totalPrice);
+			return "Mypage/myorder";
+		} catch (CanNotFoundException e) {
+			// TODO: handle exception
+			return "redirect:/main";
+		}
+	
 		
 	}
 	
-	
+	@LoginCheck
 	@PostMapping("periodloading")
 	@ResponseBody
 	public ResponseEntity<MyOrderResponseDTO> periodLoading(@RequestParam("period") Integer period,
 			@Authuser User user) throws CanNotFoundException {
 	    User u = this.us.getUser(user.getId());
-	    
+	   
 	    List<Payment> payments = this.ps.getPaymentPeriod(u.getUserId(), period);
 //		user_id와 전송받은 period 파라미터를 이용해서 조회
+//	    이거 해당 기간에 상품내역 없으면 비동기로 예외 뜨니까 메세지 보내주면 좋을 것 같음
 	    
 	    List<String> productNames = payments.stream()
 	            .map(ps::getFirstProductName)
@@ -107,11 +114,12 @@ public class MyPageController {
 	}
 	
 
+	@LoginCheck
 	@GetMapping("/myorder/detail/{paymentId}")
 	public String myOrderDetailPage(Model model,
-			@PathVariable ("paymentId") Integer id, Principal principal) throws CanNotFoundException {
+			@PathVariable ("paymentId") Integer id, @Authuser User user) throws CanNotFoundException {
 //		User u = this.us.getUser(principal.getName());
-		User u = this.us.getUser(1);
+		User u = this.us.getUser(user.getId());
 		Payment p = this.ps.getPayment1(id);
 		
 		model.addAttribute("user", u);	
@@ -126,18 +134,17 @@ public class MyPageController {
 		
 	}
 	
-//	@PreAuthorize("isAuthenticated()")
+	@LoginCheck
 	@GetMapping("/myreview")
 	public String myReviewPage(Model model,
-			Principal principal) throws CanNotFoundException {
+			@Authuser User user) throws CanNotFoundException {
 //		User u = this.us.getUser(principal.getName());
-		User u = this.us.getUser(1);
+		User u = this.us.getUser(user.getId());
 	
 		model.addAttribute("user", u);		
 		return "Mypage/myreview";
 	}
 
-//	@PreAuthorize("isAuthenticated()")
 	@GetMapping("myPage")
 	public String myPage(Model model) throws CanNotFoundException {
 		
@@ -151,8 +158,9 @@ public class MyPageController {
 	@PostMapping("/pwcheck")
 	@ResponseBody
 	public Map<String, Boolean> pwCheck(@RequestParam("password") String password,
-	                                    Principal principal, HttpSession session) throws CanNotFoundException {
-	    User u = this.us.getUser(1);
+			@Authuser User user, HttpSession session) throws CanNotFoundException {
+	    User u = this.us.getUser(user.getId());
+	    System.out.println(u.getUserId());
 	    
 	    boolean pwChecked = this.us.pwCheck(password, u.getPw());
 //	    pwCheck 메서드를 활용해 pwChecked에 true false 값 저장
@@ -167,14 +175,14 @@ public class MyPageController {
 //	    data 반환
 	}
 	
-//	@PreAuthorize("isAuthenticated()")
+	@LoginCheck
 	@GetMapping("/usermodify") 
 	public String myInfoModifyPage(
-			Model model, Principal principal) throws CanNotFoundException  {
+			Model model, @Authuser User user) throws CanNotFoundException  {
 //		User user = this.us.getUser(principal.getName());
 //		로그인 생기면 위에걸로 수정
 		
-		User user = this.us.getUser(1);
+		User u = this.us.getUser(user.getId());
 		
 		UserModifyForm form = new UserModifyForm();
 	    form.setEmail1(user.getEmail().split("@")[0]);
@@ -187,21 +195,21 @@ public class MyPageController {
 //	    form에 현재 정보를 바로 가져오기 위한 코드
 		
 	    model.addAttribute("userModifyForm", form);
-	    model.addAttribute("user", user);
+	    model.addAttribute("user", u);
 		
 		return "Mypage/usermodify";
 	}
 
-//	@PreAuthorize("isAuthenticated()")
+	@LoginCheck
 	@PostMapping("/usermodify") 
 	public String myInfoModifyPage(
 			@Valid UserModifyForm userModifyForm, BindingResult bindingResult,
-			Model model, Principal principal) throws CanNotFoundException  {
+			Model model, @Authuser User user) throws CanNotFoundException  {
 		
 		
 //		User user = this.us.getUser(principal.getName());
 //		로그인 생기면 위에걸로 수정
-		User user = this.us.getUser(1);
+		User u = this.us.getUser(user.getId());
 		
 	    model.addAttribute("user", user);
 	    
@@ -223,7 +231,6 @@ public class MyPageController {
 		
 	}
 	
-	
 	@PostMapping("/sendcode")
 	public ResponseEntity<Map<String, String>> emailAuth(@RequestParam("email") String email) {
 		Map<String, String> response = new HashMap<>();
@@ -242,25 +249,25 @@ public class MyPageController {
 		}
 	}
 	
-//	@PreAuthorize("isAuthenticated()")	
+	@LoginCheck
 	@GetMapping("/mypage/editpw")
 	public String myPwModifyPage(EditPwForm editPwForm,
-			Model model, Principal principal) throws CanNotFoundException {
+			Model model, @Authuser User user) throws CanNotFoundException {
 			
-		User user = this.us.getUser(1);
+		User u = this.us.getUser(user.getId());
 		
 		model.addAttribute("editPwForm", editPwForm);
-		model.addAttribute("user", user);
+		model.addAttribute("user", u);
 		
 			return "mypage/MypageEditPw";
 		}
 	
-//	@PreAuthorize(value = "isAuthenticated()")
+	@LoginCheck
 	@PostMapping("/mypage/editpw")
-	public String myPwModifyPage(Model model, Principal principal,
+	public String myPwModifyPage(Model model, @Authuser User user,
 			@Valid EditPwForm editPwForm, BindingResult bindingResult) throws CanNotFoundException {
-		User user = this.us.getUser(1);
-		model.addAttribute("user", user);
+		User u = this.us.getUser(user.getId());
+		model.addAttribute("user", u);
 		
 		if(us.prePasswordCheck(user, editPwForm.getPrePassword())) {
             //System.out.println("비밀번호 같아용");
@@ -287,20 +294,20 @@ public class MyPageController {
     }
 	
 	
-//	@PreAuthorize("isAuthenticated()")	
+	@LoginCheck
 	@GetMapping("/mycoupon")
-	public String myCouponPage(Model model, Principal principal) throws CanNotFoundException {
+	public String myCouponPage(Model model, @Authuser User user) throws CanNotFoundException {
 		
-		User user = this.us.getUser(1);
+		User u = this.us.getUser(user.getId());
 		List<Coupon> coupon = this.cs.getCoupon(user.getUserId());
 //		userId로 쿠폰을 조회하되 useYn 값이 n인 경우만 가져옴
 		
-		model.addAttribute("user", user);
+		model.addAttribute("user", u);
 		model.addAttribute("couponList", coupon);
 		return "Mypage/mycoupon";
 	}
 	
-//	@PreAuthorize("isAuthenticated()")
+	@LoginCheck
 	@PostMapping("/mycoupon/inputcoupon")
 	public ResponseEntity<String> useCoupon(@RequestParam("code")String code)
 			throws CanNotFoundException,CouponOverlappingException {
@@ -316,23 +323,23 @@ public class MyPageController {
 		}
 	}
 	
-//	@PreAuthorize("isAuthenticated()")
+	@LoginCheck
 	@GetMapping("/signout")
-	public String singoutPage(Model model, Principal principal) throws CanNotFoundException {
-		User user = this.us.getUser(1);
+	public String singoutPage(Model model, @Authuser User user) throws CanNotFoundException {
+		User u = this.us.getUser(user.getId());
 		
-		model.addAttribute("user", user);
+		model.addAttribute("user", u);
 
 		return "Mypage/signout";
 	}
 	
-//	@PreAuthorize("isAuthenticated()")
+	@LoginCheck
 	@PostMapping("/signout") 
-	public String signoutPage(Principal principal) throws CanNotFoundException {
+	public String signoutPage(@Authuser User user) throws CanNotFoundException {
 		
-		User user = this.us.getUser(1);
+		User u = this.us.getUser(user.getId());
 		
-		us.userSignout(user, "y");
+		us.userSignout(u, "y");
 //		해당 사용자의 signoutYn 컬럼을 y로 변경
 		
 //		return "redirect:/user/logout";

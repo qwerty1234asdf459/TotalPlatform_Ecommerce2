@@ -1,10 +1,12 @@
-
 // ---------------------- 상품설명 / 상세정보 / 리뷰 클릭 시------------->
 const productRelateNav = document.querySelector(".productRelateNav");
 const productRelateCon = productRelateNav.querySelectorAll("li");
 
 const productExplainContainer = document.querySelector(".productExplainContainer");
 const productExplainCon = productExplainContainer.querySelectorAll("li");
+
+let proContainerHeight = productExplainContainer.offsetHeight;
+let RelateNavHeight = productRelateNav.offsetHeight;
 
 productRelateCon.forEach((item,index )=>{    
     item.addEventListener('click',function(e){
@@ -14,9 +16,13 @@ productRelateCon.forEach((item,index )=>{
             con.classList.remove("on");
         });
         productExplainCon[index].classList.add("on");
-        
     });
 });
+// ---------------------- 상품설명 / 상세정보 / 리뷰 클릭 시------------->
+const headerHeight = document.querySelector("header").offsetHeight;
+
+productRelateNav.style.top = (headerHeight+10)+"px";
+
 
 // ---------------------- 장바구니 추가 버튼 기능------------------------>
 const addCartBtn = document.querySelector(".cartInBtn");
@@ -48,16 +54,9 @@ addCartBtn.addEventListener('click',function(e){
 			console.error('Error: ',error);
 		})
 	
-	
-	
-    //document.getElementById('cart_count').value = document.querySelector('.count').textContent;
-   //document.getElementById('addCartForm').submit();
+//document.getElementById('cart_count').value = document.querySelector('.count').textContent;
+//document.getElementById('addCartForm').submit();
 });
-
-// ----------------------상품 금액 천단위 콤마찍기------------------------>
-// const sell_price = document.getElementById("sell_price"); //1개 가격
-
-// sell_price = sell_price.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
 
 
 // ---------------------- 상품 수량 선택 버튼 기능(토탈 금액 조정)---------->
@@ -103,6 +102,13 @@ if(countdown){
         }
     })
 }
+
+// ----------------------상품 금액 천단위 콤마찍기------------------------>
+
+
+
+
+
 
 //-------------------------리뷰 개수 세기-------------------------->
 const table = document.getElementsByClassName('rv_container').length;

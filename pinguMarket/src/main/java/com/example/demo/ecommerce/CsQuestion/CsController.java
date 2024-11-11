@@ -47,8 +47,8 @@ private final AdminNoticeService ans;
 	                       @RequestParam(value="chk", defaultValue="on") String chk) throws UserException {
 	 
 	    // 1:1 문의 페이징
-	    EzenPaging ezenPaging = new EzenPaging(page1, 10, ar.getQuestionCountByAll(user.getUserId()), 5); // 유저정보 강제 입력 1 대신 (principal.getName() 넣기
-	    List<CsQuestion> questionList = ar.getUserByKeyword(user.getUserId(), ezenPaging.getStartNo(), ezenPaging.getPageSize()); // 유저정보 강제 입력 1 대신 (principal.getName() 넣기
+	    EzenPaging ezenPaging = new EzenPaging(page1, 10, ar.getQuestionCountByAll(user.getUserId()), 5);
+	    List<CsQuestion> questionList = ar.getUserByKeyword(user.getUserId(), ezenPaging.getStartNo(), ezenPaging.getPageSize());
 
 	
 	    // 공지사항 페이징
@@ -72,7 +72,7 @@ private final AdminNoticeService ans;
 	@GetMapping(value = "/csc/detail/{id}") // 관리자 답변 달려있을 때
 	public String detail(Model model, @PathVariable("id") Integer id, CsQuestionForm csquestionForm) throws UserException {
 		CsQuestion q = this.qr.getQuestion(id);
-		CsAnswer a = this.as.getCsAnswer(id);
+		CsAnswer a = this.as.getAdminCsAnswer(id); // 관리자 답변 >CsQuestion의 id값 불러옴
 		
 		model.addAttribute("question",  q);
 		model.addAttribute("answer", a);
@@ -97,7 +97,7 @@ private final AdminNoticeService ans;
 	@GetMapping("/csc/form")
 	public String csquestionForm(CsQuestionForm csquestionForm, Model model, @Authuser User user) {
 		
-		String userId = user.getId(); //principal.getName();으로 바꿔주기
+		String userId = user.getId();
 		List<Payment> payList = this.ar.getPaymentList(userId);
 		model.addAttribute("payList", payList);
 		
@@ -113,19 +113,19 @@ private final AdminNoticeService ans;
 			if(bindingResult.hasErrors()) {				
 				return "Cs/cscForm";
 			}
-			this.qr.create(csquestionForm.getOrderNo(), csquestionForm.getTitle(), csquestionForm.getContents(), user.getUserId()); // 유저정보 강제 입력 1 대신 (principal.getName() 넣기			
+			this.qr.create(csquestionForm.getOrderNo(), csquestionForm.getTitle(), csquestionForm.getContents(), user.getUserId());			
 			return "redirect:/csc";
 		}
 		
 	//   -----------------------------------------------고객센터 > 1:1문의 수정-----------------------------------------------
 		@LoginCheck
 		@GetMapping("/csc/modify/{id}")
-		public String questionModify(Model model, CsQuestionForm csquestionForm, @PathVariable("id") Integer id) throws UserException {
+		public String questionModify(Model model, CsQuestionForm csquestionForm, @PathVariable("id") Integer id, @Authuser User user) throws UserException {
 			
 			CsQuestion q = this.qr.getQuestion(id);
 			model.addAttribute("question", q);
 			
-			String userId = "test"; //test말고 principal.getName();으로 수정 필요
+			String userId = user.getId();
 			List<Payment> payList = this.ar.getPaymentList(userId);
 			model.addAttribute("payList", payList);
 			
@@ -161,6 +161,7 @@ private final AdminNoticeService ans;
 		
 		
 		// -----------------------------------------------고객센터 > 공지사항 > 상세페이지 조회-----------------------------------------------
+		@LoginCheck
 		@GetMapping(value ="/csc/notice/{id}")
 		public String noticeDetail(Model model, @PathVariable("id") Integer noticeId, AdminNoticeForm adminNoticeForm) throws UserException {
 			

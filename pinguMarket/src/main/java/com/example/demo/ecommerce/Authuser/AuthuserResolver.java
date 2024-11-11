@@ -47,7 +47,6 @@ public class AuthuserResolver implements HandlerMethodArgumentResolver {
 	    
 	
 	    
-	    
 	    @Override
 	    public User resolveArgument(MethodParameter parameter, ModelAndViewContainer mavContainer, NativeWebRequest webRequest, WebDataBinderFactory binderFactory) throws Exception {
 	        

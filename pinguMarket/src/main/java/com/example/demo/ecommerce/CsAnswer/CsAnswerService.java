@@ -38,6 +38,15 @@ public class CsAnswerService {
 		return this.car.findById(id).get();
 	}
 	
+//	------------------고객센터 > 1:1문의 > 관리자 답변 조회-------------------------
+	public CsAnswer getAdminCsAnswer(Integer id) {
+		
+ 		CsQuestion q = this.qr.findById(id).get(); // CsQuestion을 객체로 받아옴
+		
+		return this.car.findByCsQuestion(q).get(); // 
+	}
+	
+	
 	//---------------	답변(신규) 생성-----------------------------
 	public CsAnswer returnCreate(String adCode, CsQuestion q, String title, String contents) throws UserException {
 		CsAnswer csAnswer = new CsAnswer();
