@@ -31,9 +31,11 @@ import com.example.demo.ecommerce.Entity.Admin;
 import com.example.demo.ecommerce.Entity.CsAnswer;
 import com.example.demo.ecommerce.Entity.CsQuestion;
 import com.example.demo.ecommerce.Entity.Notice;
+import com.example.demo.ecommerce.Paging.EzenPaging;
 import com.example.demo.ecommerce.Review.CanNotFoundException;
 
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
@@ -50,9 +52,19 @@ public class AdminInquiryController {
 	//---------------관리자페이지 > 문의 관리(리스트)----------------------------------
 //	@PreAuthorize("isAuthenticated()") // 로그인 한 경우에만 요청 처리
 	@GetMapping("/admin/cs") 
-	public String Inquiry(Model model) {
-        List<CsQuestion> Q = this.cqr.findAll();
+	public String Inquiry(Model model, @RequestParam(value="page", defaultValue="0") int page,
+			@RequestParam(value = "kw", defaultValue = "") String kw,
+			@RequestParam(value = "kwType", defaultValue = "") String kwType,
+			HttpSession session) {
+		
+		//EzenPaging ezenPaging = new EzenPaging(현재 페이지 번호, 페이지당 글 갯수, 총 글 갯수, 페이징 버튼 갯수)
+		EzenPaging ezenPaging = new EzenPaging(page, 10, as.getCsQuestionCountByKeyword(kwType, kw), 5);
+        List<CsQuestion> Q = this.as.getCsQuetionByKeyword(kwType,kw,ezenPaging.getStartNo(), ezenPaging.getPageSize());
+        
         model.addAttribute("Q", Q);
+        model.addAttribute("page",  ezenPaging);
+        model.addAttribute("kw", kw);
+        model.addAttribute("kwType", kwType);
                           //" "안에 있는 값이 html에서 인식할 텍스트
         return "/Admin/AdminInquiry";  
 	}
