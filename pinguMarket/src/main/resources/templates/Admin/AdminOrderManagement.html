@@ -88,7 +88,7 @@
                 </div>
             </section>
             <section class="list-box">
-                <div class="title">총 <span id="totalResult"></span>개의 주문 목록 | <span id="result"></span>개 선택 됨</div>
+                <div class="title">총 <span id="totalResult"></span>개의 주문 목록 | <span id="selectResult"></span>개 선택 됨</div>
                 <div>
                     <span>주문 상태 변경 버튼 :</span>
                     <button type="button" class="quick-select-button">배송중</button>
@@ -115,13 +115,13 @@
                             <tbody>
                                 <tr class="Rows" th:each="PayList : ${PayList}">
                                     <td><span class="check-item"><input type="checkbox" th:id="'Select'+${PayList.orderNo}" name="Select" class="Select" onclick='getCheckedCnt()'></span></td>
-                                    <!-- th:id="'Select'+${PayList.orderNo}" 수정 필요해 보임 -->
                                     <td th:text="${PayList.orderNo}"></td>
                                     <td th:text="${PayList.createDate}"></td>
                                     <td th:text="|${PayList.paymentState} ${PayList.deliveryState}|"></td>
                                     <td th:text="${PayList.user.userId}"></td>
                                     <td th:text="${PayList.deliveryno}"></td>
-                                    <td id="openModal" class="drop"><i class="fa-solid fa-chevron-down"></i></td>
+                                    <td th:id="'openModal'+${PayList.paymentId}" class="drop" th:value="${PayList.paymentId}"><i class="fa-solid fa-chevron-down"></i></td>
+                                    
                                 </tr>
                             </tbody>
                         </table>

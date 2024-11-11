@@ -73,11 +73,11 @@ button:hover, .selectDel:hover{
 #columnBox > span { display: inline-block; 
                     padding-right: 10px;}
 #columnBox > span:nth-child(1) { width: 100px; } /*선택*/
-#columnBox > span:nth-child(2) { width: 200px; } /*번호*/
-#columnBox > span:nth-child(3) { width: 300px; } /*등록날짜*/
+#columnBox > span:nth-child(2) { width: 100px; } /*번호*/
+#columnBox > span:nth-child(3) { width: 230px; } /*등록날짜*/
 #columnBox > span:nth-child(4) { width: 200px; } /*ID*/
-#columnBox > span:nth-child(5) { width: 400px; } /*제목*/
-#columnBox > span:nth-child(6) { width: 150px; }/*답변여부*/
+#columnBox > span:nth-child(5) { width: 600px; } /*제목*/
+#columnBox > span:nth-child(6) { width: 150px; } /*답변여부*/
 
 .Rows {
     padding: 14px;
@@ -90,9 +90,9 @@ button:hover, .selectDel:hover{
     display: inline-block; 
     padding-right: 10px;
 }
-.Rows > span:nth-child(1) {width : 100px;} /*선택*/
-.Rows > span { width: 200px; }/*번호*/
-.list_updateDate { width: 300px; }/*등록날짜*/
+.Rows > span { width: 100px; }/*선택*/
+.list_num{width: 100px;}/*번호*/
+.list_updateDate { width: 230px; }/*등록날짜*/
 .list_userId { width: 200px; }/*ID*/
 .list_title { width: 400px; }/*제목*/
 .list_anwerYN { width: 150px; }/*답변여부*/

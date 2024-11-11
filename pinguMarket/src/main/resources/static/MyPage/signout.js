@@ -5,7 +5,7 @@ let pwBtn = document.querySelector('#pwCheckBtn');
     const password = document.getElementById('password').value; // 입력한 값을 password로 저장
     const csrfToken = document.getElementById('_csrf').value;
     
-    fetch('http://localhost:8080/pwcheck', { // http://localhost:8080/pwcheck에 요청을 보냄
+    fetch('http://localhost:8081/pwcheck', { // http://localhost:8080/pwcheck에 요청을 보냄
         method: 'POST', // post 형식
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded', // 컨텐츠 타입 정해주기 솔직히 이거 뭔지 잘 모르겠는데 예제에 있던거 그냥 넣음

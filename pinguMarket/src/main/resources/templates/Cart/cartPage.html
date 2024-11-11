@@ -51,6 +51,7 @@
                                     </div>
                                     <div class="productPrice">
                                         <p th:text="|${#numbers.formatInteger(cart.product.price, 0, 'COMMA')}원|"></p>
+                                        <p th:if="${cart.product.amount < 10}" id="productAmount" th:text="남은+' '+수량+':'+' '+${cart.product.amount}"></p>
                                     </div>
                                     <div class="productCount">
                                         <div class="count minusBtn"><i class="fa-solid fa-minus"></i></div>

@@ -1,9 +1,8 @@
 package com.example.demo.ecommerce.Payment;
 
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,8 +15,10 @@ import com.example.demo.ecommerce.Coupon.CouponService;
 import com.example.demo.ecommerce.Entity.Cart;
 import com.example.demo.ecommerce.Entity.Coupon;
 import com.example.demo.ecommerce.Entity.Payment;
+import com.example.demo.ecommerce.Entity.Product;
 import com.example.demo.ecommerce.Entity.User;
 import com.example.demo.ecommerce.PaymentDetail.PaymentDetailService;
+import com.example.demo.ecommerce.Product.ProductService;
 import com.example.demo.ecommerce.User.UserService;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -33,6 +34,7 @@ public class PaymentController {
 	private final CartService cartService;
 	private final PaymentService paymentService;
 	private final PaymentDetailService paymentDetailService;
+	private final ProductService productService;
 	
 	@GetMapping("/apitest")
 	public String Apitest() {
@@ -40,6 +42,7 @@ public class PaymentController {
 	}
 
 
+	
 	///////////////////////////////////////////////////////////////////////////////
 	@GetMapping("/payment")
 	public String payment(Model model, @RequestParam("cartData")String cartData
@@ -91,5 +94,22 @@ public class PaymentController {
 		return ResponseEntity.ok("주문 생성");
 	}
 	
+	@PostMapping("/paymentAmountCheck")
+	public ResponseEntity<String> AmountCheck(@RequestParam("cartData")String cartData) throws Exception{
+		List<String> cartIdList = new ObjectMapper().readValue(cartData, new TypeReference<List<String>>() {});
+		List<Cart> cartList = this.cartService.getCartByList(cartIdList);
+	
+		for(int i = 0 ; i < cartList.size(); i++) {
+			Product p = cartList.get(i).getProduct();
+			Integer amount = cartList.get(i).getProductCount();
+			System.out.println(p.getName());
+			System.out.println(p.getAmount());
+			System.out.println(amount);
+			if(p.getAmount()-amount<0) {
+				return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("상품수량이 부족합니다.");
+			}	
+		}
+		return ResponseEntity.ok("주문 가능");
+	}
 	
 }

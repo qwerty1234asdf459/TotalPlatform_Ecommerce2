@@ -21,10 +21,37 @@ productRelateCon.forEach((item,index )=>{
 // ---------------------- 장바구니 추가 버튼 기능------------------------>
 const addCartBtn = document.querySelector(".cartInBtn");
 
-addCartBtn.addEventListener('click', function() {
-    document.getElementById('cart_count').value = count.textContent;
-    console.log(document.querySelector('.count').textContent);
-    document.getElementById('addCartForm').submit();
+addCartBtn.addEventListener('click',function(e){
+		e.preventDefault();
+		fetch("http://localhost:8081/product/addcart",{
+			method: 'POST',
+			headers: {
+    			"Content-Type": 'application/x-www-form-urlencoded',
+    				},
+			body : new URLSearchParams({
+				cart_count:document.querySelector('.count').textContent,
+				product:document.getElementById('product').value
+				})
+		})
+		.then(response => {
+			if(response.ok){
+				if (confirm("장바구니에 상품을 추가했습니다. 바로 확인하시겠습니까?")) {
+            		location.href ="http://localhost:8081/cart";
+       			 }
+			}else{
+				alert("이미 장바구니에 등록된 상품 입니다.");
+				console.error(response);
+			}
+		})
+		.catch(error =>{
+			alert("연결에 실패하였습니다");
+			console.error('Error: ',error);
+		})
+	
+	
+	
+    //document.getElementById('cart_count').value = document.querySelector('.count').textContent;
+   //document.getElementById('addCartForm').submit();
 });
 
 // ----------------------상품 금액 천단위 콤마찍기------------------------>

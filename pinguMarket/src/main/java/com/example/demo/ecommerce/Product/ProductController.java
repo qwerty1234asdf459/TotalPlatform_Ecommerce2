@@ -2,6 +2,7 @@ package com.example.demo.ecommerce.Product;
 
 
 
+
 import org.springframework.dao.InvalidDataAccessApiUsageException;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -47,12 +48,12 @@ public class ProductController {
 			if(carts.cartOverlappingCheck(p, u)) {
 				this.carts.createCart(u, p, count);
 			}else {
-				return "redirect:/product/"+Integer.toString(productId);
+				return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("이미 장바구니에 등록되어있는 상품 입니다.");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return "redirect:/cart";
+		return ResponseEntity.ok("장바구니에 등록되었습니다.");
 	}
 	
 	

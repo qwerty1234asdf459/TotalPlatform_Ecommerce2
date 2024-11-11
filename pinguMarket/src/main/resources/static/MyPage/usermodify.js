@@ -12,7 +12,7 @@
 			
 			const email = document.getElementById('email').value;
 			
-			fetch('http://localhost:8080/sendcode', {
+			fetch('http://localhost:8081/sendcode', {
 				method : 'POST',
 				headers : {
 					'Content-Type': 'application/x-www-form-urlencoded',

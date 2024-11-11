@@ -67,3 +67,9 @@
 		.deliveryOpenBtn{
 			width: 100px;
 		}
+		#detailsContainer{
+			margin-top: 1.5rem;
+		}
+		.detailsItem{
+			margin: 0.5rem 0;
+		}
