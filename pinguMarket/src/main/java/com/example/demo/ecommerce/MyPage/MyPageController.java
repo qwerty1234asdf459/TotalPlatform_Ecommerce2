@@ -22,6 +22,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.example.demo.LoginCheck.LoginCheck;
+import com.example.demo.ecommerce.Authuser.Authuser;
 import com.example.demo.ecommerce.Coupon.CouponService;
 import com.example.demo.ecommerce.Email.EmailService;
 import com.example.demo.ecommerce.Entity.Coupon;
@@ -50,11 +52,11 @@ public class MyPageController {
 	private final LmsCouponService lcs;
 	private final EmailService es;
 
-//	@PreAuthorize("isAuthenticated()")
+
 	@GetMapping("/myorder")
-	public String myOrderPage(Model model, Principal principal) throws CanNotFoundException {
+	public String myOrderPage(@Authuser User user, Model model) throws CanNotFoundException {
 //		User u = this.us.getUser(principal.getName());
-		User u = this.us.getUser(1);
+		User u = this.us.getUser(user.getId());
 		// 임시용 user 1
 		
 		List<Payment> payment = this.ps.getPayment(u.getUserId());
@@ -78,11 +80,12 @@ public class MyPageController {
 		
 	}
 	
+	
 	@PostMapping("periodloading")
 	@ResponseBody
 	public ResponseEntity<MyOrderResponseDTO> periodLoading(@RequestParam("period") Integer period,
-	        Principal principal) throws CanNotFoundException {
-	    User u = this.us.getUser(1);
+			@Authuser User user) throws CanNotFoundException {
+	    User u = this.us.getUser(user.getId());
 	    
 	    List<Payment> payments = this.ps.getPaymentPeriod(u.getUserId(), period);
 //		user_id와 전송받은 period 파라미터를 이용해서 조회
@@ -98,11 +101,12 @@ public class MyPageController {
 //		getPaymentPeriod로 조회한 리스트를 바탕으로 해당 결제의 총 가격을 가져옴
 	    MyOrderResponseDTO responseDTO = new MyOrderResponseDTO(payments, productNames, totalPrices);
 //		responseDTO에 각 값들을 저장
+	    System.out.println(responseDTO);
 	    return ResponseEntity.ok(responseDTO);
 //		문제 없으면 responseDTO 반환
 	}
 	
-//	@PreAuthorize("isAuthenticated()")	
+
 	@GetMapping("/myorder/detail/{paymentId}")
 	public String myOrderDetailPage(Model model,
 			@PathVariable ("paymentId") Integer id, Principal principal) throws CanNotFoundException {

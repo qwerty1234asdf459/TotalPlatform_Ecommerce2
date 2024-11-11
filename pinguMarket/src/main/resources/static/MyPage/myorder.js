@@ -32,8 +32,38 @@
 	let trackingData = JSON.parse(data.trackingData);
     if (trackingData.status === false) {
       alert(trackingData.msg);
-    } else {
-      alert("커밋용");
+    }else if(trackingData.result === 'N'){
+	alert("해당 운송장은 배송정보 조회 결과값이 N입니다.");
+} else{
+	console.log(trackingData);
+      const resultDiv = document.getElementById('deliveryStatusResult');
+                    resultDiv.innerHTML = `
+                        <h2>배송 상태</h2>
+                        <p>운송장 번호: ${trackingData.invoiceNo}</p>
+                        <p>배송사 : ${code}</p>
+                        <p>배송 상태: ${trackingData.level}</p>
+                    `;
+      const detailsContainer = document.createElement('div');
+      detailsContainer.id = 'detailsContainer';
+      resultDiv.appendChild(detailsContainer);
+      
+      trackingData.trackingDetails.forEach((trackingDetail) =>{
+	    const detailsItem = document.createElement('div');
+        detailsItem.classList.add('detailsItem');
+        
+        const deliveryDate = new Date(trackingDetail.timeString);
+        const formattedDate1 = printDate(deliveryDate);
+        
+        detailsItem.innerHTML = `
+       <div class="deliveryWhere"><p> 위치 : ${trackingDetail.where}</p></div>
+       <div class="deliveryKind"><p> 상태 : ${trackingDetail.kind}</p></div>
+       <div class="deliveryDate"><span>${formattedDate1}</span></div>
+       
+
+        `;
+        detailsContainer.appendChild(detailsItem);
+});
+      
     }
   })
   .catch(error => {
@@ -71,7 +101,7 @@
          const period = e.target.getAttribute("value");
 			
 			
-			fetch('http://localhost:8080/periodloading', {
+			fetch('http://localhost:8081/periodloading', {
     method: 'POST',
     headers: {
         'Content-Type': 'application/x-www-form-urlencoded',

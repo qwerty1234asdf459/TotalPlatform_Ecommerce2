@@ -65,7 +65,7 @@
                     
                     <div class="deliveryModal">
         				<div class="deliveryModalBody">
-				              <form>
+				              <form action="https://info.sweettracker.co.kr/tracking/1" method="post">
             <div class="form-group">
               <label for="t_code">택배사 코드</label>
               <input type="text" class="form-control" name="t_code" id="t_code" placeholder="택배사 코드">
@@ -76,6 +76,9 @@
             </div>
             <button type="submit" id="deliveryBtn">조회하기</button>
         </form>
+        <div id="deliveryStatusResult" class="delivery-status-result">
+            <!-- 배송 상태 결과 표시 영역 -->
+        </div>
                     <button class="modalCloseBtn">닫기</button>
         				</div>
    				 </div>
@@ -104,7 +107,8 @@
     <!-- 각 결제 내역 반복 -->
     <div class="contentListContainer" 
          th:each="payment, iterStat : ${paymentList}"
-         th:onclick="|location.href='@{/myorder/detail/{paymentId}(paymentId=${payment.paymentId})}'|">
+         th:onclick="|location.href='@{/myorder/detail/{paymentId}(paymentId=${payment.paymentId})}'|"
+         th:if="${!paymentList.isEmpty()}">
          
 
         <!-- 결제 정보 -->
