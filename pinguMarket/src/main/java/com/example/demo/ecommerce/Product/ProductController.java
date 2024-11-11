@@ -40,21 +40,21 @@ public class ProductController {
 	
 //	---------------------------------------------장바구니----------------------------------------------------------------------------------------------
     @PostMapping("/product/addcart")
-	public String addcart(@RequestParam("cart_count")Integer count,
-			@RequestParam("product")Integer productId, Model model, @Authuser User user) throws CanNotFoundException, UserException {
-		User u = this.us.getUser(user.getUserId()); // 유저정보 강제 입력(추후 principal.getName()으로 변경해야 함
-		Product p = this.ps.getProduct(productId);
-		try {
-			if(carts.cartOverlappingCheck(p, u)) {
-				this.carts.createCart(u, p, count);
-			}else {
-				return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("이미 장바구니에 등록되어있는 상품 입니다.");
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return ResponseEntity.ok("장바구니에 등록되었습니다.");
-	}
+   	public String addcart(@RequestParam("cart_count")Integer count,
+   			@RequestParam("product")Integer productId, Model model, @Authuser User user) throws CanNotFoundException, UserException {
+   		User u = this.us.getUser(user.getUserId()); // 유저정보 강제 입력(추후 principal.getName()으로 변경해야 함
+   		Product p = this.ps.getProduct(productId);
+   		try {
+   			if(carts.cartOverlappingCheck(p, u)) {
+   				this.carts.createCart(u, p, count);
+   			}else {
+   				return "redirect:/product/"+Integer.toString(productId);
+   			}
+   		} catch (Exception e) {
+   			e.printStackTrace();
+   		}
+   		return "redirect:/cart";
+   	}
 	
 	
     @LoginCheck

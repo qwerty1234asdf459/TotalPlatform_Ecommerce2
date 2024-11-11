@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.example.demo.LoginCheck.LoginCheck;
+
 import com.example.demo.ecommerce.Authuser.Authuser;
 import com.example.demo.ecommerce.Coupon.CouponService;
 import com.example.demo.ecommerce.Email.EmailService;
