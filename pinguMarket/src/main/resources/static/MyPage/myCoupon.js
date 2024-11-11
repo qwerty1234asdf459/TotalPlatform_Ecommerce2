@@ -13,7 +13,7 @@ const cif = document.getElementById("couponInputForm");
 	cif.addEventListener('submit',function(e){
 		e.preventDefault();
 			
-		const code = document.getElementById('code').value;
+		const code = document.getElementById('codeInput').value;
 			
 		fetch("http://localhost:8080/mycoupon/inputcoupon",{
 			method: 'POST',

@@ -13,18 +13,19 @@ public class PaymentInfoDetails {
     // 결제 기본 정보
     private String paymentKey;      // 토스페이먼츠 고유 결제 키
     private String orderId;         // 주문 고유 번호
-    private Long amount;            // 결제 금액
+    private Long totalAmount;            // 결제 금액
     private String currency;        // 통화 (기본 KRW)
     // 결제 방법 정보
-    private String paymentMethod;   // 결제 수단 (카드, 계좌이체 등)
+    private String method;   // 결제 수단 (카드, 계좌이체 등)
     private String status;          // 결제 상태 (DONE, CANCELED 등)
     // 카드 정보 (카드 결제 시)
-    private CardInfo cardInfo;
+    private CardInfo card;
     private EasyPay easyPay;
     
     @Getter
     @Setter
     public static class CardInfo {
+    	private Long amount;
         private String issuerCode;      // 카드사 코드
         private String cardType;        // 카드 타입 (신용/체크)
         private String bin;             // 카드 번호 앞 6자리
@@ -35,13 +36,7 @@ public class PaymentInfoDetails {
     @Setter
     public static class EasyPay {
         private Long amount;   // easyPay 안의 amount 필드
-        public Long getAmount() {
-            return amount;
-        }
-    }
-    
-    public Long getAmount() {
-        return easyPay != null ? easyPay.getAmount() : null;  // easyPay 객체에서 amount 추출
+        
     }
     
     // JSON 파싱 메서드

@@ -114,8 +114,10 @@ function priceCalculate(){
 
 priceCalculate();
 
-// **********************결제하기 버튼 눌렀을때 이벤트(결제정보를 DB에 저장시키기 위한 함수)********************************
+// **********************결제하기 버튼 눌렀을때 이벤트(결제정보를 DB에 저장시키기 위한 함수)********************************/
 
+
+/////////////////////////랜덤한 4자리 알파벳을 만들기 위한 함수//////////////////////////////
 const random = (length = 4) => {
   const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
   let str = '';
@@ -125,28 +127,19 @@ const random = (length = 4) => {
   return str;
 };
 
-let orderId = random()+new Date().getTime();
+let orderId = random()+new Date().getTime(); // 랜덤 알파벳 + 오늘 날짜 = 주문번호
+
+
+///////////////////////////주문한 상품 목록중 맨위에 있는 상품이름///////////////////////////////
 
 const titleList = document.querySelectorAll(".productName");
 	const nameArr = new Array;
 	titleList.forEach((name)=>{
 		nameArr.push(name.textContent);
 	})
-
-var clientKey = 'test_ck_26DlbXAaV0MOP52Gyd6KrqY50Q9R';
-    var tossPayments = TossPayments(clientKey);
-    function requestPayment() {
-        tossPayments.requestPayment('카드', {
-            amount: totalPrice,
-            orderId: orderId,
-            orderName: nameArr[0]+" 외 "+(nameArr.length-1)+"건",
-            customerName: '유저1',
-            successUrl: window.location.origin + '/success',
-            failUrl: window.location.origin + '/fail',
-        });
-    }
-
-const psf = document.getElementById("paymentSubmitForm");
+	
+///////////////////////////////////////////////////////////
+const psf = document.getElementById("paymentSubmit");
 	psf.addEventListener('click',function(e){
 		e.preventDefault();
 			
@@ -158,23 +151,28 @@ const psf = document.getElementById("paymentSubmitForm");
 			cartArr.push(cart.value);
 			console.log(cart.value);
 		})
-		document.getElementById("paymentAddress").value = document.getElementById("adressTextArea").value
-												+" "+document.getElementById("adressTextArea2").value;
-		document.getElementById("paymentCoupon").value = couponSelect.options[couponSelect.selectedIndex].id
-		document.getElementById("paymentRequest").value = delRequest.value
-		document.getElementById("cartArr").value = JSON.stringify(cartArr);
-		document.getElementById("orderId").value = orderId;
+		//document.getElementById("paymentAddress").value = document.getElementById("adressTextArea").value+" "+document.getElementById("adressTextArea2").value;
+		////document.getElementById("paymentCoupon").value = couponSelect.options[couponSelect.selectedIndex].id
+		//document.getElementById("paymentRequest").value = delRequest.value
+		//document.getElementById("cartArr").value = JSON.stringify(cartArr);
+		//document.getElementById("orderId").value = orderId;
 			
 		fetch("http://localhost:8080/payment",{
 			method: 'POST',
 			headers: {
     			"Content-Type": 'application/x-www-form-urlencoded',
     				},
-			body : new URLSearchParams({code:code})
+			body : new URLSearchParams({
+				address:document.getElementById("adressTextArea").value+" "+document.getElementById("adressTextArea2").value,
+				couponId:couponSelect.options[couponSelect.selectedIndex].id,
+				cartData:JSON.stringify(cartArr),
+				delRequest:delRequest.value,
+				orderId:orderId
+				})
 		})
 		.then(response => {
 			if(response.ok){
-				requestPayment()
+				 handlePayment();
 			}else{
 				alert("결제에 실패했습니다.");
 				console.error(response);
@@ -186,8 +184,45 @@ const psf = document.getElementById("paymentSubmitForm");
 		})
 	})
 
+
+
+function requestTossPayment(orderId, totalPrice) {
+    return new Promise((resolve, reject) => {
+        const tossPayments = TossPayments('test_ck_26DlbXAaV0MOP52Gyd6KrqY50Q9R');
+        tossPayments.requestPayment('카드', {
+            amount: totalPrice,
+            orderId: orderId,
+            orderName: '주문 상품',
+            successUrl: window.location.origin + '/success',
+            failUrl: window.location.origin + '/fail',
+            // 결제창에서 사용자가 취소했을 때 호출되는 콜백 함수
+            onCancel() {
+                reject(new Error('사용자에 의해 결제가 취소되었습니다.'));
+                // 추가적으로 실행 중단 로직이나 UI 업데이트 등을 여기에 작성할 수 있음
+                console.log('결제가');
+                alert('사용자가 결제를 취소했습니다.');
+            }
+        });
+    });
+}
+    
 ///////////////////////////////////////////////////
-
+async function handlePayment() {
+    try {
+        const response = await requestTossPayment(orderId, totalPrice);
+        console.log("결제 성공:", response);
+    } catch (error) {
+        console.error("결제 실패 또는 취소:", error.message);
+        alert("결제가 실패하거나 취소되었습니다.");
+    }
+}
+// 이벤트 핸들러
+paymentSubmit.addEventListener('click', async function(e) {
+    e.preventDefault();
+    try {
+        await handlePayment();
+    } catch (error) {
+        console.error("결제 처리 중 오류 발생:", error.message);
+    }
+});
 	
-
-paymentSubmit.addEventListener("click",requestPayment);
