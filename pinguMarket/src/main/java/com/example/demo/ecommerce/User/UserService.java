@@ -78,4 +78,20 @@ public class UserService {
 		
 	}
 	
+//////패스워드 수정 관련 메소드///////
+  ////////////////비밀번호가 같은지 체크하는 메소드////////////////////
+  public boolean prePasswordCheck(User user, String password) throws CanNotFoundException {
+      if(passwordEncoder.matches(password, user.getPw())) {
+          return true;
+      }
+      else {
+          return false;
+      }
+  }
+  ////////////////////비밀번호 수정////////////////////
+  public void changePassword(User user, String password) throws CanNotFoundException {
+      user.setPw(passwordEncoder.encode(password));
+      this.ur.save(user);
+  }
+	
 }

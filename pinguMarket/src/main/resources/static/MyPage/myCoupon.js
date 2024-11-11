@@ -1,7 +1,6 @@
 const couponModal = document.querySelector('.couponModal');
 const openBtn = document.querySelector('.openBtn');
 const modalCloseBtn = document.querySelector('.modalCloseBtn');
-console.log(modalCloseBtn);
 openBtn.addEventListener("click", ()=>{
     couponModal.style.display="flex";
 	});
