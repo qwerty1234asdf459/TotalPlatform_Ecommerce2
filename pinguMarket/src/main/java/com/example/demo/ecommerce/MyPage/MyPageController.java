@@ -309,13 +309,12 @@ public class MyPageController {
 	
 	@LoginCheck
 	@PostMapping("/mycoupon/inputcoupon")
-	public ResponseEntity<String> useCoupon(@RequestParam("code")String code)
+	public ResponseEntity<String> useCoupon(@Authuser User user, @RequestParam("code")String code)
 			throws CanNotFoundException,CouponOverlappingException {
 		
-		if(lcs.existCoupon(code) && !lcs.useCheck(code)) {
-			cs.createCoupon(code);
-			lcs.useCoupon(code);
-			System.out.println(lcs.existCoupon(code)+","+lcs.useCheck(code));
+		if(lcs.existCoupon(code) && !lcs.useCheck(code)) {//lms쪽에 코드값이 유효하고, 쿠폰이 미사용 상태일때
+			cs.createCoupon(user,code);
+			lcs.useCoupon(code); // 쿠폰이 정상적으로 입력되면 LMS쪽 쿠폰을 사용 완료 상태로 변경
 			return ResponseEntity.ok("쿠폰 정상 입력");
 		}
 		else {
