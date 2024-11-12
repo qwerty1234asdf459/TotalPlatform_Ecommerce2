@@ -18,13 +18,13 @@ public class PaymentDTO {
 	    private String deliveryno;
 	    
 	    private String deliveryState;
-	    // 다른 필요한 필드들...
+	    // 필요한 필드들
 	    public PaymentDTO(Payment payment) {
 	        this.paymentId = payment.getPaymentId();
 	        this.createDate = payment.getCreateDate();
 	        this.deliveryno = payment.getDeliveryno();
 	        this.deliveryState = payment.getDeliveryState();
-	        // 다른 필드들 초기화...
+	        // 필드 초기화
 	    }
 
 }
