@@ -47,11 +47,11 @@ public class ReviewController {
 		model.addAttribute("user", u);
 		model.addAttribute("reviewForm", reviewForm);
 		
-		
 		try {
 			Review review = this.rs.getReview(u.getUserId(), productId);
 //			유저 id와 productid로 review 테이블을 조회
-			PaymentDetail paymentDetail = this.pds.getPaymentDetail(u.getUserId(), productId);
+			PaymentDetail paymentDetail = this.pds.getPaymentDetail(
+					u.getUserId(), productId);
 //			유저 id와 productid로 payment_detail 테이블을 조회
 			if(review != null) {
 				return "redirect:/myreview";
@@ -77,8 +77,6 @@ public class ReviewController {
 			@PathVariable ("productId") Integer productId,
 			@Valid ReviewForm reviewForm, BindingResult bindingResult,
 			@Authuser User user) throws CanNotFoundException {
-//		Product p = this.ps.getProduct(productId);
-//		User u = this.us.getUser(principal.getName());
 		
 		Product p = this.ps.getProduct(productId);
 		User u = this.us.getUser(user.getId());

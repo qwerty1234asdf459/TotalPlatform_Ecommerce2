@@ -55,10 +55,10 @@ public class MyPageController {
 
 	@LoginCheck
 	@GetMapping("/myorder")
-	public String myOrderPage(@Authuser User user, Model model) throws CanNotFoundException {
-//		User u = this.us.getUser(principal.getName());
+	public String myOrderPage(@Authuser User user, 
+			Model model) throws CanNotFoundException {
 		User u = this.us.getUser(user.getId());
-		// 임시용 user 1
+
 		try {
 			List<Payment> payment = this.ps.getPayment(u.getUserId());
 //			해당 사용자의 userId로 payment 테이블을 조회
@@ -89,28 +89,30 @@ public class MyPageController {
 	@LoginCheck
 	@PostMapping("periodloading")
 	@ResponseBody
-	public ResponseEntity<MyOrderResponseDTO> periodLoading(@RequestParam("period") Integer period,
+	public ResponseEntity<MyOrderResponseDTO> periodLoading(
+			@RequestParam("period") Integer period,
 			@Authuser User user) throws CanNotFoundException {
 	    User u = this.us.getUser(user.getId());
 	   
-	    List<Payment> payments = this.ps.getPaymentPeriod(u.getUserId(), period);
-//		user_id와 전송받은 period 파라미터를 이용해서 조회
-//	    이거 해당 기간에 상품내역 없으면 비동기로 예외 뜨니까 메세지 보내주면 좋을 것 같음
-	    
-	    List<String> productNames = payments.stream()
-	            .map(ps::getFirstProductName)
-	            .toList();
-//		getPaymentPeriod로 조회한 리스트를 바탕으로 첫 상품의 이름을 가져옴
-	    
-	    List<Integer> totalPrices = payments.stream()
-	            .map(ps::getTotalPrice)
-	            .toList();
-//		getPaymentPeriod로 조회한 리스트를 바탕으로 해당 결제의 총 가격을 가져옴
-	    MyOrderResponseDTO responseDTO = new MyOrderResponseDTO(payments, productNames, totalPrices);
-//		responseDTO에 각 값들을 저장
-	    System.out.println(responseDTO);
-	    return ResponseEntity.ok(responseDTO);
-//		문제 없으면 responseDTO 반환
+
+	    	List<Payment> payments = this.ps.getPaymentPeriod(u.getUserId(), period);
+//			user_id와 전송받은 period 파라미터를 이용해서 조회
+		    
+		    List<String> productNames = payments.stream()
+		            .map(ps::getFirstProductName)
+		            .toList();
+//			getPaymentPeriod로 조회한 리스트를 바탕으로 첫 상품의 이름을 가져옴
+		    
+		    List<Integer> totalPrices = payments.stream()
+		            .map(ps::getTotalPrice)
+		            .toList();
+//			getPaymentPeriod로 조회한 리스트를 바탕으로 해당 결제의 총 가격을 가져옴
+		    MyOrderResponseDTO responseDTO = new MyOrderResponseDTO(
+		    		payments, productNames, totalPrices);
+//			responseDTO에 각 값들을 저장
+		    return ResponseEntity.ok(responseDTO);
+//			문제 없으면 responseDTO 반환
+	   
 	}
 	
 
@@ -118,7 +120,6 @@ public class MyPageController {
 	@GetMapping("/myorder/detail/{paymentId}")
 	public String myOrderDetailPage(Model model,
 			@PathVariable ("paymentId") Integer id, @Authuser User user) throws CanNotFoundException {
-//		User u = this.us.getUser(principal.getName());
 		User u = this.us.getUser(user.getId());
 		Payment p = this.ps.getPayment1(id);
 		
@@ -138,21 +139,11 @@ public class MyPageController {
 	@GetMapping("/myreview")
 	public String myReviewPage(Model model,
 			@Authuser User user) throws CanNotFoundException {
-//		User u = this.us.getUser(principal.getName());
 		User u = this.us.getUser(user.getId());
 	
 		model.addAttribute("user", u);		
 		return "Mypage/myreview";
 	}
-
-	@GetMapping("myPage")
-	public String myPage(Model model) throws CanNotFoundException {
-		
-		User u = this.us.getUser(1);
-		model.addAttribute("user", u);
-		return "Mypage/myPage";
-	}
-//	테스트용 페이지이므로 나중에 삭제
 	
 
 	@PostMapping("/pwcheck")
@@ -160,7 +151,6 @@ public class MyPageController {
 	public Map<String, Boolean> pwCheck(@RequestParam("password") String password,
 			@Authuser User user, HttpSession session) throws CanNotFoundException {
 	    User u = this.us.getUser(user.getId());
-	    System.out.println(u.getUserId());
 	    
 	    boolean pwChecked = this.us.pwCheck(password, u.getPw());
 //	    pwCheck 메서드를 활용해 pwChecked에 true false 값 저장
@@ -179,8 +169,6 @@ public class MyPageController {
 	@GetMapping("/usermodify") 
 	public String myInfoModifyPage(
 			Model model, @Authuser User user) throws CanNotFoundException  {
-//		User user = this.us.getUser(principal.getName());
-//		로그인 생기면 위에걸로 수정
 		
 		User u = this.us.getUser(user.getId());
 		
@@ -207,18 +195,16 @@ public class MyPageController {
 			Model model, @Authuser User user) throws CanNotFoundException  {
 		
 		
-//		User user = this.us.getUser(principal.getName());
-//		로그인 생기면 위에걸로 수정
 		User u = this.us.getUser(user.getId());
 		
-	    model.addAttribute("user", user);
+	    model.addAttribute("user", u);
 	    
 		if(bindingResult.hasErrors()) {
 			return "Mypage/usermodify";
 		}
 
 		
-		this.us.userModify(user,
+		this.us.userModify(u,
 				userModifyForm.getEmail1(),
 				userModifyForm.getEmail2(),
 				userModifyForm.getAddress1(),
@@ -232,7 +218,8 @@ public class MyPageController {
 	}
 	
 	@PostMapping("/sendcode")
-	public ResponseEntity<Map<String, String>> emailAuth(@RequestParam("email") String email) {
+	public ResponseEntity<Map<String, String>> emailAuth(
+			@RequestParam("email") String email) {
 		Map<String, String> response = new HashMap<>();
 		try {
 			String code = es.sendCode(email);
@@ -244,7 +231,7 @@ public class MyPageController {
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
-			response.put("error", "에러남");
+			response.put("error", "에러 발생");
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
 		}
 	}
@@ -265,30 +252,34 @@ public class MyPageController {
 	@LoginCheck
 	@PostMapping("/mypage/editpw")
 	public String myPwModifyPage(Model model, @Authuser User user,
-			@Valid EditPwForm editPwForm, BindingResult bindingResult) throws CanNotFoundException {
+			@Valid EditPwForm editPwForm, BindingResult bindingResult
+			) throws CanNotFoundException {
 		User u = this.us.getUser(user.getId());
 		model.addAttribute("user", u);
 		
+//		현재 비밀번호와 prePassword가 일치하는지 확인
 		if(us.prePasswordCheck(user, editPwForm.getPrePassword())) {
-            //System.out.println("비밀번호 같아용");
+//			변경하려는 비밀번호와 비밀번호 확인이 일치하는지 확인
             if(!editPwForm.getPassword().equals(editPwForm.getPassword2())) {
-                bindingResult.rejectValue("Password2","NoSame", "비밀번호가 일치하지 않습니다");
-//                System.out.println("비밀번호안일치");
+                bindingResult.rejectValue("Password2","NoSame", 
+                		"비밀번호가 일치하지 않습니다");
                 return "mypage/MypageEditPw";
+//                
             }else {
+//            	현재 비밀번호와 prePassword, 변경하려는 비밀번호와 비밀번호 확인 양쪽 모두 일치할 때
+//            	현재 비밀번호와 변경하려는 비밀번호가 일치하는지 확인
                 if(us.prePasswordCheck(user, editPwForm.getPassword())) {
-                    bindingResult.rejectValue("Password","SameError", "이미 사용중인 비밀번호 입니다.");
-//                    System.out.println("이미사용중");
+                    bindingResult.rejectValue("Password","SameError", 
+                    		"이미 사용중인 비밀번호 입니다.");
                     return "mypage/MypageEditPw";
                 }
             }
             this.us.changePassword(user, editPwForm.getPassword());
-//            System.out.println("변경완료");
             return "mypage/MypageEditPw";
+//            현재 비밀번호와 prePassword가 일치하지 않으면 else로 넘어옴
         }else {
-            bindingResult.rejectValue("prePassword","NoSame", "현재 비밀번호가 일치하지 않습니다");
-//            System.out.println("현재 비밀번호가 틀림");
-            //System.out.println("비밀번호 틀려용");
+            bindingResult.rejectValue("prePassword","NoSame", 
+            		"현재 비밀번호가 일치하지 않습니다");
         }
         return "mypage/MypageEditPw";
     }
@@ -296,7 +287,8 @@ public class MyPageController {
 	
 	@LoginCheck
 	@GetMapping("/mycoupon")
-	public String myCouponPage(Model model, @Authuser User user) throws CanNotFoundException {
+	public String myCouponPage(Model model, 
+			@Authuser User user) throws CanNotFoundException {
 		
 		User u = this.us.getUser(user.getId());
 		List<Coupon> coupon = this.cs.getCoupon(user.getUserId());
@@ -318,7 +310,8 @@ public class MyPageController {
 			return ResponseEntity.ok("쿠폰 정상 입력");
 		}
 		else {
-			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("쿠폰에러");
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+					.body("쿠폰에러");
 		}
 	}
 	
@@ -341,9 +334,8 @@ public class MyPageController {
 		us.userSignout(u, "y");
 //		해당 사용자의 signoutYn 컬럼을 y로 변경
 		
-//		return "redirect:/user/logout";
-//		로그인 기능이 생길 경우 logout 페이지로 보내서 바로 로그아웃시켜야 함
-		return "redirect:/myorder";
+		return "redirect:/user/logout";
+//		바로 로그아웃
 	}
 
 }
