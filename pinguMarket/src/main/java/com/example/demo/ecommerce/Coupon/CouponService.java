@@ -28,8 +28,7 @@ public class CouponService {
 		return c;
 	}
 	
-	public void createCoupon(String code
-			, User user) throws CanNotFoundException, CouponOverlappingException{
+	public void createCoupon(User user,String code) throws CanNotFoundException, CouponOverlappingException{
 		
 		Coupon c = new Coupon();
 		LmsCoupon lc = this.lcs.findByCode(code);

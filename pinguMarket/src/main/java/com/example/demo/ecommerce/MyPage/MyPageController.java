@@ -301,18 +301,12 @@ public class MyPageController {
 	
 	@LoginCheck
 	@PostMapping("/mycoupon/inputcoupon")
-	public ResponseEntity<String> useCoupon(@RequestParam("code")String code,
-			@Authuser User user)
+	public ResponseEntity<String> useCoupon(@Authuser User user, @RequestParam("code")String code)
 			throws CanNotFoundException,CouponOverlappingException {
-
-		User u = this.us.getUser(user.getId());
-//		해당 코드로 입력된 쿠폰이 존재하는지, 코드의 사용 여부를 체크
-		if(lcs.existCoupon(code) && !lcs.useCheck(code)) {
-//			쿠폰 생성
-			cs.createCoupon(code, u);
-//			lms db테이블에서 코드 사용처리
-			lcs.useCoupon(code);
-//			System.out.println(lcs.existCoupon(code)+","+lcs.useCheck(code));
+		
+		if(lcs.existCoupon(code) && !lcs.useCheck(code)) {//lms쪽에 코드값이 유효하고, 쿠폰이 미사용 상태일때
+			cs.createCoupon(user,code);
+			lcs.useCoupon(code); // 쿠폰이 정상적으로 입력되면 LMS쪽 쿠폰을 사용 완료 상태로 변경
 			return ResponseEntity.ok("쿠폰 정상 입력");
 		}
 		else {
