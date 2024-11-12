@@ -52,14 +52,17 @@ public class PaymentController {
 		
 			List<Coupon> couponList = this.couponService.getCoupon(u.getUserId());
 		 List<String> cartIdList = new ObjectMapper().readValue(cartData, new TypeReference<List<String>>() {});
+		 //js를 통해 장바구니에서 선택된 제품들 id 값 받아옴
+		 
 		 List<String> countList = new ObjectMapper().readValue(countData, new TypeReference<List<String>>() {});
+		 //js를 통해 장바구니에 입력되었던 수량을 불러옴
 		 
 		 for(int i =0; i < cartIdList.size();i++) {
 			 cartService.modifyCart(cartService.getCart(Integer.parseInt(cartIdList.get(i))),
-					 Integer.parseInt(countList.get(i)));
+					 Integer.parseInt(countList.get(i))); // 기존에 장바구니에 수량과 주문한 수량이 다를경우 장바구니 수정
 		 }
 		 
-		 List<Cart> cartList = this.cartService.getCartByList(cartIdList);
+		 List<Cart> cartList = this.cartService.getCartByList(cartIdList); // id 리스트를 엔티티 리스트로 바꿔줌
 		 
 		 model.addAttribute("cartList",cartList);
 		 model.addAttribute("couponList",couponList);

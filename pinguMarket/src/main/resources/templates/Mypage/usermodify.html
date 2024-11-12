@@ -92,28 +92,35 @@
                   <input type="text" th:value="${user.name}" readonly>
                   </div>
                 </div>
+                
+                <div class="userInfoContainer">
+                  <div class="infoName"><h3>아이디</h3></div>
+                  <div class="userInfo">
+                  <input type="text" th:value="${user.id}" readonly>
+                  </div>
+                </div>
                   
                   <div class="userInfoContainer">
                   <div class="infoName"><h3>이메일</h3></div>
                   <div class="userInfo">
-                  <input type="text" th:field="*{email1}"/>
+                  <input type="text" th:field="*{email1}" readonly/>
                   <span>@</span>
-                    <input class="box" type="text" th:field="*{email2}">
-                    <select name="box" id="domain-list" type="text" class="box">
+                    <input class="box" type="text" th:field="*{email2}" readonly>
+                   <!-- <select name="box" id="domain-list" type="text" class="box">
                       <option value="type">직접입력</option>
                       <option value="naver.com">naver.com</option>
                       <option value="google.com">google.com</option>
                       <option value="hanmail.net">hanmail.net</option>
                       <option value="nate.com">nate.com</option>
                       <option value="kakao.com">kakao.com</option>
-                    </select>
+                    </select> -->
                   </div>
                 </div>
                 
                 <div class="userInfoContainer">
                   <div class="infoName"><h3>전화번호</h3></div>
                   <div class="userInfo">
-                  <input type="tel" th:field="*{tell}" onfocus="this.placeholder=''" maxlength="13" oninput="autoHyphen(this)" pattern="010-[0-9]{3,4}-[0-9]{4}" placeholder="- 없이 숫자만 입력하세요" 
+                  <input type="tel" th:field="*{tell}" onfocus="this.placeholder=''" maxlength="11" oninput="autoHyphen(this)" pattern="010-[0-9]{3,4}-[0-9]{4}" placeholder="- 없이 숫자만 입력하세요" 
                   id="tel" autocomplete="off" name="users_phone"  onblur="this.placeholder = '- 없이 숫자만 입력하세요'"/>
                   </div>
                 </div>

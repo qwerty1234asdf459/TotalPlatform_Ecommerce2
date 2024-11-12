@@ -15,7 +15,7 @@ const cif = document.getElementById("couponInputForm");
 			
 		const code = document.getElementById('codeInput').value;
 			
-		fetch("http://localhost:8080/mycoupon/inputcoupon",{
+		fetch("http://localhost:8081/mycoupon/inputcoupon",{
 			method: 'POST',
 			headers: {
     			"Content-Type": 'application/x-www-form-urlencoded',

@@ -1,9 +1,10 @@
     const periods = document.querySelectorAll('#period');
-    let deliveryOpenBtns = document.querySelectorAll('.deliveryOpenBtn');
+    const deliveryOpenBtns = document.querySelectorAll('.deliveryOpenBtn');
     const deliveryModal = document.querySelector('.deliveryModal');
     const modalCloseBtn = document.querySelector('.modalCloseBtn');
     const deliveryBtn = document.querySelector('#deliveryBtn');
 
+// 배송조회----
     deliveryBtn.addEventListener('click', (e) => {
   e.preventDefault();
 
@@ -72,6 +73,7 @@
   });
 });
     
+// 날짜 포맷용 기능
     function printDate(paymentDate) {
   const year = paymentDate.toLocaleDateString('en-US', {
     year: 'numeric',
@@ -86,6 +88,7 @@
   return `${year}-${month}-${day}`;
 }
 
+// 클릭한 거 색깔 바꾸기
     function periodColor(event) {
   // 모든 "on" 클래스 제거
   periods.forEach((e) => {
@@ -95,6 +98,8 @@
   event.target.classList.add("on");
 }
 
+
+// 기간별 조회----
    function periodParameter(e){
 	     e.preventDefault();
 
@@ -125,6 +130,8 @@
 			
 		};
 		
+		
+// 기간별 결제내역 리스트 업데이트
 		function updateOrderList(data) {
     const orderListContainer = document.querySelector('.contentListContainerContainer');
     orderListContainer.innerHTML = '';
@@ -165,6 +172,7 @@ periods.forEach((e) => {
 });
 
 
+// 모달창 켜고 닫기
 deliveryOpenBtns.forEach(deliveryOpenBtn =>{
 	deliveryOpenBtn.addEventListener('click', (event) =>{
         event.stopPropagation();

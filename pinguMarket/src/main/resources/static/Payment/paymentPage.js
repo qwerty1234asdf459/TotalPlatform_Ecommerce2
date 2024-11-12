@@ -43,7 +43,7 @@ function findAddr(){
           var roadAddr = data.roadAddress; // 도로명 주소 변수
           var jibunAddr = data.jibunAddress; // 지번 주소 변수
           // 우편번호와 주소 정보를 해당 필드에 넣는다.
-          addressStr += data.zonecode;
+          addressStr += data.zonecode// 우편번호;
           if(roadAddr !== ''){
               addressStr +=" "+roadAddr;
           } 
@@ -77,8 +77,9 @@ couponSelect.addEventListener("click",priceCalculate); //쿠폰이 선택될때�
 const paymentSubmit = document.getElementById("paymentSubmit");
 const couponPrice = document.getElementById("couponPrice");
 
-// **********************결제금액 계산(업데이트)********************************
 
+
+// **********************결제금액 계산(업데이트)********************************
 let totalPrice = 0;
 
 function priceCalculate(){
@@ -117,7 +118,7 @@ priceCalculate();
 // **********************결제하기 버튼 눌렀을때 이벤트(결제정보를 DB에 저장시키기 위한 함수)********************************/
 
 
-/////////////////////////랜덤한 4자리 알파벳을 만들기 위한 함수//////////////////////////////
+/////////////////////////랜덤한 4자리 알파벳을 만들기 위한 함수(주문번호)//////////////////////////////
 const random = (length = 4) => {
   const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
   let str = '';
@@ -130,7 +131,7 @@ const random = (length = 4) => {
 let orderId = random()+new Date().getTime(); // 랜덤 알파벳 + 오늘 날짜 = 주문번호
 
 
-///////////////////////////주문한 상품 목록중 맨위에 있는 상품이름///////////////////////////////
+///////////////////////////주문한 상품 목록중 맨위에 있는 상품이름(상품명)///////////////////////////////
 
 const titleList = document.querySelectorAll(".productName");
 	const nameArr = new Array;
@@ -139,6 +140,7 @@ const titleList = document.querySelectorAll(".productName");
 	})
 	
 ///////////////////////////////////////////////////////////
+
 function requestTossPayment(orderId, totalPrice,orderName) {
     const tossPayments = TossPayments('test_ck_26DlbXAaV0MOP52Gyd6KrqY50Q9R');
     tossPayments.requestPayment('카드', {
@@ -155,7 +157,6 @@ const psf = document.getElementById("paymentSubmit");
 		e.preventDefault();
 			
 		const selectedCartList = document.querySelectorAll(".carts");
-	
 		const cartArr = new Array;
 
 		selectedCartList.forEach((cart)=>{
@@ -168,7 +169,6 @@ const psf = document.getElementById("paymentSubmit");
 			orderName = nameArr[0]+" 외"+nameArr.length-1+"건";
 		}
 		
-			
 		fetch("http://localhost:8081/paymentAmountCheck",{
 			method: 'POST',
 			headers: {
@@ -182,7 +182,8 @@ const psf = document.getElementById("paymentSubmit");
 		})
 		.then(response => {
 			if(response.ok){
-				window.localStorage.setItem('adress', document.getElementById("adressTextArea").value+" "+document.getElementById("adressTextArea2").value);
+				window.localStorage.setItem('adress', document.getElementById("adressTextArea").value
+				+" "+document.getElementById("adressTextArea2").value);
 				window.localStorage.setItem('couponId', couponSelect.options[couponSelect.selectedIndex].id);
 				window.localStorage.setItem('cartData', JSON.stringify(cartArr));
 				window.localStorage.setItem('delRequest', delRequest.value);
@@ -199,5 +200,3 @@ const psf = document.getElementById("paymentSubmit");
 			console.error('Error: ',error);
 		})
 	})
-
-///////////////////////////////////////////////////////////////////
